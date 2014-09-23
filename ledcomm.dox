@@ -40,7 +40,7 @@
  * space parity.  A description of its operation is provided at
  * http://mecrisp.sourceforge.net/ledcomm.htm.
  *
- * This code has only been tested on @p ST_NUCLEO_L152RE and
+ * This code has only been tested with ChibiOS/RT V2.6.x (stable) on @p ST_NUCLEO_L152RE and
  * @p ST_NUCLEO_F401RE boards but should work on any STM32 board without
  * modification (using ChibiOS, of course). With the appropriate
  * setting of an EXT configuration, it should work on any platform
