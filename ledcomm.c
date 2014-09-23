@@ -148,7 +148,7 @@ static inline void linkUp(LEDCommDriver_t *l) {
     l->link = 1;
     l->syncs = LEDCOMM_DEFAULT_SYNCS;
     l->rx_char = 0;
-    l->rx_bits = (l->data_bits == 0 ? 8 : 7);
+    l->rx_bits = (l->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
     l->txrdy = 1;
 #if LEDCOMM_THREADED
     chSysLock();
@@ -336,7 +336,7 @@ ledCommSaveBit(LEDCommDriver_t *ldp) {
 		parity_bit = ldp->rx_char & 0x01;
 		ldp->rx_char = ldp->rx_char >> 1;
 	    }
-	    ldp->rx_char = ldp->rx_char & (ldp->data_bits == 0 ? 0xff : 0x7f);
+	    ldp->rx_char = ldp->rx_char & (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 0x7f : 0xff);
 	    if (ldp->parity && parity_bit != computeParity(ldp->rx_char)) { /* Check the parity */
 #if LEDCOMM_THREADED
 		chSysLock();
@@ -399,7 +399,7 @@ ledCommDetect(LEDCommDriver_t *ldp) {
 
 static void
 ledCommPrepare(LEDCommDriver_t *ldp) {
-#if STM32_SYSCLK == 84000000
+#if STM32_SYSCLK == 84000000	/* TODO: FIX THIS -- using SYSCLK isn't a great way to do this. */
     #define NOPS 11
 #else
     #define NOPS 2
@@ -466,7 +466,7 @@ ledCommHandler(LEDCommDriver_t *ldp)
 		ldp->txrdy = 0;
 		ldp->parity_flag = ldp->parity;
 	    }
-	    ldp->tx_bits = (ldp->data_bits == 0 ? 8 : 7);
+	    ldp->tx_bits = (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
 	}
 
     } else if (ldp->count == 3) {
@@ -695,7 +695,7 @@ void ldStart(LEDCommDriver_t *ldp, const LEDCommConfig_t *config) {
       ldp->txrdy = 1;
       ldp->rxrdy = 0;
       ldp->txbit = MARK;
-      ldp->tx_bits = (ldp->data_bits == 0 ? 8 : 7);
+      ldp->tx_bits = (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
       ldp->tx_char = 0;
       ldp->rx_char = 0;
       ldp->rx_bits = 0;
