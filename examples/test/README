@@ -1,0 +1,34 @@
+This is a simple LEDComm application where an ST_NUCLEO_L152RE board
+and ST_NUCLEO_F401RE board communicate using the LEDComm Driver.
+
+To build the elf (and binary), execute the following command:
+
+make TARGETBOARD=ST_NUCLEO_L152RE 2>&1 | tee make.out
+
+After loading the program on to the 'L152 board, do the same with the
+TARGETBOARD variable set to ST_NUCLEO_F401RE.
+
+Now connect an LED on each board -- cathode to pin D4 and the anode to pin D5.
+
+When both boards are operational, I open two windows on my linux
+workstation and execute this command in each:
+
+/usr/local/bin/socat READLINE /dev/ttyACMn,echo=0,raw,crlf,nonblock,b38400
+
+Where 'n' in the command above is a small integer based on
+where the linux USB subsystem finds the target boards (each window
+MUST use a different device).
+
+The on-board green LED will be extingished until LED "sees" the
+other.  The green LED will light up when the board detects that the
+link is up.  The output in the windows running socat should also show
+the characters "LINK UP".
+
+When the green LED is lit up on both boards, you can press the "user"
+button on one (or both) and you will begin to see the 'L' character or
+'F' character (or both) repeatedly displayed on the output windows
+(they will be interspersed).
+
+This simple application will wait for a character to be recieved, echo
+it to the screen and then transmit it to the other board via LEDComm.
+Pressing the button initiates a character transmission.
