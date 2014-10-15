@@ -40,15 +40,16 @@
  * (around 30 baud), very short range wireless (less than an inch),
  * bidirectional asynchronous serial communications.  The signalling
  * allows for half-duplex operation, 7- or 8-bits per character
- * (transferred in big-endian order) and optional odd, even, mark or
- * space parity.  A description of its operation is provided at
- * http://mecrisp.sourceforge.net/ledcomm.htm.
+ * (transferred in MSB first/big-endian order) and optional odd, even,
+ * mark or space parity.  A description of its operation is provided
+ * at http://mecrisp.sourceforge.net/ledcomm.htm (kudos to the author
+ * of the page, Matthias Koch, for the inspiration!).
  *
- * This code has only been tested with ChibiOS/RT V2.6.x (stable) on @p ST_NUCLEO_L152RE and
- * @p ST_NUCLEO_F401RE boards but should work on any STM32 board without
- * modification (using ChibiOS, of course). With the appropriate
- * setting of an EXT configuration, it should work on any platform
- * supported by ChibiOS.
+ * This code has only been tested with ChibiOS/RT V2.6.x (stable) on
+ * @p ST_NUCLEO_L152RE and @p ST_NUCLEO_F401RE boards but should work
+ * on any STM32 board without modification (using ChibiOS, of
+ * course). With the appropriate setting of an EXT configuration, it
+ * should work on any platform supported by ChibiOS.
  *
  * LEDComm was developed as part of a project to collect data from <a
  * href="http://en.wikipedia.org/wiki/Honey_bee">honey bee</a> hives.
@@ -60,14 +61,16 @@
  * <h2>Using the LEDComm Library</h2>
  *
  * The <TT>LEDComm</TT> library depends on a few HAL modules so the
- * following manifest constants in @p halconf.h must be set to @p TRUE:
+ * following manifest constants in @p halconf.h must be set to @p
+ * TRUE:
  *
  * @li HAL_USE_PAL
  * @li HAL_USE_EXT
  * @li HAL_USE_GPT
  *
- * Additionally, the <TT>LEDComm</TT> library depends on a few ChibiOS modules so the
- * following manifest constants in @p chconf.h must be set to @p TRUE:
+ * Additionally, the <TT>LEDComm</TT> library depends on a few ChibiOS
+ * modules so the following manifest constants in @p chconf.h must be
+ * set to @p TRUE:
  * 
  * @li CH_USE_QUEUES
  * @li CH_USE_EVENTS

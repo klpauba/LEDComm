@@ -98,6 +98,7 @@ include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/$(TARGETPLATFORM)/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
 include $(CHIBIOS)/test/test.mk
+include $(CHIBIOS)/ext/LEDComm/ledcomm.mk
 
 # Define linker script file here
 ifeq ($(TARGETPLATFORM),STM32L1xx)
@@ -117,7 +118,7 @@ CSRC = $(PORTSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/chprintf.c \
-       $(CHIBIOS)/ext/ledcomm-1.0.0/ledcomm.c \
+       $(LEDCOMMSRC) \
        main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
@@ -149,7 +150,7 @@ ASMSRC = $(PORTASM)
 
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
-	 $(CHIBIOS)/ext/ledcomm-1.0.0 \
+	 $(LEDCOMMINC) \
 	 $(CHIBIOS)/os/various
 
 #

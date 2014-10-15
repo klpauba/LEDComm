@@ -28,6 +28,11 @@
 #define _LEDCOMMCONF_H_
 
 /**
+ * @brief   LEDComm requires I/O queues.
+ */
+#define CH_USE_QUEUES                   TRUE
+
+/**
  * @brief   Enable LED communication on LCOM1 device if TRUE.
  */
 #define LEDCOMM_USE_LCOM1	FALSE
@@ -67,7 +72,7 @@
  *        separate thread.  If set to FALSE, all of the processing
  *        is done in the ISR.
  */
-#define LEDCOMM_THREADED	FALSE
+#define LEDCOMM_THREADED	TRUE
 
 /**
  * @brief The size of the input and output queues.

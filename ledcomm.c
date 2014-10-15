@@ -42,16 +42,20 @@
 #include "hal.h"
 
 #include "ledcomm.h"
+#include "led.h"
 
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
-#if LEDCOMM_USE_LCOM2 || defined(__DOXYGEN__)
-LEDCommDriver_t LCOM2;
+#if !CH_USE_QUEUES
+#error "LEDComm Driver requires CH_USE_QUEUES"
 #endif
 
-#if LEDCOMM_THREADED
-static BinarySemaphore ledcommINTR;
+#if LEDCOMM_USE_LCOM1 || defined(__DOXYGEN__)
+LEDCommDriver_t LCOM1;
+#endif
+#if LEDCOMM_USE_LCOM2 || defined(__DOXYGEN__)
+LEDCommDriver_t LCOM2;
 #endif
 
 #define LED_SYNC_COUNT 18	/* Number of MARKS required to mark link as up */
@@ -120,41 +124,19 @@ static const struct LEDCommDriverVMT vmt = {
   putt, gett, writet, readt
 };
 
-static inline void ledCommOn(LEDCommDriver_t *ldp) {
-    palSetPad(ldp->anode_port, ldp->anode_pad);
-    palClearPad(ldp->cathode_port, ldp->cathode_pad);
+inline bool_t isLinkUp(LEDCommDriver_t *l) {
+    return ledCommPollLinkStatus(l);
 }
 
-static inline void ledCommOff(LEDCommDriver_t *ldp) {
-    palClearPad(ldp->anode_port, ldp->anode_pad);
-    palClearPad(ldp->cathode_port, ldp->cathode_pad);
-
+inline bool_t isLinkDown(LEDCommDriver_t *l) {
+    return !ledCommPollLinkStatus(l);
 }
 
-static inline void ledCommReverse(LEDCommDriver_t *ldp) {
-    palClearPad(ldp->anode_port, ldp->anode_pad);
-    palSetPad(ldp->cathode_port, ldp->cathode_pad);
-}
-
-static inline void ledCommInitPad(LEDCommDriver_t *ldp) {
-    palSetPadMode((ldp)->anode_port, (ldp)->anode_pad, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_LOWEST);
-    palSetPadMode((ldp)->cathode_port, (ldp)->cathode_pad, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_LOWEST);
-}
-
-static inline bool_t isLinkUp(LEDCommDriver_t *l) {
-    return l->link == 1;	/* 1=link is up */
-}
-
-static inline bool_t isLinkDown(LEDCommDriver_t *l) {
-    return l->link != 1;	/* 1=link is down */
-}
-
-static inline void linkUp(LEDCommDriver_t *l) {
+inline void linkUp(LEDCommDriver_t *l) {
     l->link = 1;
     l->syncs = LEDCOMM_DEFAULT_SYNCS;
-    l->rx_char = 0;
-    l->rx_bits = (l->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
     l->txrdy = 1;
+#if CH_USE_EVENTS
 #if LEDCOMM_THREADED
     chSysLock();
 #else
@@ -168,10 +150,12 @@ static inline void linkUp(LEDCommDriver_t *l) {
 #else
     chSysUnlockFromIsr();
 #endif
+#endif /* CH_USE_EVENTS */
 }
 
-static inline void linkDown(LEDCommDriver_t *l) {
+inline void linkDown(LEDCommDriver_t *l) {
     l->link = 0;
+#if CH_USE_EVENTS
 #if LEDCOMM_THREADED
     chSysLock();
 #else
@@ -183,6 +167,7 @@ static inline void linkDown(LEDCommDriver_t *l) {
 #else
     chSysUnlockFromIsr();
 #endif
+#endif /* CH_USE_EVENTS */
 }
 
 /*
@@ -198,241 +183,7 @@ static LEDCommConfig_t default_config = {
 };
 
 void
-extcb1(EXTDriver *extp, uint8_t ch) {
-    LEDCommDriver_t *ldp;
-
-#if LEDCOMM_USE_LCOM1
-    if (ch == LCOM1.cathode_pad) {
-	ldp = &LCOM1;
-    }
-#endif
-
-#if LEDCOMM_USE_LCOM2
-    if (ch == LCOM2.cathode_pad) {
-	ldp = &LCOM2;
-    }
-#endif
-
-    extChannelDisableI(extp, ch);				/* prevent more interrupts */
-
-    ldp->c = halGetCounterValue() - ldp->c;
-    if (! ((uint32_t)(ldp->c + ldp->threshold) > 2u*ldp->threshold)) {   /* see http://www.microchip.com/forums/m628122.aspx
-									    for unsigned comparisons that might roll over. */
-	ldp->rx_register = ldp->rx_register + 1;
-    }
-}
-
-static EXTConfig extcfg = {
-  {
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL}
-  }
-};
-
-/* 
- * Count the number of consecutive trailing (right side) high bits using a binary search algorithm.
- */
-static uint8_t
-ledCommCountTrailingHighBits(uint16_t v)
-{
-    if (v == 0xffff) {
-	/* special case not handled by the code below */
-	return 16;
-    } else {
-	uint8_t c = 0;
-	
-	if ((v & 0xfff) == 0xfff) {
-	    v >>= 12;
-	    c += 12;
-	}
-	if ((v & 0xff) == 0xff) {
-	    v >>= 8;
-	    c += 8;
-	}
-	if ((v & 0xf) == 0xf) {
-	    v >>= 4;
-	    c += 4;
-	}
-	if ((v & 0x7) == 0x7) {
-	    v >>= 3;
-	    c += 3;
-	}
-	if ((v & 0x3) == 0x3) {
-	    v >>= 2;
-	    c += 2;
-	}
-	if ((v & 0x1) == 0x1) {
-	    v >>= 1;
-	    c += 1;
-	}
-
-	return c;
-    }
-}
-
-static uint8_t
-computeParity(uint8_t v) {	/* See https://graphics.stanford.edu/~seander/bithacks.html#ParityParallel */
-    v ^= v >> 4;
-    v &= 0xf;
-    return (0x6996 >> v) & 1;
-}
-
-static void
-ledCommSaveBit(LEDCommDriver_t *ldp) {
-    enum { RX_SPACE, RX_MARK, RX_STOP } bit;
-
-    switch (ledCommCountTrailingHighBits(ldp->rx_register >> 2)) {	/* shift out two trailing zeros */
-    case 3: /* 3 - 6 high bits == SPACE, 1 */
-    case 4:
-    case 5:
-    case 6:
-	bit = RX_SPACE;
-	break;
-
-    case 7: /* 7 - 10 high bits == MARK, 0 */
-    case 8:
-    case 9:
-    case 10:
-	bit = RX_MARK;
-	break;
-
-    case 11: /* 11 - 14 high bits == STOP */
-    case 12:
-    case 13:
-    case 14:
-	bit = RX_STOP;
-	break;
-
-    default: /* error */
-	if (isLinkUp(ldp)) {
-	    linkDown(ldp);
-	}
-	return;
-	break;
-    }
-
-    if (isLinkUp(ldp)) {
-	if (bit == RX_STOP) {
-	    uint8_t parity_bit = 0;
-
-	    /* we have a complete character in rx_char */
-	    if (ldp->parity) {
-		parity_bit = ldp->rx_char & 0x01;
-		ldp->rx_char = ldp->rx_char >> 1;
-	    }
-	    ldp->rx_char = ldp->rx_char & (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 0x7f : 0xff);
-	    if (ldp->parity && parity_bit != computeParity(ldp->rx_char)) { /* Check the parity */
-#if LEDCOMM_THREADED
-		chSysLock();
-#else
-		chSysLockFromIsr();
-#endif
-		chnAddFlagsI(ldp, LD_PARITY_ERROR);
-#if LEDCOMM_THREADED
-		chSysUnlock();
-#else
-		chSysUnlockFromIsr();
-#endif
-	    } else {
-#if LEDCOMM_THREADED
-		chSysLock();
-#else
-		chSysLockFromIsr();
-#endif
-		ldIncomingDataI(ldp, ldp->rx_char);
-#if LEDCOMM_THREADED
-		chSysUnlock();
-#else
-		chSysUnlockFromIsr();
-#endif
-	    }
-	    ldp->rxrdy = 1;
-	    ldp->rx_bits = 0;
-	} else {
-	    ldp->rx_char = ldp->rx_char << 1;
-	    if (bit == RX_SPACE) {
-		ldp->rx_char = ldp->rx_char + 1;
-	    }
-	}
-    } else if (bit == RX_MARK) {
-	/* link is down but we received a MARK .. decrement a counter */
-	/* used to detect that the link is up */
-	ldp->rx_register = ldp->rx_register << 1;	/* shift a MARK bit into the received character register */
-	ldp->syncs = ldp->syncs - 1;
-	if (ldp->syncs <= 0) {
-	    /* The link is UP! */
-	    linkUp(ldp);
-	}
-    }
-}
-
-static void
-ledCommDetect(LEDCommDriver_t *ldp) {
-    palClearPad(ldp->cathode_port, ldp->cathode_pad);
-    palSetPadMode(ldp->cathode_port, ldp->cathode_pad, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_LOWEST);
-
-    if ((ldp->rx_register & 0b11111) == 0b11100) {
-	/* got a bit */
-	ldp->count = 0;		/* done receiving for this cycle */
-	ledCommSaveBit(ldp);
-	ldp->rx_register = 0;
-    } else {
-	ldp->rx_register = ldp->rx_register << 1;
-    }
-}
-
-static void
-ledCommPrepare(LEDCommDriver_t *ldp) {
-#if STM32_SYSCLK == 84000000	/* TODO: FIX THIS -- using SYSCLK isn't a great way to do this. */
-    #define NOPS 11
-#else
-    #define NOPS 2
-#endif
-    uint8_t i = 0;
-
-    /* Forward bias to discharge residual capacitance */
-    ledCommOn(ldp);
-    for (i = 0; i < NOPS; i++) {
-	__NOP();
-    }
-
-    /* Reverse bias to charge the parasitic capacitance */
-    ledCommReverse(ldp);
-    for (i = 0; i < NOPS; i++) {
-	__NOP(); __NOP();
-	__NOP(); __NOP();
-    }
-
-    /* See how long it takes (in "hal ticks") for the capacitance to
-       discharge (when the EXT generates an interrupt) */
-    ldp->c = halGetCounterValue();	 			/* record number of ticks at the start of the interval */
-    extChannelEnableI(&EXTD_LEDComm, ldp->cathode_pad);		/* enable EXT to detect falling edge of cathode */
-    palSetPadMode(ldp->cathode_port, ldp->cathode_pad, PAL_MODE_INPUT);
-}
-
-static void
-ledCommHandler(LEDCommDriver_t *ldp)
+ledCommSerialHandler(LEDCommDriver_t *ldp)
 {
     if (ldp->enable == 0) {
 	return;
@@ -555,60 +306,6 @@ ledCommHandler(LEDCommDriver_t *ldp)
     }
 }
 
-static void
-ledCommDispatch(GPTDriver *gptp)		/* Inside a callback: use only i-class functions */
-{
-    (void)gptp;
-
-#if LEDCOMM_THREADED
-
-    chSysLockFromIsr();
-    chBSemResetI(&ledcommINTR, FALSE);
-    chSysUnlockFromIsr();
-#else
-#if LEDCOMM_USE_LCOM1
-    ledCommHandler(&LCOM1);
-#endif
-#if LEDCOMM_USE_LCOM2
-    ledCommHandler(&LCOM2);
-#endif
-#endif
-}
-
-static const    GPTConfig GPTC_LEDComm = {
-    .frequency = 10000,		/* 10 kHz */
-    .callback = ledCommDispatch,
-    0
-};
-
-#if LEDCOMM_THREADED
-static WORKING_AREA(waLEDCommThread, 512);
-static msg_t LEDCommThread(void *arg) {
-
-    (void)arg;
-    chRegSetThreadName("LEDComm");
-
-    extStart(&EXTD_LEDComm, &extcfg);
-
-    gptObjectInit(&GPTD_LEDComm);
-    gptStart(&GPTD_LEDComm, &GPTC_LEDComm);
-    gptStartContinuous(&GPTD_LEDComm, 2);
-
-    chBSemInit(&ledcommINTR, TRUE);
-    while (TRUE) {
-	chBSemWait(&ledcommINTR);
-	chBSemReset(&ledcommINTR, 1);
-#if LEDCOMM_USE_LCOM1
-	ledCommHandler(&LCOM1);
-#endif
-#if LEDCOMM_USE_LCOM2
-	ledCommHandler(&LCOM2);
-#endif
-    }
-
-    return (msg_t)NULL;
-}
-#endif
 
 /*===========================================================================*/
 /* Driver exported functions.                                                */
@@ -667,63 +364,68 @@ void ldObjectInit(LEDCommDriver_t *ldp, qnotify_t inotify, qnotify_t onotify) {
  * @api
  */
 void ldStart(LEDCommDriver_t *ldp, const LEDCommConfig_t *config) {
+#if !LEDCOMM_THREADED
+    extern GPTConfig GPTC_LEDComm;
+#endif
+    extern EXTConfig extcfg;
+    extern WORKING_AREA(waLEDCommThread, LEDCOMM_THREAD_STACK_SIZE);
 
-  chDbgCheck(ldp != NULL, "ldStart");
+    chDbgCheck(ldp != NULL, "ldStart");
 
-  chSysLock();
-  chDbgAssert((ldp->state == LD_STOP) || (ldp->state == LD_READY),
-              "ldStart(), #1",
-              "invalid state");
+    chSysLock();
+    chDbgAssert((ldp->state == LD_STOP) || (ldp->state == LD_READY),
+		"ldStart(), #1",
+		"invalid state");
 
-  if (config == NULL) {
-      config = &default_config;
-  }
+    if (config == NULL) {
+	config = &default_config;
+    }
 
-  ldp->anode_port = config->anode_port;
-  ldp->anode_pad = config->anode_pad;
-  ldp->cathode_port = config->cathode_port;
-  ldp->cathode_pad = config->cathode_pad;
-  ldp->threshold = config->threshold;
-  ldp->syncs = LEDCOMM_DEFAULT_SYNCS;
-  ldp->data_bits = config->data_bits;
-  ldp->parity = config->parity;
-  ldp->parity_type = config->parity_type;
+    ldp->anode_port = config->anode_port;
+    ldp->anode_pad = config->anode_pad;
+    ldp->cathode_port = config->cathode_port;
+    ldp->cathode_pad = config->cathode_pad;
+    ldp->threshold = config->threshold;
+    ldp->syncs = LEDCOMM_DEFAULT_SYNCS;
+    ldp->data_bits = config->data_bits;
+    ldp->parity = config->parity;
+    ldp->parity_type = config->parity_type;
 
-  ledCommInitPad(ldp);
+    ledCommInitPad(ldp);
 
-  extcfg.channels[ldp->cathode_pad].mode = config->cathode_extmode;
-  extcfg.channels[ldp->cathode_pad].cb = (extcallback_t)extcb1;
+    extcfg.channels[ldp->cathode_pad].mode = config->cathode_extmode;
+    extcfg.channels[ldp->cathode_pad].cb = (extcallback_t)extcb1;
 
-  if (ldp->state == LD_STOP) {
-      ldp->enable = 1;
-      ldp->link = 0;
-      ldp->txrdy = 1;
-      ldp->rxrdy = 0;
-      ldp->txbit = MARK;
-      ldp->tx_bits = (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
-      ldp->tx_char = 0;
-      ldp->rx_char = 0;
-      ldp->rx_bits = 0;
-      ldp->rx_register = 0;
-      ldp->c = 0;
-      ldp->count = 0;
-  }
+    if (ldp->state == LD_STOP) {
+	ldp->enable = 1;
+	ldp->link = 0;
+	ldp->txrdy = 1;
+	ldp->rxrdy = 0;
+	ldp->txbit = MARK;
+	ldp->tx_bits = (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
+	ldp->tx_char = 0;
+	ldp->rx_char = 0;
+	ldp->rx_bits = 0;
+	ldp->rx_register = 0;
+	ldp->c = 0;
+	ldp->count = 0;
+    }
   
 #if LEDCOMM_THREADED
-  chSysUnlock();
-  chThdCreateStatic(waLEDCommThread, sizeof(waLEDCommThread), HIGHPRIO, LEDCommThread, NULL);
-  chSysLock();
+    chSysUnlock();
+    chThdCreateStatic(waLEDCommThread, sizeof(waLEDCommThread), HIGHPRIO, LEDCommThread, NULL);
+    chSysLock();
 #else
-  chSysUnlock();
-  extStart(&EXTD_LEDComm, &extcfg);
+    chSysUnlock();
+    extStart(&EXTD_LEDComm, &extcfg);
 
-  gptObjectInit(&GPTD_LEDComm);
-  gptStart(&GPTD_LEDComm, &GPTC_LEDComm);
-  gptStartContinuous(&GPTD_LEDComm, 2);
-  chSysLock();
+    gptObjectInit(&GPTD_LEDComm);
+    gptStart(&GPTD_LEDComm, &GPTC_LEDComm);
+    gptStartContinuous(&GPTD_LEDComm, 2);
+    chSysLock();
 #endif
-  ldp->state = LD_READY;
-  chSysUnlock();
+    ldp->state = LD_READY;
+    chSysUnlock();
 }
 
 /**
@@ -772,8 +474,11 @@ void ldIncomingDataI(LEDCommDriver_t *ldp, uint8_t b) {
   chDbgCheckClassI();
   chDbgCheck(ldp != NULL, "ldIncomingDataI");
 
+#if CH_USE_EVENTS
   if (chIQIsEmptyI(&ldp->iqueue))
     chnAddFlagsI(ldp, CHN_INPUT_AVAILABLE);
+#endif
+
   if (chIQPutI(&ldp->iqueue, b) < Q_OK)
     chnAddFlagsI(ldp, LD_OVERRUN_ERROR);
 }
@@ -800,8 +505,10 @@ msg_t ldRequestDataI(LEDCommDriver_t *ldp) {
   chDbgCheck(ldp != NULL, "ldRequestDataI");
 
   b = chOQGetI(&ldp->oqueue);
+#if CH_USE_EVENTS
   if (b < Q_OK)
     chnAddFlagsI(ldp, CHN_OUTPUT_EMPTY);
+#endif
   return b;
 }
 

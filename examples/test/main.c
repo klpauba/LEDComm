@@ -35,6 +35,7 @@
 #include "test.h"
 #include "chprintf.h"
 #include "ledcomm.h"
+#include "led.h"
 
 /*
  * Green LED blinker thread, times are in milliseconds.
@@ -61,7 +62,6 @@ int main(void) {
     	BaseSequentialStream *lcom2;
 	EventListener es1Listener;
 	flagsmask_t es1Flags;
-
 
 	/*
 	 * System initializations.
@@ -110,6 +110,8 @@ int main(void) {
 	 */
 	while (TRUE) {
 	    if (!palReadPad(GPIOC, GPIOC_BUTTON)) {
+
+		/* button contact is now debounced. */
 		if (STM32_SYSCLK == 84000000) {
 		    chSequentialStreamWrite(lcom2, (const uint8_t *)"F", 1);
 		} else {

@@ -113,10 +113,6 @@
 /* Derived constants and error checks.                                       */
 /*===========================================================================*/
 
-#if !CH_USE_QUEUES && !CH_USE_EVENTS
-#error "LEDComm Driver requires CH_USE_QUEUES and CH_USE_EVENTS"
-#endif
-
 /*===========================================================================*/
 /* Driver data structures and types.                                         */
 /*===========================================================================*/
@@ -394,12 +390,17 @@ extern LEDCommDriver_t LCOM2;
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void ldInit(void);
-  void ldObjectInit(LEDCommDriver_t *ldp, qnotify_t inotify, qnotify_t onotify);
-  void ldStart(LEDCommDriver_t *ldp, const LEDCommConfig_t *config);
-  void ldStop(LEDCommDriver_t *ldp);
-  void ldIncomingDataI(LEDCommDriver_t *ldp, uint8_t b);
-  msg_t ldRequestDataI(LEDCommDriver_t *ldp);
+    void ldInit(void);
+    void ldObjectInit(LEDCommDriver_t *ldp, qnotify_t inotify, qnotify_t onotify);
+    void ldStart(LEDCommDriver_t *ldp, const LEDCommConfig_t *config);
+    void ldStop(LEDCommDriver_t *ldp);
+    void ldIncomingDataI(LEDCommDriver_t *ldp, uint8_t b);
+    msg_t ldRequestDataI(LEDCommDriver_t *ldp);
+    inline bool_t isLinkUp(LEDCommDriver_t *l);
+    inline bool_t isLinkDown(LEDCommDriver_t *l);
+    inline void linkUp(LEDCommDriver_t *l);
+    inline void linkDown(LEDCommDriver_t *l);
+    void ledCommSerialHandler(LEDCommDriver_t *ldp);
 #ifdef __cplusplus
 }
 #endif
