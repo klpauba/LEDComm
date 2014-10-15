@@ -1,5 +1,6 @@
 #include "hal.h"
 #include "ledcomm.h"
+#include "led.h"
 
 #if LEDCOMM_THREADED
 static BinarySemaphore ledcommINTR;
@@ -67,13 +68,6 @@ ledCommCountTrailingHighBits(uint16_t v)
 }
 
 uint8_t
-computeParity(uint8_t v) {	/* See https://graphics.stanford.edu/~seander/bithacks.html#ParityParallel */
-    v ^= v >> 4;
-    v &= 0xf;
-    return (0x6996 >> v) & 1;
-}
-
-uint8_t
 ledCommClassify(uint16_t v) {
     switch (ledCommCountTrailingHighBits(v)) {
     case 3: /* 3 - 6 high bits == SPACE, 1 */
@@ -111,39 +105,19 @@ ledCommSaveBit(LEDCommDriver_t *ldp) {
 	if (bit == NONE) {
 	    linkDown(ldp);
 	} else if (bit == STOP) {
-	    uint8_t parity_bit = 0;
-
 	    /* we have a complete character in rx_char */
-	    if (ldp->parity) {
-		parity_bit = ldp->rx_char & 0x01;
-		ldp->rx_char = ldp->rx_char >> 1;
-	    }
 	    ldp->rx_char = ldp->rx_char & (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 0x7f : 0xff);
-	    if (ldp->parity && parity_bit != computeParity(ldp->rx_char)) { /* Check the parity */
 #if LEDCOMM_THREADED
-		chSysLock();
+	    chSysLock();
 #else
-		chSysLockFromIsr();
+	    chSysLockFromIsr();
 #endif
-		chnAddFlagsI(ldp, LD_PARITY_ERROR);
+	    ldIncomingDataI(ldp, ldp->rx_char);
 #if LEDCOMM_THREADED
-		chSysUnlock();
+	    chSysUnlock();
 #else
-		chSysUnlockFromIsr();
+	    chSysUnlockFromIsr();
 #endif
-	    } else {
-#if LEDCOMM_THREADED
-		chSysLock();
-#else
-		chSysLockFromIsr();
-#endif
-		ldIncomingDataI(ldp, ldp->rx_char);
-#if LEDCOMM_THREADED
-		chSysUnlock();
-#else
-		chSysUnlockFromIsr();
-#endif
-	    }
 	    ldp->rxrdy = 1;
 	    ldp->rx_bits = 0;
 	} else {

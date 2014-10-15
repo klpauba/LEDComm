@@ -178,8 +178,6 @@ static LEDCommConfig_t default_config = {
     .cathode_port = GPIOB, .cathode_pad = 4,
     .cathode_extmode = (EXT_CH_MODE_FALLING_EDGE | EXT_MODE_GPIOB), /* This is kinda specific to STM32 parts */
     .data_bits = LEDCOMM_DEFAULT_DATA_BITS,
-    .parity = LEDCOMM_DEFAULT_PARITY,
-    .parity_type = LEDCOMM_DEFAULT_PARITY_TYPE,
 };
 
 void
@@ -220,7 +218,6 @@ ledCommSerialHandler(LEDCommDriver_t *ldp)
 	    } else {
 		ldp->tx_char = (uint8_t)b;
 		ldp->txrdy = 0;
-		ldp->parity_flag = ldp->parity;
 	    }
 	    ldp->tx_bits = (ldp->data_bits == LEDCOMM_DATA_BITS7 ? 7 : 8);
 	}
@@ -240,29 +237,7 @@ ledCommSerialHandler(LEDCommDriver_t *ldp)
 	    }
 	    ldp->tx_bits = ldp->tx_bits - 1;
 	}
-    } else if (ldp->count == 4) {
-	if (ldp->txbit == STOP && ldp->parity_flag) {
-	    uint8_t parity_bit = 0;
-
-	    /* Compute the parity bit */
-	    ldp->parity_flag = 0;
-
-	    /* Compute the TX parity bit, if needed. */
-	    parity_bit = computeParity(ldp->tx_char);
-
-	    if (ldp->parity_type == LEDCOMM_PARITY_EVEN) {
-		ldp->txbit = (parity_bit == 0) ? MARK : SPACE;
-	    } else if (ldp->parity_type == LEDCOMM_PARITY_ODD) {
-		ldp->txbit = (parity_bit == 1) ? MARK : SPACE ;
-	    } else if (ldp->parity_type == LEDCOMM_PARITY_MARK) {
-		ldp->txbit = MARK;
-	    } else if (ldp->parity_type == LEDCOMM_PARITY_SPACE) {
-		ldp->txbit = SPACE;
-	    } else {
-		ldp->tx_bits = 0;
-	    }
-	}
-    } else if (ldp->count >= 5 && ldp->count <= 13) {
+    } else if (ldp->count >= 4 && ldp->count <= 13) {
 	if ((ldp->count == 5 && ldp->txbit == SPACE) ||
 	    (ldp->count == 9 && ldp->txbit == MARK) || 
 	    (ldp->count == 13 && ldp->txbit == STOP)) {
@@ -388,8 +363,6 @@ void ldStart(LEDCommDriver_t *ldp, const LEDCommConfig_t *config) {
     ldp->threshold = config->threshold;
     ldp->syncs = LEDCOMM_DEFAULT_SYNCS;
     ldp->data_bits = config->data_bits;
-    ldp->parity = config->parity;
-    ldp->parity_type = config->parity_type;
 
     ledCommInitPad(ldp);
 
