@@ -1,4 +1,5 @@
 html/
 examples/test/build/
+examples/test/.dep/
 examples/test/openocd.log
 *~
