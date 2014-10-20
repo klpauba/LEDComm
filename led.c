@@ -215,7 +215,7 @@ ledCommDispatch(GPTDriver *gptp)		/* Inside a callback: use only i-class functio
 }
 
 const    GPTConfig GPTC_LEDComm = {
-    .frequency = 10000,		/* 10 kHz */
+    .frequency = LEDCOMM_GPT_FREQUENCY,
     .callback = ledCommDispatch,
     0
 };
@@ -284,7 +284,7 @@ msg_t LEDCommThread(void *arg) {
 
     gptObjectInit(&GPTD_LEDComm);
     gptStart(&GPTD_LEDComm, &GPTC_LEDComm);
-    gptStartContinuous(&GPTD_LEDComm, 2);
+    gptStartContinuous(&GPTD_LEDComm, LEDCOMM_GPT_INTERVAL);
 
     chBSemInit(&ledcommINTR, TRUE);
     while (TRUE) {
