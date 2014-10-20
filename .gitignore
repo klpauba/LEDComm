@@ -3,4 +3,5 @@ examples/test/build/
 examples/test/.dep/
 examples/test/openocd.log
 examples/test/openocd.cfg
+examples/test/mcuconf.h
 *~
