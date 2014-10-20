@@ -1,0 +1,2972 @@
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"chdebug.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	dbg_isr_cnt
+  19              		.section	.bss.dbg_isr_cnt,"aw",%nobits
+  20              		.align	2
+  21              		.type	dbg_isr_cnt, %object
+  22              		.size	dbg_isr_cnt, 4
+  23              	dbg_isr_cnt:
+  24 0000 00000000 		.space	4
+  25              		.global	dbg_lock_cnt
+  26              		.section	.bss.dbg_lock_cnt,"aw",%nobits
+  27              		.align	2
+  28              		.type	dbg_lock_cnt, %object
+  29              		.size	dbg_lock_cnt, 4
+  30              	dbg_lock_cnt:
+  31 0000 00000000 		.space	4
+  32              		.section	.rodata
+  33              		.align	2
+  34              	.LC0:
+  35 0000 53562331 		.ascii	"SV#1\000"
+  35      00
+  36              		.section	.text.dbg_check_disable,"ax",%progbits
+  37              		.align	2
+  38              		.p2align 4,,15
+  39              		.global	dbg_check_disable
+  40              		.thumb
+  41              		.thumb_func
+  42              		.type	dbg_check_disable, %function
+  43              	dbg_check_disable:
+  44              	.LFB7:
+  45              		.file 1 "/home/pauba/ChibiOS-RT/os/kernel/src/chdebug.c"
+  46              		.loc 1 81 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50 0000 08B5     		push	{r3, lr}
+  51              		.cfi_def_cfa_offset 8
+  52              		.cfi_offset 3, -8
+  53              		.cfi_offset 14, -4
+  54              		.loc 1 83 0
+  55 0002 064B     		ldr	r3, .L4
+  56 0004 1B68     		ldr	r3, [r3]
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 2
+
+
+  57 0006 002B     		cmp	r3, #0
+  58 0008 03D1     		bne	.L2
+  59              		.loc 1 83 0 is_stmt 0 discriminator 1
+  60 000a 054B     		ldr	r3, .L4+4
+  61 000c 1B68     		ldr	r3, [r3]
+  62 000e 002B     		cmp	r3, #0
+  63 0010 02D0     		beq	.L1
+  64              	.L2:
+  65              		.loc 1 84 0 is_stmt 1
+  66 0012 0448     		ldr	r0, .L4+8
+  67 0014 FFF7FEFF 		bl	chDbgPanic
+  68              	.L1:
+  69              		.loc 1 85 0
+  70 0018 08BD     		pop	{r3, pc}
+  71              	.L5:
+  72 001a 00BF     		.align	2
+  73              	.L4:
+  74 001c 00000000 		.word	dbg_isr_cnt
+  75 0020 00000000 		.word	dbg_lock_cnt
+  76 0024 00000000 		.word	.LC0
+  77              		.cfi_endproc
+  78              	.LFE7:
+  79              		.size	dbg_check_disable, .-dbg_check_disable
+  80 0028 AFF30080 		.section	.rodata
+  80      AFF30080 
+  81 0005 000000   		.align	2
+  82              	.LC1:
+  83 0008 53562332 		.ascii	"SV#2\000"
+  83      00
+  84              		.section	.text.dbg_check_suspend,"ax",%progbits
+  85              		.align	2
+  86              		.p2align 4,,15
+  87              		.global	dbg_check_suspend
+  88              		.thumb
+  89              		.thumb_func
+  90              		.type	dbg_check_suspend, %function
+  91              	dbg_check_suspend:
+  92              	.LFB8:
+  93              		.loc 1 92 0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97 0000 08B5     		push	{r3, lr}
+  98              		.cfi_def_cfa_offset 8
+  99              		.cfi_offset 3, -8
+ 100              		.cfi_offset 14, -4
+ 101              		.loc 1 94 0
+ 102 0002 064B     		ldr	r3, .L9
+ 103 0004 1B68     		ldr	r3, [r3]
+ 104 0006 002B     		cmp	r3, #0
+ 105 0008 03D1     		bne	.L7
+ 106              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 107 000a 054B     		ldr	r3, .L9+4
+ 108 000c 1B68     		ldr	r3, [r3]
+ 109 000e 002B     		cmp	r3, #0
+ 110 0010 02D0     		beq	.L6
+ 111              	.L7:
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 3
+
+
+ 112              		.loc 1 95 0 is_stmt 1
+ 113 0012 0448     		ldr	r0, .L9+8
+ 114 0014 FFF7FEFF 		bl	chDbgPanic
+ 115              	.L6:
+ 116              		.loc 1 96 0
+ 117 0018 08BD     		pop	{r3, pc}
+ 118              	.L10:
+ 119 001a 00BF     		.align	2
+ 120              	.L9:
+ 121 001c 00000000 		.word	dbg_isr_cnt
+ 122 0020 00000000 		.word	dbg_lock_cnt
+ 123 0024 08000000 		.word	.LC1
+ 124              		.cfi_endproc
+ 125              	.LFE8:
+ 126              		.size	dbg_check_suspend, .-dbg_check_suspend
+ 127 0028 AFF30080 		.section	.rodata
+ 127      AFF30080 
+ 128 000d 000000   		.align	2
+ 129              	.LC2:
+ 130 0010 53562333 		.ascii	"SV#3\000"
+ 130      00
+ 131              		.section	.text.dbg_check_enable,"ax",%progbits
+ 132              		.align	2
+ 133              		.p2align 4,,15
+ 134              		.global	dbg_check_enable
+ 135              		.thumb
+ 136              		.thumb_func
+ 137              		.type	dbg_check_enable, %function
+ 138              	dbg_check_enable:
+ 139              	.LFB9:
+ 140              		.loc 1 103 0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144 0000 08B5     		push	{r3, lr}
+ 145              		.cfi_def_cfa_offset 8
+ 146              		.cfi_offset 3, -8
+ 147              		.cfi_offset 14, -4
+ 148              		.loc 1 105 0
+ 149 0002 064B     		ldr	r3, .L14
+ 150 0004 1B68     		ldr	r3, [r3]
+ 151 0006 002B     		cmp	r3, #0
+ 152 0008 03D1     		bne	.L12
+ 153              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 154 000a 054B     		ldr	r3, .L14+4
+ 155 000c 1B68     		ldr	r3, [r3]
+ 156 000e 002B     		cmp	r3, #0
+ 157 0010 02D0     		beq	.L11
+ 158              	.L12:
+ 159              		.loc 1 106 0 is_stmt 1
+ 160 0012 0448     		ldr	r0, .L14+8
+ 161 0014 FFF7FEFF 		bl	chDbgPanic
+ 162              	.L11:
+ 163              		.loc 1 107 0
+ 164 0018 08BD     		pop	{r3, pc}
+ 165              	.L15:
+ 166 001a 00BF     		.align	2
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 4
+
+
+ 167              	.L14:
+ 168 001c 00000000 		.word	dbg_isr_cnt
+ 169 0020 00000000 		.word	dbg_lock_cnt
+ 170 0024 10000000 		.word	.LC2
+ 171              		.cfi_endproc
+ 172              	.LFE9:
+ 173              		.size	dbg_check_enable, .-dbg_check_enable
+ 174 0028 AFF30080 		.section	.rodata
+ 174      AFF30080 
+ 175 0015 000000   		.align	2
+ 176              	.LC3:
+ 177 0018 53562334 		.ascii	"SV#4\000"
+ 177      00
+ 178              		.section	.text.dbg_check_lock,"ax",%progbits
+ 179              		.align	2
+ 180              		.p2align 4,,15
+ 181              		.global	dbg_check_lock
+ 182              		.thumb
+ 183              		.thumb_func
+ 184              		.type	dbg_check_lock, %function
+ 185              	dbg_check_lock:
+ 186              	.LFB10:
+ 187              		.loc 1 114 0
+ 188              		.cfi_startproc
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191 0000 08B5     		push	{r3, lr}
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 3, -8
+ 194              		.cfi_offset 14, -4
+ 195              		.loc 1 116 0
+ 196 0002 074B     		ldr	r3, .L19
+ 197 0004 1B68     		ldr	r3, [r3]
+ 198 0006 002B     		cmp	r3, #0
+ 199 0008 03D1     		bne	.L17
+ 200              		.loc 1 116 0 is_stmt 0 discriminator 1
+ 201 000a 064B     		ldr	r3, .L19+4
+ 202 000c 1B68     		ldr	r3, [r3]
+ 203 000e 002B     		cmp	r3, #0
+ 204 0010 02D0     		beq	.L18
+ 205              	.L17:
+ 206              		.loc 1 117 0 is_stmt 1
+ 207 0012 0548     		ldr	r0, .L19+8
+ 208 0014 FFF7FEFF 		bl	chDbgPanic
+ 209              	.L18:
+ 210              		.loc 1 118 0
+ 211 0018 024B     		ldr	r3, .L19+4
+ 212 001a 0122     		movs	r2, #1
+ 213 001c 1A60     		str	r2, [r3]
+ 214              		.loc 1 119 0
+ 215 001e 08BD     		pop	{r3, pc}
+ 216              	.L20:
+ 217              		.align	2
+ 218              	.L19:
+ 219 0020 00000000 		.word	dbg_isr_cnt
+ 220 0024 00000000 		.word	dbg_lock_cnt
+ 221 0028 18000000 		.word	.LC3
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 5
+
+
+ 222              		.cfi_endproc
+ 223              	.LFE10:
+ 224              		.size	dbg_check_lock, .-dbg_check_lock
+ 225 002c AFF30080 		.section	.rodata
+ 226 001d 000000   		.align	2
+ 227              	.LC4:
+ 228 0020 53562335 		.ascii	"SV#5\000"
+ 228      00
+ 229              		.section	.text.dbg_check_unlock,"ax",%progbits
+ 230              		.align	2
+ 231              		.p2align 4,,15
+ 232              		.global	dbg_check_unlock
+ 233              		.thumb
+ 234              		.thumb_func
+ 235              		.type	dbg_check_unlock, %function
+ 236              	dbg_check_unlock:
+ 237              	.LFB11:
+ 238              		.loc 1 126 0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242 0000 08B5     		push	{r3, lr}
+ 243              		.cfi_def_cfa_offset 8
+ 244              		.cfi_offset 3, -8
+ 245              		.cfi_offset 14, -4
+ 246              		.loc 1 128 0
+ 247 0002 074B     		ldr	r3, .L24
+ 248 0004 1B68     		ldr	r3, [r3]
+ 249 0006 002B     		cmp	r3, #0
+ 250 0008 03D1     		bne	.L22
+ 251              		.loc 1 128 0 is_stmt 0 discriminator 1
+ 252 000a 064B     		ldr	r3, .L24+4
+ 253 000c 1B68     		ldr	r3, [r3]
+ 254 000e 002B     		cmp	r3, #0
+ 255 0010 02DC     		bgt	.L23
+ 256              	.L22:
+ 257              		.loc 1 129 0 is_stmt 1
+ 258 0012 0548     		ldr	r0, .L24+8
+ 259 0014 FFF7FEFF 		bl	chDbgPanic
+ 260              	.L23:
+ 261              		.loc 1 130 0
+ 262 0018 024B     		ldr	r3, .L24+4
+ 263 001a 0022     		movs	r2, #0
+ 264 001c 1A60     		str	r2, [r3]
+ 265              		.loc 1 131 0
+ 266 001e 08BD     		pop	{r3, pc}
+ 267              	.L25:
+ 268              		.align	2
+ 269              	.L24:
+ 270 0020 00000000 		.word	dbg_isr_cnt
+ 271 0024 00000000 		.word	dbg_lock_cnt
+ 272 0028 20000000 		.word	.LC4
+ 273              		.cfi_endproc
+ 274              	.LFE11:
+ 275              		.size	dbg_check_unlock, .-dbg_check_unlock
+ 276 002c AFF30080 		.section	.rodata
+ 277 0025 000000   		.align	2
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 6
+
+
+ 278              	.LC5:
+ 279 0028 53562336 		.ascii	"SV#6\000"
+ 279      00
+ 280              		.section	.text.dbg_check_lock_from_isr,"ax",%progbits
+ 281              		.align	2
+ 282              		.p2align 4,,15
+ 283              		.global	dbg_check_lock_from_isr
+ 284              		.thumb
+ 285              		.thumb_func
+ 286              		.type	dbg_check_lock_from_isr, %function
+ 287              	dbg_check_lock_from_isr:
+ 288              	.LFB12:
+ 289              		.loc 1 138 0
+ 290              		.cfi_startproc
+ 291              		@ args = 0, pretend = 0, frame = 0
+ 292              		@ frame_needed = 0, uses_anonymous_args = 0
+ 293 0000 08B5     		push	{r3, lr}
+ 294              		.cfi_def_cfa_offset 8
+ 295              		.cfi_offset 3, -8
+ 296              		.cfi_offset 14, -4
+ 297              		.loc 1 140 0
+ 298 0002 074B     		ldr	r3, .L29
+ 299 0004 1B68     		ldr	r3, [r3]
+ 300 0006 002B     		cmp	r3, #0
+ 301 0008 03DD     		ble	.L27
+ 302              		.loc 1 140 0 is_stmt 0 discriminator 1
+ 303 000a 064B     		ldr	r3, .L29+4
+ 304 000c 1B68     		ldr	r3, [r3]
+ 305 000e 002B     		cmp	r3, #0
+ 306 0010 02D0     		beq	.L28
+ 307              	.L27:
+ 308              		.loc 1 141 0 is_stmt 1
+ 309 0012 0548     		ldr	r0, .L29+8
+ 310 0014 FFF7FEFF 		bl	chDbgPanic
+ 311              	.L28:
+ 312              		.loc 1 142 0
+ 313 0018 024B     		ldr	r3, .L29+4
+ 314 001a 0122     		movs	r2, #1
+ 315 001c 1A60     		str	r2, [r3]
+ 316              		.loc 1 143 0
+ 317 001e 08BD     		pop	{r3, pc}
+ 318              	.L30:
+ 319              		.align	2
+ 320              	.L29:
+ 321 0020 00000000 		.word	dbg_isr_cnt
+ 322 0024 00000000 		.word	dbg_lock_cnt
+ 323 0028 28000000 		.word	.LC5
+ 324              		.cfi_endproc
+ 325              	.LFE12:
+ 326              		.size	dbg_check_lock_from_isr, .-dbg_check_lock_from_isr
+ 327 002c AFF30080 		.section	.rodata
+ 328 002d 000000   		.align	2
+ 329              	.LC6:
+ 330 0030 53562337 		.ascii	"SV#7\000"
+ 330      00
+ 331              		.section	.text.dbg_check_unlock_from_isr,"ax",%progbits
+ 332              		.align	2
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 7
+
+
+ 333              		.p2align 4,,15
+ 334              		.global	dbg_check_unlock_from_isr
+ 335              		.thumb
+ 336              		.thumb_func
+ 337              		.type	dbg_check_unlock_from_isr, %function
+ 338              	dbg_check_unlock_from_isr:
+ 339              	.LFB13:
+ 340              		.loc 1 150 0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 0
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344 0000 08B5     		push	{r3, lr}
+ 345              		.cfi_def_cfa_offset 8
+ 346              		.cfi_offset 3, -8
+ 347              		.cfi_offset 14, -4
+ 348              		.loc 1 152 0
+ 349 0002 074B     		ldr	r3, .L34
+ 350 0004 1B68     		ldr	r3, [r3]
+ 351 0006 002B     		cmp	r3, #0
+ 352 0008 03DD     		ble	.L32
+ 353              		.loc 1 152 0 is_stmt 0 discriminator 1
+ 354 000a 064B     		ldr	r3, .L34+4
+ 355 000c 1B68     		ldr	r3, [r3]
+ 356 000e 002B     		cmp	r3, #0
+ 357 0010 02DC     		bgt	.L33
+ 358              	.L32:
+ 359              		.loc 1 153 0 is_stmt 1
+ 360 0012 0548     		ldr	r0, .L34+8
+ 361 0014 FFF7FEFF 		bl	chDbgPanic
+ 362              	.L33:
+ 363              		.loc 1 154 0
+ 364 0018 024B     		ldr	r3, .L34+4
+ 365 001a 0022     		movs	r2, #0
+ 366 001c 1A60     		str	r2, [r3]
+ 367              		.loc 1 155 0
+ 368 001e 08BD     		pop	{r3, pc}
+ 369              	.L35:
+ 370              		.align	2
+ 371              	.L34:
+ 372 0020 00000000 		.word	dbg_isr_cnt
+ 373 0024 00000000 		.word	dbg_lock_cnt
+ 374 0028 30000000 		.word	.LC6
+ 375              		.cfi_endproc
+ 376              	.LFE13:
+ 377              		.size	dbg_check_unlock_from_isr, .-dbg_check_unlock_from_isr
+ 378 002c AFF30080 		.section	.rodata
+ 379 0035 000000   		.align	2
+ 380              	.LC7:
+ 381 0038 53562338 		.ascii	"SV#8\000"
+ 381      00
+ 382              		.section	.text.dbg_check_enter_isr,"ax",%progbits
+ 383              		.align	2
+ 384              		.p2align 4,,15
+ 385              		.global	dbg_check_enter_isr
+ 386              		.thumb
+ 387              		.thumb_func
+ 388              		.type	dbg_check_enter_isr, %function
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 8
+
+
+ 389              	dbg_check_enter_isr:
+ 390              	.LFB14:
+ 391              		.loc 1 162 0
+ 392              		.cfi_startproc
+ 393              		@ args = 0, pretend = 0, frame = 0
+ 394              		@ frame_needed = 0, uses_anonymous_args = 0
+ 395 0000 08B5     		push	{r3, lr}
+ 396              		.cfi_def_cfa_offset 8
+ 397              		.cfi_offset 3, -8
+ 398              		.cfi_offset 14, -4
+ 399              	.LBB2:
+ 400              		.loc 1 164 0
+ 401 0002 2023     		movs	r3, #32
+ 402              	@ 164 "/home/pauba/ChibiOS-RT/os/kernel/src/chdebug.c" 1
+ 403 0004 83F31188 		msr     BASEPRI, r3
+ 404              	@ 0 "" 2
+ 405              		.thumb
+ 406              	.LBE2:
+ 407              		.loc 1 165 0
+ 408 0008 094B     		ldr	r3, .L39
+ 409 000a 1B68     		ldr	r3, [r3]
+ 410 000c 002B     		cmp	r3, #0
+ 411 000e 03DB     		blt	.L37
+ 412              		.loc 1 165 0 is_stmt 0 discriminator 1
+ 413 0010 084B     		ldr	r3, .L39+4
+ 414 0012 1B68     		ldr	r3, [r3]
+ 415 0014 002B     		cmp	r3, #0
+ 416 0016 02D0     		beq	.L38
+ 417              	.L37:
+ 418              		.loc 1 166 0 is_stmt 1
+ 419 0018 0748     		ldr	r0, .L39+8
+ 420 001a FFF7FEFF 		bl	chDbgPanic
+ 421              	.L38:
+ 422              		.loc 1 167 0
+ 423 001e 044B     		ldr	r3, .L39
+ 424 0020 1B68     		ldr	r3, [r3]
+ 425 0022 5A1C     		adds	r2, r3, #1
+ 426 0024 024B     		ldr	r3, .L39
+ 427 0026 1A60     		str	r2, [r3]
+ 428              	.LBB3:
+ 429              		.loc 1 168 0
+ 430 0028 0023     		movs	r3, #0
+ 431              	@ 168 "/home/pauba/ChibiOS-RT/os/kernel/src/chdebug.c" 1
+ 432 002a 83F31188 		msr     BASEPRI, r3
+ 433              	@ 0 "" 2
+ 434              		.thumb
+ 435              	.LBE3:
+ 436              		.loc 1 169 0
+ 437 002e 08BD     		pop	{r3, pc}
+ 438              	.L40:
+ 439              		.align	2
+ 440              	.L39:
+ 441 0030 00000000 		.word	dbg_isr_cnt
+ 442 0034 00000000 		.word	dbg_lock_cnt
+ 443 0038 38000000 		.word	.LC7
+ 444              		.cfi_endproc
+ 445              	.LFE14:
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 9
+
+
+ 446              		.size	dbg_check_enter_isr, .-dbg_check_enter_isr
+ 447 003c AFF30080 		.section	.rodata
+ 448 003d 000000   		.align	2
+ 449              	.LC8:
+ 450 0040 53562339 		.ascii	"SV#9\000"
+ 450      00
+ 451              		.section	.text.dbg_check_leave_isr,"ax",%progbits
+ 452              		.align	2
+ 453              		.p2align 4,,15
+ 454              		.global	dbg_check_leave_isr
+ 455              		.thumb
+ 456              		.thumb_func
+ 457              		.type	dbg_check_leave_isr, %function
+ 458              	dbg_check_leave_isr:
+ 459              	.LFB15:
+ 460              		.loc 1 176 0
+ 461              		.cfi_startproc
+ 462              		@ args = 0, pretend = 0, frame = 0
+ 463              		@ frame_needed = 0, uses_anonymous_args = 0
+ 464 0000 08B5     		push	{r3, lr}
+ 465              		.cfi_def_cfa_offset 8
+ 466              		.cfi_offset 3, -8
+ 467              		.cfi_offset 14, -4
+ 468              	.LBB4:
+ 469              		.loc 1 178 0
+ 470 0002 2023     		movs	r3, #32
+ 471              	@ 178 "/home/pauba/ChibiOS-RT/os/kernel/src/chdebug.c" 1
+ 472 0004 83F31188 		msr     BASEPRI, r3
+ 473              	@ 0 "" 2
+ 474              		.thumb
+ 475              	.LBE4:
+ 476              		.loc 1 179 0
+ 477 0008 094B     		ldr	r3, .L44
+ 478 000a 1B68     		ldr	r3, [r3]
+ 479 000c 002B     		cmp	r3, #0
+ 480 000e 03DD     		ble	.L42
+ 481              		.loc 1 179 0 is_stmt 0 discriminator 1
+ 482 0010 084B     		ldr	r3, .L44+4
+ 483 0012 1B68     		ldr	r3, [r3]
+ 484 0014 002B     		cmp	r3, #0
+ 485 0016 02D0     		beq	.L43
+ 486              	.L42:
+ 487              		.loc 1 180 0 is_stmt 1
+ 488 0018 0748     		ldr	r0, .L44+8
+ 489 001a FFF7FEFF 		bl	chDbgPanic
+ 490              	.L43:
+ 491              		.loc 1 181 0
+ 492 001e 044B     		ldr	r3, .L44
+ 493 0020 1B68     		ldr	r3, [r3]
+ 494 0022 5A1E     		subs	r2, r3, #1
+ 495 0024 024B     		ldr	r3, .L44
+ 496 0026 1A60     		str	r2, [r3]
+ 497              	.LBB5:
+ 498              		.loc 1 182 0
+ 499 0028 0023     		movs	r3, #0
+ 500              	@ 182 "/home/pauba/ChibiOS-RT/os/kernel/src/chdebug.c" 1
+ 501 002a 83F31188 		msr     BASEPRI, r3
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 10
+
+
+ 502              	@ 0 "" 2
+ 503              		.thumb
+ 504              	.LBE5:
+ 505              		.loc 1 183 0
+ 506 002e 08BD     		pop	{r3, pc}
+ 507              	.L45:
+ 508              		.align	2
+ 509              	.L44:
+ 510 0030 00000000 		.word	dbg_isr_cnt
+ 511 0034 00000000 		.word	dbg_lock_cnt
+ 512 0038 40000000 		.word	.LC8
+ 513              		.cfi_endproc
+ 514              	.LFE15:
+ 515              		.size	dbg_check_leave_isr, .-dbg_check_leave_isr
+ 516 003c AFF30080 		.section	.rodata
+ 517 0045 000000   		.align	2
+ 518              	.LC9:
+ 519 0048 53562331 		.ascii	"SV#10\000"
+ 519      3000
+ 520              		.section	.text.chDbgCheckClassI,"ax",%progbits
+ 521              		.align	2
+ 522              		.p2align 4,,15
+ 523              		.global	chDbgCheckClassI
+ 524              		.thumb
+ 525              		.thumb_func
+ 526              		.type	chDbgCheckClassI, %function
+ 527              	chDbgCheckClassI:
+ 528              	.LFB16:
+ 529              		.loc 1 193 0
+ 530              		.cfi_startproc
+ 531              		@ args = 0, pretend = 0, frame = 0
+ 532              		@ frame_needed = 0, uses_anonymous_args = 0
+ 533 0000 08B5     		push	{r3, lr}
+ 534              		.cfi_def_cfa_offset 8
+ 535              		.cfi_offset 3, -8
+ 536              		.cfi_offset 14, -4
+ 537              		.loc 1 195 0
+ 538 0002 064B     		ldr	r3, .L49
+ 539 0004 1B68     		ldr	r3, [r3]
+ 540 0006 002B     		cmp	r3, #0
+ 541 0008 03DB     		blt	.L47
+ 542              		.loc 1 195 0 is_stmt 0 discriminator 1
+ 543 000a 054B     		ldr	r3, .L49+4
+ 544 000c 1B68     		ldr	r3, [r3]
+ 545 000e 002B     		cmp	r3, #0
+ 546 0010 02DC     		bgt	.L46
+ 547              	.L47:
+ 548              		.loc 1 196 0 is_stmt 1
+ 549 0012 0448     		ldr	r0, .L49+8
+ 550 0014 FFF7FEFF 		bl	chDbgPanic
+ 551              	.L46:
+ 552              		.loc 1 197 0
+ 553 0018 08BD     		pop	{r3, pc}
+ 554              	.L50:
+ 555 001a 00BF     		.align	2
+ 556              	.L49:
+ 557 001c 00000000 		.word	dbg_isr_cnt
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 11
+
+
+ 558 0020 00000000 		.word	dbg_lock_cnt
+ 559 0024 48000000 		.word	.LC9
+ 560              		.cfi_endproc
+ 561              	.LFE16:
+ 562              		.size	chDbgCheckClassI, .-chDbgCheckClassI
+ 563 0028 AFF30080 		.section	.rodata
+ 563      AFF30080 
+ 564 004e 0000     		.align	2
+ 565              	.LC10:
+ 566 0050 53562331 		.ascii	"SV#11\000"
+ 566      3100
+ 567 0056 0000     		.section	.text.chDbgCheckClassS,"ax",%progbits
+ 568              		.align	2
+ 569              		.p2align 4,,15
+ 570              		.global	chDbgCheckClassS
+ 571              		.thumb
+ 572              		.thumb_func
+ 573              		.type	chDbgCheckClassS, %function
+ 574              	chDbgCheckClassS:
+ 575              	.LFB17:
+ 576              		.loc 1 207 0
+ 577              		.cfi_startproc
+ 578              		@ args = 0, pretend = 0, frame = 0
+ 579              		@ frame_needed = 0, uses_anonymous_args = 0
+ 580 0000 08B5     		push	{r3, lr}
+ 581              		.cfi_def_cfa_offset 8
+ 582              		.cfi_offset 3, -8
+ 583              		.cfi_offset 14, -4
+ 584              		.loc 1 209 0
+ 585 0002 064B     		ldr	r3, .L54
+ 586 0004 1B68     		ldr	r3, [r3]
+ 587 0006 002B     		cmp	r3, #0
+ 588 0008 03D1     		bne	.L52
+ 589              		.loc 1 209 0 is_stmt 0 discriminator 1
+ 590 000a 054B     		ldr	r3, .L54+4
+ 591 000c 1B68     		ldr	r3, [r3]
+ 592 000e 002B     		cmp	r3, #0
+ 593 0010 02DC     		bgt	.L51
+ 594              	.L52:
+ 595              		.loc 1 210 0 is_stmt 1
+ 596 0012 0448     		ldr	r0, .L54+8
+ 597 0014 FFF7FEFF 		bl	chDbgPanic
+ 598              	.L51:
+ 599              		.loc 1 211 0
+ 600 0018 08BD     		pop	{r3, pc}
+ 601              	.L55:
+ 602 001a 00BF     		.align	2
+ 603              	.L54:
+ 604 001c 00000000 		.word	dbg_isr_cnt
+ 605 0020 00000000 		.word	dbg_lock_cnt
+ 606 0024 50000000 		.word	.LC10
+ 607              		.cfi_endproc
+ 608              	.LFE17:
+ 609              		.size	chDbgCheckClassS, .-chDbgCheckClassS
+ 610              		.global	dbg_trace_buffer
+ 611 0028 AFF30080 		.section	.bss.dbg_trace_buffer,"aw",%nobits
+ 611      AFF30080 
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 12
+
+
+ 612              		.align	2
+ 613              		.type	dbg_trace_buffer, %object
+ 614              		.size	dbg_trace_buffer, 1032
+ 615              	dbg_trace_buffer:
+ 616 0000 00000000 		.space	1032
+ 616      00000000 
+ 616      00000000 
+ 616      00000000 
+ 616      00000000 
+ 617              		.section	.text._trace_init,"ax",%progbits
+ 618              		.align	2
+ 619              		.p2align 4,,15
+ 620              		.global	_trace_init
+ 621              		.thumb
+ 622              		.thumb_func
+ 623              		.type	_trace_init, %function
+ 624              	_trace_init:
+ 625              	.LFB18:
+ 626              		.loc 1 229 0
+ 627              		.cfi_startproc
+ 628              		@ args = 0, pretend = 0, frame = 0
+ 629              		@ frame_needed = 0, uses_anonymous_args = 0
+ 630              		@ link register save eliminated.
+ 631              		.loc 1 231 0
+ 632 0000 034B     		ldr	r3, .L57
+ 633 0002 4022     		movs	r2, #64
+ 634 0004 1A60     		str	r2, [r3]
+ 635              		.loc 1 232 0
+ 636 0006 024B     		ldr	r3, .L57
+ 637 0008 024A     		ldr	r2, .L57+4
+ 638 000a 5A60     		str	r2, [r3, #4]
+ 639              		.loc 1 233 0
+ 640 000c 7047     		bx	lr
+ 641              	.L58:
+ 642 000e 00BF     		.align	2
+ 643              	.L57:
+ 644 0010 00000000 		.word	dbg_trace_buffer
+ 645 0014 08000000 		.word	dbg_trace_buffer+8
+ 646              		.cfi_endproc
+ 647              	.LFE18:
+ 648              		.size	_trace_init, .-_trace_init
+ 649 0018 AFF30080 		.section	.text.dbg_trace,"ax",%progbits
+ 649      AFF30080 
+ 650              		.align	2
+ 651              		.p2align 4,,15
+ 652              		.global	dbg_trace
+ 653              		.thumb
+ 654              		.thumb_func
+ 655              		.type	dbg_trace, %function
+ 656              	dbg_trace:
+ 657              	.LFB19:
+ 658              		.loc 1 242 0
+ 659              		.cfi_startproc
+ 660              		@ args = 0, pretend = 0, frame = 8
+ 661              		@ frame_needed = 0, uses_anonymous_args = 0
+ 662              		@ link register save eliminated.
+ 663 0000 82B0     		sub	sp, sp, #8
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 13
+
+
+ 664              		.cfi_def_cfa_offset 8
+ 665 0002 0190     		str	r0, [sp, #4]
+ 666              		.loc 1 244 0
+ 667 0004 124B     		ldr	r3, .L61
+ 668 0006 5B68     		ldr	r3, [r3, #4]
+ 669 0008 124A     		ldr	r2, .L61+4
+ 670 000a D268     		ldr	r2, [r2, #12]
+ 671 000c 1A60     		str	r2, [r3]
+ 672              		.loc 1 245 0
+ 673 000e 104B     		ldr	r3, .L61
+ 674 0010 5B68     		ldr	r3, [r3, #4]
+ 675 0012 114A     		ldr	r2, .L61+8
+ 676 0014 9269     		ldr	r2, [r2, #24]
+ 677 0016 5A60     		str	r2, [r3, #4]
+ 678              		.loc 1 246 0
+ 679 0018 0D4B     		ldr	r3, .L61
+ 680 001a 5B68     		ldr	r3, [r3, #4]
+ 681 001c 019A     		ldr	r2, [sp, #4]
+ 682 001e 926A     		ldr	r2, [r2, #40]
+ 683 0020 9A60     		str	r2, [r3, #8]
+ 684              		.loc 1 247 0
+ 685 0022 0B4B     		ldr	r3, .L61
+ 686 0024 5B68     		ldr	r3, [r3, #4]
+ 687 0026 019A     		ldr	r2, [sp, #4]
+ 688 0028 92F82020 		ldrb	r2, [r2, #32]	@ zero_extendqisi2
+ 689 002c 1A73     		strb	r2, [r3, #12]
+ 690              		.loc 1 248 0
+ 691 002e 084B     		ldr	r3, .L61
+ 692 0030 5B68     		ldr	r3, [r3, #4]
+ 693 0032 03F11002 		add	r2, r3, #16
+ 694 0036 064B     		ldr	r3, .L61
+ 695 0038 5A60     		str	r2, [r3, #4]
+ 696 003a 054B     		ldr	r3, .L61
+ 697 003c 5A68     		ldr	r2, [r3, #4]
+ 698 003e 074B     		ldr	r3, .L61+12
+ 699 0040 9A42     		cmp	r2, r3
+ 700 0042 02D3     		bcc	.L59
+ 701              		.loc 1 250 0
+ 702 0044 024B     		ldr	r3, .L61
+ 703 0046 064A     		ldr	r2, .L61+16
+ 704 0048 5A60     		str	r2, [r3, #4]
+ 705              	.L59:
+ 706              		.loc 1 251 0
+ 707 004a 02B0     		add	sp, sp, #8
+ 708              		@ sp needed
+ 709 004c 7047     		bx	lr
+ 710              	.L62:
+ 711 004e 00BF     		.align	2
+ 712              	.L61:
+ 713 0050 00000000 		.word	dbg_trace_buffer
+ 714 0054 00000000 		.word	vtlist
+ 715 0058 00000000 		.word	rlist
+ 716 005c 08040000 		.word	dbg_trace_buffer+1032
+ 717 0060 08000000 		.word	dbg_trace_buffer+8
+ 718              		.cfi_endproc
+ 719              	.LFE19:
+ 720              		.size	dbg_trace, .-dbg_trace
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 14
+
+
+ 721              		.global	dbg_panic_msg
+ 722 0064 AFF30080 		.section	.bss.dbg_panic_msg,"aw",%nobits
+ 722      AFF30080 
+ 722      AFF30080 
+ 723              		.align	2
+ 724              		.type	dbg_panic_msg, %object
+ 725              		.size	dbg_panic_msg, 4
+ 726              	dbg_panic_msg:
+ 727 0000 00000000 		.space	4
+ 728              		.section	.text.chDbgPanic,"ax",%progbits
+ 729              		.align	2
+ 730              		.p2align 4,,15
+ 731              		.global	chDbgPanic
+ 732              		.thumb
+ 733              		.thumb_func
+ 734              		.type	chDbgPanic, %function
+ 735              	chDbgPanic:
+ 736              	.LFB20:
+ 737              		.loc 1 271 0
+ 738              		.cfi_startproc
+ 739              		@ args = 0, pretend = 0, frame = 8
+ 740              		@ frame_needed = 0, uses_anonymous_args = 0
+ 741 0000 00B5     		push	{lr}
+ 742              		.cfi_def_cfa_offset 4
+ 743              		.cfi_offset 14, -4
+ 744 0002 83B0     		sub	sp, sp, #12
+ 745              		.cfi_def_cfa_offset 16
+ 746 0004 0190     		str	r0, [sp, #4]
+ 747              		.loc 1 273 0
+ 748 0006 044B     		ldr	r3, .L64
+ 749 0008 019A     		ldr	r2, [sp, #4]
+ 750 000a 1A60     		str	r2, [r3]
+ 751              		.loc 1 274 0
+ 752 000c FFF7FEFF 		bl	port_halt
+ 753              		.loc 1 275 0
+ 754 0010 03B0     		add	sp, sp, #12
+ 755              		@ sp needed
+ 756 0012 5DF804FB 		ldr	pc, [sp], #4
+ 757              	.L65:
+ 758 0016 00BF     		.align	2
+ 759              	.L64:
+ 760 0018 00000000 		.word	dbg_panic_msg
+ 761              		.cfi_endproc
+ 762              	.LFE20:
+ 763              		.size	chDbgPanic, .-chDbgPanic
+ 764 001c AFF30080 		.text
+ 765              	.Letext0:
+ 766              		.file 2 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/machine/_default_types.h"
+ 767              		.file 3 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/stdint.h"
+ 768              		.file 4 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chtypes.h"
+ 769              		.file 5 "/home/pauba/ChibiOS-RT/os/kernel/include/chlists.h"
+ 770              		.file 6 "/home/pauba/ChibiOS-RT/os/kernel/include/chthreads.h"
+ 771              		.file 7 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore_v7m.h"
+ 772              		.file 8 "/home/pauba/ChibiOS-RT/os/kernel/include/chvt.h"
+ 773              		.file 9 "/home/pauba/ChibiOS-RT/os/kernel/include/chschd.h"
+ 774              		.file 10 "/home/pauba/ChibiOS-RT/os/kernel/include/chmtx.h"
+ 775              		.file 11 "/home/pauba/ChibiOS-RT/os/kernel/include/chdebug.h"
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 15
+
+
+ 776              		.section	.debug_info,"",%progbits
+ 777              	.Ldebug_info0:
+ 778 0000 6A070000 		.4byte	0x76a
+ 779 0004 0400     		.2byte	0x4
+ 780 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 781 000a 04       		.byte	0x4
+ 782 000b 01       		.uleb128 0x1
+ 783 000c 84030000 		.4byte	.LASF109
+ 784 0010 01       		.byte	0x1
+ 785 0011 E2000000 		.4byte	.LASF110
+ 786 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 787 0019 00000000 		.4byte	0
+ 788 001d 00000000 		.4byte	.Ldebug_line0
+ 789 0021 02       		.uleb128 0x2
+ 790 0022 04       		.byte	0x4
+ 791 0023 05       		.byte	0x5
+ 792 0024 696E7400 		.ascii	"int\000"
+ 793 0028 03       		.uleb128 0x3
+ 794 0029 04       		.byte	0x4
+ 795 002a 07       		.byte	0x7
+ 796 002b 4E010000 		.4byte	.LASF0
+ 797 002f 03       		.uleb128 0x3
+ 798 0030 01       		.byte	0x1
+ 799 0031 06       		.byte	0x6
+ 800 0032 82000000 		.4byte	.LASF1
+ 801 0036 04       		.uleb128 0x4
+ 802 0037 21000000 		.4byte	.LASF5
+ 803 003b 02       		.byte	0x2
+ 804 003c 1C       		.byte	0x1c
+ 805 003d 41000000 		.4byte	0x41
+ 806 0041 03       		.uleb128 0x3
+ 807 0042 01       		.byte	0x1
+ 808 0043 08       		.byte	0x8
+ 809 0044 F5020000 		.4byte	.LASF2
+ 810 0048 03       		.uleb128 0x3
+ 811 0049 02       		.byte	0x2
+ 812 004a 05       		.byte	0x5
+ 813 004b 1B030000 		.4byte	.LASF3
+ 814 004f 03       		.uleb128 0x3
+ 815 0050 02       		.byte	0x2
+ 816 0051 07       		.byte	0x7
+ 817 0052 A2010000 		.4byte	.LASF4
+ 818 0056 04       		.uleb128 0x4
+ 819 0057 7B040000 		.4byte	.LASF6
+ 820 005b 02       		.byte	0x2
+ 821 005c 37       		.byte	0x37
+ 822 005d 61000000 		.4byte	0x61
+ 823 0061 03       		.uleb128 0x3
+ 824 0062 04       		.byte	0x4
+ 825 0063 05       		.byte	0x5
+ 826 0064 C2000000 		.4byte	.LASF7
+ 827 0068 04       		.uleb128 0x4
+ 828 0069 19010000 		.4byte	.LASF8
+ 829 006d 02       		.byte	0x2
+ 830 006e 38       		.byte	0x38
+ 831 006f 73000000 		.4byte	0x73
+ 832 0073 03       		.uleb128 0x3
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 16
+
+
+ 833 0074 04       		.byte	0x4
+ 834 0075 07       		.byte	0x7
+ 835 0076 6D010000 		.4byte	.LASF9
+ 836 007a 03       		.uleb128 0x3
+ 837 007b 08       		.byte	0x8
+ 838 007c 05       		.byte	0x5
+ 839 007d 74000000 		.4byte	.LASF10
+ 840 0081 04       		.uleb128 0x4
+ 841 0082 AA020000 		.4byte	.LASF11
+ 842 0086 02       		.byte	0x2
+ 843 0087 4E       		.byte	0x4e
+ 844 0088 8C000000 		.4byte	0x8c
+ 845 008c 03       		.uleb128 0x3
+ 846 008d 08       		.byte	0x8
+ 847 008e 07       		.byte	0x7
+ 848 008f 32000000 		.4byte	.LASF12
+ 849 0093 04       		.uleb128 0x4
+ 850 0094 02050000 		.4byte	.LASF13
+ 851 0098 03       		.byte	0x3
+ 852 0099 2A       		.byte	0x2a
+ 853 009a 36000000 		.4byte	0x36
+ 854 009e 04       		.uleb128 0x4
+ 855 009f ED020000 		.4byte	.LASF14
+ 856 00a3 03       		.byte	0x3
+ 857 00a4 41       		.byte	0x41
+ 858 00a5 56000000 		.4byte	0x56
+ 859 00a9 04       		.uleb128 0x4
+ 860 00aa 66030000 		.4byte	.LASF15
+ 861 00ae 03       		.byte	0x3
+ 862 00af 42       		.byte	0x42
+ 863 00b0 68000000 		.4byte	0x68
+ 864 00b4 04       		.uleb128 0x4
+ 865 00b5 18000000 		.4byte	.LASF16
+ 866 00b9 03       		.byte	0x3
+ 867 00ba 4E       		.byte	0x4e
+ 868 00bb 81000000 		.4byte	0x81
+ 869 00bf 03       		.uleb128 0x3
+ 870 00c0 01       		.byte	0x1
+ 871 00c1 02       		.byte	0x2
+ 872 00c2 E7020000 		.4byte	.LASF17
+ 873 00c6 04       		.uleb128 0x4
+ 874 00c7 E0010000 		.4byte	.LASF18
+ 875 00cb 04       		.byte	0x4
+ 876 00cc 2C       		.byte	0x2c
+ 877 00cd 93000000 		.4byte	0x93
+ 878 00d1 04       		.uleb128 0x4
+ 879 00d2 CB000000 		.4byte	.LASF19
+ 880 00d6 04       		.byte	0x4
+ 881 00d7 2D       		.byte	0x2d
+ 882 00d8 93000000 		.4byte	0x93
+ 883 00dc 04       		.uleb128 0x4
+ 884 00dd C6020000 		.4byte	.LASF20
+ 885 00e1 04       		.byte	0x4
+ 886 00e2 2E       		.byte	0x2e
+ 887 00e3 93000000 		.4byte	0x93
+ 888 00e7 04       		.uleb128 0x4
+ 889 00e8 B8000000 		.4byte	.LASF21
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 17
+
+
+ 890 00ec 04       		.byte	0x4
+ 891 00ed 2F       		.byte	0x2f
+ 892 00ee 93000000 		.4byte	0x93
+ 893 00f2 04       		.uleb128 0x4
+ 894 00f3 DF020000 		.4byte	.LASF22
+ 895 00f7 04       		.byte	0x4
+ 896 00f8 30       		.byte	0x30
+ 897 00f9 A9000000 		.4byte	0xa9
+ 898 00fd 04       		.uleb128 0x4
+ 899 00fe C1010000 		.4byte	.LASF23
+ 900 0102 04       		.byte	0x4
+ 901 0103 31       		.byte	0x31
+ 902 0104 9E000000 		.4byte	0x9e
+ 903 0108 04       		.uleb128 0x4
+ 904 0109 11020000 		.4byte	.LASF24
+ 905 010d 04       		.byte	0x4
+ 906 010e 33       		.byte	0x33
+ 907 010f A9000000 		.4byte	0xa9
+ 908 0113 04       		.uleb128 0x4
+ 909 0114 66040000 		.4byte	.LASF25
+ 910 0118 04       		.byte	0x4
+ 911 0119 35       		.byte	0x35
+ 912 011a A9000000 		.4byte	0xa9
+ 913 011e 04       		.uleb128 0x4
+ 914 011f 3D010000 		.4byte	.LASF26
+ 915 0123 04       		.byte	0x4
+ 916 0124 36       		.byte	0x36
+ 917 0125 9E000000 		.4byte	0x9e
+ 918 0129 04       		.uleb128 0x4
+ 919 012a 54030000 		.4byte	.LASF27
+ 920 012e 05       		.byte	0x5
+ 921 012f 2A       		.byte	0x2a
+ 922 0130 34010000 		.4byte	0x134
+ 923 0134 05       		.uleb128 0x5
+ 924 0135 54030000 		.4byte	.LASF27
+ 925 0139 4C       		.byte	0x4c
+ 926 013a 06       		.byte	0x6
+ 927 013b 5E       		.byte	0x5e
+ 928 013c 3D020000 		.4byte	0x23d
+ 929 0140 06       		.uleb128 0x6
+ 930 0141 45030000 		.4byte	.LASF28
+ 931 0145 06       		.byte	0x6
+ 932 0146 5F       		.byte	0x5f
+ 933 0147 5E020000 		.4byte	0x25e
+ 934 014b 00       		.byte	0
+ 935 014c 06       		.uleb128 0x6
+ 936 014d D8020000 		.4byte	.LASF29
+ 937 0151 06       		.byte	0x6
+ 938 0152 61       		.byte	0x61
+ 939 0153 5E020000 		.4byte	0x25e
+ 940 0157 04       		.byte	0x4
+ 941 0158 06       		.uleb128 0x6
+ 942 0159 6D000000 		.4byte	.LASF30
+ 943 015d 06       		.byte	0x6
+ 944 015e 63       		.byte	0x63
+ 945 015f F2000000 		.4byte	0xf2
+ 946 0163 08       		.byte	0x8
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 18
+
+
+ 947 0164 06       		.uleb128 0x6
+ 948 0165 66050000 		.4byte	.LASF31
+ 949 0169 06       		.byte	0x6
+ 950 016a 64       		.byte	0x64
+ 951 016b 23030000 		.4byte	0x323
+ 952 016f 0C       		.byte	0xc
+ 953 0170 06       		.uleb128 0x6
+ 954 0171 DA000000 		.4byte	.LASF32
+ 955 0175 06       		.byte	0x6
+ 956 0176 66       		.byte	0x66
+ 957 0177 5E020000 		.4byte	0x25e
+ 958 017b 10       		.byte	0x10
+ 959 017c 06       		.uleb128 0x6
+ 960 017d 6C020000 		.4byte	.LASF33
+ 961 0181 06       		.byte	0x6
+ 962 0182 67       		.byte	0x67
+ 963 0183 5E020000 		.4byte	0x25e
+ 964 0187 14       		.byte	0x14
+ 965 0188 06       		.uleb128 0x6
+ 966 0189 29050000 		.4byte	.LASF34
+ 967 018d 06       		.byte	0x6
+ 968 018e 6E       		.byte	0x6e
+ 969 018f DD040000 		.4byte	0x4dd
+ 970 0193 18       		.byte	0x18
+ 971 0194 06       		.uleb128 0x6
+ 972 0195 43010000 		.4byte	.LASF35
+ 973 0199 06       		.byte	0x6
+ 974 019a 74       		.byte	0x74
+ 975 019b EF040000 		.4byte	0x4ef
+ 976 019f 1C       		.byte	0x1c
+ 977 01a0 06       		.uleb128 0x6
+ 978 01a1 25030000 		.4byte	.LASF36
+ 979 01a5 06       		.byte	0x6
+ 980 01a6 79       		.byte	0x79
+ 981 01a7 D1000000 		.4byte	0xd1
+ 982 01ab 20       		.byte	0x20
+ 983 01ac 06       		.uleb128 0x6
+ 984 01ad 4C030000 		.4byte	.LASF37
+ 985 01b1 06       		.byte	0x6
+ 986 01b2 7D       		.byte	0x7d
+ 987 01b3 C6000000 		.4byte	0xc6
+ 988 01b7 21       		.byte	0x21
+ 989 01b8 06       		.uleb128 0x6
+ 990 01b9 D7040000 		.4byte	.LASF38
+ 991 01bd 06       		.byte	0x6
+ 992 01be 82       		.byte	0x82
+ 993 01bf DC000000 		.4byte	0xdc
+ 994 01c3 22       		.byte	0x22
+ 995 01c4 06       		.uleb128 0x6
+ 996 01c5 2D030000 		.4byte	.LASF39
+ 997 01c9 06       		.byte	0x6
+ 998 01ca 88       		.byte	0x88
+ 999 01cb E7000000 		.4byte	0xe7
+ 1000 01cf 23       		.byte	0x23
+ 1001 01d0 06       		.uleb128 0x6
+ 1002 01d1 92040000 		.4byte	.LASF40
+ 1003 01d5 06       		.byte	0x6
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 19
+
+
+ 1004 01d6 8F       		.byte	0x8f
+ 1005 01d7 FA030000 		.4byte	0x3fa
+ 1006 01db 24       		.byte	0x24
+ 1007 01dc 07       		.uleb128 0x7
+ 1008 01dd 705F7500 		.ascii	"p_u\000"
+ 1009 01e1 06       		.byte	0x6
+ 1010 01e2 B4       		.byte	0xb4
+ 1011 01e3 A8040000 		.4byte	0x4a8
+ 1012 01e7 28       		.byte	0x28
+ 1013 01e8 06       		.uleb128 0x6
+ 1014 01e9 6C050000 		.4byte	.LASF41
+ 1015 01ed 06       		.byte	0x6
+ 1016 01ee B9       		.byte	0xb9
+ 1017 01ef 84020000 		.4byte	0x284
+ 1018 01f3 2C       		.byte	0x2c
+ 1019 01f4 06       		.uleb128 0x6
+ 1020 01f5 B4040000 		.4byte	.LASF42
+ 1021 01f9 06       		.byte	0x6
+ 1022 01fa BF       		.byte	0xbf
+ 1023 01fb 64020000 		.4byte	0x264
+ 1024 01ff 30       		.byte	0x30
+ 1025 0200 06       		.uleb128 0x6
+ 1026 0201 00000000 		.4byte	.LASF43
+ 1027 0205 06       		.byte	0x6
+ 1028 0206 C3       		.byte	0xc3
+ 1029 0207 FD000000 		.4byte	0xfd
+ 1030 020b 38       		.byte	0x38
+ 1031 020c 06       		.uleb128 0x6
+ 1032 020d 5B030000 		.4byte	.LASF44
+ 1033 0211 06       		.byte	0x6
+ 1034 0212 C9       		.byte	0xc9
+ 1035 0213 08010000 		.4byte	0x108
+ 1036 0217 3C       		.byte	0x3c
+ 1037 0218 06       		.uleb128 0x6
+ 1038 0219 11030000 		.4byte	.LASF45
+ 1039 021d 06       		.byte	0x6
+ 1040 021e D0       		.byte	0xd0
+ 1041 021f F5040000 		.4byte	0x4f5
+ 1042 0223 40       		.byte	0x40
+ 1043 0224 06       		.uleb128 0x6
+ 1044 0225 70040000 		.4byte	.LASF46
+ 1045 0229 06       		.byte	0x6
+ 1046 022a D4       		.byte	0xd4
+ 1047 022b F2000000 		.4byte	0xf2
+ 1048 022f 44       		.byte	0x44
+ 1049 0230 06       		.uleb128 0x6
+ 1050 0231 A8000000 		.4byte	.LASF47
+ 1051 0235 06       		.byte	0x6
+ 1052 0236 DA       		.byte	0xda
+ 1053 0237 9A020000 		.4byte	0x29a
+ 1054 023b 48       		.byte	0x48
+ 1055 023c 00       		.byte	0
+ 1056 023d 08       		.uleb128 0x8
+ 1057 023e 08       		.byte	0x8
+ 1058 023f 05       		.byte	0x5
+ 1059 0240 61       		.byte	0x61
+ 1060 0241 5E020000 		.4byte	0x25e
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 20
+
+
+ 1061 0245 06       		.uleb128 0x6
+ 1062 0246 45030000 		.4byte	.LASF28
+ 1063 024a 05       		.byte	0x5
+ 1064 024b 62       		.byte	0x62
+ 1065 024c 5E020000 		.4byte	0x25e
+ 1066 0250 00       		.byte	0
+ 1067 0251 06       		.uleb128 0x6
+ 1068 0252 D8020000 		.4byte	.LASF29
+ 1069 0256 05       		.byte	0x5
+ 1070 0257 64       		.byte	0x64
+ 1071 0258 5E020000 		.4byte	0x25e
+ 1072 025c 04       		.byte	0x4
+ 1073 025d 00       		.byte	0
+ 1074 025e 09       		.uleb128 0x9
+ 1075 025f 04       		.byte	0x4
+ 1076 0260 29010000 		.4byte	0x129
+ 1077 0264 04       		.uleb128 0x4
+ 1078 0265 7A020000 		.4byte	.LASF48
+ 1079 0269 05       		.byte	0x5
+ 1080 026a 66       		.byte	0x66
+ 1081 026b 3D020000 		.4byte	0x23d
+ 1082 026f 08       		.uleb128 0x8
+ 1083 0270 04       		.byte	0x4
+ 1084 0271 05       		.byte	0x5
+ 1085 0272 6B       		.byte	0x6b
+ 1086 0273 84020000 		.4byte	0x284
+ 1087 0277 06       		.uleb128 0x6
+ 1088 0278 45030000 		.4byte	.LASF28
+ 1089 027c 05       		.byte	0x5
+ 1090 027d 6D       		.byte	0x6d
+ 1091 027e 5E020000 		.4byte	0x25e
+ 1092 0282 00       		.byte	0
+ 1093 0283 00       		.byte	0
+ 1094 0284 04       		.uleb128 0x4
+ 1095 0285 05020000 		.4byte	.LASF49
+ 1096 0289 05       		.byte	0x5
+ 1097 028a 70       		.byte	0x70
+ 1098 028b 6F020000 		.4byte	0x26f
+ 1099 028f 04       		.uleb128 0x4
+ 1100 0290 24010000 		.4byte	.LASF50
+ 1101 0294 07       		.byte	0x7
+ 1102 0295 E5       		.byte	0xe5
+ 1103 0296 9A020000 		.4byte	0x29a
+ 1104 029a 0A       		.uleb128 0xa
+ 1105 029b 04       		.byte	0x4
+ 1106 029c 04       		.uleb128 0x4
+ 1107 029d 23020000 		.4byte	.LASF51
+ 1108 02a1 07       		.byte	0x7
+ 1109 02a2 EB       		.byte	0xeb
+ 1110 02a3 B4000000 		.4byte	0xb4
+ 1111 02a7 0B       		.uleb128 0xb
+ 1112 02a8 AD040000 		.4byte	.LASF52
+ 1113 02ac 24       		.byte	0x24
+ 1114 02ad 07       		.byte	0x7
+ 1115 02ae 0C01     		.2byte	0x10c
+ 1116 02b0 23030000 		.4byte	0x323
+ 1117 02b4 0C       		.uleb128 0xc
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 21
+
+
+ 1118 02b5 723400   		.ascii	"r4\000"
+ 1119 02b8 07       		.byte	0x7
+ 1120 02b9 1F01     		.2byte	0x11f
+ 1121 02bb 8F020000 		.4byte	0x28f
+ 1122 02bf 00       		.byte	0
+ 1123 02c0 0C       		.uleb128 0xc
+ 1124 02c1 723500   		.ascii	"r5\000"
+ 1125 02c4 07       		.byte	0x7
+ 1126 02c5 2001     		.2byte	0x120
+ 1127 02c7 8F020000 		.4byte	0x28f
+ 1128 02cb 04       		.byte	0x4
+ 1129 02cc 0C       		.uleb128 0xc
+ 1130 02cd 723600   		.ascii	"r6\000"
+ 1131 02d0 07       		.byte	0x7
+ 1132 02d1 2101     		.2byte	0x121
+ 1133 02d3 8F020000 		.4byte	0x28f
+ 1134 02d7 08       		.byte	0x8
+ 1135 02d8 0C       		.uleb128 0xc
+ 1136 02d9 723700   		.ascii	"r7\000"
+ 1137 02dc 07       		.byte	0x7
+ 1138 02dd 2201     		.2byte	0x122
+ 1139 02df 8F020000 		.4byte	0x28f
+ 1140 02e3 0C       		.byte	0xc
+ 1141 02e4 0C       		.uleb128 0xc
+ 1142 02e5 723800   		.ascii	"r8\000"
+ 1143 02e8 07       		.byte	0x7
+ 1144 02e9 2301     		.2byte	0x123
+ 1145 02eb 8F020000 		.4byte	0x28f
+ 1146 02ef 10       		.byte	0x10
+ 1147 02f0 0C       		.uleb128 0xc
+ 1148 02f1 723900   		.ascii	"r9\000"
+ 1149 02f4 07       		.byte	0x7
+ 1150 02f5 2401     		.2byte	0x124
+ 1151 02f7 8F020000 		.4byte	0x28f
+ 1152 02fb 14       		.byte	0x14
+ 1153 02fc 0C       		.uleb128 0xc
+ 1154 02fd 72313000 		.ascii	"r10\000"
+ 1155 0301 07       		.byte	0x7
+ 1156 0302 2501     		.2byte	0x125
+ 1157 0304 8F020000 		.4byte	0x28f
+ 1158 0308 18       		.byte	0x18
+ 1159 0309 0C       		.uleb128 0xc
+ 1160 030a 72313100 		.ascii	"r11\000"
+ 1161 030e 07       		.byte	0x7
+ 1162 030f 2601     		.2byte	0x126
+ 1163 0311 8F020000 		.4byte	0x28f
+ 1164 0315 1C       		.byte	0x1c
+ 1165 0316 0C       		.uleb128 0xc
+ 1166 0317 6C7200   		.ascii	"lr\000"
+ 1167 031a 07       		.byte	0x7
+ 1168 031b 2701     		.2byte	0x127
+ 1169 031d 8F020000 		.4byte	0x28f
+ 1170 0321 20       		.byte	0x20
+ 1171 0322 00       		.byte	0
+ 1172 0323 0B       		.uleb128 0xb
+ 1173 0324 9A010000 		.4byte	.LASF53
+ 1174 0328 04       		.byte	0x4
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 22
+
+
+ 1175 0329 07       		.byte	0x7
+ 1176 032a 3101     		.2byte	0x131
+ 1177 032c 3E030000 		.4byte	0x33e
+ 1178 0330 0C       		.uleb128 0xc
+ 1179 0331 72313300 		.ascii	"r13\000"
+ 1180 0335 07       		.byte	0x7
+ 1181 0336 3201     		.2byte	0x132
+ 1182 0338 3E030000 		.4byte	0x33e
+ 1183 033c 00       		.byte	0
+ 1184 033d 00       		.byte	0
+ 1185 033e 09       		.uleb128 0x9
+ 1186 033f 04       		.byte	0x4
+ 1187 0340 A7020000 		.4byte	0x2a7
+ 1188 0344 03       		.uleb128 0x3
+ 1189 0345 04       		.byte	0x4
+ 1190 0346 07       		.byte	0x7
+ 1191 0347 3D020000 		.4byte	.LASF54
+ 1192 034b 04       		.uleb128 0x4
+ 1193 034c 7F010000 		.4byte	.LASF55
+ 1194 0350 08       		.byte	0x8
+ 1195 0351 58       		.byte	0x58
+ 1196 0352 56030000 		.4byte	0x356
+ 1197 0356 09       		.uleb128 0x9
+ 1198 0357 04       		.byte	0x4
+ 1199 0358 5C030000 		.4byte	0x35c
+ 1200 035c 0D       		.uleb128 0xd
+ 1201 035d 67030000 		.4byte	0x367
+ 1202 0361 0E       		.uleb128 0xe
+ 1203 0362 9A020000 		.4byte	0x29a
+ 1204 0366 00       		.byte	0
+ 1205 0367 04       		.uleb128 0x4
+ 1206 0368 77030000 		.4byte	.LASF56
+ 1207 036c 08       		.byte	0x8
+ 1208 036d 5D       		.byte	0x5d
+ 1209 036e 72030000 		.4byte	0x372
+ 1210 0372 05       		.uleb128 0x5
+ 1211 0373 77030000 		.4byte	.LASF56
+ 1212 0377 14       		.byte	0x14
+ 1213 0378 08       		.byte	0x8
+ 1214 0379 64       		.byte	0x64
+ 1215 037a BB030000 		.4byte	0x3bb
+ 1216 037e 06       		.uleb128 0x6
+ 1217 037f 5B010000 		.4byte	.LASF57
+ 1218 0383 08       		.byte	0x8
+ 1219 0384 65       		.byte	0x65
+ 1220 0385 BB030000 		.4byte	0x3bb
+ 1221 0389 00       		.byte	0
+ 1222 038a 06       		.uleb128 0x6
+ 1223 038b 2D010000 		.4byte	.LASF58
+ 1224 038f 08       		.byte	0x8
+ 1225 0390 67       		.byte	0x67
+ 1226 0391 BB030000 		.4byte	0x3bb
+ 1227 0395 04       		.byte	0x4
+ 1228 0396 06       		.uleb128 0x6
+ 1229 0397 2E020000 		.4byte	.LASF59
+ 1230 039b 08       		.byte	0x8
+ 1231 039c 69       		.byte	0x69
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 23
+
+
+ 1232 039d 13010000 		.4byte	0x113
+ 1233 03a1 08       		.byte	0x8
+ 1234 03a2 06       		.uleb128 0x6
+ 1235 03a3 46020000 		.4byte	.LASF60
+ 1236 03a7 08       		.byte	0x8
+ 1237 03a8 6A       		.byte	0x6a
+ 1238 03a9 4B030000 		.4byte	0x34b
+ 1239 03ad 0C       		.byte	0xc
+ 1240 03ae 06       		.uleb128 0x6
+ 1241 03af D0040000 		.4byte	.LASF61
+ 1242 03b3 08       		.byte	0x8
+ 1243 03b4 6C       		.byte	0x6c
+ 1244 03b5 9A020000 		.4byte	0x29a
+ 1245 03b9 10       		.byte	0x10
+ 1246 03ba 00       		.byte	0
+ 1247 03bb 09       		.uleb128 0x9
+ 1248 03bc 04       		.byte	0x4
+ 1249 03bd 67030000 		.4byte	0x367
+ 1250 03c1 08       		.uleb128 0x8
+ 1251 03c2 10       		.byte	0x10
+ 1252 03c3 08       		.byte	0x8
+ 1253 03c4 76       		.byte	0x76
+ 1254 03c5 FA030000 		.4byte	0x3fa
+ 1255 03c9 06       		.uleb128 0x6
+ 1256 03ca 5B010000 		.4byte	.LASF57
+ 1257 03ce 08       		.byte	0x8
+ 1258 03cf 77       		.byte	0x77
+ 1259 03d0 BB030000 		.4byte	0x3bb
+ 1260 03d4 00       		.byte	0
+ 1261 03d5 06       		.uleb128 0x6
+ 1262 03d6 2D010000 		.4byte	.LASF58
+ 1263 03da 08       		.byte	0x8
+ 1264 03db 79       		.byte	0x79
+ 1265 03dc BB030000 		.4byte	0x3bb
+ 1266 03e0 04       		.byte	0x4
+ 1267 03e1 06       		.uleb128 0x6
+ 1268 03e2 2E020000 		.4byte	.LASF59
+ 1269 03e6 08       		.byte	0x8
+ 1270 03e7 7B       		.byte	0x7b
+ 1271 03e8 13010000 		.4byte	0x113
+ 1272 03ec 08       		.byte	0x8
+ 1273 03ed 06       		.uleb128 0x6
+ 1274 03ee 30050000 		.4byte	.LASF62
+ 1275 03f2 08       		.byte	0x8
+ 1276 03f3 7C       		.byte	0x7c
+ 1277 03f4 FA030000 		.4byte	0x3fa
+ 1278 03f8 0C       		.byte	0xc
+ 1279 03f9 00       		.byte	0
+ 1280 03fa 0F       		.uleb128 0xf
+ 1281 03fb 13010000 		.4byte	0x113
+ 1282 03ff 04       		.uleb128 0x4
+ 1283 0400 3B050000 		.4byte	.LASF63
+ 1284 0404 08       		.byte	0x8
+ 1285 0405 7D       		.byte	0x7d
+ 1286 0406 C1030000 		.4byte	0x3c1
+ 1287 040a 08       		.uleb128 0x8
+ 1288 040b 1C       		.byte	0x1c
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 24
+
+
+ 1289 040c 09       		.byte	0x9
+ 1290 040d 5E       		.byte	0x5e
+ 1291 040e 5B040000 		.4byte	0x45b
+ 1292 0412 06       		.uleb128 0x6
+ 1293 0413 6F030000 		.4byte	.LASF64
+ 1294 0417 09       		.byte	0x9
+ 1295 0418 5F       		.byte	0x5f
+ 1296 0419 64020000 		.4byte	0x264
+ 1297 041d 00       		.byte	0
+ 1298 041e 06       		.uleb128 0x6
+ 1299 041f 37030000 		.4byte	.LASF65
+ 1300 0423 09       		.byte	0x9
+ 1301 0424 60       		.byte	0x60
+ 1302 0425 F2000000 		.4byte	0xf2
+ 1303 0429 08       		.byte	0x8
+ 1304 042a 06       		.uleb128 0x6
+ 1305 042b 74020000 		.4byte	.LASF66
+ 1306 042f 09       		.byte	0x9
+ 1307 0430 62       		.byte	0x62
+ 1308 0431 23030000 		.4byte	0x323
+ 1309 0435 0C       		.byte	0xc
+ 1310 0436 06       		.uleb128 0x6
+ 1311 0437 C7010000 		.4byte	.LASF67
+ 1312 043b 09       		.byte	0x9
+ 1313 043c 65       		.byte	0x65
+ 1314 043d 5E020000 		.4byte	0x25e
+ 1315 0441 10       		.byte	0x10
+ 1316 0442 06       		.uleb128 0x6
+ 1317 0443 91020000 		.4byte	.LASF68
+ 1318 0447 09       		.byte	0x9
+ 1319 0448 66       		.byte	0x66
+ 1320 0449 5E020000 		.4byte	0x25e
+ 1321 044d 14       		.byte	0x14
+ 1322 044e 06       		.uleb128 0x6
+ 1323 044f 87020000 		.4byte	.LASF69
+ 1324 0453 09       		.byte	0x9
+ 1325 0454 69       		.byte	0x69
+ 1326 0455 5E020000 		.4byte	0x25e
+ 1327 0459 18       		.byte	0x18
+ 1328 045a 00       		.byte	0
+ 1329 045b 04       		.uleb128 0x4
+ 1330 045c DE040000 		.4byte	.LASF70
+ 1331 0460 09       		.byte	0x9
+ 1332 0461 6B       		.byte	0x6b
+ 1333 0462 0A040000 		.4byte	0x40a
+ 1334 0466 05       		.uleb128 0x5
+ 1335 0467 1D020000 		.4byte	.LASF71
+ 1336 046b 10       		.byte	0x10
+ 1337 046c 0A       		.byte	0xa
+ 1338 046d 2C       		.byte	0x2c
+ 1339 046e 97040000 		.4byte	0x497
+ 1340 0472 06       		.uleb128 0x6
+ 1341 0473 B0000000 		.4byte	.LASF72
+ 1342 0477 0A       		.byte	0xa
+ 1343 0478 2D       		.byte	0x2d
+ 1344 0479 64020000 		.4byte	0x264
+ 1345 047d 00       		.byte	0
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 25
+
+
+ 1346 047e 06       		.uleb128 0x6
+ 1347 047f 54050000 		.4byte	.LASF73
+ 1348 0483 0A       		.byte	0xa
+ 1349 0484 2F       		.byte	0x2f
+ 1350 0485 5E020000 		.4byte	0x25e
+ 1351 0489 08       		.byte	0x8
+ 1352 048a 06       		.uleb128 0x6
+ 1353 048b 5F040000 		.4byte	.LASF74
+ 1354 048f 0A       		.byte	0xa
+ 1355 0490 31       		.byte	0x31
+ 1356 0491 97040000 		.4byte	0x497
+ 1357 0495 0C       		.byte	0xc
+ 1358 0496 00       		.byte	0
+ 1359 0497 09       		.uleb128 0x9
+ 1360 0498 04       		.byte	0x4
+ 1361 0499 66040000 		.4byte	0x466
+ 1362 049d 04       		.uleb128 0x4
+ 1363 049e 1D020000 		.4byte	.LASF71
+ 1364 04a2 0A       		.byte	0xa
+ 1365 04a3 33       		.byte	0x33
+ 1366 04a4 66040000 		.4byte	0x466
+ 1367 04a8 10       		.uleb128 0x10
+ 1368 04a9 04       		.byte	0x4
+ 1369 04aa 06       		.byte	0x6
+ 1370 04ab 96       		.byte	0x96
+ 1371 04ac DD040000 		.4byte	0x4dd
+ 1372 04b0 11       		.uleb128 0x11
+ 1373 04b1 11000000 		.4byte	.LASF75
+ 1374 04b5 06       		.byte	0x6
+ 1375 04b6 9D       		.byte	0x9d
+ 1376 04b7 FD000000 		.4byte	0xfd
+ 1377 04bb 11       		.uleb128 0x11
+ 1378 04bc 64000000 		.4byte	.LASF76
+ 1379 04c0 06       		.byte	0x6
+ 1380 04c1 A4       		.byte	0xa4
+ 1381 04c2 FD000000 		.4byte	0xfd
+ 1382 04c6 11       		.uleb128 0x11
+ 1383 04c7 22050000 		.4byte	.LASF77
+ 1384 04cb 06       		.byte	0x6
+ 1385 04cc AB       		.byte	0xab
+ 1386 04cd 9A020000 		.4byte	0x29a
+ 1387 04d1 11       		.uleb128 0x11
+ 1388 04d2 3E030000 		.4byte	.LASF78
+ 1389 04d6 06       		.byte	0x6
+ 1390 04d7 B2       		.byte	0xb2
+ 1391 04d8 08010000 		.4byte	0x108
+ 1392 04dc 00       		.byte	0
+ 1393 04dd 09       		.uleb128 0x9
+ 1394 04de 04       		.byte	0x4
+ 1395 04df E3040000 		.4byte	0x4e3
+ 1396 04e3 12       		.uleb128 0x12
+ 1397 04e4 E8040000 		.4byte	0x4e8
+ 1398 04e8 03       		.uleb128 0x3
+ 1399 04e9 01       		.byte	0x1
+ 1400 04ea 08       		.byte	0x8
+ 1401 04eb 5A040000 		.4byte	.LASF79
+ 1402 04ef 09       		.uleb128 0x9
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 26
+
+
+ 1403 04f0 04       		.byte	0x4
+ 1404 04f1 9C020000 		.4byte	0x29c
+ 1405 04f5 09       		.uleb128 0x9
+ 1406 04f6 04       		.byte	0x4
+ 1407 04f7 9D040000 		.4byte	0x49d
+ 1408 04fb 08       		.uleb128 0x8
+ 1409 04fc 10       		.byte	0x10
+ 1410 04fd 0B       		.byte	0xb
+ 1411 04fe 71       		.byte	0x71
+ 1412 04ff 34050000 		.4byte	0x534
+ 1413 0503 06       		.uleb128 0x6
+ 1414 0504 35010000 		.4byte	.LASF80
+ 1415 0508 0B       		.byte	0xb
+ 1416 0509 72       		.byte	0x72
+ 1417 050a 13010000 		.4byte	0x113
+ 1418 050e 00       		.byte	0
+ 1419 050f 06       		.uleb128 0x6
+ 1420 0510 D4000000 		.4byte	.LASF81
+ 1421 0514 0B       		.byte	0xb
+ 1422 0515 73       		.byte	0x73
+ 1423 0516 5E020000 		.4byte	0x25e
+ 1424 051a 04       		.byte	0x4
+ 1425 051b 06       		.uleb128 0x6
+ 1426 051c 5C050000 		.4byte	.LASF82
+ 1427 0520 0B       		.byte	0xb
+ 1428 0521 74       		.byte	0x74
+ 1429 0522 9A020000 		.4byte	0x29a
+ 1430 0526 08       		.byte	0x8
+ 1431 0527 06       		.uleb128 0x6
+ 1432 0528 5B000000 		.4byte	.LASF83
+ 1433 052c 0B       		.byte	0xb
+ 1434 052d 75       		.byte	0x75
+ 1435 052e 93000000 		.4byte	0x93
+ 1436 0532 0C       		.byte	0xc
+ 1437 0533 00       		.byte	0
+ 1438 0534 04       		.uleb128 0x4
+ 1439 0535 5D020000 		.4byte	.LASF84
+ 1440 0539 0B       		.byte	0xb
+ 1441 053a 76       		.byte	0x76
+ 1442 053b FB040000 		.4byte	0x4fb
+ 1443 053f 13       		.uleb128 0x13
+ 1444 0540 0804     		.2byte	0x408
+ 1445 0542 0B       		.byte	0xb
+ 1446 0543 7B       		.byte	0x7b
+ 1447 0544 6D050000 		.4byte	0x56d
+ 1448 0548 06       		.uleb128 0x6
+ 1449 0549 11010000 		.4byte	.LASF85
+ 1450 054d 0B       		.byte	0xb
+ 1451 054e 7C       		.byte	0x7c
+ 1452 054f 28000000 		.4byte	0x28
+ 1453 0553 00       		.byte	0
+ 1454 0554 06       		.uleb128 0x6
+ 1455 0555 36020000 		.4byte	.LASF86
+ 1456 0559 0B       		.byte	0xb
+ 1457 055a 7D       		.byte	0x7d
+ 1458 055b 6D050000 		.4byte	0x56d
+ 1459 055f 04       		.byte	0x4
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 27
+
+
+ 1460 0560 06       		.uleb128 0x6
+ 1461 0561 CE020000 		.4byte	.LASF87
+ 1462 0565 0B       		.byte	0xb
+ 1463 0566 7F       		.byte	0x7f
+ 1464 0567 73050000 		.4byte	0x573
+ 1465 056b 08       		.byte	0x8
+ 1466 056c 00       		.byte	0
+ 1467 056d 09       		.uleb128 0x9
+ 1468 056e 04       		.byte	0x4
+ 1469 056f 34050000 		.4byte	0x534
+ 1470 0573 14       		.uleb128 0x14
+ 1471 0574 34050000 		.4byte	0x534
+ 1472 0578 83050000 		.4byte	0x583
+ 1473 057c 15       		.uleb128 0x15
+ 1474 057d 44030000 		.4byte	0x344
+ 1475 0581 3F       		.byte	0x3f
+ 1476 0582 00       		.byte	0
+ 1477 0583 04       		.uleb128 0x4
+ 1478 0584 49000000 		.4byte	.LASF88
+ 1479 0588 0B       		.byte	0xb
+ 1480 0589 80       		.byte	0x80
+ 1481 058a 3F050000 		.4byte	0x53f
+ 1482 058e 16       		.uleb128 0x16
+ 1483 058f 42050000 		.4byte	.LASF89
+ 1484 0593 01       		.byte	0x1
+ 1485 0594 51       		.byte	0x51
+ 1486 0595 00000000 		.4byte	.LFB7
+ 1487 0599 28000000 		.4byte	.LFE7-.LFB7
+ 1488 059d 01       		.uleb128 0x1
+ 1489 059e 9C       		.byte	0x9c
+ 1490 059f 16       		.uleb128 0x16
+ 1491 05a0 88010000 		.4byte	.LASF90
+ 1492 05a4 01       		.byte	0x1
+ 1493 05a5 5C       		.byte	0x5c
+ 1494 05a6 00000000 		.4byte	.LFB8
+ 1495 05aa 28000000 		.4byte	.LFE8-.LFB8
+ 1496 05ae 01       		.uleb128 0x1
+ 1497 05af 9C       		.byte	0x9c
+ 1498 05b0 16       		.uleb128 0x16
+ 1499 05b1 BF040000 		.4byte	.LASF91
+ 1500 05b5 01       		.byte	0x1
+ 1501 05b6 67       		.byte	0x67
+ 1502 05b7 00000000 		.4byte	.LFB9
+ 1503 05bb 28000000 		.4byte	.LFE9-.LFB9
+ 1504 05bf 01       		.uleb128 0x1
+ 1505 05c0 9C       		.byte	0x9c
+ 1506 05c1 16       		.uleb128 0x16
+ 1507 05c2 4E020000 		.4byte	.LASF92
+ 1508 05c6 01       		.byte	0x1
+ 1509 05c7 72       		.byte	0x72
+ 1510 05c8 00000000 		.4byte	.LFB10
+ 1511 05cc 2C000000 		.4byte	.LFE10-.LFB10
+ 1512 05d0 01       		.uleb128 0x1
+ 1513 05d1 9C       		.byte	0x9c
+ 1514 05d2 16       		.uleb128 0x16
+ 1515 05d3 99020000 		.4byte	.LASF93
+ 1516 05d7 01       		.byte	0x1
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 28
+
+
+ 1517 05d8 7E       		.byte	0x7e
+ 1518 05d9 00000000 		.4byte	.LFB11
+ 1519 05dd 2C000000 		.4byte	.LFE11-.LFB11
+ 1520 05e1 01       		.uleb128 0x1
+ 1521 05e2 9C       		.byte	0x9c
+ 1522 05e3 16       		.uleb128 0x16
+ 1523 05e4 0A050000 		.4byte	.LASF94
+ 1524 05e8 01       		.byte	0x1
+ 1525 05e9 8A       		.byte	0x8a
+ 1526 05ea 00000000 		.4byte	.LFB12
+ 1527 05ee 2C000000 		.4byte	.LFE12-.LFB12
+ 1528 05f2 01       		.uleb128 0x1
+ 1529 05f3 9C       		.byte	0x9c
+ 1530 05f4 16       		.uleb128 0x16
+ 1531 05f5 8E000000 		.4byte	.LASF95
+ 1532 05f9 01       		.byte	0x1
+ 1533 05fa 96       		.byte	0x96
+ 1534 05fb 00000000 		.4byte	.LFB13
+ 1535 05ff 2C000000 		.4byte	.LFE13-.LFB13
+ 1536 0603 01       		.uleb128 0x1
+ 1537 0604 9C       		.byte	0x9c
+ 1538 0605 17       		.uleb128 0x17
+ 1539 0606 E8040000 		.4byte	.LASF96
+ 1540 060a 01       		.byte	0x1
+ 1541 060b A2       		.byte	0xa2
+ 1542 060c 00000000 		.4byte	.LFB14
+ 1543 0610 3C000000 		.4byte	.LFE14-.LFB14
+ 1544 0614 01       		.uleb128 0x1
+ 1545 0615 9C       		.byte	0x9c
+ 1546 0616 4D060000 		.4byte	0x64d
+ 1547 061a 18       		.uleb128 0x18
+ 1548 061b 02000000 		.4byte	.LBB2
+ 1549 061f 06000000 		.4byte	.LBE2-.LBB2
+ 1550 0623 35060000 		.4byte	0x635
+ 1551 0627 19       		.uleb128 0x19
+ 1552 0628 746D7000 		.ascii	"tmp\000"
+ 1553 062c 01       		.byte	0x1
+ 1554 062d A4       		.byte	0xa4
+ 1555 062e A9000000 		.4byte	0xa9
+ 1556 0632 01       		.uleb128 0x1
+ 1557 0633 53       		.byte	0x53
+ 1558 0634 00       		.byte	0
+ 1559 0635 1A       		.uleb128 0x1a
+ 1560 0636 28000000 		.4byte	.LBB3
+ 1561 063a 06000000 		.4byte	.LBE3-.LBB3
+ 1562 063e 19       		.uleb128 0x19
+ 1563 063f 746D7000 		.ascii	"tmp\000"
+ 1564 0643 01       		.byte	0x1
+ 1565 0644 A8       		.byte	0xa8
+ 1566 0645 A9000000 		.4byte	0xa9
+ 1567 0649 01       		.uleb128 0x1
+ 1568 064a 53       		.byte	0x53
+ 1569 064b 00       		.byte	0
+ 1570 064c 00       		.byte	0
+ 1571 064d 17       		.uleb128 0x17
+ 1572 064e 99040000 		.4byte	.LASF97
+ 1573 0652 01       		.byte	0x1
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 29
+
+
+ 1574 0653 B0       		.byte	0xb0
+ 1575 0654 00000000 		.4byte	.LFB15
+ 1576 0658 3C000000 		.4byte	.LFE15-.LFB15
+ 1577 065c 01       		.uleb128 0x1
+ 1578 065d 9C       		.byte	0x9c
+ 1579 065e 95060000 		.4byte	0x695
+ 1580 0662 18       		.uleb128 0x18
+ 1581 0663 02000000 		.4byte	.LBB4
+ 1582 0667 06000000 		.4byte	.LBE4-.LBB4
+ 1583 066b 7D060000 		.4byte	0x67d
+ 1584 066f 19       		.uleb128 0x19
+ 1585 0670 746D7000 		.ascii	"tmp\000"
+ 1586 0674 01       		.byte	0x1
+ 1587 0675 B2       		.byte	0xb2
+ 1588 0676 A9000000 		.4byte	0xa9
+ 1589 067a 01       		.uleb128 0x1
+ 1590 067b 53       		.byte	0x53
+ 1591 067c 00       		.byte	0
+ 1592 067d 1A       		.uleb128 0x1a
+ 1593 067e 28000000 		.4byte	.LBB5
+ 1594 0682 06000000 		.4byte	.LBE5-.LBB5
+ 1595 0686 19       		.uleb128 0x19
+ 1596 0687 746D7000 		.ascii	"tmp\000"
+ 1597 068b 01       		.byte	0x1
+ 1598 068c B6       		.byte	0xb6
+ 1599 068d A9000000 		.4byte	0xa9
+ 1600 0691 01       		.uleb128 0x1
+ 1601 0692 53       		.byte	0x53
+ 1602 0693 00       		.byte	0
+ 1603 0694 00       		.byte	0
+ 1604 0695 16       		.uleb128 0x16
+ 1605 0696 CF010000 		.4byte	.LASF98
+ 1606 069a 01       		.byte	0x1
+ 1607 069b C1       		.byte	0xc1
+ 1608 069c 00000000 		.4byte	.LFB16
+ 1609 06a0 28000000 		.4byte	.LFE16-.LFB16
+ 1610 06a4 01       		.uleb128 0x1
+ 1611 06a5 9C       		.byte	0x9c
+ 1612 06a6 16       		.uleb128 0x16
+ 1613 06a7 F4010000 		.4byte	.LASF99
+ 1614 06ab 01       		.byte	0x1
+ 1615 06ac CF       		.byte	0xcf
+ 1616 06ad 00000000 		.4byte	.LFB17
+ 1617 06b1 28000000 		.4byte	.LFE17-.LFB17
+ 1618 06b5 01       		.uleb128 0x1
+ 1619 06b6 9C       		.byte	0x9c
+ 1620 06b7 1B       		.uleb128 0x1b
+ 1621 06b8 B5010000 		.4byte	.LASF100
+ 1622 06bc 01       		.byte	0x1
+ 1623 06bd E5       		.byte	0xe5
+ 1624 06be 00000000 		.4byte	.LFB18
+ 1625 06c2 18000000 		.4byte	.LFE18-.LFB18
+ 1626 06c6 01       		.uleb128 0x1
+ 1627 06c7 9C       		.byte	0x9c
+ 1628 06c8 1C       		.uleb128 0x1c
+ 1629 06c9 63010000 		.4byte	.LASF101
+ 1630 06cd 01       		.byte	0x1
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 30
+
+
+ 1631 06ce F2       		.byte	0xf2
+ 1632 06cf 00000000 		.4byte	.LFB19
+ 1633 06d3 64000000 		.4byte	.LFE19-.LFB19
+ 1634 06d7 01       		.uleb128 0x1
+ 1635 06d8 9C       		.byte	0x9c
+ 1636 06d9 EC060000 		.4byte	0x6ec
+ 1637 06dd 1D       		.uleb128 0x1d
+ 1638 06de 6F747000 		.ascii	"otp\000"
+ 1639 06e2 01       		.byte	0x1
+ 1640 06e3 F2       		.byte	0xf2
+ 1641 06e4 5E020000 		.4byte	0x25e
+ 1642 06e8 02       		.uleb128 0x2
+ 1643 06e9 91       		.byte	0x91
+ 1644 06ea 7C       		.sleb128 -4
+ 1645 06eb 00       		.byte	0
+ 1646 06ec 1E       		.uleb128 0x1e
+ 1647 06ed 06000000 		.4byte	.LASF102
+ 1648 06f1 01       		.byte	0x1
+ 1649 06f2 0F01     		.2byte	0x10f
+ 1650 06f4 00000000 		.4byte	.LFB20
+ 1651 06f8 1C000000 		.4byte	.LFE20-.LFB20
+ 1652 06fc 01       		.uleb128 0x1
+ 1653 06fd 9C       		.byte	0x9c
+ 1654 06fe 12070000 		.4byte	0x712
+ 1655 0702 1F       		.uleb128 0x1f
+ 1656 0703 6D736700 		.ascii	"msg\000"
+ 1657 0707 01       		.byte	0x1
+ 1658 0708 0F01     		.2byte	0x10f
+ 1659 070a DD040000 		.4byte	0x4dd
+ 1660 070e 02       		.uleb128 0x2
+ 1661 070f 91       		.byte	0x91
+ 1662 0710 74       		.sleb128 -12
+ 1663 0711 00       		.byte	0
+ 1664 0712 20       		.uleb128 0x20
+ 1665 0713 2B000000 		.4byte	.LASF103
+ 1666 0717 08       		.byte	0x8
+ 1667 0718 F5       		.byte	0xf5
+ 1668 0719 FF030000 		.4byte	0x3ff
+ 1669 071d 20       		.uleb128 0x20
+ 1670 071e FC040000 		.4byte	.LASF104
+ 1671 0722 09       		.byte	0x9
+ 1672 0723 6F       		.byte	0x6f
+ 1673 0724 5B040000 		.4byte	0x45b
+ 1674 0728 21       		.uleb128 0x21
+ 1675 0729 B5020000 		.4byte	.LASF105
+ 1676 072d 01       		.byte	0x1
+ 1677 072e DF       		.byte	0xdf
+ 1678 072f 83050000 		.4byte	0x583
+ 1679 0733 05       		.uleb128 0x5
+ 1680 0734 03       		.byte	0x3
+ 1681 0735 00000000 		.4byte	dbg_trace_buffer
+ 1682 0739 21       		.uleb128 0x21
+ 1683 073a E8010000 		.4byte	.LASF106
+ 1684 073e 01       		.byte	0x1
+ 1685 073f 45       		.byte	0x45
+ 1686 0740 1E010000 		.4byte	0x11e
+ 1687 0744 05       		.uleb128 0x5
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 31
+
+
+ 1688 0745 03       		.byte	0x3
+ 1689 0746 00000000 		.4byte	dbg_isr_cnt
+ 1690 074a 21       		.uleb128 0x21
+ 1691 074b 85040000 		.4byte	.LASF107
+ 1692 074f 01       		.byte	0x1
+ 1693 0750 4A       		.byte	0x4a
+ 1694 0751 1E010000 		.4byte	0x11e
+ 1695 0755 05       		.uleb128 0x5
+ 1696 0756 03       		.byte	0x3
+ 1697 0757 00000000 		.4byte	dbg_lock_cnt
+ 1698 075b 22       		.uleb128 0x22
+ 1699 075c 03030000 		.4byte	.LASF108
+ 1700 0760 01       		.byte	0x1
+ 1701 0761 0801     		.2byte	0x108
+ 1702 0763 DD040000 		.4byte	0x4dd
+ 1703 0767 05       		.uleb128 0x5
+ 1704 0768 03       		.byte	0x3
+ 1705 0769 00000000 		.4byte	dbg_panic_msg
+ 1706 076d 00       		.byte	0
+ 1707              		.section	.debug_abbrev,"",%progbits
+ 1708              	.Ldebug_abbrev0:
+ 1709 0000 01       		.uleb128 0x1
+ 1710 0001 11       		.uleb128 0x11
+ 1711 0002 01       		.byte	0x1
+ 1712 0003 25       		.uleb128 0x25
+ 1713 0004 0E       		.uleb128 0xe
+ 1714 0005 13       		.uleb128 0x13
+ 1715 0006 0B       		.uleb128 0xb
+ 1716 0007 03       		.uleb128 0x3
+ 1717 0008 0E       		.uleb128 0xe
+ 1718 0009 55       		.uleb128 0x55
+ 1719 000a 17       		.uleb128 0x17
+ 1720 000b 11       		.uleb128 0x11
+ 1721 000c 01       		.uleb128 0x1
+ 1722 000d 10       		.uleb128 0x10
+ 1723 000e 17       		.uleb128 0x17
+ 1724 000f 00       		.byte	0
+ 1725 0010 00       		.byte	0
+ 1726 0011 02       		.uleb128 0x2
+ 1727 0012 24       		.uleb128 0x24
+ 1728 0013 00       		.byte	0
+ 1729 0014 0B       		.uleb128 0xb
+ 1730 0015 0B       		.uleb128 0xb
+ 1731 0016 3E       		.uleb128 0x3e
+ 1732 0017 0B       		.uleb128 0xb
+ 1733 0018 03       		.uleb128 0x3
+ 1734 0019 08       		.uleb128 0x8
+ 1735 001a 00       		.byte	0
+ 1736 001b 00       		.byte	0
+ 1737 001c 03       		.uleb128 0x3
+ 1738 001d 24       		.uleb128 0x24
+ 1739 001e 00       		.byte	0
+ 1740 001f 0B       		.uleb128 0xb
+ 1741 0020 0B       		.uleb128 0xb
+ 1742 0021 3E       		.uleb128 0x3e
+ 1743 0022 0B       		.uleb128 0xb
+ 1744 0023 03       		.uleb128 0x3
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 32
+
+
+ 1745 0024 0E       		.uleb128 0xe
+ 1746 0025 00       		.byte	0
+ 1747 0026 00       		.byte	0
+ 1748 0027 04       		.uleb128 0x4
+ 1749 0028 16       		.uleb128 0x16
+ 1750 0029 00       		.byte	0
+ 1751 002a 03       		.uleb128 0x3
+ 1752 002b 0E       		.uleb128 0xe
+ 1753 002c 3A       		.uleb128 0x3a
+ 1754 002d 0B       		.uleb128 0xb
+ 1755 002e 3B       		.uleb128 0x3b
+ 1756 002f 0B       		.uleb128 0xb
+ 1757 0030 49       		.uleb128 0x49
+ 1758 0031 13       		.uleb128 0x13
+ 1759 0032 00       		.byte	0
+ 1760 0033 00       		.byte	0
+ 1761 0034 05       		.uleb128 0x5
+ 1762 0035 13       		.uleb128 0x13
+ 1763 0036 01       		.byte	0x1
+ 1764 0037 03       		.uleb128 0x3
+ 1765 0038 0E       		.uleb128 0xe
+ 1766 0039 0B       		.uleb128 0xb
+ 1767 003a 0B       		.uleb128 0xb
+ 1768 003b 3A       		.uleb128 0x3a
+ 1769 003c 0B       		.uleb128 0xb
+ 1770 003d 3B       		.uleb128 0x3b
+ 1771 003e 0B       		.uleb128 0xb
+ 1772 003f 01       		.uleb128 0x1
+ 1773 0040 13       		.uleb128 0x13
+ 1774 0041 00       		.byte	0
+ 1775 0042 00       		.byte	0
+ 1776 0043 06       		.uleb128 0x6
+ 1777 0044 0D       		.uleb128 0xd
+ 1778 0045 00       		.byte	0
+ 1779 0046 03       		.uleb128 0x3
+ 1780 0047 0E       		.uleb128 0xe
+ 1781 0048 3A       		.uleb128 0x3a
+ 1782 0049 0B       		.uleb128 0xb
+ 1783 004a 3B       		.uleb128 0x3b
+ 1784 004b 0B       		.uleb128 0xb
+ 1785 004c 49       		.uleb128 0x49
+ 1786 004d 13       		.uleb128 0x13
+ 1787 004e 38       		.uleb128 0x38
+ 1788 004f 0B       		.uleb128 0xb
+ 1789 0050 00       		.byte	0
+ 1790 0051 00       		.byte	0
+ 1791 0052 07       		.uleb128 0x7
+ 1792 0053 0D       		.uleb128 0xd
+ 1793 0054 00       		.byte	0
+ 1794 0055 03       		.uleb128 0x3
+ 1795 0056 08       		.uleb128 0x8
+ 1796 0057 3A       		.uleb128 0x3a
+ 1797 0058 0B       		.uleb128 0xb
+ 1798 0059 3B       		.uleb128 0x3b
+ 1799 005a 0B       		.uleb128 0xb
+ 1800 005b 49       		.uleb128 0x49
+ 1801 005c 13       		.uleb128 0x13
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 33
+
+
+ 1802 005d 38       		.uleb128 0x38
+ 1803 005e 0B       		.uleb128 0xb
+ 1804 005f 00       		.byte	0
+ 1805 0060 00       		.byte	0
+ 1806 0061 08       		.uleb128 0x8
+ 1807 0062 13       		.uleb128 0x13
+ 1808 0063 01       		.byte	0x1
+ 1809 0064 0B       		.uleb128 0xb
+ 1810 0065 0B       		.uleb128 0xb
+ 1811 0066 3A       		.uleb128 0x3a
+ 1812 0067 0B       		.uleb128 0xb
+ 1813 0068 3B       		.uleb128 0x3b
+ 1814 0069 0B       		.uleb128 0xb
+ 1815 006a 01       		.uleb128 0x1
+ 1816 006b 13       		.uleb128 0x13
+ 1817 006c 00       		.byte	0
+ 1818 006d 00       		.byte	0
+ 1819 006e 09       		.uleb128 0x9
+ 1820 006f 0F       		.uleb128 0xf
+ 1821 0070 00       		.byte	0
+ 1822 0071 0B       		.uleb128 0xb
+ 1823 0072 0B       		.uleb128 0xb
+ 1824 0073 49       		.uleb128 0x49
+ 1825 0074 13       		.uleb128 0x13
+ 1826 0075 00       		.byte	0
+ 1827 0076 00       		.byte	0
+ 1828 0077 0A       		.uleb128 0xa
+ 1829 0078 0F       		.uleb128 0xf
+ 1830 0079 00       		.byte	0
+ 1831 007a 0B       		.uleb128 0xb
+ 1832 007b 0B       		.uleb128 0xb
+ 1833 007c 00       		.byte	0
+ 1834 007d 00       		.byte	0
+ 1835 007e 0B       		.uleb128 0xb
+ 1836 007f 13       		.uleb128 0x13
+ 1837 0080 01       		.byte	0x1
+ 1838 0081 03       		.uleb128 0x3
+ 1839 0082 0E       		.uleb128 0xe
+ 1840 0083 0B       		.uleb128 0xb
+ 1841 0084 0B       		.uleb128 0xb
+ 1842 0085 3A       		.uleb128 0x3a
+ 1843 0086 0B       		.uleb128 0xb
+ 1844 0087 3B       		.uleb128 0x3b
+ 1845 0088 05       		.uleb128 0x5
+ 1846 0089 01       		.uleb128 0x1
+ 1847 008a 13       		.uleb128 0x13
+ 1848 008b 00       		.byte	0
+ 1849 008c 00       		.byte	0
+ 1850 008d 0C       		.uleb128 0xc
+ 1851 008e 0D       		.uleb128 0xd
+ 1852 008f 00       		.byte	0
+ 1853 0090 03       		.uleb128 0x3
+ 1854 0091 08       		.uleb128 0x8
+ 1855 0092 3A       		.uleb128 0x3a
+ 1856 0093 0B       		.uleb128 0xb
+ 1857 0094 3B       		.uleb128 0x3b
+ 1858 0095 05       		.uleb128 0x5
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 34
+
+
+ 1859 0096 49       		.uleb128 0x49
+ 1860 0097 13       		.uleb128 0x13
+ 1861 0098 38       		.uleb128 0x38
+ 1862 0099 0B       		.uleb128 0xb
+ 1863 009a 00       		.byte	0
+ 1864 009b 00       		.byte	0
+ 1865 009c 0D       		.uleb128 0xd
+ 1866 009d 15       		.uleb128 0x15
+ 1867 009e 01       		.byte	0x1
+ 1868 009f 27       		.uleb128 0x27
+ 1869 00a0 19       		.uleb128 0x19
+ 1870 00a1 01       		.uleb128 0x1
+ 1871 00a2 13       		.uleb128 0x13
+ 1872 00a3 00       		.byte	0
+ 1873 00a4 00       		.byte	0
+ 1874 00a5 0E       		.uleb128 0xe
+ 1875 00a6 05       		.uleb128 0x5
+ 1876 00a7 00       		.byte	0
+ 1877 00a8 49       		.uleb128 0x49
+ 1878 00a9 13       		.uleb128 0x13
+ 1879 00aa 00       		.byte	0
+ 1880 00ab 00       		.byte	0
+ 1881 00ac 0F       		.uleb128 0xf
+ 1882 00ad 35       		.uleb128 0x35
+ 1883 00ae 00       		.byte	0
+ 1884 00af 49       		.uleb128 0x49
+ 1885 00b0 13       		.uleb128 0x13
+ 1886 00b1 00       		.byte	0
+ 1887 00b2 00       		.byte	0
+ 1888 00b3 10       		.uleb128 0x10
+ 1889 00b4 17       		.uleb128 0x17
+ 1890 00b5 01       		.byte	0x1
+ 1891 00b6 0B       		.uleb128 0xb
+ 1892 00b7 0B       		.uleb128 0xb
+ 1893 00b8 3A       		.uleb128 0x3a
+ 1894 00b9 0B       		.uleb128 0xb
+ 1895 00ba 3B       		.uleb128 0x3b
+ 1896 00bb 0B       		.uleb128 0xb
+ 1897 00bc 01       		.uleb128 0x1
+ 1898 00bd 13       		.uleb128 0x13
+ 1899 00be 00       		.byte	0
+ 1900 00bf 00       		.byte	0
+ 1901 00c0 11       		.uleb128 0x11
+ 1902 00c1 0D       		.uleb128 0xd
+ 1903 00c2 00       		.byte	0
+ 1904 00c3 03       		.uleb128 0x3
+ 1905 00c4 0E       		.uleb128 0xe
+ 1906 00c5 3A       		.uleb128 0x3a
+ 1907 00c6 0B       		.uleb128 0xb
+ 1908 00c7 3B       		.uleb128 0x3b
+ 1909 00c8 0B       		.uleb128 0xb
+ 1910 00c9 49       		.uleb128 0x49
+ 1911 00ca 13       		.uleb128 0x13
+ 1912 00cb 00       		.byte	0
+ 1913 00cc 00       		.byte	0
+ 1914 00cd 12       		.uleb128 0x12
+ 1915 00ce 26       		.uleb128 0x26
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 35
+
+
+ 1916 00cf 00       		.byte	0
+ 1917 00d0 49       		.uleb128 0x49
+ 1918 00d1 13       		.uleb128 0x13
+ 1919 00d2 00       		.byte	0
+ 1920 00d3 00       		.byte	0
+ 1921 00d4 13       		.uleb128 0x13
+ 1922 00d5 13       		.uleb128 0x13
+ 1923 00d6 01       		.byte	0x1
+ 1924 00d7 0B       		.uleb128 0xb
+ 1925 00d8 05       		.uleb128 0x5
+ 1926 00d9 3A       		.uleb128 0x3a
+ 1927 00da 0B       		.uleb128 0xb
+ 1928 00db 3B       		.uleb128 0x3b
+ 1929 00dc 0B       		.uleb128 0xb
+ 1930 00dd 01       		.uleb128 0x1
+ 1931 00de 13       		.uleb128 0x13
+ 1932 00df 00       		.byte	0
+ 1933 00e0 00       		.byte	0
+ 1934 00e1 14       		.uleb128 0x14
+ 1935 00e2 01       		.uleb128 0x1
+ 1936 00e3 01       		.byte	0x1
+ 1937 00e4 49       		.uleb128 0x49
+ 1938 00e5 13       		.uleb128 0x13
+ 1939 00e6 01       		.uleb128 0x1
+ 1940 00e7 13       		.uleb128 0x13
+ 1941 00e8 00       		.byte	0
+ 1942 00e9 00       		.byte	0
+ 1943 00ea 15       		.uleb128 0x15
+ 1944 00eb 21       		.uleb128 0x21
+ 1945 00ec 00       		.byte	0
+ 1946 00ed 49       		.uleb128 0x49
+ 1947 00ee 13       		.uleb128 0x13
+ 1948 00ef 2F       		.uleb128 0x2f
+ 1949 00f0 0B       		.uleb128 0xb
+ 1950 00f1 00       		.byte	0
+ 1951 00f2 00       		.byte	0
+ 1952 00f3 16       		.uleb128 0x16
+ 1953 00f4 2E       		.uleb128 0x2e
+ 1954 00f5 00       		.byte	0
+ 1955 00f6 3F       		.uleb128 0x3f
+ 1956 00f7 19       		.uleb128 0x19
+ 1957 00f8 03       		.uleb128 0x3
+ 1958 00f9 0E       		.uleb128 0xe
+ 1959 00fa 3A       		.uleb128 0x3a
+ 1960 00fb 0B       		.uleb128 0xb
+ 1961 00fc 3B       		.uleb128 0x3b
+ 1962 00fd 0B       		.uleb128 0xb
+ 1963 00fe 27       		.uleb128 0x27
+ 1964 00ff 19       		.uleb128 0x19
+ 1965 0100 11       		.uleb128 0x11
+ 1966 0101 01       		.uleb128 0x1
+ 1967 0102 12       		.uleb128 0x12
+ 1968 0103 06       		.uleb128 0x6
+ 1969 0104 40       		.uleb128 0x40
+ 1970 0105 18       		.uleb128 0x18
+ 1971 0106 9642     		.uleb128 0x2116
+ 1972 0108 19       		.uleb128 0x19
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 36
+
+
+ 1973 0109 00       		.byte	0
+ 1974 010a 00       		.byte	0
+ 1975 010b 17       		.uleb128 0x17
+ 1976 010c 2E       		.uleb128 0x2e
+ 1977 010d 01       		.byte	0x1
+ 1978 010e 3F       		.uleb128 0x3f
+ 1979 010f 19       		.uleb128 0x19
+ 1980 0110 03       		.uleb128 0x3
+ 1981 0111 0E       		.uleb128 0xe
+ 1982 0112 3A       		.uleb128 0x3a
+ 1983 0113 0B       		.uleb128 0xb
+ 1984 0114 3B       		.uleb128 0x3b
+ 1985 0115 0B       		.uleb128 0xb
+ 1986 0116 27       		.uleb128 0x27
+ 1987 0117 19       		.uleb128 0x19
+ 1988 0118 11       		.uleb128 0x11
+ 1989 0119 01       		.uleb128 0x1
+ 1990 011a 12       		.uleb128 0x12
+ 1991 011b 06       		.uleb128 0x6
+ 1992 011c 40       		.uleb128 0x40
+ 1993 011d 18       		.uleb128 0x18
+ 1994 011e 9642     		.uleb128 0x2116
+ 1995 0120 19       		.uleb128 0x19
+ 1996 0121 01       		.uleb128 0x1
+ 1997 0122 13       		.uleb128 0x13
+ 1998 0123 00       		.byte	0
+ 1999 0124 00       		.byte	0
+ 2000 0125 18       		.uleb128 0x18
+ 2001 0126 0B       		.uleb128 0xb
+ 2002 0127 01       		.byte	0x1
+ 2003 0128 11       		.uleb128 0x11
+ 2004 0129 01       		.uleb128 0x1
+ 2005 012a 12       		.uleb128 0x12
+ 2006 012b 06       		.uleb128 0x6
+ 2007 012c 01       		.uleb128 0x1
+ 2008 012d 13       		.uleb128 0x13
+ 2009 012e 00       		.byte	0
+ 2010 012f 00       		.byte	0
+ 2011 0130 19       		.uleb128 0x19
+ 2012 0131 34       		.uleb128 0x34
+ 2013 0132 00       		.byte	0
+ 2014 0133 03       		.uleb128 0x3
+ 2015 0134 08       		.uleb128 0x8
+ 2016 0135 3A       		.uleb128 0x3a
+ 2017 0136 0B       		.uleb128 0xb
+ 2018 0137 3B       		.uleb128 0x3b
+ 2019 0138 0B       		.uleb128 0xb
+ 2020 0139 49       		.uleb128 0x49
+ 2021 013a 13       		.uleb128 0x13
+ 2022 013b 02       		.uleb128 0x2
+ 2023 013c 18       		.uleb128 0x18
+ 2024 013d 00       		.byte	0
+ 2025 013e 00       		.byte	0
+ 2026 013f 1A       		.uleb128 0x1a
+ 2027 0140 0B       		.uleb128 0xb
+ 2028 0141 01       		.byte	0x1
+ 2029 0142 11       		.uleb128 0x11
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 37
+
+
+ 2030 0143 01       		.uleb128 0x1
+ 2031 0144 12       		.uleb128 0x12
+ 2032 0145 06       		.uleb128 0x6
+ 2033 0146 00       		.byte	0
+ 2034 0147 00       		.byte	0
+ 2035 0148 1B       		.uleb128 0x1b
+ 2036 0149 2E       		.uleb128 0x2e
+ 2037 014a 00       		.byte	0
+ 2038 014b 3F       		.uleb128 0x3f
+ 2039 014c 19       		.uleb128 0x19
+ 2040 014d 03       		.uleb128 0x3
+ 2041 014e 0E       		.uleb128 0xe
+ 2042 014f 3A       		.uleb128 0x3a
+ 2043 0150 0B       		.uleb128 0xb
+ 2044 0151 3B       		.uleb128 0x3b
+ 2045 0152 0B       		.uleb128 0xb
+ 2046 0153 27       		.uleb128 0x27
+ 2047 0154 19       		.uleb128 0x19
+ 2048 0155 11       		.uleb128 0x11
+ 2049 0156 01       		.uleb128 0x1
+ 2050 0157 12       		.uleb128 0x12
+ 2051 0158 06       		.uleb128 0x6
+ 2052 0159 40       		.uleb128 0x40
+ 2053 015a 18       		.uleb128 0x18
+ 2054 015b 9742     		.uleb128 0x2117
+ 2055 015d 19       		.uleb128 0x19
+ 2056 015e 00       		.byte	0
+ 2057 015f 00       		.byte	0
+ 2058 0160 1C       		.uleb128 0x1c
+ 2059 0161 2E       		.uleb128 0x2e
+ 2060 0162 01       		.byte	0x1
+ 2061 0163 3F       		.uleb128 0x3f
+ 2062 0164 19       		.uleb128 0x19
+ 2063 0165 03       		.uleb128 0x3
+ 2064 0166 0E       		.uleb128 0xe
+ 2065 0167 3A       		.uleb128 0x3a
+ 2066 0168 0B       		.uleb128 0xb
+ 2067 0169 3B       		.uleb128 0x3b
+ 2068 016a 0B       		.uleb128 0xb
+ 2069 016b 27       		.uleb128 0x27
+ 2070 016c 19       		.uleb128 0x19
+ 2071 016d 11       		.uleb128 0x11
+ 2072 016e 01       		.uleb128 0x1
+ 2073 016f 12       		.uleb128 0x12
+ 2074 0170 06       		.uleb128 0x6
+ 2075 0171 40       		.uleb128 0x40
+ 2076 0172 18       		.uleb128 0x18
+ 2077 0173 9742     		.uleb128 0x2117
+ 2078 0175 19       		.uleb128 0x19
+ 2079 0176 01       		.uleb128 0x1
+ 2080 0177 13       		.uleb128 0x13
+ 2081 0178 00       		.byte	0
+ 2082 0179 00       		.byte	0
+ 2083 017a 1D       		.uleb128 0x1d
+ 2084 017b 05       		.uleb128 0x5
+ 2085 017c 00       		.byte	0
+ 2086 017d 03       		.uleb128 0x3
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 38
+
+
+ 2087 017e 08       		.uleb128 0x8
+ 2088 017f 3A       		.uleb128 0x3a
+ 2089 0180 0B       		.uleb128 0xb
+ 2090 0181 3B       		.uleb128 0x3b
+ 2091 0182 0B       		.uleb128 0xb
+ 2092 0183 49       		.uleb128 0x49
+ 2093 0184 13       		.uleb128 0x13
+ 2094 0185 02       		.uleb128 0x2
+ 2095 0186 18       		.uleb128 0x18
+ 2096 0187 00       		.byte	0
+ 2097 0188 00       		.byte	0
+ 2098 0189 1E       		.uleb128 0x1e
+ 2099 018a 2E       		.uleb128 0x2e
+ 2100 018b 01       		.byte	0x1
+ 2101 018c 3F       		.uleb128 0x3f
+ 2102 018d 19       		.uleb128 0x19
+ 2103 018e 03       		.uleb128 0x3
+ 2104 018f 0E       		.uleb128 0xe
+ 2105 0190 3A       		.uleb128 0x3a
+ 2106 0191 0B       		.uleb128 0xb
+ 2107 0192 3B       		.uleb128 0x3b
+ 2108 0193 05       		.uleb128 0x5
+ 2109 0194 27       		.uleb128 0x27
+ 2110 0195 19       		.uleb128 0x19
+ 2111 0196 11       		.uleb128 0x11
+ 2112 0197 01       		.uleb128 0x1
+ 2113 0198 12       		.uleb128 0x12
+ 2114 0199 06       		.uleb128 0x6
+ 2115 019a 40       		.uleb128 0x40
+ 2116 019b 18       		.uleb128 0x18
+ 2117 019c 9642     		.uleb128 0x2116
+ 2118 019e 19       		.uleb128 0x19
+ 2119 019f 01       		.uleb128 0x1
+ 2120 01a0 13       		.uleb128 0x13
+ 2121 01a1 00       		.byte	0
+ 2122 01a2 00       		.byte	0
+ 2123 01a3 1F       		.uleb128 0x1f
+ 2124 01a4 05       		.uleb128 0x5
+ 2125 01a5 00       		.byte	0
+ 2126 01a6 03       		.uleb128 0x3
+ 2127 01a7 08       		.uleb128 0x8
+ 2128 01a8 3A       		.uleb128 0x3a
+ 2129 01a9 0B       		.uleb128 0xb
+ 2130 01aa 3B       		.uleb128 0x3b
+ 2131 01ab 05       		.uleb128 0x5
+ 2132 01ac 49       		.uleb128 0x49
+ 2133 01ad 13       		.uleb128 0x13
+ 2134 01ae 02       		.uleb128 0x2
+ 2135 01af 18       		.uleb128 0x18
+ 2136 01b0 00       		.byte	0
+ 2137 01b1 00       		.byte	0
+ 2138 01b2 20       		.uleb128 0x20
+ 2139 01b3 34       		.uleb128 0x34
+ 2140 01b4 00       		.byte	0
+ 2141 01b5 03       		.uleb128 0x3
+ 2142 01b6 0E       		.uleb128 0xe
+ 2143 01b7 3A       		.uleb128 0x3a
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 39
+
+
+ 2144 01b8 0B       		.uleb128 0xb
+ 2145 01b9 3B       		.uleb128 0x3b
+ 2146 01ba 0B       		.uleb128 0xb
+ 2147 01bb 49       		.uleb128 0x49
+ 2148 01bc 13       		.uleb128 0x13
+ 2149 01bd 3F       		.uleb128 0x3f
+ 2150 01be 19       		.uleb128 0x19
+ 2151 01bf 3C       		.uleb128 0x3c
+ 2152 01c0 19       		.uleb128 0x19
+ 2153 01c1 00       		.byte	0
+ 2154 01c2 00       		.byte	0
+ 2155 01c3 21       		.uleb128 0x21
+ 2156 01c4 34       		.uleb128 0x34
+ 2157 01c5 00       		.byte	0
+ 2158 01c6 03       		.uleb128 0x3
+ 2159 01c7 0E       		.uleb128 0xe
+ 2160 01c8 3A       		.uleb128 0x3a
+ 2161 01c9 0B       		.uleb128 0xb
+ 2162 01ca 3B       		.uleb128 0x3b
+ 2163 01cb 0B       		.uleb128 0xb
+ 2164 01cc 49       		.uleb128 0x49
+ 2165 01cd 13       		.uleb128 0x13
+ 2166 01ce 3F       		.uleb128 0x3f
+ 2167 01cf 19       		.uleb128 0x19
+ 2168 01d0 02       		.uleb128 0x2
+ 2169 01d1 18       		.uleb128 0x18
+ 2170 01d2 00       		.byte	0
+ 2171 01d3 00       		.byte	0
+ 2172 01d4 22       		.uleb128 0x22
+ 2173 01d5 34       		.uleb128 0x34
+ 2174 01d6 00       		.byte	0
+ 2175 01d7 03       		.uleb128 0x3
+ 2176 01d8 0E       		.uleb128 0xe
+ 2177 01d9 3A       		.uleb128 0x3a
+ 2178 01da 0B       		.uleb128 0xb
+ 2179 01db 3B       		.uleb128 0x3b
+ 2180 01dc 05       		.uleb128 0x5
+ 2181 01dd 49       		.uleb128 0x49
+ 2182 01de 13       		.uleb128 0x13
+ 2183 01df 3F       		.uleb128 0x3f
+ 2184 01e0 19       		.uleb128 0x19
+ 2185 01e1 02       		.uleb128 0x2
+ 2186 01e2 18       		.uleb128 0x18
+ 2187 01e3 00       		.byte	0
+ 2188 01e4 00       		.byte	0
+ 2189 01e5 00       		.byte	0
+ 2190              		.section	.debug_aranges,"",%progbits
+ 2191 0000 84000000 		.4byte	0x84
+ 2192 0004 0200     		.2byte	0x2
+ 2193 0006 00000000 		.4byte	.Ldebug_info0
+ 2194 000a 04       		.byte	0x4
+ 2195 000b 00       		.byte	0
+ 2196 000c 0000     		.2byte	0
+ 2197 000e 0000     		.2byte	0
+ 2198 0010 00000000 		.4byte	.LFB7
+ 2199 0014 28000000 		.4byte	.LFE7-.LFB7
+ 2200 0018 00000000 		.4byte	.LFB8
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 40
+
+
+ 2201 001c 28000000 		.4byte	.LFE8-.LFB8
+ 2202 0020 00000000 		.4byte	.LFB9
+ 2203 0024 28000000 		.4byte	.LFE9-.LFB9
+ 2204 0028 00000000 		.4byte	.LFB10
+ 2205 002c 2C000000 		.4byte	.LFE10-.LFB10
+ 2206 0030 00000000 		.4byte	.LFB11
+ 2207 0034 2C000000 		.4byte	.LFE11-.LFB11
+ 2208 0038 00000000 		.4byte	.LFB12
+ 2209 003c 2C000000 		.4byte	.LFE12-.LFB12
+ 2210 0040 00000000 		.4byte	.LFB13
+ 2211 0044 2C000000 		.4byte	.LFE13-.LFB13
+ 2212 0048 00000000 		.4byte	.LFB14
+ 2213 004c 3C000000 		.4byte	.LFE14-.LFB14
+ 2214 0050 00000000 		.4byte	.LFB15
+ 2215 0054 3C000000 		.4byte	.LFE15-.LFB15
+ 2216 0058 00000000 		.4byte	.LFB16
+ 2217 005c 28000000 		.4byte	.LFE16-.LFB16
+ 2218 0060 00000000 		.4byte	.LFB17
+ 2219 0064 28000000 		.4byte	.LFE17-.LFB17
+ 2220 0068 00000000 		.4byte	.LFB18
+ 2221 006c 18000000 		.4byte	.LFE18-.LFB18
+ 2222 0070 00000000 		.4byte	.LFB19
+ 2223 0074 64000000 		.4byte	.LFE19-.LFB19
+ 2224 0078 00000000 		.4byte	.LFB20
+ 2225 007c 1C000000 		.4byte	.LFE20-.LFB20
+ 2226 0080 00000000 		.4byte	0
+ 2227 0084 00000000 		.4byte	0
+ 2228              		.section	.debug_ranges,"",%progbits
+ 2229              	.Ldebug_ranges0:
+ 2230 0000 00000000 		.4byte	.LFB7
+ 2231 0004 28000000 		.4byte	.LFE7
+ 2232 0008 00000000 		.4byte	.LFB8
+ 2233 000c 28000000 		.4byte	.LFE8
+ 2234 0010 00000000 		.4byte	.LFB9
+ 2235 0014 28000000 		.4byte	.LFE9
+ 2236 0018 00000000 		.4byte	.LFB10
+ 2237 001c 2C000000 		.4byte	.LFE10
+ 2238 0020 00000000 		.4byte	.LFB11
+ 2239 0024 2C000000 		.4byte	.LFE11
+ 2240 0028 00000000 		.4byte	.LFB12
+ 2241 002c 2C000000 		.4byte	.LFE12
+ 2242 0030 00000000 		.4byte	.LFB13
+ 2243 0034 2C000000 		.4byte	.LFE13
+ 2244 0038 00000000 		.4byte	.LFB14
+ 2245 003c 3C000000 		.4byte	.LFE14
+ 2246 0040 00000000 		.4byte	.LFB15
+ 2247 0044 3C000000 		.4byte	.LFE15
+ 2248 0048 00000000 		.4byte	.LFB16
+ 2249 004c 28000000 		.4byte	.LFE16
+ 2250 0050 00000000 		.4byte	.LFB17
+ 2251 0054 28000000 		.4byte	.LFE17
+ 2252 0058 00000000 		.4byte	.LFB18
+ 2253 005c 18000000 		.4byte	.LFE18
+ 2254 0060 00000000 		.4byte	.LFB19
+ 2255 0064 64000000 		.4byte	.LFE19
+ 2256 0068 00000000 		.4byte	.LFB20
+ 2257 006c 1C000000 		.4byte	.LFE20
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 41
+
+
+ 2258 0070 00000000 		.4byte	0
+ 2259 0074 00000000 		.4byte	0
+ 2260              		.section	.debug_line,"",%progbits
+ 2261              	.Ldebug_line0:
+ 2262 0000 03030000 		.section	.debug_str,"MS",%progbits,1
+ 2262      02009801 
+ 2262      00000201 
+ 2262      FB0E0D00 
+ 2262      01010101 
+ 2263              	.LASF43:
+ 2264 0000 705F6D73 		.ascii	"p_msg\000"
+ 2264      6700
+ 2265              	.LASF102:
+ 2266 0006 63684462 		.ascii	"chDbgPanic\000"
+ 2266      6750616E 
+ 2266      696300
+ 2267              	.LASF75:
+ 2268 0011 7264796D 		.ascii	"rdymsg\000"
+ 2268      736700
+ 2269              	.LASF16:
+ 2270 0018 75696E74 		.ascii	"uint64_t\000"
+ 2270      36345F74 
+ 2270      00
+ 2271              	.LASF5:
+ 2272 0021 5F5F7569 		.ascii	"__uint8_t\000"
+ 2272      6E74385F 
+ 2272      7400
+ 2273              	.LASF103:
+ 2274 002b 76746C69 		.ascii	"vtlist\000"
+ 2274      737400
+ 2275              	.LASF12:
+ 2276 0032 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2276      206C6F6E 
+ 2276      6720756E 
+ 2276      7369676E 
+ 2276      65642069 
+ 2277              	.LASF88:
+ 2278 0049 63685F74 		.ascii	"ch_trace_buffer_t\000"
+ 2278      72616365 
+ 2278      5F627566 
+ 2278      6665725F 
+ 2278      7400
+ 2279              	.LASF83:
+ 2280 005b 73655F73 		.ascii	"se_state\000"
+ 2280      74617465 
+ 2280      00
+ 2281              	.LASF76:
+ 2282 0064 65786974 		.ascii	"exitcode\000"
+ 2282      636F6465 
+ 2282      00
+ 2283              	.LASF30:
+ 2284 006d 705F7072 		.ascii	"p_prio\000"
+ 2284      696F00
+ 2285              	.LASF10:
+ 2286 0074 6C6F6E67 		.ascii	"long long int\000"
+ 2286      206C6F6E 
+ 2286      6720696E 
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 42
+
+
+ 2286      7400
+ 2287              	.LASF1:
+ 2288 0082 7369676E 		.ascii	"signed char\000"
+ 2288      65642063 
+ 2288      68617200 
+ 2289              	.LASF95:
+ 2290 008e 6462675F 		.ascii	"dbg_check_unlock_from_isr\000"
+ 2290      63686563 
+ 2290      6B5F756E 
+ 2290      6C6F636B 
+ 2290      5F66726F 
+ 2291              	.LASF47:
+ 2292 00a8 705F6D70 		.ascii	"p_mpool\000"
+ 2292      6F6F6C00 
+ 2293              	.LASF72:
+ 2294 00b0 6D5F7175 		.ascii	"m_queue\000"
+ 2294      65756500 
+ 2295              	.LASF21:
+ 2296 00b8 74736C69 		.ascii	"tslices_t\000"
+ 2296      6365735F 
+ 2296      7400
+ 2297              	.LASF7:
+ 2298 00c2 6C6F6E67 		.ascii	"long int\000"
+ 2298      20696E74 
+ 2298      00
+ 2299              	.LASF19:
+ 2300 00cb 74737461 		.ascii	"tstate_t\000"
+ 2300      74655F74 
+ 2300      00
+ 2301              	.LASF81:
+ 2302 00d4 73655F74 		.ascii	"se_tp\000"
+ 2302      7000
+ 2303              	.LASF32:
+ 2304 00da 705F6E65 		.ascii	"p_newer\000"
+ 2304      77657200 
+ 2305              	.LASF110:
+ 2306 00e2 2F686F6D 		.ascii	"/home/pauba/ChibiOS-RT/os/kernel/src/chdebug.c\000"
+ 2306      652F7061 
+ 2306      7562612F 
+ 2306      43686962 
+ 2306      694F532D 
+ 2307              	.LASF85:
+ 2308 0111 74625F73 		.ascii	"tb_size\000"
+ 2308      697A6500 
+ 2309              	.LASF8:
+ 2310 0119 5F5F7569 		.ascii	"__uint32_t\000"
+ 2310      6E743332 
+ 2310      5F7400
+ 2311              	.LASF50:
+ 2312 0124 72656761 		.ascii	"regarm_t\000"
+ 2312      726D5F74 
+ 2312      00
+ 2313              	.LASF58:
+ 2314 012d 76745F70 		.ascii	"vt_prev\000"
+ 2314      72657600 
+ 2315              	.LASF80:
+ 2316 0135 73655F74 		.ascii	"se_time\000"
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 43
+
+
+ 2316      696D6500 
+ 2317              	.LASF26:
+ 2318 013d 636E745F 		.ascii	"cnt_t\000"
+ 2318      7400
+ 2319              	.LASF35:
+ 2320 0143 705F7374 		.ascii	"p_stklimit\000"
+ 2320      6B6C696D 
+ 2320      697400
+ 2321              	.LASF0:
+ 2322 014e 756E7369 		.ascii	"unsigned int\000"
+ 2322      676E6564 
+ 2322      20696E74 
+ 2322      00
+ 2323              	.LASF57:
+ 2324 015b 76745F6E 		.ascii	"vt_next\000"
+ 2324      65787400 
+ 2325              	.LASF101:
+ 2326 0163 6462675F 		.ascii	"dbg_trace\000"
+ 2326      74726163 
+ 2326      6500
+ 2327              	.LASF9:
+ 2328 016d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2328      20756E73 
+ 2328      69676E65 
+ 2328      6420696E 
+ 2328      7400
+ 2329              	.LASF55:
+ 2330 017f 76746675 		.ascii	"vtfunc_t\000"
+ 2330      6E635F74 
+ 2330      00
+ 2331              	.LASF90:
+ 2332 0188 6462675F 		.ascii	"dbg_check_suspend\000"
+ 2332      63686563 
+ 2332      6B5F7375 
+ 2332      7370656E 
+ 2332      6400
+ 2333              	.LASF53:
+ 2334 019a 636F6E74 		.ascii	"context\000"
+ 2334      65787400 
+ 2335              	.LASF4:
+ 2336 01a2 73686F72 		.ascii	"short unsigned int\000"
+ 2336      7420756E 
+ 2336      7369676E 
+ 2336      65642069 
+ 2336      6E7400
+ 2337              	.LASF100:
+ 2338 01b5 5F747261 		.ascii	"_trace_init\000"
+ 2338      63655F69 
+ 2338      6E697400 
+ 2339              	.LASF23:
+ 2340 01c1 6D73675F 		.ascii	"msg_t\000"
+ 2340      7400
+ 2341              	.LASF67:
+ 2342 01c7 725F6E65 		.ascii	"r_newer\000"
+ 2342      77657200 
+ 2343              	.LASF98:
+ 2344 01cf 63684462 		.ascii	"chDbgCheckClassI\000"
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 44
+
+
+ 2344      67436865 
+ 2344      636B436C 
+ 2344      61737349 
+ 2344      00
+ 2345              	.LASF18:
+ 2346 01e0 746D6F64 		.ascii	"tmode_t\000"
+ 2346      655F7400 
+ 2347              	.LASF106:
+ 2348 01e8 6462675F 		.ascii	"dbg_isr_cnt\000"
+ 2348      6973725F 
+ 2348      636E7400 
+ 2349              	.LASF99:
+ 2350 01f4 63684462 		.ascii	"chDbgCheckClassS\000"
+ 2350      67436865 
+ 2350      636B436C 
+ 2350      61737353 
+ 2350      00
+ 2351              	.LASF49:
+ 2352 0205 54687265 		.ascii	"ThreadsList\000"
+ 2352      6164734C 
+ 2352      69737400 
+ 2353              	.LASF24:
+ 2354 0211 6576656E 		.ascii	"eventmask_t\000"
+ 2354      746D6173 
+ 2354      6B5F7400 
+ 2355              	.LASF71:
+ 2356 021d 4D757465 		.ascii	"Mutex\000"
+ 2356      7800
+ 2357              	.LASF51:
+ 2358 0223 73746B61 		.ascii	"stkalign_t\000"
+ 2358      6C69676E 
+ 2358      5F7400
+ 2359              	.LASF59:
+ 2360 022e 76745F74 		.ascii	"vt_time\000"
+ 2360      696D6500 
+ 2361              	.LASF86:
+ 2362 0236 74625F70 		.ascii	"tb_ptr\000"
+ 2362      747200
+ 2363              	.LASF54:
+ 2364 023d 73697A65 		.ascii	"sizetype\000"
+ 2364      74797065 
+ 2364      00
+ 2365              	.LASF60:
+ 2366 0246 76745F66 		.ascii	"vt_func\000"
+ 2366      756E6300 
+ 2367              	.LASF92:
+ 2368 024e 6462675F 		.ascii	"dbg_check_lock\000"
+ 2368      63686563 
+ 2368      6B5F6C6F 
+ 2368      636B00
+ 2369              	.LASF84:
+ 2370 025d 63685F73 		.ascii	"ch_swc_event_t\000"
+ 2370      77635F65 
+ 2370      76656E74 
+ 2370      5F7400
+ 2371              	.LASF33:
+ 2372 026c 705F6F6C 		.ascii	"p_older\000"
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 45
+
+
+ 2372      64657200 
+ 2373              	.LASF66:
+ 2374 0274 725F6374 		.ascii	"r_ctx\000"
+ 2374      7800
+ 2375              	.LASF48:
+ 2376 027a 54687265 		.ascii	"ThreadsQueue\000"
+ 2376      61647351 
+ 2376      75657565 
+ 2376      00
+ 2377              	.LASF69:
+ 2378 0287 725F6375 		.ascii	"r_current\000"
+ 2378      7272656E 
+ 2378      7400
+ 2379              	.LASF68:
+ 2380 0291 725F6F6C 		.ascii	"r_older\000"
+ 2380      64657200 
+ 2381              	.LASF93:
+ 2382 0299 6462675F 		.ascii	"dbg_check_unlock\000"
+ 2382      63686563 
+ 2382      6B5F756E 
+ 2382      6C6F636B 
+ 2382      00
+ 2383              	.LASF11:
+ 2384 02aa 5F5F7569 		.ascii	"__uint64_t\000"
+ 2384      6E743634 
+ 2384      5F7400
+ 2385              	.LASF105:
+ 2386 02b5 6462675F 		.ascii	"dbg_trace_buffer\000"
+ 2386      74726163 
+ 2386      655F6275 
+ 2386      66666572 
+ 2386      00
+ 2387              	.LASF20:
+ 2388 02c6 74726566 		.ascii	"trefs_t\000"
+ 2388      735F7400 
+ 2389              	.LASF87:
+ 2390 02ce 74625F62 		.ascii	"tb_buffer\000"
+ 2390      75666665 
+ 2390      7200
+ 2391              	.LASF29:
+ 2392 02d8 705F7072 		.ascii	"p_prev\000"
+ 2392      657600
+ 2393              	.LASF22:
+ 2394 02df 74707269 		.ascii	"tprio_t\000"
+ 2394      6F5F7400 
+ 2395              	.LASF17:
+ 2396 02e7 5F426F6F 		.ascii	"_Bool\000"
+ 2396      6C00
+ 2397              	.LASF14:
+ 2398 02ed 696E7433 		.ascii	"int32_t\000"
+ 2398      325F7400 
+ 2399              	.LASF2:
+ 2400 02f5 756E7369 		.ascii	"unsigned char\000"
+ 2400      676E6564 
+ 2400      20636861 
+ 2400      7200
+ 2401              	.LASF108:
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 46
+
+
+ 2402 0303 6462675F 		.ascii	"dbg_panic_msg\000"
+ 2402      70616E69 
+ 2402      635F6D73 
+ 2402      6700
+ 2403              	.LASF45:
+ 2404 0311 705F6D74 		.ascii	"p_mtxlist\000"
+ 2404      786C6973 
+ 2404      7400
+ 2405              	.LASF3:
+ 2406 031b 73686F72 		.ascii	"short int\000"
+ 2406      7420696E 
+ 2406      7400
+ 2407              	.LASF36:
+ 2408 0325 705F7374 		.ascii	"p_state\000"
+ 2408      61746500 
+ 2409              	.LASF39:
+ 2410 032d 705F7072 		.ascii	"p_preempt\000"
+ 2410      65656D70 
+ 2410      7400
+ 2411              	.LASF65:
+ 2412 0337 725F7072 		.ascii	"r_prio\000"
+ 2412      696F00
+ 2413              	.LASF78:
+ 2414 033e 65776D61 		.ascii	"ewmask\000"
+ 2414      736B00
+ 2415              	.LASF28:
+ 2416 0345 705F6E65 		.ascii	"p_next\000"
+ 2416      787400
+ 2417              	.LASF37:
+ 2418 034c 705F666C 		.ascii	"p_flags\000"
+ 2418      61677300 
+ 2419              	.LASF27:
+ 2420 0354 54687265 		.ascii	"Thread\000"
+ 2420      616400
+ 2421              	.LASF44:
+ 2422 035b 705F6570 		.ascii	"p_epending\000"
+ 2422      656E6469 
+ 2422      6E6700
+ 2423              	.LASF15:
+ 2424 0366 75696E74 		.ascii	"uint32_t\000"
+ 2424      33325F74 
+ 2424      00
+ 2425              	.LASF64:
+ 2426 036f 725F7175 		.ascii	"r_queue\000"
+ 2426      65756500 
+ 2427              	.LASF56:
+ 2428 0377 56697274 		.ascii	"VirtualTimer\000"
+ 2428      75616C54 
+ 2428      696D6572 
+ 2428      00
+ 2429              	.LASF109:
+ 2430 0384 474E5520 		.ascii	"GNU C 4.8.3 20140228 (release) [ARM/embedded-4_8-br"
+ 2430      4320342E 
+ 2430      382E3320 
+ 2430      32303134 
+ 2430      30323238 
+ 2431 03b7 616E6368 		.ascii	"anch revision 208322] -mcpu=cortex-m4 -mno-thumb-in"
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 47
+
+
+ 2431      20726576 
+ 2431      6973696F 
+ 2431      6E203230 
+ 2431      38333232 
+ 2432 03ea 74657277 		.ascii	"terwork -mthumb -ggdb -fomit-frame-pointer -falign-"
+ 2432      6F726B20 
+ 2432      2D6D7468 
+ 2432      756D6220 
+ 2432      2D676764 
+ 2433 041d 66756E63 		.ascii	"functions=16 -ffunction-sections -fdata-sections -f"
+ 2433      74696F6E 
+ 2433      733D3136 
+ 2433      202D6666 
+ 2433      756E6374 
+ 2434 0450 6E6F2D63 		.ascii	"no-common\000"
+ 2434      6F6D6D6F 
+ 2434      6E00
+ 2435              	.LASF79:
+ 2436 045a 63686172 		.ascii	"char\000"
+ 2436      00
+ 2437              	.LASF74:
+ 2438 045f 6D5F6E65 		.ascii	"m_next\000"
+ 2438      787400
+ 2439              	.LASF25:
+ 2440 0466 73797374 		.ascii	"systime_t\000"
+ 2440      696D655F 
+ 2440      7400
+ 2441              	.LASF46:
+ 2442 0470 705F7265 		.ascii	"p_realprio\000"
+ 2442      616C7072 
+ 2442      696F00
+ 2443              	.LASF6:
+ 2444 047b 5F5F696E 		.ascii	"__int32_t\000"
+ 2444      7433325F 
+ 2444      7400
+ 2445              	.LASF107:
+ 2446 0485 6462675F 		.ascii	"dbg_lock_cnt\000"
+ 2446      6C6F636B 
+ 2446      5F636E74 
+ 2446      00
+ 2447              	.LASF40:
+ 2448 0492 705F7469 		.ascii	"p_time\000"
+ 2448      6D6500
+ 2449              	.LASF97:
+ 2450 0499 6462675F 		.ascii	"dbg_check_leave_isr\000"
+ 2450      63686563 
+ 2450      6B5F6C65 
+ 2450      6176655F 
+ 2450      69737200 
+ 2451              	.LASF52:
+ 2452 04ad 696E7463 		.ascii	"intctx\000"
+ 2452      747800
+ 2453              	.LASF42:
+ 2454 04b4 705F6D73 		.ascii	"p_msgqueue\000"
+ 2454      67717565 
+ 2454      756500
+ 2455              	.LASF91:
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 48
+
+
+ 2456 04bf 6462675F 		.ascii	"dbg_check_enable\000"
+ 2456      63686563 
+ 2456      6B5F656E 
+ 2456      61626C65 
+ 2456      00
+ 2457              	.LASF61:
+ 2458 04d0 76745F70 		.ascii	"vt_par\000"
+ 2458      617200
+ 2459              	.LASF38:
+ 2460 04d7 705F7265 		.ascii	"p_refs\000"
+ 2460      667300
+ 2461              	.LASF70:
+ 2462 04de 52656164 		.ascii	"ReadyList\000"
+ 2462      794C6973 
+ 2462      7400
+ 2463              	.LASF96:
+ 2464 04e8 6462675F 		.ascii	"dbg_check_enter_isr\000"
+ 2464      63686563 
+ 2464      6B5F656E 
+ 2464      7465725F 
+ 2464      69737200 
+ 2465              	.LASF104:
+ 2466 04fc 726C6973 		.ascii	"rlist\000"
+ 2466      7400
+ 2467              	.LASF13:
+ 2468 0502 75696E74 		.ascii	"uint8_t\000"
+ 2468      385F7400 
+ 2469              	.LASF94:
+ 2470 050a 6462675F 		.ascii	"dbg_check_lock_from_isr\000"
+ 2470      63686563 
+ 2470      6B5F6C6F 
+ 2470      636B5F66 
+ 2470      726F6D5F 
+ 2471              	.LASF77:
+ 2472 0522 77746F62 		.ascii	"wtobjp\000"
+ 2472      6A7000
+ 2473              	.LASF34:
+ 2474 0529 705F6E61 		.ascii	"p_name\000"
+ 2474      6D6500
+ 2475              	.LASF62:
+ 2476 0530 76745F73 		.ascii	"vt_systime\000"
+ 2476      79737469 
+ 2476      6D6500
+ 2477              	.LASF63:
+ 2478 053b 56544C69 		.ascii	"VTList\000"
+ 2478      737400
+ 2479              	.LASF89:
+ 2480 0542 6462675F 		.ascii	"dbg_check_disable\000"
+ 2480      63686563 
+ 2480      6B5F6469 
+ 2480      7361626C 
+ 2480      6500
+ 2481              	.LASF73:
+ 2482 0554 6D5F6F77 		.ascii	"m_owner\000"
+ 2482      6E657200 
+ 2483              	.LASF82:
+ 2484 055c 73655F77 		.ascii	"se_wtobjp\000"
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 49
+
+
+ 2484      746F626A 
+ 2484      7000
+ 2485              	.LASF31:
+ 2486 0566 705F6374 		.ascii	"p_ctx\000"
+ 2486      7800
+ 2487              	.LASF41:
+ 2488 056c 705F7761 		.ascii	"p_waiting\000"
+ 2488      6974696E 
+ 2488      6700
+ 2489              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.3 20140228 (release) [ARM/embedded-4_8-br
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 50
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 chdebug.c
+/home/pauba/tmp/ccvlR53v.s:23     .bss.dbg_isr_cnt:00000000 dbg_isr_cnt
+/home/pauba/tmp/ccvlR53v.s:20     .bss.dbg_isr_cnt:00000000 $d
+/home/pauba/tmp/ccvlR53v.s:30     .bss.dbg_lock_cnt:00000000 dbg_lock_cnt
+/home/pauba/tmp/ccvlR53v.s:27     .bss.dbg_lock_cnt:00000000 $d
+/home/pauba/tmp/ccvlR53v.s:33     .rodata:00000000 $d
+/home/pauba/tmp/ccvlR53v.s:37     .text.dbg_check_disable:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:43     .text.dbg_check_disable:00000000 dbg_check_disable
+/home/pauba/tmp/ccvlR53v.s:735    .text.chDbgPanic:00000000 chDbgPanic
+/home/pauba/tmp/ccvlR53v.s:74     .text.dbg_check_disable:0000001c $d
+/home/pauba/tmp/ccvlR53v.s:85     .text.dbg_check_suspend:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:91     .text.dbg_check_suspend:00000000 dbg_check_suspend
+/home/pauba/tmp/ccvlR53v.s:121    .text.dbg_check_suspend:0000001c $d
+/home/pauba/tmp/ccvlR53v.s:132    .text.dbg_check_enable:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:138    .text.dbg_check_enable:00000000 dbg_check_enable
+/home/pauba/tmp/ccvlR53v.s:168    .text.dbg_check_enable:0000001c $d
+/home/pauba/tmp/ccvlR53v.s:179    .text.dbg_check_lock:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:185    .text.dbg_check_lock:00000000 dbg_check_lock
+/home/pauba/tmp/ccvlR53v.s:219    .text.dbg_check_lock:00000020 $d
+/home/pauba/tmp/ccvlR53v.s:230    .text.dbg_check_unlock:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:236    .text.dbg_check_unlock:00000000 dbg_check_unlock
+/home/pauba/tmp/ccvlR53v.s:270    .text.dbg_check_unlock:00000020 $d
+/home/pauba/tmp/ccvlR53v.s:281    .text.dbg_check_lock_from_isr:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:287    .text.dbg_check_lock_from_isr:00000000 dbg_check_lock_from_isr
+/home/pauba/tmp/ccvlR53v.s:321    .text.dbg_check_lock_from_isr:00000020 $d
+/home/pauba/tmp/ccvlR53v.s:332    .text.dbg_check_unlock_from_isr:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:338    .text.dbg_check_unlock_from_isr:00000000 dbg_check_unlock_from_isr
+/home/pauba/tmp/ccvlR53v.s:372    .text.dbg_check_unlock_from_isr:00000020 $d
+/home/pauba/tmp/ccvlR53v.s:383    .text.dbg_check_enter_isr:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:389    .text.dbg_check_enter_isr:00000000 dbg_check_enter_isr
+/home/pauba/tmp/ccvlR53v.s:441    .text.dbg_check_enter_isr:00000030 $d
+/home/pauba/tmp/ccvlR53v.s:452    .text.dbg_check_leave_isr:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:458    .text.dbg_check_leave_isr:00000000 dbg_check_leave_isr
+/home/pauba/tmp/ccvlR53v.s:510    .text.dbg_check_leave_isr:00000030 $d
+/home/pauba/tmp/ccvlR53v.s:521    .text.chDbgCheckClassI:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:527    .text.chDbgCheckClassI:00000000 chDbgCheckClassI
+/home/pauba/tmp/ccvlR53v.s:557    .text.chDbgCheckClassI:0000001c $d
+/home/pauba/tmp/ccvlR53v.s:568    .text.chDbgCheckClassS:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:574    .text.chDbgCheckClassS:00000000 chDbgCheckClassS
+/home/pauba/tmp/ccvlR53v.s:604    .text.chDbgCheckClassS:0000001c $d
+/home/pauba/tmp/ccvlR53v.s:615    .bss.dbg_trace_buffer:00000000 dbg_trace_buffer
+/home/pauba/tmp/ccvlR53v.s:612    .bss.dbg_trace_buffer:00000000 $d
+/home/pauba/tmp/ccvlR53v.s:618    .text._trace_init:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:624    .text._trace_init:00000000 _trace_init
+/home/pauba/tmp/ccvlR53v.s:644    .text._trace_init:00000010 $d
+/home/pauba/tmp/ccvlR53v.s:650    .text.dbg_trace:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:656    .text.dbg_trace:00000000 dbg_trace
+/home/pauba/tmp/ccvlR53v.s:713    .text.dbg_trace:00000050 $d
+/home/pauba/tmp/ccvlR53v.s:726    .bss.dbg_panic_msg:00000000 dbg_panic_msg
+/home/pauba/tmp/ccvlR53v.s:723    .bss.dbg_panic_msg:00000000 $d
+/home/pauba/tmp/ccvlR53v.s:729    .text.chDbgPanic:00000000 $t
+/home/pauba/tmp/ccvlR53v.s:760    .text.chDbgPanic:00000018 $d
+                     .debug_frame:00000010 $d
+/home/pauba/tmp/ccvlR53v.s:80     .text.dbg_check_disable:00000028 $t
+/home/pauba/tmp/ccvlR53v.s:127    .text.dbg_check_suspend:00000028 $t
+/home/pauba/tmp/ccvlR53v.s:174    .text.dbg_check_enable:00000028 $t
+ARM GAS  /home/pauba/tmp/ccvlR53v.s 			page 51
+
+
+/home/pauba/tmp/ccvlR53v.s:225    .text.dbg_check_lock:0000002c $t
+/home/pauba/tmp/ccvlR53v.s:276    .text.dbg_check_unlock:0000002c $t
+/home/pauba/tmp/ccvlR53v.s:327    .text.dbg_check_lock_from_isr:0000002c $t
+/home/pauba/tmp/ccvlR53v.s:378    .text.dbg_check_unlock_from_isr:0000002c $t
+/home/pauba/tmp/ccvlR53v.s:447    .text.dbg_check_enter_isr:0000003c $t
+/home/pauba/tmp/ccvlR53v.s:516    .text.dbg_check_leave_isr:0000003c $t
+/home/pauba/tmp/ccvlR53v.s:563    .text.chDbgCheckClassI:00000028 $t
+/home/pauba/tmp/ccvlR53v.s:611    .text.chDbgCheckClassS:00000028 $t
+/home/pauba/tmp/ccvlR53v.s:649    .text._trace_init:00000018 $t
+/home/pauba/tmp/ccvlR53v.s:722    .text.dbg_trace:00000064 $t
+/home/pauba/tmp/ccvlR53v.s:764    .text.chDbgPanic:0000001c $t
+
+UNDEFINED SYMBOLS
+vtlist
+rlist
+port_halt

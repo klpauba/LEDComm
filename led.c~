@@ -1,0 +1,68 @@
+inline void ledCommOn(LEDCommDriver_t *ldp) {
+    palSetPad(ldp->anode_port, ldp->anode_pad);
+    palClearPad(ldp->cathode_port, ldp->cathode_pad);
+}
+
+inline void ledCommOff(LEDCommDriver_t *ldp) {
+    palClearPad(ldp->anode_port, ldp->anode_pad);
+    palClearPad(ldp->cathode_port, ldp->cathode_pad);
+}
+
+inline void ledCommReverse(LEDCommDriver_t *ldp) {
+    palClearPad(ldp->anode_port, ldp->anode_pad);
+    palSetPad(ldp->cathode_port, ldp->cathode_pad);
+}
+
+inline void ledCommInitPad(LEDCommDriver_t *ldp) {
+    palSetPadMode((ldp)->anode_port, (ldp)->anode_pad, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_LOWEST);
+    palSetPadMode((ldp)->cathode_port, (ldp)->cathode_pad, PAL_MODE_OUTPUT_PUSHPULL | PAL_STM32_OSPEED_LOWEST);
+}
+
+/* 
+ * Count the number of consecutive trailing (right side) high bits using a binary search algorithm.
+ */
+uint8_t
+ledCommCountTrailingHighBits(uint16_t v)
+{
+    if (v == 0xffff) {
+	/* special case not handled by the code below */
+	return 16;
+    } else {
+	uint8_t c = 0;
+	
+	if ((v & 0xfff) == 0xfff) {
+	    v >>= 12;
+	    c += 12;
+	}
+	if ((v & 0xff) == 0xff) {
+	    v >>= 8;
+	    c += 8;
+	}
+	if ((v & 0xf) == 0xf) {
+	    v >>= 4;
+	    c += 4;
+	}
+	if ((v & 0x7) == 0x7) {
+	    v >>= 3;
+	    c += 3;
+	}
+	if ((v & 0x3) == 0x3) {
+	    v >>= 2;
+	    c += 2;
+	}
+	if ((v & 0x1) == 0x1) {
+	    v >>= 1;
+	    c += 1;
+	}
+
+	return c;
+    }
+}
+
+static uint8_t
+computeParity(uint8_t v) {	/* See https://graphics.stanford.edu/~seander/bithacks.html#ParityParallel */
+    v ^= v >> 4;
+    v &= 0xf;
+    return (0x6996 >> v) & 1;
+}
+

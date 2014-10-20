@@ -1,0 +1,2258 @@
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"testheap.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.bss.test_heap,"aw",%nobits
+  19              		.align	3
+  20              		.type	test_heap, %object
+  21              		.size	test_heap, 32
+  22              	test_heap:
+  23 0000 00000000 		.space	32
+  23      00000000 
+  23      00000000 
+  23      00000000 
+  23      00000000 
+  24              		.section	.text.heap1_setup,"ax",%progbits
+  25              		.align	2
+  26              		.p2align 4,,15
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	heap1_setup, %function
+  30              	heap1_setup:
+  31              	.LFB7:
+  32              		.file 1 "/home/pauba/ChibiOS-RT/test/testheap.c"
+  33              		.loc 1 64 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37 0000 08B5     		push	{r3, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 3, -8
+  40              		.cfi_offset 14, -4
+  41              		.loc 1 66 0
+  42 0002 0348     		ldr	r0, .L2
+  43 0004 0349     		ldr	r1, .L2+4
+  44 0006 4FF4D262 		mov	r2, #1680
+  45 000a FFF7FEFF 		bl	chHeapInit
+  46              		.loc 1 67 0
+  47 000e 08BD     		pop	{r3, pc}
+  48              	.L3:
+  49              		.align	2
+  50              	.L2:
+  51 0010 00000000 		.word	test_heap
+  52 0014 00000000 		.word	test
+  53              		.cfi_endproc
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 2
+
+
+  54              	.LFE7:
+  55              		.size	heap1_setup, .-heap1_setup
+  56 0018 AFF30080 		.section	.text.heap1_execute,"ax",%progbits
+  56      AFF30080 
+  57              		.align	2
+  58              		.p2align 4,,15
+  59              		.thumb
+  60              		.thumb_func
+  61              		.type	heap1_execute, %function
+  62              	heap1_execute:
+  63              	.LFB8:
+  64              		.loc 1 69 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 24
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 00B5     		push	{lr}
+  69              		.cfi_def_cfa_offset 4
+  70              		.cfi_offset 14, -4
+  71 0002 87B0     		sub	sp, sp, #28
+  72              		.cfi_def_cfa_offset 32
+  73              		.loc 1 74 0
+  74 0004 FFF7FEFF 		bl	chCoreStatus
+  75              		.loc 1 80 0
+  76 0008 01AB     		add	r3, sp, #4
+  77 000a 0020     		movs	r0, #0
+  78 000c 1946     		mov	r1, r3
+  79 000e FFF7FEFF 		bl	chHeapStatus
+  80              		.loc 1 81 0
+  81 0012 0020     		movs	r0, #0
+  82 0014 1021     		movs	r1, #16
+  83 0016 FFF7FEFF 		bl	chHeapAlloc
+  84 001a 0590     		str	r0, [sp, #20]
+  85              		.loc 1 82 0
+  86 001c 059B     		ldr	r3, [sp, #20]
+  87 001e 002B     		cmp	r3, #0
+  88 0020 0CBF     		ite	eq
+  89 0022 0023     		moveq	r3, #0
+  90 0024 0123     		movne	r3, #1
+  91 0026 DBB2     		uxtb	r3, r3
+  92 0028 0120     		movs	r0, #1
+  93 002a 1946     		mov	r1, r3
+  94 002c FFF7FEFF 		bl	_test_assert
+  95 0030 0346     		mov	r3, r0
+  96 0032 002B     		cmp	r3, #0
+  97 0034 00D0     		beq	.L5
+  98              		.loc 1 82 0 is_stmt 0 discriminator 1
+  99 0036 4EE1     		b	.L4
+ 100              	.L5:
+ 101              		.loc 1 83 0 is_stmt 1
+ 102 0038 0598     		ldr	r0, [sp, #20]
+ 103 003a FFF7FEFF 		bl	chHeapFree
+ 104              		.loc 1 84 0
+ 105 003e 0020     		movs	r0, #0
+ 106 0040 6FF0FF01 		mvn	r1, #255
+ 107 0044 FFF7FEFF 		bl	chHeapAlloc
+ 108 0048 0590     		str	r0, [sp, #20]
+ 109              		.loc 1 85 0
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 3
+
+
+ 110 004a 059B     		ldr	r3, [sp, #20]
+ 111 004c 002B     		cmp	r3, #0
+ 112 004e 14BF     		ite	ne
+ 113 0050 0023     		movne	r3, #0
+ 114 0052 0123     		moveq	r3, #1
+ 115 0054 DBB2     		uxtb	r3, r3
+ 116 0056 0220     		movs	r0, #2
+ 117 0058 1946     		mov	r1, r3
+ 118 005a FFF7FEFF 		bl	_test_assert
+ 119 005e 0346     		mov	r3, r0
+ 120 0060 002B     		cmp	r3, #0
+ 121 0062 00D0     		beq	.L7
+ 122              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 123 0064 37E1     		b	.L4
+ 124              	.L7:
+ 125              		.loc 1 88 0 is_stmt 1
+ 126 0066 01AB     		add	r3, sp, #4
+ 127 0068 9C48     		ldr	r0, .L22
+ 128 006a 1946     		mov	r1, r3
+ 129 006c FFF7FEFF 		bl	chHeapStatus
+ 130              		.loc 1 91 0
+ 131 0070 9A48     		ldr	r0, .L22
+ 132 0072 1021     		movs	r1, #16
+ 133 0074 FFF7FEFF 		bl	chHeapAlloc
+ 134 0078 0590     		str	r0, [sp, #20]
+ 135              		.loc 1 92 0
+ 136 007a 9848     		ldr	r0, .L22
+ 137 007c 1021     		movs	r1, #16
+ 138 007e FFF7FEFF 		bl	chHeapAlloc
+ 139 0082 0490     		str	r0, [sp, #16]
+ 140              		.loc 1 93 0
+ 141 0084 9548     		ldr	r0, .L22
+ 142 0086 1021     		movs	r1, #16
+ 143 0088 FFF7FEFF 		bl	chHeapAlloc
+ 144 008c 0390     		str	r0, [sp, #12]
+ 145              		.loc 1 94 0
+ 146 008e 0598     		ldr	r0, [sp, #20]
+ 147 0090 FFF7FEFF 		bl	chHeapFree
+ 148              		.loc 1 95 0
+ 149 0094 0498     		ldr	r0, [sp, #16]
+ 150 0096 FFF7FEFF 		bl	chHeapFree
+ 151              		.loc 1 96 0
+ 152 009a 0398     		ldr	r0, [sp, #12]
+ 153 009c FFF7FEFF 		bl	chHeapFree
+ 154              		.loc 1 97 0
+ 155 00a0 02AB     		add	r3, sp, #8
+ 156 00a2 8E48     		ldr	r0, .L22
+ 157 00a4 1946     		mov	r1, r3
+ 158 00a6 FFF7FEFF 		bl	chHeapStatus
+ 159 00aa 0346     		mov	r3, r0
+ 160 00ac 012B     		cmp	r3, #1
+ 161 00ae 14BF     		ite	ne
+ 162 00b0 0023     		movne	r3, #0
+ 163 00b2 0123     		moveq	r3, #1
+ 164 00b4 DBB2     		uxtb	r3, r3
+ 165 00b6 0320     		movs	r0, #3
+ 166 00b8 1946     		mov	r1, r3
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 4
+
+
+ 167 00ba FFF7FEFF 		bl	_test_assert
+ 168 00be 0346     		mov	r3, r0
+ 169 00c0 002B     		cmp	r3, #0
+ 170 00c2 00D0     		beq	.L8
+ 171              		.loc 1 97 0 is_stmt 0 discriminator 1
+ 172 00c4 07E1     		b	.L4
+ 173              	.L8:
+ 174              		.loc 1 100 0 is_stmt 1
+ 175 00c6 8548     		ldr	r0, .L22
+ 176 00c8 1021     		movs	r1, #16
+ 177 00ca FFF7FEFF 		bl	chHeapAlloc
+ 178 00ce 0590     		str	r0, [sp, #20]
+ 179              		.loc 1 101 0
+ 180 00d0 8248     		ldr	r0, .L22
+ 181 00d2 1021     		movs	r1, #16
+ 182 00d4 FFF7FEFF 		bl	chHeapAlloc
+ 183 00d8 0490     		str	r0, [sp, #16]
+ 184              		.loc 1 102 0
+ 185 00da 8048     		ldr	r0, .L22
+ 186 00dc 1021     		movs	r1, #16
+ 187 00de FFF7FEFF 		bl	chHeapAlloc
+ 188 00e2 0390     		str	r0, [sp, #12]
+ 189              		.loc 1 103 0
+ 190 00e4 0398     		ldr	r0, [sp, #12]
+ 191 00e6 FFF7FEFF 		bl	chHeapFree
+ 192              		.loc 1 104 0
+ 193 00ea 0498     		ldr	r0, [sp, #16]
+ 194 00ec FFF7FEFF 		bl	chHeapFree
+ 195              		.loc 1 105 0
+ 196 00f0 0598     		ldr	r0, [sp, #20]
+ 197 00f2 FFF7FEFF 		bl	chHeapFree
+ 198              		.loc 1 106 0
+ 199 00f6 02AB     		add	r3, sp, #8
+ 200 00f8 7848     		ldr	r0, .L22
+ 201 00fa 1946     		mov	r1, r3
+ 202 00fc FFF7FEFF 		bl	chHeapStatus
+ 203 0100 0346     		mov	r3, r0
+ 204 0102 012B     		cmp	r3, #1
+ 205 0104 14BF     		ite	ne
+ 206 0106 0023     		movne	r3, #0
+ 207 0108 0123     		moveq	r3, #1
+ 208 010a DBB2     		uxtb	r3, r3
+ 209 010c 0420     		movs	r0, #4
+ 210 010e 1946     		mov	r1, r3
+ 211 0110 FFF7FEFF 		bl	_test_assert
+ 212 0114 0346     		mov	r3, r0
+ 213 0116 002B     		cmp	r3, #0
+ 214 0118 00D0     		beq	.L9
+ 215              		.loc 1 106 0 is_stmt 0 discriminator 1
+ 216 011a DCE0     		b	.L4
+ 217              	.L9:
+ 218              		.loc 1 109 0 is_stmt 1
+ 219 011c 6F48     		ldr	r0, .L22
+ 220 011e 1121     		movs	r1, #17
+ 221 0120 FFF7FEFF 		bl	chHeapAlloc
+ 222 0124 0590     		str	r0, [sp, #20]
+ 223              		.loc 1 110 0
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 5
+
+
+ 224 0126 6D48     		ldr	r0, .L22
+ 225 0128 1021     		movs	r1, #16
+ 226 012a FFF7FEFF 		bl	chHeapAlloc
+ 227 012e 0490     		str	r0, [sp, #16]
+ 228              		.loc 1 111 0
+ 229 0130 0598     		ldr	r0, [sp, #20]
+ 230 0132 FFF7FEFF 		bl	chHeapFree
+ 231              		.loc 1 112 0
+ 232 0136 02AB     		add	r3, sp, #8
+ 233 0138 6848     		ldr	r0, .L22
+ 234 013a 1946     		mov	r1, r3
+ 235 013c FFF7FEFF 		bl	chHeapStatus
+ 236 0140 0346     		mov	r3, r0
+ 237 0142 022B     		cmp	r3, #2
+ 238 0144 14BF     		ite	ne
+ 239 0146 0023     		movne	r3, #0
+ 240 0148 0123     		moveq	r3, #1
+ 241 014a DBB2     		uxtb	r3, r3
+ 242 014c 0520     		movs	r0, #5
+ 243 014e 1946     		mov	r1, r3
+ 244 0150 FFF7FEFF 		bl	_test_assert
+ 245 0154 0346     		mov	r3, r0
+ 246 0156 002B     		cmp	r3, #0
+ 247 0158 00D0     		beq	.L10
+ 248              		.loc 1 112 0 is_stmt 0 discriminator 1
+ 249 015a BCE0     		b	.L4
+ 250              	.L10:
+ 251              		.loc 1 113 0 is_stmt 1
+ 252 015c 5F48     		ldr	r0, .L22
+ 253 015e 1021     		movs	r1, #16
+ 254 0160 FFF7FEFF 		bl	chHeapAlloc
+ 255 0164 0590     		str	r0, [sp, #20]
+ 256              		.loc 1 116 0
+ 257 0166 02AB     		add	r3, sp, #8
+ 258 0168 5C48     		ldr	r0, .L22
+ 259 016a 1946     		mov	r1, r3
+ 260 016c FFF7FEFF 		bl	chHeapStatus
+ 261 0170 0346     		mov	r3, r0
+ 262 0172 012B     		cmp	r3, #1
+ 263 0174 07D0     		beq	.L11
+ 264              		.loc 1 116 0 is_stmt 0 discriminator 2
+ 265 0176 02AB     		add	r3, sp, #8
+ 266 0178 5848     		ldr	r0, .L22
+ 267 017a 1946     		mov	r1, r3
+ 268 017c FFF7FEFF 		bl	chHeapStatus
+ 269 0180 0346     		mov	r3, r0
+ 270 0182 022B     		cmp	r3, #2
+ 271 0184 01D1     		bne	.L12
+ 272              	.L11:
+ 273              		.loc 1 116 0 discriminator 1
+ 274 0186 0123     		movs	r3, #1
+ 275 0188 00E0     		b	.L13
+ 276              	.L12:
+ 277              		.loc 1 116 0 discriminator 3
+ 278 018a 0023     		movs	r3, #0
+ 279              	.L13:
+ 280              		.loc 1 116 0 discriminator 4
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 6
+
+
+ 281 018c 03F00103 		and	r3, r3, #1
+ 282 0190 DBB2     		uxtb	r3, r3
+ 283 0192 0620     		movs	r0, #6
+ 284 0194 1946     		mov	r1, r3
+ 285 0196 FFF7FEFF 		bl	_test_assert
+ 286 019a 0346     		mov	r3, r0
+ 287 019c 002B     		cmp	r3, #0
+ 288 019e 00D0     		beq	.L14
+ 289              		.loc 1 116 0 discriminator 1
+ 290 01a0 99E0     		b	.L4
+ 291              	.L14:
+ 292              		.loc 1 118 0 is_stmt 1
+ 293 01a2 0498     		ldr	r0, [sp, #16]
+ 294 01a4 FFF7FEFF 		bl	chHeapFree
+ 295              		.loc 1 119 0
+ 296 01a8 0598     		ldr	r0, [sp, #20]
+ 297 01aa FFF7FEFF 		bl	chHeapFree
+ 298              		.loc 1 120 0
+ 299 01ae 02AB     		add	r3, sp, #8
+ 300 01b0 4A48     		ldr	r0, .L22
+ 301 01b2 1946     		mov	r1, r3
+ 302 01b4 FFF7FEFF 		bl	chHeapStatus
+ 303 01b8 0346     		mov	r3, r0
+ 304 01ba 012B     		cmp	r3, #1
+ 305 01bc 14BF     		ite	ne
+ 306 01be 0023     		movne	r3, #0
+ 307 01c0 0123     		moveq	r3, #1
+ 308 01c2 DBB2     		uxtb	r3, r3
+ 309 01c4 0720     		movs	r0, #7
+ 310 01c6 1946     		mov	r1, r3
+ 311 01c8 FFF7FEFF 		bl	_test_assert
+ 312 01cc 0346     		mov	r3, r0
+ 313 01ce 002B     		cmp	r3, #0
+ 314 01d0 00D0     		beq	.L15
+ 315              		.loc 1 120 0 is_stmt 0 discriminator 1
+ 316 01d2 80E0     		b	.L4
+ 317              	.L15:
+ 318              		.loc 1 123 0 is_stmt 1
+ 319 01d4 4148     		ldr	r0, .L22
+ 320 01d6 1021     		movs	r1, #16
+ 321 01d8 FFF7FEFF 		bl	chHeapAlloc
+ 322 01dc 0590     		str	r0, [sp, #20]
+ 323              		.loc 1 124 0
+ 324 01de 3F48     		ldr	r0, .L22
+ 325 01e0 1021     		movs	r1, #16
+ 326 01e2 FFF7FEFF 		bl	chHeapAlloc
+ 327 01e6 0490     		str	r0, [sp, #16]
+ 328              		.loc 1 125 0
+ 329 01e8 0598     		ldr	r0, [sp, #20]
+ 330 01ea FFF7FEFF 		bl	chHeapFree
+ 331              		.loc 1 126 0
+ 332 01ee 02AB     		add	r3, sp, #8
+ 333 01f0 3A48     		ldr	r0, .L22
+ 334 01f2 1946     		mov	r1, r3
+ 335 01f4 FFF7FEFF 		bl	chHeapStatus
+ 336 01f8 0346     		mov	r3, r0
+ 337 01fa 022B     		cmp	r3, #2
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 7
+
+
+ 338 01fc 14BF     		ite	ne
+ 339 01fe 0023     		movne	r3, #0
+ 340 0200 0123     		moveq	r3, #1
+ 341 0202 DBB2     		uxtb	r3, r3
+ 342 0204 0820     		movs	r0, #8
+ 343 0206 1946     		mov	r1, r3
+ 344 0208 FFF7FEFF 		bl	_test_assert
+ 345 020c 0346     		mov	r3, r0
+ 346 020e 002B     		cmp	r3, #0
+ 347 0210 00D0     		beq	.L16
+ 348              		.loc 1 126 0 is_stmt 0 discriminator 1
+ 349 0212 60E0     		b	.L4
+ 350              	.L16:
+ 351              		.loc 1 127 0 is_stmt 1
+ 352 0214 3148     		ldr	r0, .L22
+ 353 0216 2021     		movs	r1, #32
+ 354 0218 FFF7FEFF 		bl	chHeapAlloc
+ 355 021c 0590     		str	r0, [sp, #20]
+ 356              		.loc 1 128 0
+ 357 021e 0598     		ldr	r0, [sp, #20]
+ 358 0220 FFF7FEFF 		bl	chHeapFree
+ 359              		.loc 1 129 0
+ 360 0224 0498     		ldr	r0, [sp, #16]
+ 361 0226 FFF7FEFF 		bl	chHeapFree
+ 362              		.loc 1 130 0
+ 363 022a 02AB     		add	r3, sp, #8
+ 364 022c 2B48     		ldr	r0, .L22
+ 365 022e 1946     		mov	r1, r3
+ 366 0230 FFF7FEFF 		bl	chHeapStatus
+ 367 0234 0346     		mov	r3, r0
+ 368 0236 012B     		cmp	r3, #1
+ 369 0238 14BF     		ite	ne
+ 370 023a 0023     		movne	r3, #0
+ 371 023c 0123     		moveq	r3, #1
+ 372 023e DBB2     		uxtb	r3, r3
+ 373 0240 0920     		movs	r0, #9
+ 374 0242 1946     		mov	r1, r3
+ 375 0244 FFF7FEFF 		bl	_test_assert
+ 376 0248 0346     		mov	r3, r0
+ 377 024a 002B     		cmp	r3, #0
+ 378 024c 00D0     		beq	.L17
+ 379              		.loc 1 130 0 is_stmt 0 discriminator 1
+ 380 024e 42E0     		b	.L4
+ 381              	.L17:
+ 382              		.loc 1 133 0 is_stmt 1
+ 383 0250 02AB     		add	r3, sp, #8
+ 384 0252 2248     		ldr	r0, .L22
+ 385 0254 1946     		mov	r1, r3
+ 386 0256 FFF7FEFF 		bl	chHeapStatus
+ 387              		.loc 1 134 0
+ 388 025a 029B     		ldr	r3, [sp, #8]
+ 389 025c 1F48     		ldr	r0, .L22
+ 390 025e 1946     		mov	r1, r3
+ 391 0260 FFF7FEFF 		bl	chHeapAlloc
+ 392 0264 0590     		str	r0, [sp, #20]
+ 393              		.loc 1 135 0
+ 394 0266 02AB     		add	r3, sp, #8
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 8
+
+
+ 395 0268 1C48     		ldr	r0, .L22
+ 396 026a 1946     		mov	r1, r3
+ 397 026c FFF7FEFF 		bl	chHeapStatus
+ 398 0270 0346     		mov	r3, r0
+ 399 0272 002B     		cmp	r3, #0
+ 400 0274 14BF     		ite	ne
+ 401 0276 0023     		movne	r3, #0
+ 402 0278 0123     		moveq	r3, #1
+ 403 027a DBB2     		uxtb	r3, r3
+ 404 027c 0A20     		movs	r0, #10
+ 405 027e 1946     		mov	r1, r3
+ 406 0280 FFF7FEFF 		bl	_test_assert
+ 407 0284 0346     		mov	r3, r0
+ 408 0286 002B     		cmp	r3, #0
+ 409 0288 00D0     		beq	.L18
+ 410              		.loc 1 135 0 is_stmt 0 discriminator 1
+ 411 028a 24E0     		b	.L4
+ 412              	.L18:
+ 413              		.loc 1 136 0 is_stmt 1
+ 414 028c 0598     		ldr	r0, [sp, #20]
+ 415 028e FFF7FEFF 		bl	chHeapFree
+ 416              		.loc 1 138 0
+ 417 0292 02AB     		add	r3, sp, #8
+ 418 0294 1148     		ldr	r0, .L22
+ 419 0296 1946     		mov	r1, r3
+ 420 0298 FFF7FEFF 		bl	chHeapStatus
+ 421 029c 0346     		mov	r3, r0
+ 422 029e 012B     		cmp	r3, #1
+ 423 02a0 14BF     		ite	ne
+ 424 02a2 0023     		movne	r3, #0
+ 425 02a4 0123     		moveq	r3, #1
+ 426 02a6 DBB2     		uxtb	r3, r3
+ 427 02a8 0B20     		movs	r0, #11
+ 428 02aa 1946     		mov	r1, r3
+ 429 02ac FFF7FEFF 		bl	_test_assert
+ 430 02b0 0346     		mov	r3, r0
+ 431 02b2 002B     		cmp	r3, #0
+ 432 02b4 00D0     		beq	.L19
+ 433              		.loc 1 138 0 is_stmt 0 discriminator 1
+ 434 02b6 0EE0     		b	.L4
+ 435              	.L19:
+ 436              		.loc 1 139 0 is_stmt 1
+ 437 02b8 029A     		ldr	r2, [sp, #8]
+ 438 02ba 019B     		ldr	r3, [sp, #4]
+ 439 02bc 9A42     		cmp	r2, r3
+ 440 02be 14BF     		ite	ne
+ 441 02c0 0023     		movne	r3, #0
+ 442 02c2 0123     		moveq	r3, #1
+ 443 02c4 DBB2     		uxtb	r3, r3
+ 444 02c6 0C20     		movs	r0, #12
+ 445 02c8 1946     		mov	r1, r3
+ 446 02ca FFF7FEFF 		bl	_test_assert
+ 447 02ce 0346     		mov	r3, r0
+ 448 02d0 002B     		cmp	r3, #0
+ 449 02d2 00D0     		beq	.L4
+ 450 02d4 00BF     		nop
+ 451              	.L4:
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 9
+
+
+ 452              		.loc 1 140 0
+ 453 02d6 07B0     		add	sp, sp, #28
+ 454              		@ sp needed
+ 455 02d8 5DF804FB 		ldr	pc, [sp], #4
+ 456              	.L23:
+ 457              		.align	2
+ 458              	.L22:
+ 459 02dc 00000000 		.word	test_heap
+ 460              		.cfi_endproc
+ 461              	.LFE8:
+ 462              		.size	heap1_execute, .-heap1_execute
+ 463              		.global	testheap1
+ 464              		.section	.rodata
+ 465              		.align	2
+ 466              	.LC0:
+ 467 0000 48656170 		.ascii	"Heap, allocation and fragmentation test\000"
+ 467      2C20616C 
+ 467      6C6F6361 
+ 467      74696F6E 
+ 467      20616E64 
+ 468              		.section	.rodata.testheap1,"a",%progbits
+ 469              		.align	2
+ 470              		.type	testheap1, %object
+ 471              		.size	testheap1, 16
+ 472              	testheap1:
+ 473 0000 00000000 		.word	.LC0
+ 474 0004 00000000 		.word	heap1_setup
+ 475 0008 00000000 		.word	0
+ 476 000c 00000000 		.word	heap1_execute
+ 477              		.global	patternheap
+ 478              		.section	.rodata.patternheap,"a",%progbits
+ 479              		.align	2
+ 480              		.type	patternheap, %object
+ 481              		.size	patternheap, 8
+ 482              	patternheap:
+ 483 0000 00000000 		.word	testheap1
+ 484 0004 00000000 		.word	0
+ 485              		.text
+ 486              	.Letext0:
+ 487              		.file 2 "/opt/gcc-arm-none-eabi-4_8-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stddef.h"
+ 488              		.file 3 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/machine/_default_types.h"
+ 489              		.file 4 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/stdint.h"
+ 490              		.file 5 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chtypes.h"
+ 491              		.file 6 "/home/pauba/ChibiOS-RT/os/kernel/include/chlists.h"
+ 492              		.file 7 "/home/pauba/ChibiOS-RT/os/kernel/include/chthreads.h"
+ 493              		.file 8 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore_v7m.h"
+ 494              		.file 9 "/home/pauba/ChibiOS-RT/os/kernel/include/chmtx.h"
+ 495              		.file 10 "/home/pauba/ChibiOS-RT/os/kernel/include/chmemcore.h"
+ 496              		.file 11 "/home/pauba/ChibiOS-RT/os/kernel/include/chheap.h"
+ 497              		.file 12 "/home/pauba/ChibiOS-RT/test/test.h"
+ 498              		.section	.debug_info,"",%progbits
+ 499              	.Ldebug_info0:
+ 500 0000 3B060000 		.4byte	0x63b
+ 501 0004 0400     		.2byte	0x4
+ 502 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 503 000a 04       		.byte	0x4
+ 504 000b 01       		.uleb128 0x1
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 10
+
+
+ 505 000c B8020000 		.4byte	.LASF86
+ 506 0010 01       		.byte	0x1
+ 507 0011 4B000000 		.4byte	.LASF87
+ 508 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 509 0019 00000000 		.4byte	0
+ 510 001d 00000000 		.4byte	.Ldebug_line0
+ 511 0021 02       		.uleb128 0x2
+ 512 0022 04       		.byte	0x4
+ 513 0023 05       		.byte	0x5
+ 514 0024 696E7400 		.ascii	"int\000"
+ 515 0028 03       		.uleb128 0x3
+ 516 0029 06000000 		.4byte	.LASF2
+ 517 002d 02       		.byte	0x2
+ 518 002e D4       		.byte	0xd4
+ 519 002f 33000000 		.4byte	0x33
+ 520 0033 04       		.uleb128 0x4
+ 521 0034 04       		.byte	0x4
+ 522 0035 07       		.byte	0x7
+ 523 0036 2D010000 		.4byte	.LASF0
+ 524 003a 04       		.uleb128 0x4
+ 525 003b 01       		.byte	0x1
+ 526 003c 06       		.byte	0x6
+ 527 003d A4000000 		.4byte	.LASF1
+ 528 0041 03       		.uleb128 0x3
+ 529 0042 1D000000 		.4byte	.LASF3
+ 530 0046 03       		.byte	0x3
+ 531 0047 1C       		.byte	0x1c
+ 532 0048 4C000000 		.4byte	0x4c
+ 533 004c 04       		.uleb128 0x4
+ 534 004d 01       		.byte	0x1
+ 535 004e 08       		.byte	0x8
+ 536 004f 2E020000 		.4byte	.LASF4
+ 537 0053 04       		.uleb128 0x4
+ 538 0054 02       		.byte	0x2
+ 539 0055 05       		.byte	0x5
+ 540 0056 51020000 		.4byte	.LASF5
+ 541 005a 04       		.uleb128 0x4
+ 542 005b 02       		.byte	0x2
+ 543 005c 07       		.byte	0x7
+ 544 005d 67010000 		.4byte	.LASF6
+ 545 0061 03       		.uleb128 0x3
+ 546 0062 AF030000 		.4byte	.LASF7
+ 547 0066 03       		.byte	0x3
+ 548 0067 37       		.byte	0x37
+ 549 0068 6C000000 		.4byte	0x6c
+ 550 006c 04       		.uleb128 0x4
+ 551 006d 04       		.byte	0x4
+ 552 006e 05       		.byte	0x5
+ 553 006f D0000000 		.4byte	.LASF8
+ 554 0073 03       		.uleb128 0x3
+ 555 0074 FA000000 		.4byte	.LASF9
+ 556 0078 03       		.byte	0x3
+ 557 0079 38       		.byte	0x38
+ 558 007a 7E000000 		.4byte	0x7e
+ 559 007e 04       		.uleb128 0x4
+ 560 007f 04       		.byte	0x4
+ 561 0080 07       		.byte	0x7
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 11
+
+
+ 562 0081 3A010000 		.4byte	.LASF10
+ 563 0085 04       		.uleb128 0x4
+ 564 0086 08       		.byte	0x8
+ 565 0087 05       		.byte	0x5
+ 566 0088 96000000 		.4byte	.LASF11
+ 567 008c 03       		.uleb128 0x3
+ 568 008d EA010000 		.4byte	.LASF12
+ 569 0091 03       		.byte	0x3
+ 570 0092 4E       		.byte	0x4e
+ 571 0093 97000000 		.4byte	0x97
+ 572 0097 04       		.uleb128 0x4
+ 573 0098 08       		.byte	0x8
+ 574 0099 07       		.byte	0x7
+ 575 009a 34000000 		.4byte	.LASF13
+ 576 009e 03       		.uleb128 0x3
+ 577 009f E6030000 		.4byte	.LASF14
+ 578 00a3 04       		.byte	0x4
+ 579 00a4 2A       		.byte	0x2a
+ 580 00a5 41000000 		.4byte	0x41
+ 581 00a9 03       		.uleb128 0x3
+ 582 00aa 26020000 		.4byte	.LASF15
+ 583 00ae 04       		.byte	0x4
+ 584 00af 41       		.byte	0x41
+ 585 00b0 61000000 		.4byte	0x61
+ 586 00b4 03       		.uleb128 0x3
+ 587 00b5 AA020000 		.4byte	.LASF16
+ 588 00b9 04       		.byte	0x4
+ 589 00ba 42       		.byte	0x42
+ 590 00bb 73000000 		.4byte	0x73
+ 591 00bf 03       		.uleb128 0x3
+ 592 00c0 14000000 		.4byte	.LASF17
+ 593 00c4 04       		.byte	0x4
+ 594 00c5 4E       		.byte	0x4e
+ 595 00c6 8C000000 		.4byte	0x8c
+ 596 00ca 04       		.uleb128 0x4
+ 597 00cb 01       		.byte	0x1
+ 598 00cc 02       		.byte	0x2
+ 599 00cd 20020000 		.4byte	.LASF18
+ 600 00d1 03       		.uleb128 0x3
+ 601 00d2 80010000 		.4byte	.LASF19
+ 602 00d6 05       		.byte	0x5
+ 603 00d7 2C       		.byte	0x2c
+ 604 00d8 9E000000 		.4byte	0x9e
+ 605 00dc 03       		.uleb128 0x3
+ 606 00dd D9000000 		.4byte	.LASF20
+ 607 00e1 05       		.byte	0x5
+ 608 00e2 2D       		.byte	0x2d
+ 609 00e3 9E000000 		.4byte	0x9e
+ 610 00e7 03       		.uleb128 0x3
+ 611 00e8 F5010000 		.4byte	.LASF21
+ 612 00ec 05       		.byte	0x5
+ 613 00ed 2E       		.byte	0x2e
+ 614 00ee 9E000000 		.4byte	0x9e
+ 615 00f2 03       		.uleb128 0x3
+ 616 00f3 C6000000 		.4byte	.LASF22
+ 617 00f7 05       		.byte	0x5
+ 618 00f8 2F       		.byte	0x2f
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 12
+
+
+ 619 00f9 9E000000 		.4byte	0x9e
+ 620 00fd 03       		.uleb128 0x3
+ 621 00fe 0C020000 		.4byte	.LASF23
+ 622 0102 05       		.byte	0x5
+ 623 0103 30       		.byte	0x30
+ 624 0104 B4000000 		.4byte	0xb4
+ 625 0108 03       		.uleb128 0x3
+ 626 0109 7A010000 		.4byte	.LASF24
+ 627 010d 05       		.byte	0x5
+ 628 010e 31       		.byte	0x31
+ 629 010f A9000000 		.4byte	0xa9
+ 630 0113 03       		.uleb128 0x3
+ 631 0114 94010000 		.4byte	.LASF25
+ 632 0118 05       		.byte	0x5
+ 633 0119 33       		.byte	0x33
+ 634 011a B4000000 		.4byte	0xb4
+ 635 011e 03       		.uleb128 0x3
+ 636 011f 9A030000 		.4byte	.LASF26
+ 637 0123 05       		.byte	0x5
+ 638 0124 35       		.byte	0x35
+ 639 0125 B4000000 		.4byte	0xb4
+ 640 0129 03       		.uleb128 0x3
+ 641 012a 8F020000 		.4byte	.LASF27
+ 642 012e 06       		.byte	0x6
+ 643 012f 2A       		.byte	0x2a
+ 644 0130 34010000 		.4byte	0x134
+ 645 0134 05       		.uleb128 0x5
+ 646 0135 8F020000 		.4byte	.LASF27
+ 647 0139 4C       		.byte	0x4c
+ 648 013a 07       		.byte	0x7
+ 649 013b 5E       		.byte	0x5e
+ 650 013c 3D020000 		.4byte	0x23d
+ 651 0140 06       		.uleb128 0x6
+ 652 0141 80020000 		.4byte	.LASF28
+ 653 0145 07       		.byte	0x7
+ 654 0146 5F       		.byte	0x5f
+ 655 0147 5E020000 		.4byte	0x25e
+ 656 014b 00       		.byte	0
+ 657 014c 06       		.uleb128 0x6
+ 658 014d FD010000 		.4byte	.LASF29
+ 659 0151 07       		.byte	0x7
+ 660 0152 61       		.byte	0x61
+ 661 0153 5E020000 		.4byte	0x25e
+ 662 0157 04       		.byte	0x4
+ 663 0158 06       		.uleb128 0x6
+ 664 0159 83000000 		.4byte	.LASF30
+ 665 015d 07       		.byte	0x7
+ 666 015e 63       		.byte	0x63
+ 667 015f FD000000 		.4byte	0xfd
+ 668 0163 08       		.byte	0x8
+ 669 0164 06       		.uleb128 0x6
+ 670 0165 0E040000 		.4byte	.LASF31
+ 671 0169 07       		.byte	0x7
+ 672 016a 64       		.byte	0x64
+ 673 016b 23030000 		.4byte	0x323
+ 674 016f 0C       		.byte	0xc
+ 675 0170 06       		.uleb128 0x6
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 13
+
+
+ 676 0171 E9000000 		.4byte	.LASF32
+ 677 0175 07       		.byte	0x7
+ 678 0176 66       		.byte	0x66
+ 679 0177 5E020000 		.4byte	0x25e
+ 680 017b 10       		.byte	0x10
+ 681 017c 06       		.uleb128 0x6
+ 682 017d C4010000 		.4byte	.LASF33
+ 683 0181 07       		.byte	0x7
+ 684 0182 67       		.byte	0x67
+ 685 0183 5E020000 		.4byte	0x25e
+ 686 0187 14       		.byte	0x14
+ 687 0188 06       		.uleb128 0x6
+ 688 0189 FF030000 		.4byte	.LASF34
+ 689 018d 07       		.byte	0x7
+ 690 018e 6E       		.byte	0x6e
+ 691 018f 8E040000 		.4byte	0x48e
+ 692 0193 18       		.byte	0x18
+ 693 0194 06       		.uleb128 0x6
+ 694 0195 22010000 		.4byte	.LASF35
+ 695 0199 07       		.byte	0x7
+ 696 019a 74       		.byte	0x74
+ 697 019b A0040000 		.4byte	0x4a0
+ 698 019f 1C       		.byte	0x1c
+ 699 01a0 06       		.uleb128 0x6
+ 700 01a1 5B020000 		.4byte	.LASF36
+ 701 01a5 07       		.byte	0x7
+ 702 01a6 79       		.byte	0x79
+ 703 01a7 DC000000 		.4byte	0xdc
+ 704 01ab 20       		.byte	0x20
+ 705 01ac 06       		.uleb128 0x6
+ 706 01ad 87020000 		.4byte	.LASF37
+ 707 01b1 07       		.byte	0x7
+ 708 01b2 7D       		.byte	0x7d
+ 709 01b3 D1000000 		.4byte	0xd1
+ 710 01b7 21       		.byte	0x21
+ 711 01b8 06       		.uleb128 0x6
+ 712 01b9 DF030000 		.4byte	.LASF38
+ 713 01bd 07       		.byte	0x7
+ 714 01be 82       		.byte	0x82
+ 715 01bf E7000000 		.4byte	0xe7
+ 716 01c3 22       		.byte	0x22
+ 717 01c4 06       		.uleb128 0x6
+ 718 01c5 63020000 		.4byte	.LASF39
+ 719 01c9 07       		.byte	0x7
+ 720 01ca 88       		.byte	0x88
+ 721 01cb F2000000 		.4byte	0xf2
+ 722 01cf 23       		.byte	0x23
+ 723 01d0 06       		.uleb128 0x6
+ 724 01d1 B9030000 		.4byte	.LASF40
+ 725 01d5 07       		.byte	0x7
+ 726 01d6 8F       		.byte	0x8f
+ 727 01d7 4B030000 		.4byte	0x34b
+ 728 01db 24       		.byte	0x24
+ 729 01dc 07       		.uleb128 0x7
+ 730 01dd 705F7500 		.ascii	"p_u\000"
+ 731 01e1 07       		.byte	0x7
+ 732 01e2 B4       		.byte	0xb4
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 14
+
+
+ 733 01e3 59040000 		.4byte	0x459
+ 734 01e7 28       		.byte	0x28
+ 735 01e8 06       		.uleb128 0x6
+ 736 01e9 14040000 		.4byte	.LASF41
+ 737 01ed 07       		.byte	0x7
+ 738 01ee B9       		.byte	0xb9
+ 739 01ef 84020000 		.4byte	0x284
+ 740 01f3 2C       		.byte	0x2c
+ 741 01f4 06       		.uleb128 0x6
+ 742 01f5 C7030000 		.4byte	.LASF42
+ 743 01f9 07       		.byte	0x7
+ 744 01fa BF       		.byte	0xbf
+ 745 01fb 64020000 		.4byte	0x264
+ 746 01ff 30       		.byte	0x30
+ 747 0200 06       		.uleb128 0x6
+ 748 0201 00000000 		.4byte	.LASF43
+ 749 0205 07       		.byte	0x7
+ 750 0206 C3       		.byte	0xc3
+ 751 0207 08010000 		.4byte	0x108
+ 752 020b 38       		.byte	0x38
+ 753 020c 06       		.uleb128 0x6
+ 754 020d 9F020000 		.4byte	.LASF44
+ 755 0211 07       		.byte	0x7
+ 756 0212 C9       		.byte	0xc9
+ 757 0213 13010000 		.4byte	0x113
+ 758 0217 3C       		.byte	0x3c
+ 759 0218 06       		.uleb128 0x6
+ 760 0219 47020000 		.4byte	.LASF45
+ 761 021d 07       		.byte	0x7
+ 762 021e D0       		.byte	0xd0
+ 763 021f A6040000 		.4byte	0x4a6
+ 764 0223 40       		.byte	0x40
+ 765 0224 06       		.uleb128 0x6
+ 766 0225 A4030000 		.4byte	.LASF46
+ 767 0229 07       		.byte	0x7
+ 768 022a D4       		.byte	0xd4
+ 769 022b FD000000 		.4byte	0xfd
+ 770 022f 44       		.byte	0x44
+ 771 0230 06       		.uleb128 0x6
+ 772 0231 B6000000 		.4byte	.LASF47
+ 773 0235 07       		.byte	0x7
+ 774 0236 DA       		.byte	0xda
+ 775 0237 9A020000 		.4byte	0x29a
+ 776 023b 48       		.byte	0x48
+ 777 023c 00       		.byte	0
+ 778 023d 08       		.uleb128 0x8
+ 779 023e 08       		.byte	0x8
+ 780 023f 06       		.byte	0x6
+ 781 0240 61       		.byte	0x61
+ 782 0241 5E020000 		.4byte	0x25e
+ 783 0245 06       		.uleb128 0x6
+ 784 0246 80020000 		.4byte	.LASF28
+ 785 024a 06       		.byte	0x6
+ 786 024b 62       		.byte	0x62
+ 787 024c 5E020000 		.4byte	0x25e
+ 788 0250 00       		.byte	0
+ 789 0251 06       		.uleb128 0x6
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 15
+
+
+ 790 0252 FD010000 		.4byte	.LASF29
+ 791 0256 06       		.byte	0x6
+ 792 0257 64       		.byte	0x64
+ 793 0258 5E020000 		.4byte	0x25e
+ 794 025c 04       		.byte	0x4
+ 795 025d 00       		.byte	0
+ 796 025e 09       		.uleb128 0x9
+ 797 025f 04       		.byte	0x4
+ 798 0260 29010000 		.4byte	0x129
+ 799 0264 03       		.uleb128 0x3
+ 800 0265 CC010000 		.4byte	.LASF48
+ 801 0269 06       		.byte	0x6
+ 802 026a 66       		.byte	0x66
+ 803 026b 3D020000 		.4byte	0x23d
+ 804 026f 08       		.uleb128 0x8
+ 805 0270 04       		.byte	0x4
+ 806 0271 06       		.byte	0x6
+ 807 0272 6B       		.byte	0x6b
+ 808 0273 84020000 		.4byte	0x284
+ 809 0277 06       		.uleb128 0x6
+ 810 0278 80020000 		.4byte	.LASF28
+ 811 027c 06       		.byte	0x6
+ 812 027d 6D       		.byte	0x6d
+ 813 027e 5E020000 		.4byte	0x25e
+ 814 0282 00       		.byte	0
+ 815 0283 00       		.byte	0
+ 816 0284 03       		.uleb128 0x3
+ 817 0285 88010000 		.4byte	.LASF49
+ 818 0289 06       		.byte	0x6
+ 819 028a 70       		.byte	0x70
+ 820 028b 6F020000 		.4byte	0x26f
+ 821 028f 03       		.uleb128 0x3
+ 822 0290 05010000 		.4byte	.LASF50
+ 823 0294 08       		.byte	0x8
+ 824 0295 E5       		.byte	0xe5
+ 825 0296 9A020000 		.4byte	0x29a
+ 826 029a 0A       		.uleb128 0xa
+ 827 029b 04       		.byte	0x4
+ 828 029c 03       		.uleb128 0x3
+ 829 029d A6010000 		.4byte	.LASF51
+ 830 02a1 08       		.byte	0x8
+ 831 02a2 EB       		.byte	0xeb
+ 832 02a3 BF000000 		.4byte	0xbf
+ 833 02a7 0B       		.uleb128 0xb
+ 834 02a8 C0030000 		.4byte	.LASF52
+ 835 02ac 24       		.byte	0x24
+ 836 02ad 08       		.byte	0x8
+ 837 02ae 0C01     		.2byte	0x10c
+ 838 02b0 23030000 		.4byte	0x323
+ 839 02b4 0C       		.uleb128 0xc
+ 840 02b5 723400   		.ascii	"r4\000"
+ 841 02b8 08       		.byte	0x8
+ 842 02b9 1F01     		.2byte	0x11f
+ 843 02bb 8F020000 		.4byte	0x28f
+ 844 02bf 00       		.byte	0
+ 845 02c0 0C       		.uleb128 0xc
+ 846 02c1 723500   		.ascii	"r5\000"
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 16
+
+
+ 847 02c4 08       		.byte	0x8
+ 848 02c5 2001     		.2byte	0x120
+ 849 02c7 8F020000 		.4byte	0x28f
+ 850 02cb 04       		.byte	0x4
+ 851 02cc 0C       		.uleb128 0xc
+ 852 02cd 723600   		.ascii	"r6\000"
+ 853 02d0 08       		.byte	0x8
+ 854 02d1 2101     		.2byte	0x121
+ 855 02d3 8F020000 		.4byte	0x28f
+ 856 02d7 08       		.byte	0x8
+ 857 02d8 0C       		.uleb128 0xc
+ 858 02d9 723700   		.ascii	"r7\000"
+ 859 02dc 08       		.byte	0x8
+ 860 02dd 2201     		.2byte	0x122
+ 861 02df 8F020000 		.4byte	0x28f
+ 862 02e3 0C       		.byte	0xc
+ 863 02e4 0C       		.uleb128 0xc
+ 864 02e5 723800   		.ascii	"r8\000"
+ 865 02e8 08       		.byte	0x8
+ 866 02e9 2301     		.2byte	0x123
+ 867 02eb 8F020000 		.4byte	0x28f
+ 868 02ef 10       		.byte	0x10
+ 869 02f0 0C       		.uleb128 0xc
+ 870 02f1 723900   		.ascii	"r9\000"
+ 871 02f4 08       		.byte	0x8
+ 872 02f5 2401     		.2byte	0x124
+ 873 02f7 8F020000 		.4byte	0x28f
+ 874 02fb 14       		.byte	0x14
+ 875 02fc 0C       		.uleb128 0xc
+ 876 02fd 72313000 		.ascii	"r10\000"
+ 877 0301 08       		.byte	0x8
+ 878 0302 2501     		.2byte	0x125
+ 879 0304 8F020000 		.4byte	0x28f
+ 880 0308 18       		.byte	0x18
+ 881 0309 0C       		.uleb128 0xc
+ 882 030a 72313100 		.ascii	"r11\000"
+ 883 030e 08       		.byte	0x8
+ 884 030f 2601     		.2byte	0x126
+ 885 0311 8F020000 		.4byte	0x28f
+ 886 0315 1C       		.byte	0x1c
+ 887 0316 0C       		.uleb128 0xc
+ 888 0317 6C7200   		.ascii	"lr\000"
+ 889 031a 08       		.byte	0x8
+ 890 031b 2701     		.2byte	0x127
+ 891 031d 8F020000 		.4byte	0x28f
+ 892 0321 20       		.byte	0x20
+ 893 0322 00       		.byte	0
+ 894 0323 0B       		.uleb128 0xb
+ 895 0324 5A010000 		.4byte	.LASF53
+ 896 0328 04       		.byte	0x4
+ 897 0329 08       		.byte	0x8
+ 898 032a 3101     		.2byte	0x131
+ 899 032c 3E030000 		.4byte	0x33e
+ 900 0330 0C       		.uleb128 0xc
+ 901 0331 72313300 		.ascii	"r13\000"
+ 902 0335 08       		.byte	0x8
+ 903 0336 3201     		.2byte	0x132
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 17
+
+
+ 904 0338 3E030000 		.4byte	0x33e
+ 905 033c 00       		.byte	0
+ 906 033d 00       		.byte	0
+ 907 033e 09       		.uleb128 0x9
+ 908 033f 04       		.byte	0x4
+ 909 0340 A7020000 		.4byte	0x2a7
+ 910 0344 04       		.uleb128 0x4
+ 911 0345 04       		.byte	0x4
+ 912 0346 07       		.byte	0x7
+ 913 0347 BB010000 		.4byte	.LASF54
+ 914 034b 0D       		.uleb128 0xd
+ 915 034c 1E010000 		.4byte	0x11e
+ 916 0350 05       		.uleb128 0x5
+ 917 0351 A0010000 		.4byte	.LASF55
+ 918 0355 10       		.byte	0x10
+ 919 0356 09       		.byte	0x9
+ 920 0357 2C       		.byte	0x2c
+ 921 0358 81030000 		.4byte	0x381
+ 922 035c 06       		.uleb128 0x6
+ 923 035d BE000000 		.4byte	.LASF56
+ 924 0361 09       		.byte	0x9
+ 925 0362 2D       		.byte	0x2d
+ 926 0363 64020000 		.4byte	0x264
+ 927 0367 00       		.byte	0
+ 928 0368 06       		.uleb128 0x6
+ 929 0369 06040000 		.4byte	.LASF57
+ 930 036d 09       		.byte	0x9
+ 931 036e 2F       		.byte	0x2f
+ 932 036f 5E020000 		.4byte	0x25e
+ 933 0373 08       		.byte	0x8
+ 934 0374 06       		.uleb128 0x6
+ 935 0375 93030000 		.4byte	.LASF58
+ 936 0379 09       		.byte	0x9
+ 937 037a 31       		.byte	0x31
+ 938 037b 81030000 		.4byte	0x381
+ 939 037f 0C       		.byte	0xc
+ 940 0380 00       		.byte	0
+ 941 0381 09       		.uleb128 0x9
+ 942 0382 04       		.byte	0x4
+ 943 0383 50030000 		.4byte	0x350
+ 944 0387 03       		.uleb128 0x3
+ 945 0388 A0010000 		.4byte	.LASF55
+ 946 038c 09       		.byte	0x9
+ 947 038d 33       		.byte	0x33
+ 948 038e 50030000 		.4byte	0x350
+ 949 0392 03       		.uleb128 0x3
+ 950 0393 27000000 		.4byte	.LASF59
+ 951 0397 0A       		.byte	0xa
+ 952 0398 2C       		.byte	0x2c
+ 953 0399 9D030000 		.4byte	0x39d
+ 954 039d 09       		.uleb128 0x9
+ 955 039e 04       		.byte	0x4
+ 956 039f A3030000 		.4byte	0x3a3
+ 957 03a3 0E       		.uleb128 0xe
+ 958 03a4 9A020000 		.4byte	0x29a
+ 959 03a8 B2030000 		.4byte	0x3b2
+ 960 03ac 0F       		.uleb128 0xf
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 18
+
+
+ 961 03ad 28000000 		.4byte	0x28
+ 962 03b1 00       		.byte	0
+ 963 03b2 03       		.uleb128 0x3
+ 964 03b3 DF010000 		.4byte	.LASF60
+ 965 03b7 0B       		.byte	0xb
+ 966 03b8 34       		.byte	0x34
+ 967 03b9 BD030000 		.4byte	0x3bd
+ 968 03bd 05       		.uleb128 0x5
+ 969 03be 1E040000 		.4byte	.LASF61
+ 970 03c2 20       		.byte	0x20
+ 971 03c3 0B       		.byte	0xb
+ 972 03c4 47       		.byte	0x47
+ 973 03c5 EE030000 		.4byte	0x3ee
+ 974 03c9 06       		.uleb128 0x6
+ 975 03ca 3C020000 		.4byte	.LASF62
+ 976 03ce 0B       		.byte	0xb
+ 977 03cf 48       		.byte	0x48
+ 978 03d0 92030000 		.4byte	0x392
+ 979 03d4 00       		.byte	0
+ 980 03d5 06       		.uleb128 0x6
+ 981 03d6 72000000 		.4byte	.LASF63
+ 982 03da 0B       		.byte	0xb
+ 983 03db 4A       		.byte	0x4a
+ 984 03dc 0D040000 		.4byte	0x40d
+ 985 03e0 08       		.byte	0x8
+ 986 03e1 06       		.uleb128 0x6
+ 987 03e2 B0000000 		.4byte	.LASF64
+ 988 03e6 0B       		.byte	0xb
+ 989 03e7 4C       		.byte	0x4c
+ 990 03e8 87030000 		.4byte	0x387
+ 991 03ec 10       		.byte	0x10
+ 992 03ed 00       		.byte	0
+ 993 03ee 10       		.uleb128 0x10
+ 994 03ef 04       		.byte	0x4
+ 995 03f0 0B       		.byte	0xb
+ 996 03f1 3C       		.byte	0x3c
+ 997 03f2 0D040000 		.4byte	0x40d
+ 998 03f6 11       		.uleb128 0x11
+ 999 03f7 7E000000 		.4byte	.LASF65
+ 1000 03fb 0B       		.byte	0xb
+ 1001 03fc 3D       		.byte	0x3d
+ 1002 03fd 2E040000 		.4byte	0x42e
+ 1003 0401 11       		.uleb128 0x11
+ 1004 0402 B3020000 		.4byte	.LASF66
+ 1005 0406 0B       		.byte	0xb
+ 1006 0407 3E       		.byte	0x3e
+ 1007 0408 34040000 		.4byte	0x434
+ 1008 040c 00       		.byte	0
+ 1009 040d 12       		.uleb128 0x12
+ 1010 040e 6D020000 		.4byte	.LASF79
+ 1011 0412 08       		.byte	0x8
+ 1012 0413 0B       		.byte	0xb
+ 1013 0414 39       		.byte	0x39
+ 1014 0415 2E040000 		.4byte	0x42e
+ 1015 0419 11       		.uleb128 0x11
+ 1016 041a 1C010000 		.4byte	.LASF67
+ 1017 041e 0B       		.byte	0xb
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 19
+
+
+ 1018 041f 3A       		.byte	0x3a
+ 1019 0420 9C020000 		.4byte	0x29c
+ 1020 0424 13       		.uleb128 0x13
+ 1021 0425 6800     		.ascii	"h\000"
+ 1022 0427 0B       		.byte	0xb
+ 1023 0428 41       		.byte	0x41
+ 1024 0429 3A040000 		.4byte	0x43a
+ 1025 042d 00       		.byte	0
+ 1026 042e 09       		.uleb128 0x9
+ 1027 042f 04       		.byte	0x4
+ 1028 0430 0D040000 		.4byte	0x40d
+ 1029 0434 09       		.uleb128 0x9
+ 1030 0435 04       		.byte	0x4
+ 1031 0436 B2030000 		.4byte	0x3b2
+ 1032 043a 08       		.uleb128 0x8
+ 1033 043b 08       		.byte	0x8
+ 1034 043c 0B       		.byte	0xb
+ 1035 043d 3B       		.byte	0x3b
+ 1036 043e 59040000 		.4byte	0x459
+ 1037 0442 07       		.uleb128 0x7
+ 1038 0443 7500     		.ascii	"u\000"
+ 1039 0445 0B       		.byte	0xb
+ 1040 0446 3F       		.byte	0x3f
+ 1041 0447 EE030000 		.4byte	0x3ee
+ 1042 044b 00       		.byte	0
+ 1043 044c 06       		.uleb128 0x6
+ 1044 044d 62010000 		.4byte	.LASF68
+ 1045 0451 0B       		.byte	0xb
+ 1046 0452 40       		.byte	0x40
+ 1047 0453 28000000 		.4byte	0x28
+ 1048 0457 04       		.byte	0x4
+ 1049 0458 00       		.byte	0
+ 1050 0459 10       		.uleb128 0x10
+ 1051 045a 04       		.byte	0x4
+ 1052 045b 07       		.byte	0x7
+ 1053 045c 96       		.byte	0x96
+ 1054 045d 8E040000 		.4byte	0x48e
+ 1055 0461 11       		.uleb128 0x11
+ 1056 0462 0D000000 		.4byte	.LASF69
+ 1057 0466 07       		.byte	0x7
+ 1058 0467 9D       		.byte	0x9d
+ 1059 0468 08010000 		.4byte	0x108
+ 1060 046c 11       		.uleb128 0x11
+ 1061 046d F1000000 		.4byte	.LASF70
+ 1062 0471 07       		.byte	0x7
+ 1063 0472 A4       		.byte	0xa4
+ 1064 0473 08010000 		.4byte	0x108
+ 1065 0477 11       		.uleb128 0x11
+ 1066 0478 F8030000 		.4byte	.LASF71
+ 1067 047c 07       		.byte	0x7
+ 1068 047d AB       		.byte	0xab
+ 1069 047e 9A020000 		.4byte	0x29a
+ 1070 0482 11       		.uleb128 0x11
+ 1071 0483 79020000 		.4byte	.LASF72
+ 1072 0487 07       		.byte	0x7
+ 1073 0488 B2       		.byte	0xb2
+ 1074 0489 13010000 		.4byte	0x113
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 20
+
+
+ 1075 048d 00       		.byte	0
+ 1076 048e 09       		.uleb128 0x9
+ 1077 048f 04       		.byte	0x4
+ 1078 0490 94040000 		.4byte	0x494
+ 1079 0494 14       		.uleb128 0x14
+ 1080 0495 99040000 		.4byte	0x499
+ 1081 0499 04       		.uleb128 0x4
+ 1082 049a 01       		.byte	0x1
+ 1083 049b 08       		.byte	0x8
+ 1084 049c 8E030000 		.4byte	.LASF73
+ 1085 04a0 09       		.uleb128 0x9
+ 1086 04a1 04       		.byte	0x4
+ 1087 04a2 9C020000 		.4byte	0x29c
+ 1088 04a6 09       		.uleb128 0x9
+ 1089 04a7 04       		.byte	0x4
+ 1090 04a8 87030000 		.4byte	0x387
+ 1091 04ac 05       		.uleb128 0x5
+ 1092 04ad 96020000 		.4byte	.LASF74
+ 1093 04b1 10       		.byte	0x10
+ 1094 04b2 0C       		.byte	0xc
+ 1095 04b3 3B       		.byte	0x3b
+ 1096 04b4 E9040000 		.4byte	0x4e9
+ 1097 04b8 06       		.uleb128 0x6
+ 1098 04b9 55010000 		.4byte	.LASF75
+ 1099 04bd 0C       		.byte	0xc
+ 1100 04be 3C       		.byte	0x3c
+ 1101 04bf 8E040000 		.4byte	0x48e
+ 1102 04c3 00       		.byte	0
+ 1103 04c4 06       		.uleb128 0x6
+ 1104 04c5 D9010000 		.4byte	.LASF76
+ 1105 04c9 0C       		.byte	0xc
+ 1106 04ca 3D       		.byte	0x3d
+ 1107 04cb EA040000 		.4byte	0x4ea
+ 1108 04cf 04       		.byte	0x4
+ 1109 04d0 06       		.uleb128 0x6
+ 1110 04d1 4C010000 		.4byte	.LASF77
+ 1111 04d5 0C       		.byte	0xc
+ 1112 04d6 3E       		.byte	0x3e
+ 1113 04d7 EA040000 		.4byte	0x4ea
+ 1114 04db 08       		.byte	0x8
+ 1115 04dc 06       		.uleb128 0x6
+ 1116 04dd 04020000 		.4byte	.LASF78
+ 1117 04e1 0C       		.byte	0xc
+ 1118 04e2 3F       		.byte	0x3f
+ 1119 04e3 EA040000 		.4byte	0x4ea
+ 1120 04e7 0C       		.byte	0xc
+ 1121 04e8 00       		.byte	0
+ 1122 04e9 15       		.uleb128 0x15
+ 1123 04ea 09       		.uleb128 0x9
+ 1124 04eb 04       		.byte	0x4
+ 1125 04ec E9040000 		.4byte	0x4e9
+ 1126 04f0 16       		.uleb128 0x16
+ 1127 04f1 9006     		.2byte	0x690
+ 1128 04f3 0C       		.byte	0xc
+ 1129 04f4 44       		.byte	0x44
+ 1130 04f5 35050000 		.4byte	0x535
+ 1131 04f9 07       		.uleb128 0x7
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 21
+
+
+ 1132 04fa 543000   		.ascii	"T0\000"
+ 1133 04fd 0C       		.byte	0xc
+ 1134 04fe 45       		.byte	0x45
+ 1135 04ff 35050000 		.4byte	0x535
+ 1136 0503 00       		.byte	0
+ 1137 0504 17       		.uleb128 0x17
+ 1138 0505 543100   		.ascii	"T1\000"
+ 1139 0508 0C       		.byte	0xc
+ 1140 0509 46       		.byte	0x46
+ 1141 050a 35050000 		.4byte	0x535
+ 1142 050e 5001     		.2byte	0x150
+ 1143 0510 17       		.uleb128 0x17
+ 1144 0511 543200   		.ascii	"T2\000"
+ 1145 0514 0C       		.byte	0xc
+ 1146 0515 47       		.byte	0x47
+ 1147 0516 35050000 		.4byte	0x535
+ 1148 051a A002     		.2byte	0x2a0
+ 1149 051c 17       		.uleb128 0x17
+ 1150 051d 543300   		.ascii	"T3\000"
+ 1151 0520 0C       		.byte	0xc
+ 1152 0521 48       		.byte	0x48
+ 1153 0522 35050000 		.4byte	0x535
+ 1154 0526 F003     		.2byte	0x3f0
+ 1155 0528 17       		.uleb128 0x17
+ 1156 0529 543400   		.ascii	"T4\000"
+ 1157 052c 0C       		.byte	0xc
+ 1158 052d 49       		.byte	0x49
+ 1159 052e 35050000 		.4byte	0x535
+ 1160 0532 4005     		.2byte	0x540
+ 1161 0534 00       		.byte	0
+ 1162 0535 18       		.uleb128 0x18
+ 1163 0536 9C020000 		.4byte	0x29c
+ 1164 053a 45050000 		.4byte	0x545
+ 1165 053e 19       		.uleb128 0x19
+ 1166 053f 44030000 		.4byte	0x344
+ 1167 0543 29       		.byte	0x29
+ 1168 0544 00       		.byte	0
+ 1169 0545 1A       		.uleb128 0x1a
+ 1170 0546 D2030000 		.4byte	.LASF80
+ 1171 054a 9006     		.2byte	0x690
+ 1172 054c 0C       		.byte	0xc
+ 1173 054d 43       		.byte	0x43
+ 1174 054e 68050000 		.4byte	0x568
+ 1175 0552 13       		.uleb128 0x13
+ 1176 0553 776100   		.ascii	"wa\000"
+ 1177 0556 0C       		.byte	0xc
+ 1178 0557 4A       		.byte	0x4a
+ 1179 0558 F0040000 		.4byte	0x4f0
+ 1180 055c 11       		.uleb128 0x11
+ 1181 055d E2000000 		.4byte	.LASF81
+ 1182 0561 0C       		.byte	0xc
+ 1183 0562 4B       		.byte	0x4b
+ 1184 0563 68050000 		.4byte	0x568
+ 1185 0567 00       		.byte	0
+ 1186 0568 18       		.uleb128 0x18
+ 1187 0569 9E000000 		.4byte	0x9e
+ 1188 056d 79050000 		.4byte	0x579
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 22
+
+
+ 1189 0571 1B       		.uleb128 0x1b
+ 1190 0572 44030000 		.4byte	0x344
+ 1191 0576 8F06     		.2byte	0x68f
+ 1192 0578 00       		.byte	0
+ 1193 0579 1C       		.uleb128 0x1c
+ 1194 057a 14020000 		.4byte	.LASF88
+ 1195 057e 01       		.byte	0x1
+ 1196 057f 40       		.byte	0x40
+ 1197 0580 00000000 		.4byte	.LFB7
+ 1198 0584 18000000 		.4byte	.LFE7-.LFB7
+ 1199 0588 01       		.uleb128 0x1
+ 1200 0589 9C       		.byte	0x9c
+ 1201 058a 1D       		.uleb128 0x1d
+ 1202 058b 0E010000 		.4byte	.LASF89
+ 1203 058f 01       		.byte	0x1
+ 1204 0590 45       		.byte	0x45
+ 1205 0591 00000000 		.4byte	.LFB8
+ 1206 0595 E0020000 		.4byte	.LFE8-.LFB8
+ 1207 0599 01       		.uleb128 0x1
+ 1208 059a 9C       		.byte	0x9c
+ 1209 059b E0050000 		.4byte	0x5e0
+ 1210 059f 1E       		.uleb128 0x1e
+ 1211 05a0 703100   		.ascii	"p1\000"
+ 1212 05a3 01       		.byte	0x1
+ 1213 05a4 46       		.byte	0x46
+ 1214 05a5 9A020000 		.4byte	0x29a
+ 1215 05a9 02       		.uleb128 0x2
+ 1216 05aa 91       		.byte	0x91
+ 1217 05ab 74       		.sleb128 -12
+ 1218 05ac 1E       		.uleb128 0x1e
+ 1219 05ad 703200   		.ascii	"p2\000"
+ 1220 05b0 01       		.byte	0x1
+ 1221 05b1 46       		.byte	0x46
+ 1222 05b2 9A020000 		.4byte	0x29a
+ 1223 05b6 02       		.uleb128 0x2
+ 1224 05b7 91       		.byte	0x91
+ 1225 05b8 70       		.sleb128 -16
+ 1226 05b9 1E       		.uleb128 0x1e
+ 1227 05ba 703300   		.ascii	"p3\000"
+ 1228 05bd 01       		.byte	0x1
+ 1229 05be 46       		.byte	0x46
+ 1230 05bf 9A020000 		.4byte	0x29a
+ 1231 05c3 02       		.uleb128 0x2
+ 1232 05c4 91       		.byte	0x91
+ 1233 05c5 6C       		.sleb128 -20
+ 1234 05c6 1E       		.uleb128 0x1e
+ 1235 05c7 6E00     		.ascii	"n\000"
+ 1236 05c9 01       		.byte	0x1
+ 1237 05ca 47       		.byte	0x47
+ 1238 05cb 28000000 		.4byte	0x28
+ 1239 05cf 02       		.uleb128 0x2
+ 1240 05d0 91       		.byte	0x91
+ 1241 05d1 68       		.sleb128 -24
+ 1242 05d2 1E       		.uleb128 0x1e
+ 1243 05d3 737A00   		.ascii	"sz\000"
+ 1244 05d6 01       		.byte	0x1
+ 1245 05d7 47       		.byte	0x47
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 23
+
+
+ 1246 05d8 28000000 		.4byte	0x28
+ 1247 05dc 02       		.uleb128 0x2
+ 1248 05dd 91       		.byte	0x91
+ 1249 05de 64       		.sleb128 -28
+ 1250 05df 00       		.byte	0
+ 1251 05e0 1F       		.uleb128 0x1f
+ 1252 05e1 EE030000 		.4byte	.LASF82
+ 1253 05e5 01       		.byte	0x1
+ 1254 05e6 33       		.byte	0x33
+ 1255 05e7 B2030000 		.4byte	0x3b2
+ 1256 05eb 05       		.uleb128 0x5
+ 1257 05ec 03       		.byte	0x3
+ 1258 05ed 00000000 		.4byte	test_heap
+ 1259 05f1 20       		.uleb128 0x20
+ 1260 05f2 79000000 		.4byte	.LASF83
+ 1261 05f6 0C       		.byte	0xc
+ 1262 05f7 A6       		.byte	0xa6
+ 1263 05f8 45050000 		.4byte	0x545
+ 1264 05fc 21       		.uleb128 0x21
+ 1265 05fd B1010000 		.4byte	.LASF84
+ 1266 0601 01       		.byte	0x1
+ 1267 0602 8E       		.byte	0x8e
+ 1268 0603 0D060000 		.4byte	0x60d
+ 1269 0607 05       		.uleb128 0x5
+ 1270 0608 03       		.byte	0x3
+ 1271 0609 00000000 		.4byte	testheap1
+ 1272 060d 14       		.uleb128 0x14
+ 1273 060e AC040000 		.4byte	0x4ac
+ 1274 0612 18       		.uleb128 0x18
+ 1275 0613 22060000 		.4byte	0x622
+ 1276 0617 22060000 		.4byte	0x622
+ 1277 061b 19       		.uleb128 0x19
+ 1278 061c 44030000 		.4byte	0x344
+ 1279 0620 01       		.byte	0x1
+ 1280 0621 00       		.byte	0
+ 1281 0622 09       		.uleb128 0x9
+ 1282 0623 04       		.byte	0x4
+ 1283 0624 0D060000 		.4byte	0x60d
+ 1284 0628 21       		.uleb128 0x21
+ 1285 0629 8A000000 		.4byte	.LASF85
+ 1286 062d 01       		.byte	0x1
+ 1287 062e 9A       		.byte	0x9a
+ 1288 062f 39060000 		.4byte	0x639
+ 1289 0633 05       		.uleb128 0x5
+ 1290 0634 03       		.byte	0x3
+ 1291 0635 00000000 		.4byte	patternheap
+ 1292 0639 14       		.uleb128 0x14
+ 1293 063a 12060000 		.4byte	0x612
+ 1294 063e 00       		.byte	0
+ 1295              		.section	.debug_abbrev,"",%progbits
+ 1296              	.Ldebug_abbrev0:
+ 1297 0000 01       		.uleb128 0x1
+ 1298 0001 11       		.uleb128 0x11
+ 1299 0002 01       		.byte	0x1
+ 1300 0003 25       		.uleb128 0x25
+ 1301 0004 0E       		.uleb128 0xe
+ 1302 0005 13       		.uleb128 0x13
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 24
+
+
+ 1303 0006 0B       		.uleb128 0xb
+ 1304 0007 03       		.uleb128 0x3
+ 1305 0008 0E       		.uleb128 0xe
+ 1306 0009 55       		.uleb128 0x55
+ 1307 000a 17       		.uleb128 0x17
+ 1308 000b 11       		.uleb128 0x11
+ 1309 000c 01       		.uleb128 0x1
+ 1310 000d 10       		.uleb128 0x10
+ 1311 000e 17       		.uleb128 0x17
+ 1312 000f 00       		.byte	0
+ 1313 0010 00       		.byte	0
+ 1314 0011 02       		.uleb128 0x2
+ 1315 0012 24       		.uleb128 0x24
+ 1316 0013 00       		.byte	0
+ 1317 0014 0B       		.uleb128 0xb
+ 1318 0015 0B       		.uleb128 0xb
+ 1319 0016 3E       		.uleb128 0x3e
+ 1320 0017 0B       		.uleb128 0xb
+ 1321 0018 03       		.uleb128 0x3
+ 1322 0019 08       		.uleb128 0x8
+ 1323 001a 00       		.byte	0
+ 1324 001b 00       		.byte	0
+ 1325 001c 03       		.uleb128 0x3
+ 1326 001d 16       		.uleb128 0x16
+ 1327 001e 00       		.byte	0
+ 1328 001f 03       		.uleb128 0x3
+ 1329 0020 0E       		.uleb128 0xe
+ 1330 0021 3A       		.uleb128 0x3a
+ 1331 0022 0B       		.uleb128 0xb
+ 1332 0023 3B       		.uleb128 0x3b
+ 1333 0024 0B       		.uleb128 0xb
+ 1334 0025 49       		.uleb128 0x49
+ 1335 0026 13       		.uleb128 0x13
+ 1336 0027 00       		.byte	0
+ 1337 0028 00       		.byte	0
+ 1338 0029 04       		.uleb128 0x4
+ 1339 002a 24       		.uleb128 0x24
+ 1340 002b 00       		.byte	0
+ 1341 002c 0B       		.uleb128 0xb
+ 1342 002d 0B       		.uleb128 0xb
+ 1343 002e 3E       		.uleb128 0x3e
+ 1344 002f 0B       		.uleb128 0xb
+ 1345 0030 03       		.uleb128 0x3
+ 1346 0031 0E       		.uleb128 0xe
+ 1347 0032 00       		.byte	0
+ 1348 0033 00       		.byte	0
+ 1349 0034 05       		.uleb128 0x5
+ 1350 0035 13       		.uleb128 0x13
+ 1351 0036 01       		.byte	0x1
+ 1352 0037 03       		.uleb128 0x3
+ 1353 0038 0E       		.uleb128 0xe
+ 1354 0039 0B       		.uleb128 0xb
+ 1355 003a 0B       		.uleb128 0xb
+ 1356 003b 3A       		.uleb128 0x3a
+ 1357 003c 0B       		.uleb128 0xb
+ 1358 003d 3B       		.uleb128 0x3b
+ 1359 003e 0B       		.uleb128 0xb
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 25
+
+
+ 1360 003f 01       		.uleb128 0x1
+ 1361 0040 13       		.uleb128 0x13
+ 1362 0041 00       		.byte	0
+ 1363 0042 00       		.byte	0
+ 1364 0043 06       		.uleb128 0x6
+ 1365 0044 0D       		.uleb128 0xd
+ 1366 0045 00       		.byte	0
+ 1367 0046 03       		.uleb128 0x3
+ 1368 0047 0E       		.uleb128 0xe
+ 1369 0048 3A       		.uleb128 0x3a
+ 1370 0049 0B       		.uleb128 0xb
+ 1371 004a 3B       		.uleb128 0x3b
+ 1372 004b 0B       		.uleb128 0xb
+ 1373 004c 49       		.uleb128 0x49
+ 1374 004d 13       		.uleb128 0x13
+ 1375 004e 38       		.uleb128 0x38
+ 1376 004f 0B       		.uleb128 0xb
+ 1377 0050 00       		.byte	0
+ 1378 0051 00       		.byte	0
+ 1379 0052 07       		.uleb128 0x7
+ 1380 0053 0D       		.uleb128 0xd
+ 1381 0054 00       		.byte	0
+ 1382 0055 03       		.uleb128 0x3
+ 1383 0056 08       		.uleb128 0x8
+ 1384 0057 3A       		.uleb128 0x3a
+ 1385 0058 0B       		.uleb128 0xb
+ 1386 0059 3B       		.uleb128 0x3b
+ 1387 005a 0B       		.uleb128 0xb
+ 1388 005b 49       		.uleb128 0x49
+ 1389 005c 13       		.uleb128 0x13
+ 1390 005d 38       		.uleb128 0x38
+ 1391 005e 0B       		.uleb128 0xb
+ 1392 005f 00       		.byte	0
+ 1393 0060 00       		.byte	0
+ 1394 0061 08       		.uleb128 0x8
+ 1395 0062 13       		.uleb128 0x13
+ 1396 0063 01       		.byte	0x1
+ 1397 0064 0B       		.uleb128 0xb
+ 1398 0065 0B       		.uleb128 0xb
+ 1399 0066 3A       		.uleb128 0x3a
+ 1400 0067 0B       		.uleb128 0xb
+ 1401 0068 3B       		.uleb128 0x3b
+ 1402 0069 0B       		.uleb128 0xb
+ 1403 006a 01       		.uleb128 0x1
+ 1404 006b 13       		.uleb128 0x13
+ 1405 006c 00       		.byte	0
+ 1406 006d 00       		.byte	0
+ 1407 006e 09       		.uleb128 0x9
+ 1408 006f 0F       		.uleb128 0xf
+ 1409 0070 00       		.byte	0
+ 1410 0071 0B       		.uleb128 0xb
+ 1411 0072 0B       		.uleb128 0xb
+ 1412 0073 49       		.uleb128 0x49
+ 1413 0074 13       		.uleb128 0x13
+ 1414 0075 00       		.byte	0
+ 1415 0076 00       		.byte	0
+ 1416 0077 0A       		.uleb128 0xa
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 26
+
+
+ 1417 0078 0F       		.uleb128 0xf
+ 1418 0079 00       		.byte	0
+ 1419 007a 0B       		.uleb128 0xb
+ 1420 007b 0B       		.uleb128 0xb
+ 1421 007c 00       		.byte	0
+ 1422 007d 00       		.byte	0
+ 1423 007e 0B       		.uleb128 0xb
+ 1424 007f 13       		.uleb128 0x13
+ 1425 0080 01       		.byte	0x1
+ 1426 0081 03       		.uleb128 0x3
+ 1427 0082 0E       		.uleb128 0xe
+ 1428 0083 0B       		.uleb128 0xb
+ 1429 0084 0B       		.uleb128 0xb
+ 1430 0085 3A       		.uleb128 0x3a
+ 1431 0086 0B       		.uleb128 0xb
+ 1432 0087 3B       		.uleb128 0x3b
+ 1433 0088 05       		.uleb128 0x5
+ 1434 0089 01       		.uleb128 0x1
+ 1435 008a 13       		.uleb128 0x13
+ 1436 008b 00       		.byte	0
+ 1437 008c 00       		.byte	0
+ 1438 008d 0C       		.uleb128 0xc
+ 1439 008e 0D       		.uleb128 0xd
+ 1440 008f 00       		.byte	0
+ 1441 0090 03       		.uleb128 0x3
+ 1442 0091 08       		.uleb128 0x8
+ 1443 0092 3A       		.uleb128 0x3a
+ 1444 0093 0B       		.uleb128 0xb
+ 1445 0094 3B       		.uleb128 0x3b
+ 1446 0095 05       		.uleb128 0x5
+ 1447 0096 49       		.uleb128 0x49
+ 1448 0097 13       		.uleb128 0x13
+ 1449 0098 38       		.uleb128 0x38
+ 1450 0099 0B       		.uleb128 0xb
+ 1451 009a 00       		.byte	0
+ 1452 009b 00       		.byte	0
+ 1453 009c 0D       		.uleb128 0xd
+ 1454 009d 35       		.uleb128 0x35
+ 1455 009e 00       		.byte	0
+ 1456 009f 49       		.uleb128 0x49
+ 1457 00a0 13       		.uleb128 0x13
+ 1458 00a1 00       		.byte	0
+ 1459 00a2 00       		.byte	0
+ 1460 00a3 0E       		.uleb128 0xe
+ 1461 00a4 15       		.uleb128 0x15
+ 1462 00a5 01       		.byte	0x1
+ 1463 00a6 27       		.uleb128 0x27
+ 1464 00a7 19       		.uleb128 0x19
+ 1465 00a8 49       		.uleb128 0x49
+ 1466 00a9 13       		.uleb128 0x13
+ 1467 00aa 01       		.uleb128 0x1
+ 1468 00ab 13       		.uleb128 0x13
+ 1469 00ac 00       		.byte	0
+ 1470 00ad 00       		.byte	0
+ 1471 00ae 0F       		.uleb128 0xf
+ 1472 00af 05       		.uleb128 0x5
+ 1473 00b0 00       		.byte	0
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 27
+
+
+ 1474 00b1 49       		.uleb128 0x49
+ 1475 00b2 13       		.uleb128 0x13
+ 1476 00b3 00       		.byte	0
+ 1477 00b4 00       		.byte	0
+ 1478 00b5 10       		.uleb128 0x10
+ 1479 00b6 17       		.uleb128 0x17
+ 1480 00b7 01       		.byte	0x1
+ 1481 00b8 0B       		.uleb128 0xb
+ 1482 00b9 0B       		.uleb128 0xb
+ 1483 00ba 3A       		.uleb128 0x3a
+ 1484 00bb 0B       		.uleb128 0xb
+ 1485 00bc 3B       		.uleb128 0x3b
+ 1486 00bd 0B       		.uleb128 0xb
+ 1487 00be 01       		.uleb128 0x1
+ 1488 00bf 13       		.uleb128 0x13
+ 1489 00c0 00       		.byte	0
+ 1490 00c1 00       		.byte	0
+ 1491 00c2 11       		.uleb128 0x11
+ 1492 00c3 0D       		.uleb128 0xd
+ 1493 00c4 00       		.byte	0
+ 1494 00c5 03       		.uleb128 0x3
+ 1495 00c6 0E       		.uleb128 0xe
+ 1496 00c7 3A       		.uleb128 0x3a
+ 1497 00c8 0B       		.uleb128 0xb
+ 1498 00c9 3B       		.uleb128 0x3b
+ 1499 00ca 0B       		.uleb128 0xb
+ 1500 00cb 49       		.uleb128 0x49
+ 1501 00cc 13       		.uleb128 0x13
+ 1502 00cd 00       		.byte	0
+ 1503 00ce 00       		.byte	0
+ 1504 00cf 12       		.uleb128 0x12
+ 1505 00d0 17       		.uleb128 0x17
+ 1506 00d1 01       		.byte	0x1
+ 1507 00d2 03       		.uleb128 0x3
+ 1508 00d3 0E       		.uleb128 0xe
+ 1509 00d4 0B       		.uleb128 0xb
+ 1510 00d5 0B       		.uleb128 0xb
+ 1511 00d6 3A       		.uleb128 0x3a
+ 1512 00d7 0B       		.uleb128 0xb
+ 1513 00d8 3B       		.uleb128 0x3b
+ 1514 00d9 0B       		.uleb128 0xb
+ 1515 00da 01       		.uleb128 0x1
+ 1516 00db 13       		.uleb128 0x13
+ 1517 00dc 00       		.byte	0
+ 1518 00dd 00       		.byte	0
+ 1519 00de 13       		.uleb128 0x13
+ 1520 00df 0D       		.uleb128 0xd
+ 1521 00e0 00       		.byte	0
+ 1522 00e1 03       		.uleb128 0x3
+ 1523 00e2 08       		.uleb128 0x8
+ 1524 00e3 3A       		.uleb128 0x3a
+ 1525 00e4 0B       		.uleb128 0xb
+ 1526 00e5 3B       		.uleb128 0x3b
+ 1527 00e6 0B       		.uleb128 0xb
+ 1528 00e7 49       		.uleb128 0x49
+ 1529 00e8 13       		.uleb128 0x13
+ 1530 00e9 00       		.byte	0
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 28
+
+
+ 1531 00ea 00       		.byte	0
+ 1532 00eb 14       		.uleb128 0x14
+ 1533 00ec 26       		.uleb128 0x26
+ 1534 00ed 00       		.byte	0
+ 1535 00ee 49       		.uleb128 0x49
+ 1536 00ef 13       		.uleb128 0x13
+ 1537 00f0 00       		.byte	0
+ 1538 00f1 00       		.byte	0
+ 1539 00f2 15       		.uleb128 0x15
+ 1540 00f3 15       		.uleb128 0x15
+ 1541 00f4 00       		.byte	0
+ 1542 00f5 27       		.uleb128 0x27
+ 1543 00f6 19       		.uleb128 0x19
+ 1544 00f7 00       		.byte	0
+ 1545 00f8 00       		.byte	0
+ 1546 00f9 16       		.uleb128 0x16
+ 1547 00fa 13       		.uleb128 0x13
+ 1548 00fb 01       		.byte	0x1
+ 1549 00fc 0B       		.uleb128 0xb
+ 1550 00fd 05       		.uleb128 0x5
+ 1551 00fe 3A       		.uleb128 0x3a
+ 1552 00ff 0B       		.uleb128 0xb
+ 1553 0100 3B       		.uleb128 0x3b
+ 1554 0101 0B       		.uleb128 0xb
+ 1555 0102 01       		.uleb128 0x1
+ 1556 0103 13       		.uleb128 0x13
+ 1557 0104 00       		.byte	0
+ 1558 0105 00       		.byte	0
+ 1559 0106 17       		.uleb128 0x17
+ 1560 0107 0D       		.uleb128 0xd
+ 1561 0108 00       		.byte	0
+ 1562 0109 03       		.uleb128 0x3
+ 1563 010a 08       		.uleb128 0x8
+ 1564 010b 3A       		.uleb128 0x3a
+ 1565 010c 0B       		.uleb128 0xb
+ 1566 010d 3B       		.uleb128 0x3b
+ 1567 010e 0B       		.uleb128 0xb
+ 1568 010f 49       		.uleb128 0x49
+ 1569 0110 13       		.uleb128 0x13
+ 1570 0111 38       		.uleb128 0x38
+ 1571 0112 05       		.uleb128 0x5
+ 1572 0113 00       		.byte	0
+ 1573 0114 00       		.byte	0
+ 1574 0115 18       		.uleb128 0x18
+ 1575 0116 01       		.uleb128 0x1
+ 1576 0117 01       		.byte	0x1
+ 1577 0118 49       		.uleb128 0x49
+ 1578 0119 13       		.uleb128 0x13
+ 1579 011a 01       		.uleb128 0x1
+ 1580 011b 13       		.uleb128 0x13
+ 1581 011c 00       		.byte	0
+ 1582 011d 00       		.byte	0
+ 1583 011e 19       		.uleb128 0x19
+ 1584 011f 21       		.uleb128 0x21
+ 1585 0120 00       		.byte	0
+ 1586 0121 49       		.uleb128 0x49
+ 1587 0122 13       		.uleb128 0x13
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 29
+
+
+ 1588 0123 2F       		.uleb128 0x2f
+ 1589 0124 0B       		.uleb128 0xb
+ 1590 0125 00       		.byte	0
+ 1591 0126 00       		.byte	0
+ 1592 0127 1A       		.uleb128 0x1a
+ 1593 0128 17       		.uleb128 0x17
+ 1594 0129 01       		.byte	0x1
+ 1595 012a 03       		.uleb128 0x3
+ 1596 012b 0E       		.uleb128 0xe
+ 1597 012c 0B       		.uleb128 0xb
+ 1598 012d 05       		.uleb128 0x5
+ 1599 012e 3A       		.uleb128 0x3a
+ 1600 012f 0B       		.uleb128 0xb
+ 1601 0130 3B       		.uleb128 0x3b
+ 1602 0131 0B       		.uleb128 0xb
+ 1603 0132 01       		.uleb128 0x1
+ 1604 0133 13       		.uleb128 0x13
+ 1605 0134 00       		.byte	0
+ 1606 0135 00       		.byte	0
+ 1607 0136 1B       		.uleb128 0x1b
+ 1608 0137 21       		.uleb128 0x21
+ 1609 0138 00       		.byte	0
+ 1610 0139 49       		.uleb128 0x49
+ 1611 013a 13       		.uleb128 0x13
+ 1612 013b 2F       		.uleb128 0x2f
+ 1613 013c 05       		.uleb128 0x5
+ 1614 013d 00       		.byte	0
+ 1615 013e 00       		.byte	0
+ 1616 013f 1C       		.uleb128 0x1c
+ 1617 0140 2E       		.uleb128 0x2e
+ 1618 0141 00       		.byte	0
+ 1619 0142 03       		.uleb128 0x3
+ 1620 0143 0E       		.uleb128 0xe
+ 1621 0144 3A       		.uleb128 0x3a
+ 1622 0145 0B       		.uleb128 0xb
+ 1623 0146 3B       		.uleb128 0x3b
+ 1624 0147 0B       		.uleb128 0xb
+ 1625 0148 27       		.uleb128 0x27
+ 1626 0149 19       		.uleb128 0x19
+ 1627 014a 11       		.uleb128 0x11
+ 1628 014b 01       		.uleb128 0x1
+ 1629 014c 12       		.uleb128 0x12
+ 1630 014d 06       		.uleb128 0x6
+ 1631 014e 40       		.uleb128 0x40
+ 1632 014f 18       		.uleb128 0x18
+ 1633 0150 9642     		.uleb128 0x2116
+ 1634 0152 19       		.uleb128 0x19
+ 1635 0153 00       		.byte	0
+ 1636 0154 00       		.byte	0
+ 1637 0155 1D       		.uleb128 0x1d
+ 1638 0156 2E       		.uleb128 0x2e
+ 1639 0157 01       		.byte	0x1
+ 1640 0158 03       		.uleb128 0x3
+ 1641 0159 0E       		.uleb128 0xe
+ 1642 015a 3A       		.uleb128 0x3a
+ 1643 015b 0B       		.uleb128 0xb
+ 1644 015c 3B       		.uleb128 0x3b
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 30
+
+
+ 1645 015d 0B       		.uleb128 0xb
+ 1646 015e 27       		.uleb128 0x27
+ 1647 015f 19       		.uleb128 0x19
+ 1648 0160 11       		.uleb128 0x11
+ 1649 0161 01       		.uleb128 0x1
+ 1650 0162 12       		.uleb128 0x12
+ 1651 0163 06       		.uleb128 0x6
+ 1652 0164 40       		.uleb128 0x40
+ 1653 0165 18       		.uleb128 0x18
+ 1654 0166 9642     		.uleb128 0x2116
+ 1655 0168 19       		.uleb128 0x19
+ 1656 0169 01       		.uleb128 0x1
+ 1657 016a 13       		.uleb128 0x13
+ 1658 016b 00       		.byte	0
+ 1659 016c 00       		.byte	0
+ 1660 016d 1E       		.uleb128 0x1e
+ 1661 016e 34       		.uleb128 0x34
+ 1662 016f 00       		.byte	0
+ 1663 0170 03       		.uleb128 0x3
+ 1664 0171 08       		.uleb128 0x8
+ 1665 0172 3A       		.uleb128 0x3a
+ 1666 0173 0B       		.uleb128 0xb
+ 1667 0174 3B       		.uleb128 0x3b
+ 1668 0175 0B       		.uleb128 0xb
+ 1669 0176 49       		.uleb128 0x49
+ 1670 0177 13       		.uleb128 0x13
+ 1671 0178 02       		.uleb128 0x2
+ 1672 0179 18       		.uleb128 0x18
+ 1673 017a 00       		.byte	0
+ 1674 017b 00       		.byte	0
+ 1675 017c 1F       		.uleb128 0x1f
+ 1676 017d 34       		.uleb128 0x34
+ 1677 017e 00       		.byte	0
+ 1678 017f 03       		.uleb128 0x3
+ 1679 0180 0E       		.uleb128 0xe
+ 1680 0181 3A       		.uleb128 0x3a
+ 1681 0182 0B       		.uleb128 0xb
+ 1682 0183 3B       		.uleb128 0x3b
+ 1683 0184 0B       		.uleb128 0xb
+ 1684 0185 49       		.uleb128 0x49
+ 1685 0186 13       		.uleb128 0x13
+ 1686 0187 02       		.uleb128 0x2
+ 1687 0188 18       		.uleb128 0x18
+ 1688 0189 00       		.byte	0
+ 1689 018a 00       		.byte	0
+ 1690 018b 20       		.uleb128 0x20
+ 1691 018c 34       		.uleb128 0x34
+ 1692 018d 00       		.byte	0
+ 1693 018e 03       		.uleb128 0x3
+ 1694 018f 0E       		.uleb128 0xe
+ 1695 0190 3A       		.uleb128 0x3a
+ 1696 0191 0B       		.uleb128 0xb
+ 1697 0192 3B       		.uleb128 0x3b
+ 1698 0193 0B       		.uleb128 0xb
+ 1699 0194 49       		.uleb128 0x49
+ 1700 0195 13       		.uleb128 0x13
+ 1701 0196 3F       		.uleb128 0x3f
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 31
+
+
+ 1702 0197 19       		.uleb128 0x19
+ 1703 0198 3C       		.uleb128 0x3c
+ 1704 0199 19       		.uleb128 0x19
+ 1705 019a 00       		.byte	0
+ 1706 019b 00       		.byte	0
+ 1707 019c 21       		.uleb128 0x21
+ 1708 019d 34       		.uleb128 0x34
+ 1709 019e 00       		.byte	0
+ 1710 019f 03       		.uleb128 0x3
+ 1711 01a0 0E       		.uleb128 0xe
+ 1712 01a1 3A       		.uleb128 0x3a
+ 1713 01a2 0B       		.uleb128 0xb
+ 1714 01a3 3B       		.uleb128 0x3b
+ 1715 01a4 0B       		.uleb128 0xb
+ 1716 01a5 49       		.uleb128 0x49
+ 1717 01a6 13       		.uleb128 0x13
+ 1718 01a7 3F       		.uleb128 0x3f
+ 1719 01a8 19       		.uleb128 0x19
+ 1720 01a9 02       		.uleb128 0x2
+ 1721 01aa 18       		.uleb128 0x18
+ 1722 01ab 00       		.byte	0
+ 1723 01ac 00       		.byte	0
+ 1724 01ad 00       		.byte	0
+ 1725              		.section	.debug_aranges,"",%progbits
+ 1726 0000 24000000 		.4byte	0x24
+ 1727 0004 0200     		.2byte	0x2
+ 1728 0006 00000000 		.4byte	.Ldebug_info0
+ 1729 000a 04       		.byte	0x4
+ 1730 000b 00       		.byte	0
+ 1731 000c 0000     		.2byte	0
+ 1732 000e 0000     		.2byte	0
+ 1733 0010 00000000 		.4byte	.LFB7
+ 1734 0014 18000000 		.4byte	.LFE7-.LFB7
+ 1735 0018 00000000 		.4byte	.LFB8
+ 1736 001c E0020000 		.4byte	.LFE8-.LFB8
+ 1737 0020 00000000 		.4byte	0
+ 1738 0024 00000000 		.4byte	0
+ 1739              		.section	.debug_ranges,"",%progbits
+ 1740              	.Ldebug_ranges0:
+ 1741 0000 00000000 		.4byte	.LFB7
+ 1742 0004 18000000 		.4byte	.LFE7
+ 1743 0008 00000000 		.4byte	.LFB8
+ 1744 000c E0020000 		.4byte	.LFE8
+ 1745 0010 00000000 		.4byte	0
+ 1746 0014 00000000 		.4byte	0
+ 1747              		.section	.debug_line,"",%progbits
+ 1748              	.Ldebug_line0:
+ 1749 0000 A2020000 		.section	.debug_str,"MS",%progbits,1
+ 1749      0200E401 
+ 1749      00000201 
+ 1749      FB0E0D00 
+ 1749      01010101 
+ 1750              	.LASF43:
+ 1751 0000 705F6D73 		.ascii	"p_msg\000"
+ 1751      6700
+ 1752              	.LASF2:
+ 1753 0006 73697A65 		.ascii	"size_t\000"
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 32
+
+
+ 1753      5F7400
+ 1754              	.LASF69:
+ 1755 000d 7264796D 		.ascii	"rdymsg\000"
+ 1755      736700
+ 1756              	.LASF17:
+ 1757 0014 75696E74 		.ascii	"uint64_t\000"
+ 1757      36345F74 
+ 1757      00
+ 1758              	.LASF3:
+ 1759 001d 5F5F7569 		.ascii	"__uint8_t\000"
+ 1759      6E74385F 
+ 1759      7400
+ 1760              	.LASF59:
+ 1761 0027 6D656D67 		.ascii	"memgetfunc_t\000"
+ 1761      65746675 
+ 1761      6E635F74 
+ 1761      00
+ 1762              	.LASF13:
+ 1763 0034 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1763      206C6F6E 
+ 1763      6720756E 
+ 1763      7369676E 
+ 1763      65642069 
+ 1764              	.LASF87:
+ 1765 004b 2F686F6D 		.ascii	"/home/pauba/ChibiOS-RT/test/testheap.c\000"
+ 1765      652F7061 
+ 1765      7562612F 
+ 1765      43686962 
+ 1765      694F532D 
+ 1766              	.LASF63:
+ 1767 0072 685F6672 		.ascii	"h_free\000"
+ 1767      656500
+ 1768              	.LASF83:
+ 1769 0079 74657374 		.ascii	"test\000"
+ 1769      00
+ 1770              	.LASF65:
+ 1771 007e 6E657874 		.ascii	"next\000"
+ 1771      00
+ 1772              	.LASF30:
+ 1773 0083 705F7072 		.ascii	"p_prio\000"
+ 1773      696F00
+ 1774              	.LASF85:
+ 1775 008a 70617474 		.ascii	"patternheap\000"
+ 1775      65726E68 
+ 1775      65617000 
+ 1776              	.LASF11:
+ 1777 0096 6C6F6E67 		.ascii	"long long int\000"
+ 1777      206C6F6E 
+ 1777      6720696E 
+ 1777      7400
+ 1778              	.LASF1:
+ 1779 00a4 7369676E 		.ascii	"signed char\000"
+ 1779      65642063 
+ 1779      68617200 
+ 1780              	.LASF64:
+ 1781 00b0 685F6D74 		.ascii	"h_mtx\000"
+ 1781      7800
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 33
+
+
+ 1782              	.LASF47:
+ 1783 00b6 705F6D70 		.ascii	"p_mpool\000"
+ 1783      6F6F6C00 
+ 1784              	.LASF56:
+ 1785 00be 6D5F7175 		.ascii	"m_queue\000"
+ 1785      65756500 
+ 1786              	.LASF22:
+ 1787 00c6 74736C69 		.ascii	"tslices_t\000"
+ 1787      6365735F 
+ 1787      7400
+ 1788              	.LASF8:
+ 1789 00d0 6C6F6E67 		.ascii	"long int\000"
+ 1789      20696E74 
+ 1789      00
+ 1790              	.LASF20:
+ 1791 00d9 74737461 		.ascii	"tstate_t\000"
+ 1791      74655F74 
+ 1791      00
+ 1792              	.LASF81:
+ 1793 00e2 62756666 		.ascii	"buffer\000"
+ 1793      657200
+ 1794              	.LASF32:
+ 1795 00e9 705F6E65 		.ascii	"p_newer\000"
+ 1795      77657200 
+ 1796              	.LASF70:
+ 1797 00f1 65786974 		.ascii	"exitcode\000"
+ 1797      636F6465 
+ 1797      00
+ 1798              	.LASF9:
+ 1799 00fa 5F5F7569 		.ascii	"__uint32_t\000"
+ 1799      6E743332 
+ 1799      5F7400
+ 1800              	.LASF50:
+ 1801 0105 72656761 		.ascii	"regarm_t\000"
+ 1801      726D5F74 
+ 1801      00
+ 1802              	.LASF89:
+ 1803 010e 68656170 		.ascii	"heap1_execute\000"
+ 1803      315F6578 
+ 1803      65637574 
+ 1803      6500
+ 1804              	.LASF67:
+ 1805 011c 616C6967 		.ascii	"align\000"
+ 1805      6E00
+ 1806              	.LASF35:
+ 1807 0122 705F7374 		.ascii	"p_stklimit\000"
+ 1807      6B6C696D 
+ 1807      697400
+ 1808              	.LASF0:
+ 1809 012d 756E7369 		.ascii	"unsigned int\000"
+ 1809      676E6564 
+ 1809      20696E74 
+ 1809      00
+ 1810              	.LASF10:
+ 1811 013a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1811      20756E73 
+ 1811      69676E65 
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 34
+
+
+ 1811      6420696E 
+ 1811      7400
+ 1812              	.LASF77:
+ 1813 014c 74656172 		.ascii	"teardown\000"
+ 1813      646F776E 
+ 1813      00
+ 1814              	.LASF75:
+ 1815 0155 6E616D65 		.ascii	"name\000"
+ 1815      00
+ 1816              	.LASF53:
+ 1817 015a 636F6E74 		.ascii	"context\000"
+ 1817      65787400 
+ 1818              	.LASF68:
+ 1819 0162 73697A65 		.ascii	"size\000"
+ 1819      00
+ 1820              	.LASF6:
+ 1821 0167 73686F72 		.ascii	"short unsigned int\000"
+ 1821      7420756E 
+ 1821      7369676E 
+ 1821      65642069 
+ 1821      6E7400
+ 1822              	.LASF24:
+ 1823 017a 6D73675F 		.ascii	"msg_t\000"
+ 1823      7400
+ 1824              	.LASF19:
+ 1825 0180 746D6F64 		.ascii	"tmode_t\000"
+ 1825      655F7400 
+ 1826              	.LASF49:
+ 1827 0188 54687265 		.ascii	"ThreadsList\000"
+ 1827      6164734C 
+ 1827      69737400 
+ 1828              	.LASF25:
+ 1829 0194 6576656E 		.ascii	"eventmask_t\000"
+ 1829      746D6173 
+ 1829      6B5F7400 
+ 1830              	.LASF55:
+ 1831 01a0 4D757465 		.ascii	"Mutex\000"
+ 1831      7800
+ 1832              	.LASF51:
+ 1833 01a6 73746B61 		.ascii	"stkalign_t\000"
+ 1833      6C69676E 
+ 1833      5F7400
+ 1834              	.LASF84:
+ 1835 01b1 74657374 		.ascii	"testheap1\000"
+ 1835      68656170 
+ 1835      3100
+ 1836              	.LASF54:
+ 1837 01bb 73697A65 		.ascii	"sizetype\000"
+ 1837      74797065 
+ 1837      00
+ 1838              	.LASF33:
+ 1839 01c4 705F6F6C 		.ascii	"p_older\000"
+ 1839      64657200 
+ 1840              	.LASF48:
+ 1841 01cc 54687265 		.ascii	"ThreadsQueue\000"
+ 1841      61647351 
+ 1841      75657565 
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 35
+
+
+ 1841      00
+ 1842              	.LASF76:
+ 1843 01d9 73657475 		.ascii	"setup\000"
+ 1843      7000
+ 1844              	.LASF60:
+ 1845 01df 4D656D6F 		.ascii	"MemoryHeap\000"
+ 1845      72794865 
+ 1845      617000
+ 1846              	.LASF12:
+ 1847 01ea 5F5F7569 		.ascii	"__uint64_t\000"
+ 1847      6E743634 
+ 1847      5F7400
+ 1848              	.LASF21:
+ 1849 01f5 74726566 		.ascii	"trefs_t\000"
+ 1849      735F7400 
+ 1850              	.LASF29:
+ 1851 01fd 705F7072 		.ascii	"p_prev\000"
+ 1851      657600
+ 1852              	.LASF78:
+ 1853 0204 65786563 		.ascii	"execute\000"
+ 1853      75746500 
+ 1854              	.LASF23:
+ 1855 020c 74707269 		.ascii	"tprio_t\000"
+ 1855      6F5F7400 
+ 1856              	.LASF88:
+ 1857 0214 68656170 		.ascii	"heap1_setup\000"
+ 1857      315F7365 
+ 1857      74757000 
+ 1858              	.LASF18:
+ 1859 0220 5F426F6F 		.ascii	"_Bool\000"
+ 1859      6C00
+ 1860              	.LASF15:
+ 1861 0226 696E7433 		.ascii	"int32_t\000"
+ 1861      325F7400 
+ 1862              	.LASF4:
+ 1863 022e 756E7369 		.ascii	"unsigned char\000"
+ 1863      676E6564 
+ 1863      20636861 
+ 1863      7200
+ 1864              	.LASF62:
+ 1865 023c 685F7072 		.ascii	"h_provider\000"
+ 1865      6F766964 
+ 1865      657200
+ 1866              	.LASF45:
+ 1867 0247 705F6D74 		.ascii	"p_mtxlist\000"
+ 1867      786C6973 
+ 1867      7400
+ 1868              	.LASF5:
+ 1869 0251 73686F72 		.ascii	"short int\000"
+ 1869      7420696E 
+ 1869      7400
+ 1870              	.LASF36:
+ 1871 025b 705F7374 		.ascii	"p_state\000"
+ 1871      61746500 
+ 1872              	.LASF39:
+ 1873 0263 705F7072 		.ascii	"p_preempt\000"
+ 1873      65656D70 
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 36
+
+
+ 1873      7400
+ 1874              	.LASF79:
+ 1875 026d 68656170 		.ascii	"heap_header\000"
+ 1875      5F686561 
+ 1875      64657200 
+ 1876              	.LASF72:
+ 1877 0279 65776D61 		.ascii	"ewmask\000"
+ 1877      736B00
+ 1878              	.LASF28:
+ 1879 0280 705F6E65 		.ascii	"p_next\000"
+ 1879      787400
+ 1880              	.LASF37:
+ 1881 0287 705F666C 		.ascii	"p_flags\000"
+ 1881      61677300 
+ 1882              	.LASF27:
+ 1883 028f 54687265 		.ascii	"Thread\000"
+ 1883      616400
+ 1884              	.LASF74:
+ 1885 0296 74657374 		.ascii	"testcase\000"
+ 1885      63617365 
+ 1885      00
+ 1886              	.LASF44:
+ 1887 029f 705F6570 		.ascii	"p_epending\000"
+ 1887      656E6469 
+ 1887      6E6700
+ 1888              	.LASF16:
+ 1889 02aa 75696E74 		.ascii	"uint32_t\000"
+ 1889      33325F74 
+ 1889      00
+ 1890              	.LASF66:
+ 1891 02b3 68656170 		.ascii	"heap\000"
+ 1891      00
+ 1892              	.LASF86:
+ 1893 02b8 474E5520 		.ascii	"GNU C 4.8.3 20140228 (release) [ARM/embedded-4_8-br"
+ 1893      4320342E 
+ 1893      382E3320 
+ 1893      32303134 
+ 1893      30323238 
+ 1894 02eb 616E6368 		.ascii	"anch revision 208322] -mcpu=cortex-m4 -mno-thumb-in"
+ 1894      20726576 
+ 1894      6973696F 
+ 1894      6E203230 
+ 1894      38333232 
+ 1895 031e 74657277 		.ascii	"terwork -mthumb -ggdb -fomit-frame-pointer -falign-"
+ 1895      6F726B20 
+ 1895      2D6D7468 
+ 1895      756D6220 
+ 1895      2D676764 
+ 1896 0351 66756E63 		.ascii	"functions=16 -ffunction-sections -fdata-sections -f"
+ 1896      74696F6E 
+ 1896      733D3136 
+ 1896      202D6666 
+ 1896      756E6374 
+ 1897 0384 6E6F2D63 		.ascii	"no-common\000"
+ 1897      6F6D6D6F 
+ 1897      6E00
+ 1898              	.LASF73:
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 37
+
+
+ 1899 038e 63686172 		.ascii	"char\000"
+ 1899      00
+ 1900              	.LASF58:
+ 1901 0393 6D5F6E65 		.ascii	"m_next\000"
+ 1901      787400
+ 1902              	.LASF26:
+ 1903 039a 73797374 		.ascii	"systime_t\000"
+ 1903      696D655F 
+ 1903      7400
+ 1904              	.LASF46:
+ 1905 03a4 705F7265 		.ascii	"p_realprio\000"
+ 1905      616C7072 
+ 1905      696F00
+ 1906              	.LASF7:
+ 1907 03af 5F5F696E 		.ascii	"__int32_t\000"
+ 1907      7433325F 
+ 1907      7400
+ 1908              	.LASF40:
+ 1909 03b9 705F7469 		.ascii	"p_time\000"
+ 1909      6D6500
+ 1910              	.LASF52:
+ 1911 03c0 696E7463 		.ascii	"intctx\000"
+ 1911      747800
+ 1912              	.LASF42:
+ 1913 03c7 705F6D73 		.ascii	"p_msgqueue\000"
+ 1913      67717565 
+ 1913      756500
+ 1914              	.LASF80:
+ 1915 03d2 74657374 		.ascii	"test_buffers\000"
+ 1915      5F627566 
+ 1915      66657273 
+ 1915      00
+ 1916              	.LASF38:
+ 1917 03df 705F7265 		.ascii	"p_refs\000"
+ 1917      667300
+ 1918              	.LASF14:
+ 1919 03e6 75696E74 		.ascii	"uint8_t\000"
+ 1919      385F7400 
+ 1920              	.LASF82:
+ 1921 03ee 74657374 		.ascii	"test_heap\000"
+ 1921      5F686561 
+ 1921      7000
+ 1922              	.LASF71:
+ 1923 03f8 77746F62 		.ascii	"wtobjp\000"
+ 1923      6A7000
+ 1924              	.LASF34:
+ 1925 03ff 705F6E61 		.ascii	"p_name\000"
+ 1925      6D6500
+ 1926              	.LASF57:
+ 1927 0406 6D5F6F77 		.ascii	"m_owner\000"
+ 1927      6E657200 
+ 1928              	.LASF31:
+ 1929 040e 705F6374 		.ascii	"p_ctx\000"
+ 1929      7800
+ 1930              	.LASF41:
+ 1931 0414 705F7761 		.ascii	"p_waiting\000"
+ 1931      6974696E 
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 38
+
+
+ 1931      6700
+ 1932              	.LASF61:
+ 1933 041e 6D656D6F 		.ascii	"memory_heap\000"
+ 1933      72795F68 
+ 1933      65617000 
+ 1934              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.3 20140228 (release) [ARM/embedded-4_8-br
+ARM GAS  /home/pauba/tmp/ccciIW6g.s 			page 39
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 testheap.c
+/home/pauba/tmp/ccciIW6g.s:19     .bss.test_heap:00000000 $d
+/home/pauba/tmp/ccciIW6g.s:22     .bss.test_heap:00000000 test_heap
+/home/pauba/tmp/ccciIW6g.s:25     .text.heap1_setup:00000000 $t
+/home/pauba/tmp/ccciIW6g.s:30     .text.heap1_setup:00000000 heap1_setup
+/home/pauba/tmp/ccciIW6g.s:51     .text.heap1_setup:00000010 $d
+/home/pauba/tmp/ccciIW6g.s:57     .text.heap1_execute:00000000 $t
+/home/pauba/tmp/ccciIW6g.s:62     .text.heap1_execute:00000000 heap1_execute
+/home/pauba/tmp/ccciIW6g.s:459    .text.heap1_execute:000002dc $d
+/home/pauba/tmp/ccciIW6g.s:472    .rodata.testheap1:00000000 testheap1
+/home/pauba/tmp/ccciIW6g.s:465    .rodata:00000000 $d
+/home/pauba/tmp/ccciIW6g.s:469    .rodata.testheap1:00000000 $d
+/home/pauba/tmp/ccciIW6g.s:482    .rodata.patternheap:00000000 patternheap
+/home/pauba/tmp/ccciIW6g.s:479    .rodata.patternheap:00000000 $d
+                     .debug_frame:00000010 $d
+/home/pauba/tmp/ccciIW6g.s:56     .text.heap1_setup:00000018 $t
+
+UNDEFINED SYMBOLS
+chHeapInit
+test
+chCoreStatus
+chHeapStatus
+chHeapAlloc
+_test_assert
+chHeapFree

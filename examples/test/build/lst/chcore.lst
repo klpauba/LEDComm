@@ -1,0 +1,330 @@
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"chcore.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.port_halt,"ax",%progbits
+  19              		.align	2
+  20              		.p2align 4,,15
+  21              		.weak	port_halt
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	port_halt, %function
+  25              	port_halt:
+  26              	.LFB7:
+  27              		.file 1 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore.c"
+  28              		.loc 1 46 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 48 0
+  34              	@ 48 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore.c" 1
+  35 0000 72B6     		cpsid   i
+  36              	@ 0 "" 2
+  37              		.thumb
+  38              	.L2:
+  39              		.loc 1 50 0 discriminator 1
+  40 0002 FEE7     		b	.L2
+  41              		.cfi_endproc
+  42              	.LFE7:
+  43              		.size	port_halt, .-port_halt
+  44 0004 AFF30080 		.text
+  44      AFF30080 
+  44      AFF30080 
+  45              	.Letext0:
+  46              		.section	.debug_info,"",%progbits
+  47              	.Ldebug_info0:
+  48 0000 8A000000 		.4byte	0x8a
+  49 0004 0400     		.2byte	0x4
+  50 0006 00000000 		.4byte	.Ldebug_abbrev0
+  51 000a 04       		.byte	0x4
+  52 000b 01       		.uleb128 0x1
+  53 000c 6A000000 		.4byte	.LASF12
+  54 0010 01       		.byte	0x1
+  55 0011 65010000 		.4byte	.LASF13
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 2
+
+
+  56 0015 00000000 		.4byte	.Ldebug_ranges0+0
+  57 0019 00000000 		.4byte	0
+  58 001d 00000000 		.4byte	.Ldebug_line0
+  59 0021 02       		.uleb128 0x2
+  60 0022 04       		.byte	0x4
+  61 0023 05       		.byte	0x5
+  62 0024 696E7400 		.ascii	"int\000"
+  63 0028 03       		.uleb128 0x3
+  64 0029 04       		.byte	0x4
+  65 002a 07       		.byte	0x7
+  66 002b 0E000000 		.4byte	.LASF0
+  67 002f 03       		.uleb128 0x3
+  68 0030 01       		.byte	0x1
+  69 0031 06       		.byte	0x6
+  70 0032 59010000 		.4byte	.LASF1
+  71 0036 03       		.uleb128 0x3
+  72 0037 01       		.byte	0x1
+  73 0038 08       		.byte	0x8
+  74 0039 1B000000 		.4byte	.LASF2
+  75 003d 03       		.uleb128 0x3
+  76 003e 02       		.byte	0x2
+  77 003f 05       		.byte	0x5
+  78 0040 99010000 		.4byte	.LASF3
+  79 0044 03       		.uleb128 0x3
+  80 0045 02       		.byte	0x2
+  81 0046 07       		.byte	0x7
+  82 0047 46010000 		.4byte	.LASF4
+  83 004b 03       		.uleb128 0x3
+  84 004c 04       		.byte	0x4
+  85 004d 05       		.byte	0x5
+  86 004e 61000000 		.4byte	.LASF5
+  87 0052 03       		.uleb128 0x3
+  88 0053 04       		.byte	0x4
+  89 0054 07       		.byte	0x7
+  90 0055 29000000 		.4byte	.LASF6
+  91 0059 03       		.uleb128 0x3
+  92 005a 08       		.byte	0x8
+  93 005b 05       		.byte	0x5
+  94 005c 00000000 		.4byte	.LASF7
+  95 0060 03       		.uleb128 0x3
+  96 0061 08       		.byte	0x8
+  97 0062 07       		.byte	0x7
+  98 0063 3B000000 		.4byte	.LASF8
+  99 0067 03       		.uleb128 0x3
+ 100 0068 01       		.byte	0x1
+ 101 0069 02       		.byte	0x2
+ 102 006a 40010000 		.4byte	.LASF9
+ 103 006e 03       		.uleb128 0x3
+ 104 006f 04       		.byte	0x4
+ 105 0070 07       		.byte	0x7
+ 106 0071 A3010000 		.4byte	.LASF10
+ 107 0075 03       		.uleb128 0x3
+ 108 0076 01       		.byte	0x1
+ 109 0077 08       		.byte	0x8
+ 110 0078 5C000000 		.4byte	.LASF11
+ 111 007c 04       		.uleb128 0x4
+ 112 007d 52000000 		.4byte	.LASF14
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 3
+
+
+ 113 0081 01       		.byte	0x1
+ 114 0082 2E       		.byte	0x2e
+ 115 0083 00000000 		.4byte	.LFB7
+ 116 0087 04000000 		.4byte	.LFE7-.LFB7
+ 117 008b 01       		.uleb128 0x1
+ 118 008c 9C       		.byte	0x9c
+ 119 008d 00       		.byte	0
+ 120              		.section	.debug_abbrev,"",%progbits
+ 121              	.Ldebug_abbrev0:
+ 122 0000 01       		.uleb128 0x1
+ 123 0001 11       		.uleb128 0x11
+ 124 0002 01       		.byte	0x1
+ 125 0003 25       		.uleb128 0x25
+ 126 0004 0E       		.uleb128 0xe
+ 127 0005 13       		.uleb128 0x13
+ 128 0006 0B       		.uleb128 0xb
+ 129 0007 03       		.uleb128 0x3
+ 130 0008 0E       		.uleb128 0xe
+ 131 0009 55       		.uleb128 0x55
+ 132 000a 17       		.uleb128 0x17
+ 133 000b 11       		.uleb128 0x11
+ 134 000c 01       		.uleb128 0x1
+ 135 000d 10       		.uleb128 0x10
+ 136 000e 17       		.uleb128 0x17
+ 137 000f 00       		.byte	0
+ 138 0010 00       		.byte	0
+ 139 0011 02       		.uleb128 0x2
+ 140 0012 24       		.uleb128 0x24
+ 141 0013 00       		.byte	0
+ 142 0014 0B       		.uleb128 0xb
+ 143 0015 0B       		.uleb128 0xb
+ 144 0016 3E       		.uleb128 0x3e
+ 145 0017 0B       		.uleb128 0xb
+ 146 0018 03       		.uleb128 0x3
+ 147 0019 08       		.uleb128 0x8
+ 148 001a 00       		.byte	0
+ 149 001b 00       		.byte	0
+ 150 001c 03       		.uleb128 0x3
+ 151 001d 24       		.uleb128 0x24
+ 152 001e 00       		.byte	0
+ 153 001f 0B       		.uleb128 0xb
+ 154 0020 0B       		.uleb128 0xb
+ 155 0021 3E       		.uleb128 0x3e
+ 156 0022 0B       		.uleb128 0xb
+ 157 0023 03       		.uleb128 0x3
+ 158 0024 0E       		.uleb128 0xe
+ 159 0025 00       		.byte	0
+ 160 0026 00       		.byte	0
+ 161 0027 04       		.uleb128 0x4
+ 162 0028 2E       		.uleb128 0x2e
+ 163 0029 00       		.byte	0
+ 164 002a 3F       		.uleb128 0x3f
+ 165 002b 19       		.uleb128 0x19
+ 166 002c 03       		.uleb128 0x3
+ 167 002d 0E       		.uleb128 0xe
+ 168 002e 3A       		.uleb128 0x3a
+ 169 002f 0B       		.uleb128 0xb
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 4
+
+
+ 170 0030 3B       		.uleb128 0x3b
+ 171 0031 0B       		.uleb128 0xb
+ 172 0032 27       		.uleb128 0x27
+ 173 0033 19       		.uleb128 0x19
+ 174 0034 11       		.uleb128 0x11
+ 175 0035 01       		.uleb128 0x1
+ 176 0036 12       		.uleb128 0x12
+ 177 0037 06       		.uleb128 0x6
+ 178 0038 40       		.uleb128 0x40
+ 179 0039 18       		.uleb128 0x18
+ 180 003a 9742     		.uleb128 0x2117
+ 181 003c 19       		.uleb128 0x19
+ 182 003d 00       		.byte	0
+ 183 003e 00       		.byte	0
+ 184 003f 00       		.byte	0
+ 185              		.section	.debug_aranges,"",%progbits
+ 186 0000 1C000000 		.4byte	0x1c
+ 187 0004 0200     		.2byte	0x2
+ 188 0006 00000000 		.4byte	.Ldebug_info0
+ 189 000a 04       		.byte	0x4
+ 190 000b 00       		.byte	0
+ 191 000c 0000     		.2byte	0
+ 192 000e 0000     		.2byte	0
+ 193 0010 00000000 		.4byte	.LFB7
+ 194 0014 04000000 		.4byte	.LFE7-.LFB7
+ 195 0018 00000000 		.4byte	0
+ 196 001c 00000000 		.4byte	0
+ 197              		.section	.debug_ranges,"",%progbits
+ 198              	.Ldebug_ranges0:
+ 199 0000 00000000 		.4byte	.LFB7
+ 200 0004 04000000 		.4byte	.LFE7
+ 201 0008 00000000 		.4byte	0
+ 202 000c 00000000 		.4byte	0
+ 203              		.section	.debug_line,"",%progbits
+ 204              	.Ldebug_line0:
+ 205 0000 65000000 		.section	.debug_str,"MS",%progbits,1
+ 205      02004A00 
+ 205      00000201 
+ 205      FB0E0D00 
+ 205      01010101 
+ 206              	.LASF7:
+ 207 0000 6C6F6E67 		.ascii	"long long int\000"
+ 207      206C6F6E 
+ 207      6720696E 
+ 207      7400
+ 208              	.LASF0:
+ 209 000e 756E7369 		.ascii	"unsigned int\000"
+ 209      676E6564 
+ 209      20696E74 
+ 209      00
+ 210              	.LASF2:
+ 211 001b 756E7369 		.ascii	"unsigned char\000"
+ 211      676E6564 
+ 211      20636861 
+ 211      7200
+ 212              	.LASF6:
+ 213 0029 6C6F6E67 		.ascii	"long unsigned int\000"
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 5
+
+
+ 213      20756E73 
+ 213      69676E65 
+ 213      6420696E 
+ 213      7400
+ 214              	.LASF8:
+ 215 003b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 215      206C6F6E 
+ 215      6720756E 
+ 215      7369676E 
+ 215      65642069 
+ 216              	.LASF14:
+ 217 0052 706F7274 		.ascii	"port_halt\000"
+ 217      5F68616C 
+ 217      7400
+ 218              	.LASF11:
+ 219 005c 63686172 		.ascii	"char\000"
+ 219      00
+ 220              	.LASF5:
+ 221 0061 6C6F6E67 		.ascii	"long int\000"
+ 221      20696E74 
+ 221      00
+ 222              	.LASF12:
+ 223 006a 474E5520 		.ascii	"GNU C 4.8.3 20140228 (release) [ARM/embedded-4_8-br"
+ 223      4320342E 
+ 223      382E3320 
+ 223      32303134 
+ 223      30323238 
+ 224 009d 616E6368 		.ascii	"anch revision 208322] -mcpu=cortex-m4 -mno-thumb-in"
+ 224      20726576 
+ 224      6973696F 
+ 224      6E203230 
+ 224      38333232 
+ 225 00d0 74657277 		.ascii	"terwork -mthumb -ggdb -fomit-frame-pointer -falign-"
+ 225      6F726B20 
+ 225      2D6D7468 
+ 225      756D6220 
+ 225      2D676764 
+ 226 0103 66756E63 		.ascii	"functions=16 -ffunction-sections -fdata-sections -f"
+ 226      74696F6E 
+ 226      733D3136 
+ 226      202D6666 
+ 226      756E6374 
+ 227 0136 6E6F2D63 		.ascii	"no-common\000"
+ 227      6F6D6D6F 
+ 227      6E00
+ 228              	.LASF9:
+ 229 0140 5F426F6F 		.ascii	"_Bool\000"
+ 229      6C00
+ 230              	.LASF4:
+ 231 0146 73686F72 		.ascii	"short unsigned int\000"
+ 231      7420756E 
+ 231      7369676E 
+ 231      65642069 
+ 231      6E7400
+ 232              	.LASF1:
+ 233 0159 7369676E 		.ascii	"signed char\000"
+ 233      65642063 
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 6
+
+
+ 233      68617200 
+ 234              	.LASF13:
+ 235 0165 2F686F6D 		.ascii	"/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore.c"
+ 235      652F7061 
+ 235      7562612F 
+ 235      43686962 
+ 235      694F532D 
+ 236 0198 00       		.ascii	"\000"
+ 237              	.LASF3:
+ 238 0199 73686F72 		.ascii	"short int\000"
+ 238      7420696E 
+ 238      7400
+ 239              	.LASF10:
+ 240 01a3 73697A65 		.ascii	"sizetype\000"
+ 240      74797065 
+ 240      00
+ 241              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.3 20140228 (release) [ARM/embedded-4_8-br
+ARM GAS  /home/pauba/tmp/cc97Dbva.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 chcore.c
+/home/pauba/tmp/cc97Dbva.s:19     .text.port_halt:00000000 $t
+/home/pauba/tmp/cc97Dbva.s:25     .text.port_halt:00000000 port_halt
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

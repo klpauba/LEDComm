@@ -1,0 +1,4041 @@
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"ledcomm-uart.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.luartInit,"ax",%progbits
+  19              		.align	2
+  20              		.p2align 4,,15
+  21              		.global	luartInit
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	luartInit, %function
+  25              	luartInit:
+  26              	.LFB68:
+  27              		.file 1 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c"
+  28              		.loc 1 115 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 116 0
+  34 0000 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE68:
+  37              		.size	luartInit, .-luartInit
+  38 0002 00BFAFF3 		.section	.text.luartObjectInit,"ax",%progbits
+  38      0080AFF3 
+  38      0080AFF3 
+  38      0080
+  39              		.align	2
+  40              		.p2align 4,,15
+  41              		.global	luartObjectInit
+  42              		.thumb
+  43              		.thumb_func
+  44              		.type	luartObjectInit, %function
+  45              	luartObjectInit:
+  46              	.LFB69:
+  47              		.loc 1 125 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 8
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 82B0     		sub	sp, sp, #8
+  53              		.cfi_def_cfa_offset 8
+  54 0002 0190     		str	r0, [sp, #4]
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 2
+
+
+  55              		.loc 1 127 0
+  56 0004 019B     		ldr	r3, [sp, #4]
+  57 0006 0122     		movs	r2, #1
+  58 0008 1A70     		strb	r2, [r3]
+  59              		.loc 1 128 0
+  60 000a 019B     		ldr	r3, [sp, #4]
+  61 000c 0022     		movs	r2, #0
+  62 000e 5A70     		strb	r2, [r3, #1]
+  63              		.loc 1 129 0
+  64 0010 019B     		ldr	r3, [sp, #4]
+  65 0012 0022     		movs	r2, #0
+  66 0014 9A70     		strb	r2, [r3, #2]
+  67              		.loc 1 130 0
+  68 0016 019B     		ldr	r3, [sp, #4]
+  69 0018 0022     		movs	r2, #0
+  70 001a 5A60     		str	r2, [r3, #4]
+  71              		.loc 1 135 0
+  72 001c 02B0     		add	sp, sp, #8
+  73              		@ sp needed
+  74 001e 7047     		bx	lr
+  75              		.cfi_endproc
+  76              	.LFE69:
+  77              		.size	luartObjectInit, .-luartObjectInit
+  78              		.section	.rodata
+  79              		.align	2
+  80              	.LC0:
+  81 0000 226C7561 		.ascii	"\"luartStart\"()\000"
+  81      72745374 
+  81      61727422 
+  81      282900
+  82 000f 00       		.align	2
+  83              	.LC1:
+  84 0010 6C756172 		.ascii	"luartStart(), #1\000"
+  84      74537461 
+  84      72742829 
+  84      2C202331 
+  84      00
+  85              		.section	.text.luartStart,"ax",%progbits
+  86              		.align	2
+  87              		.p2align 4,,15
+  88              		.global	luartStart
+  89              		.thumb
+  90              		.thumb_func
+  91              		.type	luartStart, %function
+  92              	luartStart:
+  93              	.LFB70:
+  94              		.loc 1 145 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 8
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98 0000 00B5     		push	{lr}
+  99              		.cfi_def_cfa_offset 4
+ 100              		.cfi_offset 14, -4
+ 101 0002 83B0     		sub	sp, sp, #12
+ 102              		.cfi_def_cfa_offset 16
+ 103 0004 0190     		str	r0, [sp, #4]
+ 104 0006 0091     		str	r1, [sp]
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 3
+
+
+ 105              		.loc 1 147 0
+ 106 0008 019B     		ldr	r3, [sp, #4]
+ 107 000a 002B     		cmp	r3, #0
+ 108 000c 02D0     		beq	.L4
+ 109              		.loc 1 147 0 is_stmt 0 discriminator 2
+ 110 000e 009B     		ldr	r3, [sp]
+ 111 0010 002B     		cmp	r3, #0
+ 112 0012 02D1     		bne	.L5
+ 113              	.L4:
+ 114              		.loc 1 147 0 discriminator 1
+ 115 0014 1048     		ldr	r0, .L7
+ 116 0016 FFF7FEFF 		bl	chDbgPanic
+ 117              	.L5:
+ 118              	.LBB2:
+ 119              		.loc 1 149 0 is_stmt 1
+ 120 001a 2023     		movs	r3, #32
+ 121              	@ 149 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 122 001c 83F31188 		msr     BASEPRI, r3
+ 123              	@ 0 "" 2
+ 124              		.thumb
+ 125              	.LBE2:
+ 126 0020 FFF7FEFF 		bl	dbg_check_lock
+ 127              		.loc 1 150 0
+ 128 0024 019B     		ldr	r3, [sp, #4]
+ 129 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 130 0028 012B     		cmp	r3, #1
+ 131 002a 06D0     		beq	.L6
+ 132              		.loc 1 150 0 is_stmt 0 discriminator 1
+ 133 002c 019B     		ldr	r3, [sp, #4]
+ 134 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 135 0030 022B     		cmp	r3, #2
+ 136 0032 02D0     		beq	.L6
+ 137 0034 0948     		ldr	r0, .L7+4
+ 138 0036 FFF7FEFF 		bl	chDbgPanic
+ 139              	.L6:
+ 140              		.loc 1 153 0 is_stmt 1
+ 141 003a 019B     		ldr	r3, [sp, #4]
+ 142 003c 009A     		ldr	r2, [sp]
+ 143 003e 5A60     		str	r2, [r3, #4]
+ 144              		.loc 1 155 0
+ 145 0040 019B     		ldr	r3, [sp, #4]
+ 146 0042 0222     		movs	r2, #2
+ 147 0044 1A70     		strb	r2, [r3]
+ 148              		.loc 1 156 0
+ 149 0046 FFF7FEFF 		bl	dbg_check_unlock
+ 150              	.LBB3:
+ 151 004a 0023     		movs	r3, #0
+ 152              	@ 156 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 153 004c 83F31188 		msr     BASEPRI, r3
+ 154              	@ 0 "" 2
+ 155              		.thumb
+ 156              	.LBE3:
+ 157              		.loc 1 157 0
+ 158 0050 03B0     		add	sp, sp, #12
+ 159              		@ sp needed
+ 160 0052 5DF804FB 		ldr	pc, [sp], #4
+ 161              	.L8:
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 4
+
+
+ 162 0056 00BF     		.align	2
+ 163              	.L7:
+ 164 0058 00000000 		.word	.LC0
+ 165 005c 10000000 		.word	.LC1
+ 166              		.cfi_endproc
+ 167              	.LFE70:
+ 168              		.size	luartStart, .-luartStart
+ 169              		.section	.rodata
+ 170 0021 000000   		.align	2
+ 171              	.LC2:
+ 172 0024 226C7561 		.ascii	"\"luartStop\"()\000"
+ 172      72745374 
+ 172      6F702228 
+ 172      2900
+ 173 0032 0000     		.align	2
+ 174              	.LC3:
+ 175 0034 6C756172 		.ascii	"luartStop(), #1\000"
+ 175      7453746F 
+ 175      7028292C 
+ 175      20233100 
+ 176              		.section	.text.luartStop,"ax",%progbits
+ 177              		.align	2
+ 178              		.p2align 4,,15
+ 179              		.global	luartStop
+ 180              		.thumb
+ 181              		.thumb_func
+ 182              		.type	luartStop, %function
+ 183              	luartStop:
+ 184              	.LFB71:
+ 185              		.loc 1 166 0
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 8
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189 0000 00B5     		push	{lr}
+ 190              		.cfi_def_cfa_offset 4
+ 191              		.cfi_offset 14, -4
+ 192 0002 83B0     		sub	sp, sp, #12
+ 193              		.cfi_def_cfa_offset 16
+ 194 0004 0190     		str	r0, [sp, #4]
+ 195              		.loc 1 168 0
+ 196 0006 019B     		ldr	r3, [sp, #4]
+ 197 0008 002B     		cmp	r3, #0
+ 198 000a 02D1     		bne	.L10
+ 199              		.loc 1 168 0 is_stmt 0 discriminator 1
+ 200 000c 1148     		ldr	r0, .L12
+ 201 000e FFF7FEFF 		bl	chDbgPanic
+ 202              	.L10:
+ 203              	.LBB4:
+ 204              		.loc 1 170 0 is_stmt 1
+ 205 0012 2023     		movs	r3, #32
+ 206              	@ 170 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 207 0014 83F31188 		msr     BASEPRI, r3
+ 208              	@ 0 "" 2
+ 209              		.thumb
+ 210              	.LBE4:
+ 211 0018 FFF7FEFF 		bl	dbg_check_lock
+ 212              		.loc 1 171 0
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 5
+
+
+ 213 001c 019B     		ldr	r3, [sp, #4]
+ 214 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 215 0020 012B     		cmp	r3, #1
+ 216 0022 06D0     		beq	.L11
+ 217              		.loc 1 171 0 is_stmt 0 discriminator 1
+ 218 0024 019B     		ldr	r3, [sp, #4]
+ 219 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 220 0028 022B     		cmp	r3, #2
+ 221 002a 02D0     		beq	.L11
+ 222 002c 0A48     		ldr	r0, .L12+4
+ 223 002e FFF7FEFF 		bl	chDbgPanic
+ 224              	.L11:
+ 225              		.loc 1 175 0 is_stmt 1
+ 226 0032 019B     		ldr	r3, [sp, #4]
+ 227 0034 0122     		movs	r2, #1
+ 228 0036 1A70     		strb	r2, [r3]
+ 229              		.loc 1 176 0
+ 230 0038 019B     		ldr	r3, [sp, #4]
+ 231 003a 0022     		movs	r2, #0
+ 232 003c 5A70     		strb	r2, [r3, #1]
+ 233              		.loc 1 177 0
+ 234 003e 019B     		ldr	r3, [sp, #4]
+ 235 0040 0022     		movs	r2, #0
+ 236 0042 9A70     		strb	r2, [r3, #2]
+ 237              		.loc 1 178 0
+ 238 0044 FFF7FEFF 		bl	dbg_check_unlock
+ 239              	.LBB5:
+ 240 0048 0023     		movs	r3, #0
+ 241              	@ 178 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 242 004a 83F31188 		msr     BASEPRI, r3
+ 243              	@ 0 "" 2
+ 244              		.thumb
+ 245              	.LBE5:
+ 246              		.loc 1 179 0
+ 247 004e 03B0     		add	sp, sp, #12
+ 248              		@ sp needed
+ 249 0050 5DF804FB 		ldr	pc, [sp], #4
+ 250              	.L13:
+ 251              		.align	2
+ 252              	.L12:
+ 253 0054 24000000 		.word	.LC2
+ 254 0058 34000000 		.word	.LC3
+ 255              		.cfi_endproc
+ 256              	.LFE71:
+ 257              		.size	luartStop, .-luartStop
+ 258 005c AFF30080 		.section	.rodata
+ 259              		.align	2
+ 260              	.LC4:
+ 261 0044 226C7561 		.ascii	"\"luartStartSend\"()\000"
+ 261      72745374 
+ 261      61727453 
+ 261      656E6422 
+ 261      282900
+ 262 0057 00       		.align	2
+ 263              	.LC5:
+ 264 0058 6C756172 		.ascii	"luartStartSend(), #1\000"
+ 264      74537461 
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 6
+
+
+ 264      72745365 
+ 264      6E642829 
+ 264      2C202331 
+ 265 006d 000000   		.align	2
+ 266              	.LC6:
+ 267 0070 6C756172 		.ascii	"luartStartSend(), #2\000"
+ 267      74537461 
+ 267      72745365 
+ 267      6E642829 
+ 267      2C202332 
+ 268              		.section	.text.luartStartSend,"ax",%progbits
+ 269              		.align	2
+ 270              		.p2align 4,,15
+ 271              		.global	luartStartSend
+ 272              		.thumb
+ 273              		.thumb_func
+ 274              		.type	luartStartSend, %function
+ 275              	luartStartSend:
+ 276              	.LFB72:
+ 277              		.loc 1 192 0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 16
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281 0000 00B5     		push	{lr}
+ 282              		.cfi_def_cfa_offset 4
+ 283              		.cfi_offset 14, -4
+ 284 0002 85B0     		sub	sp, sp, #20
+ 285              		.cfi_def_cfa_offset 24
+ 286 0004 0390     		str	r0, [sp, #12]
+ 287 0006 0291     		str	r1, [sp, #8]
+ 288 0008 0192     		str	r2, [sp, #4]
+ 289              		.loc 1 194 0
+ 290 000a 039B     		ldr	r3, [sp, #12]
+ 291 000c 002B     		cmp	r3, #0
+ 292 000e 05D0     		beq	.L15
+ 293              		.loc 1 194 0 is_stmt 0 discriminator 2
+ 294 0010 029B     		ldr	r3, [sp, #8]
+ 295 0012 002B     		cmp	r3, #0
+ 296 0014 02D0     		beq	.L15
+ 297              		.loc 1 194 0 discriminator 1
+ 298 0016 019B     		ldr	r3, [sp, #4]
+ 299 0018 002B     		cmp	r3, #0
+ 300 001a 02D1     		bne	.L16
+ 301              	.L15:
+ 302 001c 1048     		ldr	r0, .L19
+ 303 001e FFF7FEFF 		bl	chDbgPanic
+ 304              	.L16:
+ 305              	.LBB6:
+ 306              		.loc 1 197 0 is_stmt 1
+ 307 0022 2023     		movs	r3, #32
+ 308              	@ 197 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 309 0024 83F31188 		msr     BASEPRI, r3
+ 310              	@ 0 "" 2
+ 311              		.thumb
+ 312              	.LBE6:
+ 313 0028 FFF7FEFF 		bl	dbg_check_lock
+ 314              		.loc 1 198 0
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 7
+
+
+ 315 002c 039B     		ldr	r3, [sp, #12]
+ 316 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 317 0030 022B     		cmp	r3, #2
+ 318 0032 02D0     		beq	.L17
+ 319              		.loc 1 198 0 is_stmt 0 discriminator 1
+ 320 0034 0B48     		ldr	r0, .L19+4
+ 321 0036 FFF7FEFF 		bl	chDbgPanic
+ 322              	.L17:
+ 323              		.loc 1 200 0 is_stmt 1
+ 324 003a 039B     		ldr	r3, [sp, #12]
+ 325 003c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 326 003e 012B     		cmp	r3, #1
+ 327 0040 02D1     		bne	.L18
+ 328              		.loc 1 200 0 is_stmt 0 discriminator 1
+ 329 0042 0948     		ldr	r0, .L19+8
+ 330 0044 FFF7FEFF 		bl	chDbgPanic
+ 331              	.L18:
+ 332              		.loc 1 204 0 is_stmt 1
+ 333 0048 039B     		ldr	r3, [sp, #12]
+ 334 004a 0122     		movs	r2, #1
+ 335 004c 5A70     		strb	r2, [r3, #1]
+ 336              		.loc 1 205 0
+ 337 004e FFF7FEFF 		bl	dbg_check_unlock
+ 338              	.LBB7:
+ 339 0052 0023     		movs	r3, #0
+ 340              	@ 205 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 341 0054 83F31188 		msr     BASEPRI, r3
+ 342              	@ 0 "" 2
+ 343              		.thumb
+ 344              	.LBE7:
+ 345              		.loc 1 206 0
+ 346 0058 05B0     		add	sp, sp, #20
+ 347              		@ sp needed
+ 348 005a 5DF804FB 		ldr	pc, [sp], #4
+ 349              	.L20:
+ 350 005e 00BF     		.align	2
+ 351              	.L19:
+ 352 0060 44000000 		.word	.LC4
+ 353 0064 58000000 		.word	.LC5
+ 354 0068 70000000 		.word	.LC6
+ 355              		.cfi_endproc
+ 356              	.LFE72:
+ 357              		.size	luartStartSend, .-luartStartSend
+ 358 006c AFF30080 		.section	.rodata
+ 359 0085 000000   		.align	2
+ 360              	.LC7:
+ 361 0088 226C7561 		.ascii	"\"luartStartSendI\"()\000"
+ 361      72745374 
+ 361      61727453 
+ 361      656E6449 
+ 361      22282900 
+ 362              		.align	2
+ 363              	.LC8:
+ 364 009c 6C756172 		.ascii	"luartStartSendI(), #1\000"
+ 364      74537461 
+ 364      72745365 
+ 364      6E644928 
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 8
+
+
+ 364      292C2023 
+ 365 00b2 0000     		.align	2
+ 366              	.LC9:
+ 367 00b4 6C756172 		.ascii	"luartStartSendI(), #2\000"
+ 367      74537461 
+ 367      72745365 
+ 367      6E644928 
+ 367      292C2023 
+ 368              		.section	.text.luartStartSendI,"ax",%progbits
+ 369              		.align	2
+ 370              		.p2align 4,,15
+ 371              		.global	luartStartSendI
+ 372              		.thumb
+ 373              		.thumb_func
+ 374              		.type	luartStartSendI, %function
+ 375              	luartStartSendI:
+ 376              	.LFB73:
+ 377              		.loc 1 220 0
+ 378              		.cfi_startproc
+ 379              		@ args = 0, pretend = 0, frame = 16
+ 380              		@ frame_needed = 0, uses_anonymous_args = 0
+ 381 0000 00B5     		push	{lr}
+ 382              		.cfi_def_cfa_offset 4
+ 383              		.cfi_offset 14, -4
+ 384 0002 85B0     		sub	sp, sp, #20
+ 385              		.cfi_def_cfa_offset 24
+ 386 0004 0390     		str	r0, [sp, #12]
+ 387 0006 0291     		str	r1, [sp, #8]
+ 388 0008 0192     		str	r2, [sp, #4]
+ 389              		.loc 1 222 0
+ 390 000a FFF7FEFF 		bl	chDbgCheckClassI
+ 391              		.loc 1 223 0
+ 392 000e 039B     		ldr	r3, [sp, #12]
+ 393 0010 002B     		cmp	r3, #0
+ 394 0012 05D0     		beq	.L22
+ 395              		.loc 1 223 0 is_stmt 0 discriminator 2
+ 396 0014 029B     		ldr	r3, [sp, #8]
+ 397 0016 002B     		cmp	r3, #0
+ 398 0018 02D0     		beq	.L22
+ 399              		.loc 1 223 0 discriminator 1
+ 400 001a 019B     		ldr	r3, [sp, #4]
+ 401 001c 002B     		cmp	r3, #0
+ 402 001e 02D1     		bne	.L23
+ 403              	.L22:
+ 404 0020 0B48     		ldr	r0, .L26
+ 405 0022 FFF7FEFF 		bl	chDbgPanic
+ 406              	.L23:
+ 407              		.loc 1 225 0 is_stmt 1
+ 408 0026 039B     		ldr	r3, [sp, #12]
+ 409 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 410 002a 022B     		cmp	r3, #2
+ 411 002c 02D0     		beq	.L24
+ 412              		.loc 1 225 0 is_stmt 0 discriminator 1
+ 413 002e 0948     		ldr	r0, .L26+4
+ 414 0030 FFF7FEFF 		bl	chDbgPanic
+ 415              	.L24:
+ 416              		.loc 1 227 0 is_stmt 1
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 9
+
+
+ 417 0034 039B     		ldr	r3, [sp, #12]
+ 418 0036 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 419 0038 012B     		cmp	r3, #1
+ 420 003a 02D1     		bne	.L25
+ 421              		.loc 1 227 0 is_stmt 0 discriminator 1
+ 422 003c 0648     		ldr	r0, .L26+8
+ 423 003e FFF7FEFF 		bl	chDbgPanic
+ 424              	.L25:
+ 425              		.loc 1 231 0 is_stmt 1
+ 426 0042 039B     		ldr	r3, [sp, #12]
+ 427 0044 0122     		movs	r2, #1
+ 428 0046 5A70     		strb	r2, [r3, #1]
+ 429              		.loc 1 232 0
+ 430 0048 05B0     		add	sp, sp, #20
+ 431              		@ sp needed
+ 432 004a 5DF804FB 		ldr	pc, [sp], #4
+ 433              	.L27:
+ 434 004e 00BF     		.align	2
+ 435              	.L26:
+ 436 0050 88000000 		.word	.LC7
+ 437 0054 9C000000 		.word	.LC8
+ 438 0058 B4000000 		.word	.LC9
+ 439              		.cfi_endproc
+ 440              	.LFE73:
+ 441              		.size	luartStartSendI, .-luartStartSendI
+ 442 005c AFF30080 		.section	.rodata
+ 443 00ca 0000     		.align	2
+ 444              	.LC10:
+ 445 00cc 226C7561 		.ascii	"\"luartStopSend\"()\000"
+ 445      72745374 
+ 445      6F705365 
+ 445      6E642228 
+ 445      2900
+ 446 00de 0000     		.align	2
+ 447              	.LC11:
+ 448 00e0 6C756172 		.ascii	"luartStopSend(), #1\000"
+ 448      7453746F 
+ 448      7053656E 
+ 448      6428292C 
+ 448      20233100 
+ 449              		.section	.text.luartStopSend,"ax",%progbits
+ 450              		.align	2
+ 451              		.p2align 4,,15
+ 452              		.global	luartStopSend
+ 453              		.thumb
+ 454              		.thumb_func
+ 455              		.type	luartStopSend, %function
+ 456              	luartStopSend:
+ 457              	.LFB74:
+ 458              		.loc 1 246 0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 16
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462 0000 00B5     		push	{lr}
+ 463              		.cfi_def_cfa_offset 4
+ 464              		.cfi_offset 14, -4
+ 465 0002 85B0     		sub	sp, sp, #20
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 10
+
+
+ 466              		.cfi_def_cfa_offset 24
+ 467 0004 0190     		str	r0, [sp, #4]
+ 468              		.loc 1 249 0
+ 469 0006 019B     		ldr	r3, [sp, #4]
+ 470 0008 002B     		cmp	r3, #0
+ 471 000a 02D1     		bne	.L29
+ 472              		.loc 1 249 0 is_stmt 0 discriminator 1
+ 473 000c 1148     		ldr	r0, .L34
+ 474 000e FFF7FEFF 		bl	chDbgPanic
+ 475              	.L29:
+ 476              	.LBB8:
+ 477              		.loc 1 251 0 is_stmt 1
+ 478 0012 2023     		movs	r3, #32
+ 479              	@ 251 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 480 0014 83F31188 		msr     BASEPRI, r3
+ 481              	@ 0 "" 2
+ 482              		.thumb
+ 483              	.LBE8:
+ 484 0018 FFF7FEFF 		bl	dbg_check_lock
+ 485              		.loc 1 252 0
+ 486 001c 019B     		ldr	r3, [sp, #4]
+ 487 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 488 0020 022B     		cmp	r3, #2
+ 489 0022 02D0     		beq	.L30
+ 490              		.loc 1 252 0 is_stmt 0 discriminator 1
+ 491 0024 0C48     		ldr	r0, .L34+4
+ 492 0026 FFF7FEFF 		bl	chDbgPanic
+ 493              	.L30:
+ 494              		.loc 1 254 0 is_stmt 1
+ 495 002a 019B     		ldr	r3, [sp, #4]
+ 496 002c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 497 002e 012B     		cmp	r3, #1
+ 498 0030 03D1     		bne	.L31
+ 499              		.loc 1 256 0
+ 500 0032 019B     		ldr	r3, [sp, #4]
+ 501 0034 0022     		movs	r2, #0
+ 502 0036 5A70     		strb	r2, [r3, #1]
+ 503 0038 01E0     		b	.L32
+ 504              	.L31:
+ 505              		.loc 1 258 0
+ 506 003a 0023     		movs	r3, #0
+ 507 003c 0393     		str	r3, [sp, #12]
+ 508              	.L32:
+ 509              		.loc 1 260 0
+ 510 003e FFF7FEFF 		bl	dbg_check_unlock
+ 511              	.LBB9:
+ 512 0042 0023     		movs	r3, #0
+ 513              	@ 260 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 514 0044 83F31188 		msr     BASEPRI, r3
+ 515              	@ 0 "" 2
+ 516              		.thumb
+ 517              	.LBE9:
+ 518              		.loc 1 261 0
+ 519 0048 039B     		ldr	r3, [sp, #12]
+ 520              		.loc 1 262 0
+ 521 004a 1846     		mov	r0, r3
+ 522 004c 05B0     		add	sp, sp, #20
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 11
+
+
+ 523              		@ sp needed
+ 524 004e 5DF804FB 		ldr	pc, [sp], #4
+ 525              	.L35:
+ 526 0052 00BF     		.align	2
+ 527              	.L34:
+ 528 0054 CC000000 		.word	.LC10
+ 529 0058 E0000000 		.word	.LC11
+ 530              		.cfi_endproc
+ 531              	.LFE74:
+ 532              		.size	luartStopSend, .-luartStopSend
+ 533 005c AFF30080 		.section	.rodata
+ 534              		.align	2
+ 535              	.LC12:
+ 536 00f4 226C7561 		.ascii	"\"luartStopSendI\"()\000"
+ 536      72745374 
+ 536      6F705365 
+ 536      6E644922 
+ 536      282900
+ 537 0107 00       		.align	2
+ 538              	.LC13:
+ 539 0108 6C756172 		.ascii	"luartStopSendI(), #1\000"
+ 539      7453746F 
+ 539      7053656E 
+ 539      64492829 
+ 539      2C202331 
+ 540              		.section	.text.luartStopSendI,"ax",%progbits
+ 541              		.align	2
+ 542              		.p2align 4,,15
+ 543              		.global	luartStopSendI
+ 544              		.thumb
+ 545              		.thumb_func
+ 546              		.type	luartStopSendI, %function
+ 547              	luartStopSendI:
+ 548              	.LFB75:
+ 549              		.loc 1 277 0
+ 550              		.cfi_startproc
+ 551              		@ args = 0, pretend = 0, frame = 16
+ 552              		@ frame_needed = 0, uses_anonymous_args = 0
+ 553 0000 00B5     		push	{lr}
+ 554              		.cfi_def_cfa_offset 4
+ 555              		.cfi_offset 14, -4
+ 556 0002 85B0     		sub	sp, sp, #20
+ 557              		.cfi_def_cfa_offset 24
+ 558 0004 0190     		str	r0, [sp, #4]
+ 559              		.loc 1 279 0
+ 560 0006 FFF7FEFF 		bl	chDbgCheckClassI
+ 561              		.loc 1 280 0
+ 562 000a 019B     		ldr	r3, [sp, #4]
+ 563 000c 002B     		cmp	r3, #0
+ 564 000e 02D1     		bne	.L37
+ 565              		.loc 1 280 0 is_stmt 0 discriminator 1
+ 566 0010 0C48     		ldr	r0, .L41
+ 567 0012 FFF7FEFF 		bl	chDbgPanic
+ 568              	.L37:
+ 569              		.loc 1 281 0 is_stmt 1
+ 570 0016 019B     		ldr	r3, [sp, #4]
+ 571 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 12
+
+
+ 572 001a 022B     		cmp	r3, #2
+ 573 001c 02D0     		beq	.L38
+ 574              		.loc 1 281 0 is_stmt 0 discriminator 1
+ 575 001e 0A48     		ldr	r0, .L41+4
+ 576 0020 FFF7FEFF 		bl	chDbgPanic
+ 577              	.L38:
+ 578              		.loc 1 283 0 is_stmt 1
+ 579 0024 019B     		ldr	r3, [sp, #4]
+ 580 0026 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 581 0028 012B     		cmp	r3, #1
+ 582 002a 06D1     		bne	.L39
+ 583              	.LBB10:
+ 584              		.loc 1 284 0
+ 585 002c 0023     		movs	r3, #0
+ 586 002e 0393     		str	r3, [sp, #12]
+ 587              		.loc 1 286 0
+ 588 0030 019B     		ldr	r3, [sp, #4]
+ 589 0032 0022     		movs	r2, #0
+ 590 0034 5A70     		strb	r2, [r3, #1]
+ 591              		.loc 1 287 0
+ 592 0036 039B     		ldr	r3, [sp, #12]
+ 593 0038 00E0     		b	.L40
+ 594              	.L39:
+ 595              	.LBE10:
+ 596              		.loc 1 289 0
+ 597 003a 0023     		movs	r3, #0
+ 598              	.L40:
+ 599              		.loc 1 290 0
+ 600 003c 1846     		mov	r0, r3
+ 601 003e 05B0     		add	sp, sp, #20
+ 602              		@ sp needed
+ 603 0040 5DF804FB 		ldr	pc, [sp], #4
+ 604              	.L42:
+ 605              		.align	2
+ 606              	.L41:
+ 607 0044 F4000000 		.word	.LC12
+ 608 0048 08010000 		.word	.LC13
+ 609              		.cfi_endproc
+ 610              	.LFE75:
+ 611              		.size	luartStopSendI, .-luartStopSendI
+ 612 004c AFF30080 		.section	.rodata
+ 613 011d 000000   		.align	2
+ 614              	.LC14:
+ 615 0120 226C7561 		.ascii	"\"luartStartReceive\"()\000"
+ 615      72745374 
+ 615      61727452 
+ 615      65636569 
+ 615      76652228 
+ 616 0136 0000     		.align	2
+ 617              	.LC15:
+ 618 0138 6C756172 		.ascii	"luartStartReceive(), #1\000"
+ 618      74537461 
+ 618      72745265 
+ 618      63656976 
+ 618      6528292C 
+ 619              		.align	2
+ 620              	.LC16:
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 13
+
+
+ 621 0150 6C756172 		.ascii	"luartStartReceive(), #2\000"
+ 621      74537461 
+ 621      72745265 
+ 621      63656976 
+ 621      6528292C 
+ 622              		.section	.text.luartStartReceive,"ax",%progbits
+ 623              		.align	2
+ 624              		.p2align 4,,15
+ 625              		.global	luartStartReceive
+ 626              		.thumb
+ 627              		.thumb_func
+ 628              		.type	luartStartReceive, %function
+ 629              	luartStartReceive:
+ 630              	.LFB76:
+ 631              		.loc 1 303 0
+ 632              		.cfi_startproc
+ 633              		@ args = 0, pretend = 0, frame = 16
+ 634              		@ frame_needed = 0, uses_anonymous_args = 0
+ 635 0000 00B5     		push	{lr}
+ 636              		.cfi_def_cfa_offset 4
+ 637              		.cfi_offset 14, -4
+ 638 0002 85B0     		sub	sp, sp, #20
+ 639              		.cfi_def_cfa_offset 24
+ 640 0004 0390     		str	r0, [sp, #12]
+ 641 0006 0291     		str	r1, [sp, #8]
+ 642 0008 0192     		str	r2, [sp, #4]
+ 643              		.loc 1 305 0
+ 644 000a 039B     		ldr	r3, [sp, #12]
+ 645 000c 002B     		cmp	r3, #0
+ 646 000e 05D0     		beq	.L44
+ 647              		.loc 1 305 0 is_stmt 0 discriminator 2
+ 648 0010 029B     		ldr	r3, [sp, #8]
+ 649 0012 002B     		cmp	r3, #0
+ 650 0014 02D0     		beq	.L44
+ 651              		.loc 1 305 0 discriminator 1
+ 652 0016 019B     		ldr	r3, [sp, #4]
+ 653 0018 002B     		cmp	r3, #0
+ 654 001a 02D1     		bne	.L45
+ 655              	.L44:
+ 656 001c 1048     		ldr	r0, .L48
+ 657 001e FFF7FEFF 		bl	chDbgPanic
+ 658              	.L45:
+ 659              	.LBB11:
+ 660              		.loc 1 308 0 is_stmt 1
+ 661 0022 2023     		movs	r3, #32
+ 662              	@ 308 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 663 0024 83F31188 		msr     BASEPRI, r3
+ 664              	@ 0 "" 2
+ 665              		.thumb
+ 666              	.LBE11:
+ 667 0028 FFF7FEFF 		bl	dbg_check_lock
+ 668              		.loc 1 309 0
+ 669 002c 039B     		ldr	r3, [sp, #12]
+ 670 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 671 0030 022B     		cmp	r3, #2
+ 672 0032 02D0     		beq	.L46
+ 673              		.loc 1 309 0 is_stmt 0 discriminator 1
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 14
+
+
+ 674 0034 0B48     		ldr	r0, .L48+4
+ 675 0036 FFF7FEFF 		bl	chDbgPanic
+ 676              	.L46:
+ 677              		.loc 1 311 0 is_stmt 1
+ 678 003a 039B     		ldr	r3, [sp, #12]
+ 679 003c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 680 003e 012B     		cmp	r3, #1
+ 681 0040 02D1     		bne	.L47
+ 682              		.loc 1 311 0 is_stmt 0 discriminator 1
+ 683 0042 0948     		ldr	r0, .L48+8
+ 684 0044 FFF7FEFF 		bl	chDbgPanic
+ 685              	.L47:
+ 686              		.loc 1 315 0 is_stmt 1
+ 687 0048 039B     		ldr	r3, [sp, #12]
+ 688 004a 0122     		movs	r2, #1
+ 689 004c 9A70     		strb	r2, [r3, #2]
+ 690              		.loc 1 316 0
+ 691 004e FFF7FEFF 		bl	dbg_check_unlock
+ 692              	.LBB12:
+ 693 0052 0023     		movs	r3, #0
+ 694              	@ 316 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 695 0054 83F31188 		msr     BASEPRI, r3
+ 696              	@ 0 "" 2
+ 697              		.thumb
+ 698              	.LBE12:
+ 699              		.loc 1 317 0
+ 700 0058 05B0     		add	sp, sp, #20
+ 701              		@ sp needed
+ 702 005a 5DF804FB 		ldr	pc, [sp], #4
+ 703              	.L49:
+ 704 005e 00BF     		.align	2
+ 705              	.L48:
+ 706 0060 20010000 		.word	.LC14
+ 707 0064 38010000 		.word	.LC15
+ 708 0068 50010000 		.word	.LC16
+ 709              		.cfi_endproc
+ 710              	.LFE76:
+ 711              		.size	luartStartReceive, .-luartStartReceive
+ 712 006c AFF30080 		.section	.rodata
+ 713              		.align	2
+ 714              	.LC17:
+ 715 0168 226C7561 		.ascii	"\"luartStartReceiveI\"()\000"
+ 715      72745374 
+ 715      61727452 
+ 715      65636569 
+ 715      76654922 
+ 716 017f 00       		.align	2
+ 717              	.LC18:
+ 718 0180 6C756172 		.ascii	"luartStartReceiveI(), #1\000"
+ 718      74537461 
+ 718      72745265 
+ 718      63656976 
+ 718      65492829 
+ 719 0199 000000   		.align	2
+ 720              	.LC19:
+ 721 019c 6C756172 		.ascii	"luartStartReceiveI(), #2\000"
+ 721      74537461 
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 15
+
+
+ 721      72745265 
+ 721      63656976 
+ 721      65492829 
+ 722              		.section	.text.luartStartReceiveI,"ax",%progbits
+ 723              		.align	2
+ 724              		.p2align 4,,15
+ 725              		.global	luartStartReceiveI
+ 726              		.thumb
+ 727              		.thumb_func
+ 728              		.type	luartStartReceiveI, %function
+ 729              	luartStartReceiveI:
+ 730              	.LFB77:
+ 731              		.loc 1 331 0
+ 732              		.cfi_startproc
+ 733              		@ args = 0, pretend = 0, frame = 16
+ 734              		@ frame_needed = 0, uses_anonymous_args = 0
+ 735 0000 00B5     		push	{lr}
+ 736              		.cfi_def_cfa_offset 4
+ 737              		.cfi_offset 14, -4
+ 738 0002 85B0     		sub	sp, sp, #20
+ 739              		.cfi_def_cfa_offset 24
+ 740 0004 0390     		str	r0, [sp, #12]
+ 741 0006 0291     		str	r1, [sp, #8]
+ 742 0008 0192     		str	r2, [sp, #4]
+ 743              		.loc 1 333 0
+ 744 000a FFF7FEFF 		bl	chDbgCheckClassI
+ 745              		.loc 1 334 0
+ 746 000e 039B     		ldr	r3, [sp, #12]
+ 747 0010 002B     		cmp	r3, #0
+ 748 0012 05D0     		beq	.L51
+ 749              		.loc 1 334 0 is_stmt 0 discriminator 2
+ 750 0014 029B     		ldr	r3, [sp, #8]
+ 751 0016 002B     		cmp	r3, #0
+ 752 0018 02D0     		beq	.L51
+ 753              		.loc 1 334 0 discriminator 1
+ 754 001a 019B     		ldr	r3, [sp, #4]
+ 755 001c 002B     		cmp	r3, #0
+ 756 001e 02D1     		bne	.L52
+ 757              	.L51:
+ 758 0020 0B48     		ldr	r0, .L55
+ 759 0022 FFF7FEFF 		bl	chDbgPanic
+ 760              	.L52:
+ 761              		.loc 1 336 0 is_stmt 1
+ 762 0026 039B     		ldr	r3, [sp, #12]
+ 763 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 764 002a 022B     		cmp	r3, #2
+ 765 002c 02D0     		beq	.L53
+ 766              		.loc 1 336 0 is_stmt 0 discriminator 1
+ 767 002e 0948     		ldr	r0, .L55+4
+ 768 0030 FFF7FEFF 		bl	chDbgPanic
+ 769              	.L53:
+ 770              		.loc 1 338 0 is_stmt 1
+ 771 0034 039B     		ldr	r3, [sp, #12]
+ 772 0036 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 773 0038 012B     		cmp	r3, #1
+ 774 003a 02D1     		bne	.L54
+ 775              		.loc 1 338 0 is_stmt 0 discriminator 1
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 16
+
+
+ 776 003c 0648     		ldr	r0, .L55+8
+ 777 003e FFF7FEFF 		bl	chDbgPanic
+ 778              	.L54:
+ 779              		.loc 1 342 0 is_stmt 1
+ 780 0042 039B     		ldr	r3, [sp, #12]
+ 781 0044 0122     		movs	r2, #1
+ 782 0046 9A70     		strb	r2, [r3, #2]
+ 783              		.loc 1 343 0
+ 784 0048 05B0     		add	sp, sp, #20
+ 785              		@ sp needed
+ 786 004a 5DF804FB 		ldr	pc, [sp], #4
+ 787              	.L56:
+ 788 004e 00BF     		.align	2
+ 789              	.L55:
+ 790 0050 68010000 		.word	.LC17
+ 791 0054 80010000 		.word	.LC18
+ 792 0058 9C010000 		.word	.LC19
+ 793              		.cfi_endproc
+ 794              	.LFE77:
+ 795              		.size	luartStartReceiveI, .-luartStartReceiveI
+ 796 005c AFF30080 		.section	.rodata
+ 797 01b5 000000   		.align	2
+ 798              	.LC20:
+ 799 01b8 226C7561 		.ascii	"\"luartStopReceive\"()\000"
+ 799      72745374 
+ 799      6F705265 
+ 799      63656976 
+ 799      65222829 
+ 800 01cd 000000   		.align	2
+ 801              	.LC21:
+ 802 01d0 6C756172 		.ascii	"luartStopReceive(), #1\000"
+ 802      7453746F 
+ 802      70526563 
+ 802      65697665 
+ 802      28292C20 
+ 803              		.section	.text.luartStopReceive,"ax",%progbits
+ 804              		.align	2
+ 805              		.p2align 4,,15
+ 806              		.global	luartStopReceive
+ 807              		.thumb
+ 808              		.thumb_func
+ 809              		.type	luartStopReceive, %function
+ 810              	luartStopReceive:
+ 811              	.LFB78:
+ 812              		.loc 1 357 0
+ 813              		.cfi_startproc
+ 814              		@ args = 0, pretend = 0, frame = 16
+ 815              		@ frame_needed = 0, uses_anonymous_args = 0
+ 816 0000 00B5     		push	{lr}
+ 817              		.cfi_def_cfa_offset 4
+ 818              		.cfi_offset 14, -4
+ 819 0002 85B0     		sub	sp, sp, #20
+ 820              		.cfi_def_cfa_offset 24
+ 821 0004 0190     		str	r0, [sp, #4]
+ 822              		.loc 1 360 0
+ 823 0006 019B     		ldr	r3, [sp, #4]
+ 824 0008 002B     		cmp	r3, #0
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 17
+
+
+ 825 000a 02D1     		bne	.L58
+ 826              		.loc 1 360 0 is_stmt 0 discriminator 1
+ 827 000c 1148     		ldr	r0, .L63
+ 828 000e FFF7FEFF 		bl	chDbgPanic
+ 829              	.L58:
+ 830              	.LBB13:
+ 831              		.loc 1 362 0 is_stmt 1
+ 832 0012 2023     		movs	r3, #32
+ 833              	@ 362 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 834 0014 83F31188 		msr     BASEPRI, r3
+ 835              	@ 0 "" 2
+ 836              		.thumb
+ 837              	.LBE13:
+ 838 0018 FFF7FEFF 		bl	dbg_check_lock
+ 839              		.loc 1 363 0
+ 840 001c 019B     		ldr	r3, [sp, #4]
+ 841 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 842 0020 022B     		cmp	r3, #2
+ 843 0022 02D0     		beq	.L59
+ 844              		.loc 1 363 0 is_stmt 0 discriminator 1
+ 845 0024 0C48     		ldr	r0, .L63+4
+ 846 0026 FFF7FEFF 		bl	chDbgPanic
+ 847              	.L59:
+ 848              		.loc 1 366 0 is_stmt 1
+ 849 002a 019B     		ldr	r3, [sp, #4]
+ 850 002c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 851 002e 012B     		cmp	r3, #1
+ 852 0030 03D1     		bne	.L60
+ 853              		.loc 1 368 0
+ 854 0032 019B     		ldr	r3, [sp, #4]
+ 855 0034 0022     		movs	r2, #0
+ 856 0036 9A70     		strb	r2, [r3, #2]
+ 857 0038 01E0     		b	.L61
+ 858              	.L60:
+ 859              		.loc 1 370 0
+ 860 003a 0023     		movs	r3, #0
+ 861 003c 0393     		str	r3, [sp, #12]
+ 862              	.L61:
+ 863              		.loc 1 372 0
+ 864 003e FFF7FEFF 		bl	dbg_check_unlock
+ 865              	.LBB14:
+ 866 0042 0023     		movs	r3, #0
+ 867              	@ 372 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c" 1
+ 868 0044 83F31188 		msr     BASEPRI, r3
+ 869              	@ 0 "" 2
+ 870              		.thumb
+ 871              	.LBE14:
+ 872              		.loc 1 373 0
+ 873 0048 039B     		ldr	r3, [sp, #12]
+ 874              		.loc 1 374 0
+ 875 004a 1846     		mov	r0, r3
+ 876 004c 05B0     		add	sp, sp, #20
+ 877              		@ sp needed
+ 878 004e 5DF804FB 		ldr	pc, [sp], #4
+ 879              	.L64:
+ 880 0052 00BF     		.align	2
+ 881              	.L63:
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 18
+
+
+ 882 0054 B8010000 		.word	.LC20
+ 883 0058 D0010000 		.word	.LC21
+ 884              		.cfi_endproc
+ 885              	.LFE78:
+ 886              		.size	luartStopReceive, .-luartStopReceive
+ 887 005c AFF30080 		.section	.rodata
+ 888 01e7 00       		.align	2
+ 889              	.LC22:
+ 890 01e8 226C7561 		.ascii	"\"luartStopReceiveI\"()\000"
+ 890      72745374 
+ 890      6F705265 
+ 890      63656976 
+ 890      65492228 
+ 891 01fe 0000     		.align	2
+ 892              	.LC23:
+ 893 0200 6C756172 		.ascii	"luartStopReceiveI(), #1\000"
+ 893      7453746F 
+ 893      70526563 
+ 893      65697665 
+ 893      4928292C 
+ 894              		.section	.text.luartStopReceiveI,"ax",%progbits
+ 895              		.align	2
+ 896              		.p2align 4,,15
+ 897              		.global	luartStopReceiveI
+ 898              		.thumb
+ 899              		.thumb_func
+ 900              		.type	luartStopReceiveI, %function
+ 901              	luartStopReceiveI:
+ 902              	.LFB79:
+ 903              		.loc 1 389 0
+ 904              		.cfi_startproc
+ 905              		@ args = 0, pretend = 0, frame = 16
+ 906              		@ frame_needed = 0, uses_anonymous_args = 0
+ 907 0000 00B5     		push	{lr}
+ 908              		.cfi_def_cfa_offset 4
+ 909              		.cfi_offset 14, -4
+ 910 0002 85B0     		sub	sp, sp, #20
+ 911              		.cfi_def_cfa_offset 24
+ 912 0004 0190     		str	r0, [sp, #4]
+ 913              		.loc 1 391 0
+ 914 0006 FFF7FEFF 		bl	chDbgCheckClassI
+ 915              		.loc 1 392 0
+ 916 000a 019B     		ldr	r3, [sp, #4]
+ 917 000c 002B     		cmp	r3, #0
+ 918 000e 02D1     		bne	.L66
+ 919              		.loc 1 392 0 is_stmt 0 discriminator 1
+ 920 0010 0C48     		ldr	r0, .L70
+ 921 0012 FFF7FEFF 		bl	chDbgPanic
+ 922              	.L66:
+ 923              		.loc 1 393 0 is_stmt 1
+ 924 0016 019B     		ldr	r3, [sp, #4]
+ 925 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 926 001a 022B     		cmp	r3, #2
+ 927 001c 02D0     		beq	.L67
+ 928              		.loc 1 393 0 is_stmt 0 discriminator 1
+ 929 001e 0A48     		ldr	r0, .L70+4
+ 930 0020 FFF7FEFF 		bl	chDbgPanic
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 19
+
+
+ 931              	.L67:
+ 932              		.loc 1 396 0 is_stmt 1
+ 933 0024 019B     		ldr	r3, [sp, #4]
+ 934 0026 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 935 0028 012B     		cmp	r3, #1
+ 936 002a 06D1     		bne	.L68
+ 937              	.LBB15:
+ 938              		.loc 1 397 0
+ 939 002c 0023     		movs	r3, #0
+ 940 002e 0393     		str	r3, [sp, #12]
+ 941              		.loc 1 398 0
+ 942 0030 019B     		ldr	r3, [sp, #4]
+ 943 0032 0022     		movs	r2, #0
+ 944 0034 9A70     		strb	r2, [r3, #2]
+ 945              		.loc 1 399 0
+ 946 0036 039B     		ldr	r3, [sp, #12]
+ 947 0038 00E0     		b	.L69
+ 948              	.L68:
+ 949              	.LBE15:
+ 950              		.loc 1 401 0
+ 951 003a 0023     		movs	r3, #0
+ 952              	.L69:
+ 953              		.loc 1 402 0
+ 954 003c 1846     		mov	r0, r3
+ 955 003e 05B0     		add	sp, sp, #20
+ 956              		@ sp needed
+ 957 0040 5DF804FB 		ldr	pc, [sp], #4
+ 958              	.L71:
+ 959              		.align	2
+ 960              	.L70:
+ 961 0044 E8010000 		.word	.LC22
+ 962 0048 00020000 		.word	.LC23
+ 963              		.cfi_endproc
+ 964              	.LFE79:
+ 965              		.size	luartStopReceiveI, .-luartStopReceiveI
+ 966 004c AFF30080 		.section	.rodata
+ 967              		.align	2
+ 968              	.LC24:
+ 969 0218 226C7561 		.ascii	"\"luartPollLinkStatus\"()\000"
+ 969      7274506F 
+ 969      6C6C4C69 
+ 969      6E6B5374 
+ 969      61747573 
+ 970              		.section	.text.luartPollLinkStatus,"ax",%progbits
+ 971              		.align	2
+ 972              		.p2align 4,,15
+ 973              		.global	luartPollLinkStatus
+ 974              		.thumb
+ 975              		.thumb_func
+ 976              		.type	luartPollLinkStatus, %function
+ 977              	luartPollLinkStatus:
+ 978              	.LFB80:
+ 979              		.loc 1 414 0
+ 980              		.cfi_startproc
+ 981              		@ args = 0, pretend = 0, frame = 8
+ 982              		@ frame_needed = 0, uses_anonymous_args = 0
+ 983 0000 00B5     		push	{lr}
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 20
+
+
+ 984              		.cfi_def_cfa_offset 4
+ 985              		.cfi_offset 14, -4
+ 986 0002 83B0     		sub	sp, sp, #12
+ 987              		.cfi_def_cfa_offset 16
+ 988 0004 0190     		str	r0, [sp, #4]
+ 989              		.loc 1 415 0
+ 990 0006 019B     		ldr	r3, [sp, #4]
+ 991 0008 002B     		cmp	r3, #0
+ 992 000a 02D1     		bne	.L73
+ 993              		.loc 1 415 0 is_stmt 0 discriminator 1
+ 994 000c 0548     		ldr	r0, .L75
+ 995 000e FFF7FEFF 		bl	chDbgPanic
+ 996              	.L73:
+ 997              		.loc 1 416 0 is_stmt 1
+ 998 0012 019B     		ldr	r3, [sp, #4]
+ 999 0014 1B7B     		ldrb	r3, [r3, #12]
+ 1000 0016 C3F30003 		ubfx	r3, r3, #0, #1
+ 1001 001a DBB2     		uxtb	r3, r3
+ 1002              		.loc 1 417 0
+ 1003 001c 1846     		mov	r0, r3
+ 1004 001e 03B0     		add	sp, sp, #12
+ 1005              		@ sp needed
+ 1006 0020 5DF804FB 		ldr	pc, [sp], #4
+ 1007              	.L76:
+ 1008              		.align	2
+ 1009              	.L75:
+ 1010 0024 18020000 		.word	.LC24
+ 1011              		.cfi_endproc
+ 1012              	.LFE80:
+ 1013              		.size	luartPollLinkStatus, .-luartPollLinkStatus
+ 1014 0028 AFF30080 		.text
+ 1014      AFF30080 
+ 1015              	.Letext0:
+ 1016              		.file 2 "/opt/gcc-arm-none-eabi-4_8-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stddef.h"
+ 1017              		.file 3 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/machine/_default_types.h"
+ 1018              		.file 4 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/stdint.h"
+ 1019              		.file 5 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chtypes.h"
+ 1020              		.file 6 "/home/pauba/ChibiOS-RT/os/kernel/include/chlists.h"
+ 1021              		.file 7 "/home/pauba/ChibiOS-RT/os/kernel/include/chthreads.h"
+ 1022              		.file 8 "/home/pauba/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore_v7m.h"
+ 1023              		.file 9 "/home/pauba/ChibiOS-RT/os/kernel/include/chmtx.h"
+ 1024              		.file 10 "/home/pauba/ChibiOS-RT/os/kernel/include/chevents.h"
+ 1025              		.file 11 "/home/pauba/ChibiOS-RT/os/hal/platforms/STM32/GPIOv2/pal_lld.h"
+ 1026              		.file 12 "/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.h"
+ 1027              		.file 13 "/home/pauba/ChibiOS-RT/os/ports/common/ARMCMx/CMSIS/include/core_cm3.h"
+ 1028              		.section	.debug_info,"",%progbits
+ 1029              	.Ldebug_info0:
+ 1030 0000 510B0000 		.4byte	0xb51
+ 1031 0004 0400     		.2byte	0x4
+ 1032 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1033 000a 04       		.byte	0x4
+ 1034 000b 01       		.uleb128 0x1
+ 1035 000c 77040000 		.4byte	.LASF137
+ 1036 0010 01       		.byte	0x1
+ 1037 0011 B5050000 		.4byte	.LASF138
+ 1038 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 1039 0019 00000000 		.4byte	0
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 21
+
+
+ 1040 001d 00000000 		.4byte	.Ldebug_line0
+ 1041 0021 02       		.uleb128 0x2
+ 1042 0022 04       		.byte	0x4
+ 1043 0023 05       		.byte	0x5
+ 1044 0024 696E7400 		.ascii	"int\000"
+ 1045 0028 03       		.uleb128 0x3
+ 1046 0029 15000000 		.4byte	.LASF2
+ 1047 002d 02       		.byte	0x2
+ 1048 002e D4       		.byte	0xd4
+ 1049 002f 33000000 		.4byte	0x33
+ 1050 0033 04       		.uleb128 0x4
+ 1051 0034 04       		.byte	0x4
+ 1052 0035 07       		.byte	0x7
+ 1053 0036 ED010000 		.4byte	.LASF0
+ 1054 003a 04       		.uleb128 0x4
+ 1055 003b 01       		.byte	0x1
+ 1056 003c 06       		.byte	0x6
+ 1057 003d E8000000 		.4byte	.LASF1
+ 1058 0041 03       		.uleb128 0x3
+ 1059 0042 4F000000 		.4byte	.LASF3
+ 1060 0046 03       		.byte	0x3
+ 1061 0047 1C       		.byte	0x1c
+ 1062 0048 4C000000 		.4byte	0x4c
+ 1063 004c 04       		.uleb128 0x4
+ 1064 004d 01       		.byte	0x1
+ 1065 004e 08       		.byte	0x8
+ 1066 004f 8A030000 		.4byte	.LASF4
+ 1067 0053 04       		.uleb128 0x4
+ 1068 0054 02       		.byte	0x2
+ 1069 0055 05       		.byte	0x5
+ 1070 0056 BF030000 		.4byte	.LASF5
+ 1071 005a 03       		.uleb128 0x3
+ 1072 005b 6B050000 		.4byte	.LASF6
+ 1073 005f 03       		.byte	0x3
+ 1074 0060 26       		.byte	0x26
+ 1075 0061 65000000 		.4byte	0x65
+ 1076 0065 04       		.uleb128 0x4
+ 1077 0066 02       		.byte	0x2
+ 1078 0067 07       		.byte	0x7
+ 1079 0068 3D020000 		.4byte	.LASF7
+ 1080 006c 03       		.uleb128 0x3
+ 1081 006d 92020000 		.4byte	.LASF8
+ 1082 0071 03       		.byte	0x3
+ 1083 0072 37       		.byte	0x37
+ 1084 0073 77000000 		.4byte	0x77
+ 1085 0077 04       		.uleb128 0x4
+ 1086 0078 04       		.byte	0x4
+ 1087 0079 05       		.byte	0x5
+ 1088 007a 4D010000 		.4byte	.LASF9
+ 1089 007e 03       		.uleb128 0x3
+ 1090 007f 93010000 		.4byte	.LASF10
+ 1091 0083 03       		.byte	0x3
+ 1092 0084 38       		.byte	0x38
+ 1093 0085 89000000 		.4byte	0x89
+ 1094 0089 04       		.uleb128 0x4
+ 1095 008a 04       		.byte	0x4
+ 1096 008b 07       		.byte	0x7
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 22
+
+
+ 1097 008c 4D050000 		.4byte	.LASF11
+ 1098 0090 04       		.uleb128 0x4
+ 1099 0091 08       		.byte	0x8
+ 1100 0092 05       		.byte	0x5
+ 1101 0093 DA000000 		.4byte	.LASF12
+ 1102 0097 03       		.uleb128 0x3
+ 1103 0098 1A030000 		.4byte	.LASF13
+ 1104 009c 03       		.byte	0x3
+ 1105 009d 4E       		.byte	0x4e
+ 1106 009e A2000000 		.4byte	0xa2
+ 1107 00a2 04       		.uleb128 0x4
+ 1108 00a3 08       		.byte	0x8
+ 1109 00a4 07       		.byte	0x7
+ 1110 00a5 87000000 		.4byte	.LASF14
+ 1111 00a9 03       		.uleb128 0x3
+ 1112 00aa 36060000 		.4byte	.LASF15
+ 1113 00ae 04       		.byte	0x4
+ 1114 00af 2A       		.byte	0x2a
+ 1115 00b0 41000000 		.4byte	0x41
+ 1116 00b4 03       		.uleb128 0x3
+ 1117 00b5 66010000 		.4byte	.LASF16
+ 1118 00b9 04       		.byte	0x4
+ 1119 00ba 36       		.byte	0x36
+ 1120 00bb 5A000000 		.4byte	0x5a
+ 1121 00bf 03       		.uleb128 0x3
+ 1122 00c0 82030000 		.4byte	.LASF17
+ 1123 00c4 04       		.byte	0x4
+ 1124 00c5 41       		.byte	0x41
+ 1125 00c6 6C000000 		.4byte	0x6c
+ 1126 00ca 03       		.uleb128 0x3
+ 1127 00cb 51040000 		.4byte	.LASF18
+ 1128 00cf 04       		.byte	0x4
+ 1129 00d0 42       		.byte	0x42
+ 1130 00d1 7E000000 		.4byte	0x7e
+ 1131 00d5 03       		.uleb128 0x3
+ 1132 00d6 3F000000 		.4byte	.LASF19
+ 1133 00da 04       		.byte	0x4
+ 1134 00db 4E       		.byte	0x4e
+ 1135 00dc 97000000 		.4byte	0x97
+ 1136 00e0 03       		.uleb128 0x3
+ 1137 00e1 CC000000 		.4byte	.LASF20
+ 1138 00e5 05       		.byte	0x5
+ 1139 00e6 2B       		.byte	0x2b
+ 1140 00e7 EB000000 		.4byte	0xeb
+ 1141 00eb 04       		.uleb128 0x4
+ 1142 00ec 01       		.byte	0x1
+ 1143 00ed 02       		.byte	0x2
+ 1144 00ee 7C030000 		.4byte	.LASF21
+ 1145 00f2 03       		.uleb128 0x3
+ 1146 00f3 72020000 		.4byte	.LASF22
+ 1147 00f7 05       		.byte	0x5
+ 1148 00f8 2C       		.byte	0x2c
+ 1149 00f9 A9000000 		.4byte	0xa9
+ 1150 00fd 03       		.uleb128 0x3
+ 1151 00fe 56010000 		.4byte	.LASF23
+ 1152 0102 05       		.byte	0x5
+ 1153 0103 2D       		.byte	0x2d
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 23
+
+
+ 1154 0104 A9000000 		.4byte	0xa9
+ 1155 0108 03       		.uleb128 0x3
+ 1156 0109 2F030000 		.4byte	.LASF24
+ 1157 010d 05       		.byte	0x5
+ 1158 010e 2E       		.byte	0x2e
+ 1159 010f A9000000 		.4byte	0xa9
+ 1160 0113 03       		.uleb128 0x3
+ 1161 0114 21010000 		.4byte	.LASF25
+ 1162 0118 05       		.byte	0x5
+ 1163 0119 2F       		.byte	0x2f
+ 1164 011a A9000000 		.4byte	0xa9
+ 1165 011e 03       		.uleb128 0x3
+ 1166 011f 5B030000 		.4byte	.LASF26
+ 1167 0123 05       		.byte	0x5
+ 1168 0124 30       		.byte	0x30
+ 1169 0125 CA000000 		.4byte	0xca
+ 1170 0129 03       		.uleb128 0x3
+ 1171 012a 5A020000 		.4byte	.LASF27
+ 1172 012e 05       		.byte	0x5
+ 1173 012f 31       		.byte	0x31
+ 1174 0130 BF000000 		.4byte	0xbf
+ 1175 0134 03       		.uleb128 0x3
+ 1176 0135 86020000 		.4byte	.LASF28
+ 1177 0139 05       		.byte	0x5
+ 1178 013a 33       		.byte	0x33
+ 1179 013b CA000000 		.4byte	0xca
+ 1180 013f 03       		.uleb128 0x3
+ 1181 0140 A7020000 		.4byte	.LASF29
+ 1182 0144 05       		.byte	0x5
+ 1183 0145 34       		.byte	0x34
+ 1184 0146 CA000000 		.4byte	0xca
+ 1185 014a 03       		.uleb128 0x3
+ 1186 014b 90050000 		.4byte	.LASF30
+ 1187 014f 05       		.byte	0x5
+ 1188 0150 35       		.byte	0x35
+ 1189 0151 CA000000 		.4byte	0xca
+ 1190 0155 03       		.uleb128 0x3
+ 1191 0156 C0010000 		.4byte	.LASF31
+ 1192 015a 06       		.byte	0x6
+ 1193 015b 2A       		.byte	0x2a
+ 1194 015c 60010000 		.4byte	0x160
+ 1195 0160 05       		.uleb128 0x5
+ 1196 0161 C0010000 		.4byte	.LASF31
+ 1197 0165 4C       		.byte	0x4c
+ 1198 0166 07       		.byte	0x7
+ 1199 0167 5E       		.byte	0x5e
+ 1200 0168 69020000 		.4byte	0x269
+ 1201 016c 06       		.uleb128 0x6
+ 1202 016d FE030000 		.4byte	.LASF32
+ 1203 0171 07       		.byte	0x7
+ 1204 0172 5F       		.byte	0x5f
+ 1205 0173 8A020000 		.4byte	0x28a
+ 1206 0177 00       		.byte	0
+ 1207 0178 06       		.uleb128 0x6
+ 1208 0179 4A030000 		.4byte	.LASF33
+ 1209 017d 07       		.byte	0x7
+ 1210 017e 61       		.byte	0x61
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 24
+
+
+ 1211 017f 8A020000 		.4byte	0x28a
+ 1212 0183 04       		.byte	0x4
+ 1213 0184 06       		.uleb128 0x6
+ 1214 0185 D3000000 		.4byte	.LASF34
+ 1215 0189 07       		.byte	0x7
+ 1216 018a 63       		.byte	0x63
+ 1217 018b 1E010000 		.4byte	0x11e
+ 1218 018f 08       		.byte	0x8
+ 1219 0190 06       		.uleb128 0x6
+ 1220 0191 B5060000 		.4byte	.LASF35
+ 1221 0195 07       		.byte	0x7
+ 1222 0196 64       		.byte	0x64
+ 1223 0197 4F030000 		.4byte	0x34f
+ 1224 019b 0C       		.byte	0xc
+ 1225 019c 06       		.uleb128 0x6
+ 1226 019d 76010000 		.4byte	.LASF36
+ 1227 01a1 07       		.byte	0x7
+ 1228 01a2 66       		.byte	0x66
+ 1229 01a3 8A020000 		.4byte	0x28a
+ 1230 01a7 10       		.byte	0x10
+ 1231 01a8 06       		.uleb128 0x6
+ 1232 01a9 E6020000 		.4byte	.LASF37
+ 1233 01ad 07       		.byte	0x7
+ 1234 01ae 67       		.byte	0x67
+ 1235 01af 8A020000 		.4byte	0x28a
+ 1236 01b3 14       		.byte	0x14
+ 1237 01b4 06       		.uleb128 0x6
+ 1238 01b5 67060000 		.4byte	.LASF38
+ 1239 01b9 07       		.byte	0x7
+ 1240 01ba 6E       		.byte	0x6e
+ 1241 01bb 6A040000 		.4byte	0x46a
+ 1242 01bf 18       		.byte	0x18
+ 1243 01c0 06       		.uleb128 0x6
+ 1244 01c1 E2010000 		.4byte	.LASF39
+ 1245 01c5 07       		.byte	0x7
+ 1246 01c6 74       		.byte	0x74
+ 1247 01c7 7C040000 		.4byte	0x47c
+ 1248 01cb 1C       		.byte	0x1c
+ 1249 01cc 06       		.uleb128 0x6
+ 1250 01cd C9030000 		.4byte	.LASF40
+ 1251 01d1 07       		.byte	0x7
+ 1252 01d2 79       		.byte	0x79
+ 1253 01d3 FD000000 		.4byte	0xfd
+ 1254 01d7 20       		.byte	0x20
+ 1255 01d8 06       		.uleb128 0x6
+ 1256 01d9 05040000 		.4byte	.LASF41
+ 1257 01dd 07       		.byte	0x7
+ 1258 01de 7D       		.byte	0x7d
+ 1259 01df F2000000 		.4byte	0xf2
+ 1260 01e3 21       		.byte	0x21
+ 1261 01e4 06       		.uleb128 0x6
+ 1262 01e5 5F010000 		.4byte	.LASF42
+ 1263 01e9 07       		.byte	0x7
+ 1264 01ea 82       		.byte	0x82
+ 1265 01eb 08010000 		.4byte	0x108
+ 1266 01ef 22       		.byte	0x22
+ 1267 01f0 06       		.uleb128 0x6
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 25
+
+
+ 1268 01f1 D1030000 		.4byte	.LASF43
+ 1269 01f5 07       		.byte	0x7
+ 1270 01f6 88       		.byte	0x88
+ 1271 01f7 13010000 		.4byte	0x113
+ 1272 01fb 23       		.byte	0x23
+ 1273 01fc 06       		.uleb128 0x6
+ 1274 01fd 6F010000 		.4byte	.LASF44
+ 1275 0201 07       		.byte	0x7
+ 1276 0202 8F       		.byte	0x8f
+ 1277 0203 7C030000 		.4byte	0x37c
+ 1278 0207 24       		.byte	0x24
+ 1279 0208 07       		.uleb128 0x7
+ 1280 0209 705F7500 		.ascii	"p_u\000"
+ 1281 020d 07       		.byte	0x7
+ 1282 020e B4       		.byte	0xb4
+ 1283 020f 35040000 		.4byte	0x435
+ 1284 0213 28       		.byte	0x28
+ 1285 0214 06       		.uleb128 0x6
+ 1286 0215 BB060000 		.4byte	.LASF45
+ 1287 0219 07       		.byte	0x7
+ 1288 021a B9       		.byte	0xb9
+ 1289 021b B0020000 		.4byte	0x2b0
+ 1290 021f 2C       		.byte	0x2c
+ 1291 0220 06       		.uleb128 0x6
+ 1292 0221 1A020000 		.4byte	.LASF46
+ 1293 0225 07       		.byte	0x7
+ 1294 0226 BF       		.byte	0xbf
+ 1295 0227 90020000 		.4byte	0x290
+ 1296 022b 30       		.byte	0x30
+ 1297 022c 06       		.uleb128 0x6
+ 1298 022d 30060000 		.4byte	.LASF47
+ 1299 0231 07       		.byte	0x7
+ 1300 0232 C3       		.byte	0xc3
+ 1301 0233 29010000 		.4byte	0x129
+ 1302 0237 38       		.byte	0x38
+ 1303 0238 06       		.uleb128 0x6
+ 1304 0239 46040000 		.4byte	.LASF48
+ 1305 023d 07       		.byte	0x7
+ 1306 023e C9       		.byte	0xc9
+ 1307 023f 34010000 		.4byte	0x134
+ 1308 0243 3C       		.byte	0x3c
+ 1309 0244 06       		.uleb128 0x6
+ 1310 0245 B5030000 		.4byte	.LASF49
+ 1311 0249 07       		.byte	0x7
+ 1312 024a D0       		.byte	0xd0
+ 1313 024b 82040000 		.4byte	0x482
+ 1314 024f 40       		.byte	0x40
+ 1315 0250 06       		.uleb128 0x6
+ 1316 0251 9A050000 		.4byte	.LASF50
+ 1317 0255 07       		.byte	0x7
+ 1318 0256 D4       		.byte	0xd4
+ 1319 0257 1E010000 		.4byte	0x11e
+ 1320 025b 44       		.byte	0x44
+ 1321 025c 06       		.uleb128 0x6
+ 1322 025d 04010000 		.4byte	.LASF51
+ 1323 0261 07       		.byte	0x7
+ 1324 0262 DA       		.byte	0xda
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 26
+
+
+ 1325 0263 C6020000 		.4byte	0x2c6
+ 1326 0267 48       		.byte	0x48
+ 1327 0268 00       		.byte	0
+ 1328 0269 08       		.uleb128 0x8
+ 1329 026a 08       		.byte	0x8
+ 1330 026b 06       		.byte	0x6
+ 1331 026c 61       		.byte	0x61
+ 1332 026d 8A020000 		.4byte	0x28a
+ 1333 0271 06       		.uleb128 0x6
+ 1334 0272 FE030000 		.4byte	.LASF32
+ 1335 0276 06       		.byte	0x6
+ 1336 0277 62       		.byte	0x62
+ 1337 0278 8A020000 		.4byte	0x28a
+ 1338 027c 00       		.byte	0
+ 1339 027d 06       		.uleb128 0x6
+ 1340 027e 4A030000 		.4byte	.LASF33
+ 1341 0282 06       		.byte	0x6
+ 1342 0283 64       		.byte	0x64
+ 1343 0284 8A020000 		.4byte	0x28a
+ 1344 0288 04       		.byte	0x4
+ 1345 0289 00       		.byte	0
+ 1346 028a 09       		.uleb128 0x9
+ 1347 028b 04       		.byte	0x4
+ 1348 028c 55010000 		.4byte	0x155
+ 1349 0290 03       		.uleb128 0x3
+ 1350 0291 EE020000 		.4byte	.LASF52
+ 1351 0295 06       		.byte	0x6
+ 1352 0296 66       		.byte	0x66
+ 1353 0297 69020000 		.4byte	0x269
+ 1354 029b 08       		.uleb128 0x8
+ 1355 029c 04       		.byte	0x4
+ 1356 029d 06       		.byte	0x6
+ 1357 029e 6B       		.byte	0x6b
+ 1358 029f B0020000 		.4byte	0x2b0
+ 1359 02a3 06       		.uleb128 0x6
+ 1360 02a4 FE030000 		.4byte	.LASF32
+ 1361 02a8 06       		.byte	0x6
+ 1362 02a9 6D       		.byte	0x6d
+ 1363 02aa 8A020000 		.4byte	0x28a
+ 1364 02ae 00       		.byte	0
+ 1365 02af 00       		.byte	0
+ 1366 02b0 03       		.uleb128 0x3
+ 1367 02b1 7A020000 		.4byte	.LASF53
+ 1368 02b5 06       		.byte	0x6
+ 1369 02b6 70       		.byte	0x70
+ 1370 02b7 9B020000 		.4byte	0x29b
+ 1371 02bb 03       		.uleb128 0x3
+ 1372 02bc 5A040000 		.4byte	.LASF54
+ 1373 02c0 08       		.byte	0x8
+ 1374 02c1 E5       		.byte	0xe5
+ 1375 02c2 C6020000 		.4byte	0x2c6
+ 1376 02c6 0A       		.uleb128 0xa
+ 1377 02c7 04       		.byte	0x4
+ 1378 02c8 03       		.uleb128 0x3
+ 1379 02c9 9C020000 		.4byte	.LASF55
+ 1380 02cd 08       		.byte	0x8
+ 1381 02ce EB       		.byte	0xeb
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 27
+
+
+ 1382 02cf D5000000 		.4byte	0xd5
+ 1383 02d3 0B       		.uleb128 0xb
+ 1384 02d4 17060000 		.4byte	.LASF56
+ 1385 02d8 24       		.byte	0x24
+ 1386 02d9 08       		.byte	0x8
+ 1387 02da 0C01     		.2byte	0x10c
+ 1388 02dc 4F030000 		.4byte	0x34f
+ 1389 02e0 0C       		.uleb128 0xc
+ 1390 02e1 723400   		.ascii	"r4\000"
+ 1391 02e4 08       		.byte	0x8
+ 1392 02e5 1F01     		.2byte	0x11f
+ 1393 02e7 BB020000 		.4byte	0x2bb
+ 1394 02eb 00       		.byte	0
+ 1395 02ec 0C       		.uleb128 0xc
+ 1396 02ed 723500   		.ascii	"r5\000"
+ 1397 02f0 08       		.byte	0x8
+ 1398 02f1 2001     		.2byte	0x120
+ 1399 02f3 BB020000 		.4byte	0x2bb
+ 1400 02f7 04       		.byte	0x4
+ 1401 02f8 0C       		.uleb128 0xc
+ 1402 02f9 723600   		.ascii	"r6\000"
+ 1403 02fc 08       		.byte	0x8
+ 1404 02fd 2101     		.2byte	0x121
+ 1405 02ff BB020000 		.4byte	0x2bb
+ 1406 0303 08       		.byte	0x8
+ 1407 0304 0C       		.uleb128 0xc
+ 1408 0305 723700   		.ascii	"r7\000"
+ 1409 0308 08       		.byte	0x8
+ 1410 0309 2201     		.2byte	0x122
+ 1411 030b BB020000 		.4byte	0x2bb
+ 1412 030f 0C       		.byte	0xc
+ 1413 0310 0C       		.uleb128 0xc
+ 1414 0311 723800   		.ascii	"r8\000"
+ 1415 0314 08       		.byte	0x8
+ 1416 0315 2301     		.2byte	0x123
+ 1417 0317 BB020000 		.4byte	0x2bb
+ 1418 031b 10       		.byte	0x10
+ 1419 031c 0C       		.uleb128 0xc
+ 1420 031d 723900   		.ascii	"r9\000"
+ 1421 0320 08       		.byte	0x8
+ 1422 0321 2401     		.2byte	0x124
+ 1423 0323 BB020000 		.4byte	0x2bb
+ 1424 0327 14       		.byte	0x14
+ 1425 0328 0C       		.uleb128 0xc
+ 1426 0329 72313000 		.ascii	"r10\000"
+ 1427 032d 08       		.byte	0x8
+ 1428 032e 2501     		.2byte	0x125
+ 1429 0330 BB020000 		.4byte	0x2bb
+ 1430 0334 18       		.byte	0x18
+ 1431 0335 0C       		.uleb128 0xc
+ 1432 0336 72313100 		.ascii	"r11\000"
+ 1433 033a 08       		.byte	0x8
+ 1434 033b 2601     		.2byte	0x126
+ 1435 033d BB020000 		.4byte	0x2bb
+ 1436 0341 1C       		.byte	0x1c
+ 1437 0342 0C       		.uleb128 0xc
+ 1438 0343 6C7200   		.ascii	"lr\000"
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 28
+
+
+ 1439 0346 08       		.byte	0x8
+ 1440 0347 2701     		.2byte	0x127
+ 1441 0349 BB020000 		.4byte	0x2bb
+ 1442 034d 20       		.byte	0x20
+ 1443 034e 00       		.byte	0
+ 1444 034f 0B       		.uleb128 0xb
+ 1445 0350 F2050000 		.4byte	.LASF57
+ 1446 0354 04       		.byte	0x4
+ 1447 0355 08       		.byte	0x8
+ 1448 0356 3101     		.2byte	0x131
+ 1449 0358 6A030000 		.4byte	0x36a
+ 1450 035c 0C       		.uleb128 0xc
+ 1451 035d 72313300 		.ascii	"r13\000"
+ 1452 0361 08       		.byte	0x8
+ 1453 0362 3201     		.2byte	0x132
+ 1454 0364 6A030000 		.4byte	0x36a
+ 1455 0368 00       		.byte	0
+ 1456 0369 00       		.byte	0
+ 1457 036a 09       		.uleb128 0x9
+ 1458 036b 04       		.byte	0x4
+ 1459 036c D3020000 		.4byte	0x2d3
+ 1460 0370 0D       		.uleb128 0xd
+ 1461 0371 CA000000 		.4byte	0xca
+ 1462 0375 04       		.uleb128 0x4
+ 1463 0376 04       		.byte	0x4
+ 1464 0377 07       		.byte	0x7
+ 1465 0378 C0020000 		.4byte	.LASF58
+ 1466 037c 0D       		.uleb128 0xd
+ 1467 037d 4A010000 		.4byte	0x14a
+ 1468 0381 05       		.uleb128 0x5
+ 1469 0382 CF020000 		.4byte	.LASF59
+ 1470 0386 10       		.byte	0x10
+ 1471 0387 09       		.byte	0x9
+ 1472 0388 2C       		.byte	0x2c
+ 1473 0389 B2030000 		.4byte	0x3b2
+ 1474 038d 06       		.uleb128 0x6
+ 1475 038e 98030000 		.4byte	.LASF60
+ 1476 0392 09       		.byte	0x9
+ 1477 0393 2D       		.byte	0x2d
+ 1478 0394 90020000 		.4byte	0x290
+ 1479 0398 00       		.byte	0
+ 1480 0399 06       		.uleb128 0x6
+ 1481 039a A1060000 		.4byte	.LASF61
+ 1482 039e 09       		.byte	0x9
+ 1483 039f 2F       		.byte	0x2f
+ 1484 03a0 8A020000 		.4byte	0x28a
+ 1485 03a4 08       		.byte	0x8
+ 1486 03a5 06       		.uleb128 0x6
+ 1487 03a6 13030000 		.4byte	.LASF62
+ 1488 03aa 09       		.byte	0x9
+ 1489 03ab 31       		.byte	0x31
+ 1490 03ac B2030000 		.4byte	0x3b2
+ 1491 03b0 0C       		.byte	0xc
+ 1492 03b1 00       		.byte	0
+ 1493 03b2 09       		.uleb128 0x9
+ 1494 03b3 04       		.byte	0x4
+ 1495 03b4 81030000 		.4byte	0x381
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 29
+
+
+ 1496 03b8 03       		.uleb128 0x3
+ 1497 03b9 CF020000 		.4byte	.LASF59
+ 1498 03bd 09       		.byte	0x9
+ 1499 03be 33       		.byte	0x33
+ 1500 03bf 81030000 		.4byte	0x381
+ 1501 03c3 03       		.uleb128 0x3
+ 1502 03c4 52060000 		.4byte	.LASF63
+ 1503 03c8 0A       		.byte	0xa
+ 1504 03c9 2C       		.byte	0x2c
+ 1505 03ca CE030000 		.4byte	0x3ce
+ 1506 03ce 05       		.uleb128 0x5
+ 1507 03cf 52060000 		.4byte	.LASF63
+ 1508 03d3 10       		.byte	0x10
+ 1509 03d4 0A       		.byte	0xa
+ 1510 03d5 31       		.byte	0x31
+ 1511 03d6 0B040000 		.4byte	0x40b
+ 1512 03da 06       		.uleb128 0x6
+ 1513 03db 6A020000 		.4byte	.LASF64
+ 1514 03df 0A       		.byte	0xa
+ 1515 03e0 32       		.byte	0x32
+ 1516 03e1 0B040000 		.4byte	0x40b
+ 1517 03e5 00       		.byte	0
+ 1518 03e6 06       		.uleb128 0x6
+ 1519 03e7 A0030000 		.4byte	.LASF65
+ 1520 03eb 0A       		.byte	0xa
+ 1521 03ec 35       		.byte	0x35
+ 1522 03ed 8A020000 		.4byte	0x28a
+ 1523 03f1 04       		.byte	0x4
+ 1524 03f2 06       		.uleb128 0x6
+ 1525 03f3 DE020000 		.4byte	.LASF66
+ 1526 03f7 0A       		.byte	0xa
+ 1527 03f8 37       		.byte	0x37
+ 1528 03f9 34010000 		.4byte	0x134
+ 1529 03fd 08       		.byte	0x8
+ 1530 03fe 06       		.uleb128 0x6
+ 1531 03ff AC030000 		.4byte	.LASF67
+ 1532 0403 0A       		.byte	0xa
+ 1533 0404 3A       		.byte	0x3a
+ 1534 0405 3F010000 		.4byte	0x13f
+ 1535 0409 0C       		.byte	0xc
+ 1536 040a 00       		.byte	0
+ 1537 040b 09       		.uleb128 0x9
+ 1538 040c 04       		.byte	0x4
+ 1539 040d C3030000 		.4byte	0x3c3
+ 1540 0411 05       		.uleb128 0x5
+ 1541 0412 C7010000 		.4byte	.LASF68
+ 1542 0416 04       		.byte	0x4
+ 1543 0417 0A       		.byte	0xa
+ 1544 0418 41       		.byte	0x41
+ 1545 0419 2A040000 		.4byte	0x42a
+ 1546 041d 06       		.uleb128 0x6
+ 1547 041e 1E060000 		.4byte	.LASF69
+ 1548 0422 0A       		.byte	0xa
+ 1549 0423 42       		.byte	0x42
+ 1550 0424 0B040000 		.4byte	0x40b
+ 1551 0428 00       		.byte	0
+ 1552 0429 00       		.byte	0
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 30
+
+
+ 1553 042a 03       		.uleb128 0x3
+ 1554 042b C7010000 		.4byte	.LASF68
+ 1555 042f 0A       		.byte	0xa
+ 1556 0430 45       		.byte	0x45
+ 1557 0431 11040000 		.4byte	0x411
+ 1558 0435 0E       		.uleb128 0xe
+ 1559 0436 04       		.byte	0x4
+ 1560 0437 07       		.byte	0x7
+ 1561 0438 96       		.byte	0x96
+ 1562 0439 6A040000 		.4byte	0x46a
+ 1563 043d 0F       		.uleb128 0xf
+ 1564 043e 26000000 		.4byte	.LASF70
+ 1565 0442 07       		.byte	0x7
+ 1566 0443 9D       		.byte	0x9d
+ 1567 0444 29010000 		.4byte	0x129
+ 1568 0448 0F       		.uleb128 0xf
+ 1569 0449 A4000000 		.4byte	.LASF71
+ 1570 044d 07       		.byte	0x7
+ 1571 044e A4       		.byte	0xa4
+ 1572 044f 29010000 		.4byte	0x129
+ 1573 0453 0F       		.uleb128 0xf
+ 1574 0454 60060000 		.4byte	.LASF72
+ 1575 0458 07       		.byte	0x7
+ 1576 0459 AB       		.byte	0xab
+ 1577 045a C6020000 		.4byte	0x2c6
+ 1578 045e 0F       		.uleb128 0xf
+ 1579 045f F7030000 		.4byte	.LASF73
+ 1580 0463 07       		.byte	0x7
+ 1581 0464 B2       		.byte	0xb2
+ 1582 0465 34010000 		.4byte	0x134
+ 1583 0469 00       		.byte	0
+ 1584 046a 09       		.uleb128 0x9
+ 1585 046b 04       		.byte	0x4
+ 1586 046c 70040000 		.4byte	0x470
+ 1587 0470 10       		.uleb128 0x10
+ 1588 0471 75040000 		.4byte	0x475
+ 1589 0475 04       		.uleb128 0x4
+ 1590 0476 01       		.byte	0x1
+ 1591 0477 08       		.byte	0x8
+ 1592 0478 5F050000 		.4byte	.LASF74
+ 1593 047c 09       		.uleb128 0x9
+ 1594 047d 04       		.byte	0x4
+ 1595 047e C8020000 		.4byte	0x2c8
+ 1596 0482 09       		.uleb128 0x9
+ 1597 0483 04       		.byte	0x4
+ 1598 0484 B8030000 		.4byte	0x3b8
+ 1599 0488 0D       		.uleb128 0xd
+ 1600 0489 B4000000 		.4byte	0xb4
+ 1601 048d 08       		.uleb128 0x8
+ 1602 048e 04       		.byte	0x4
+ 1603 048f 0B       		.byte	0xb
+ 1604 0490 96       		.byte	0x96
+ 1605 0491 AE040000 		.4byte	0x4ae
+ 1606 0495 07       		.uleb128 0x7
+ 1607 0496 73657400 		.ascii	"set\000"
+ 1608 049a 0B       		.byte	0xb
+ 1609 049b 97       		.byte	0x97
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 31
+
+
+ 1610 049c B4000000 		.4byte	0xb4
+ 1611 04a0 00       		.byte	0
+ 1612 04a1 06       		.uleb128 0x6
+ 1613 04a2 C9020000 		.4byte	.LASF75
+ 1614 04a6 0B       		.byte	0xb
+ 1615 04a7 98       		.byte	0x98
+ 1616 04a8 B4000000 		.4byte	0xb4
+ 1617 04ac 02       		.byte	0x2
+ 1618 04ad 00       		.byte	0
+ 1619 04ae 0E       		.uleb128 0xe
+ 1620 04af 04       		.byte	0x4
+ 1621 04b0 0B       		.byte	0xb
+ 1622 04b1 94       		.byte	0x94
+ 1623 04b2 C9040000 		.4byte	0x4c9
+ 1624 04b6 11       		.uleb128 0x11
+ 1625 04b7 5700     		.ascii	"W\000"
+ 1626 04b9 0B       		.byte	0xb
+ 1627 04ba 95       		.byte	0x95
+ 1628 04bb CA000000 		.4byte	0xca
+ 1629 04bf 11       		.uleb128 0x11
+ 1630 04c0 4800     		.ascii	"H\000"
+ 1631 04c2 0B       		.byte	0xb
+ 1632 04c3 99       		.byte	0x99
+ 1633 04c4 8D040000 		.4byte	0x48d
+ 1634 04c8 00       		.byte	0
+ 1635 04c9 08       		.uleb128 0x8
+ 1636 04ca 28       		.byte	0x28
+ 1637 04cb 0B       		.byte	0xb
+ 1638 04cc 8C       		.byte	0x8c
+ 1639 04cd 4A050000 		.4byte	0x54a
+ 1640 04d1 06       		.uleb128 0x6
+ 1641 04d2 71000000 		.4byte	.LASF76
+ 1642 04d6 0B       		.byte	0xb
+ 1643 04d7 8E       		.byte	0x8e
+ 1644 04d8 70030000 		.4byte	0x370
+ 1645 04dc 00       		.byte	0
+ 1646 04dd 06       		.uleb128 0x6
+ 1647 04de 48000000 		.4byte	.LASF77
+ 1648 04e2 0B       		.byte	0xb
+ 1649 04e3 8F       		.byte	0x8f
+ 1650 04e4 70030000 		.4byte	0x370
+ 1651 04e8 04       		.byte	0x4
+ 1652 04e9 06       		.uleb128 0x6
+ 1653 04ea 8B010000 		.4byte	.LASF78
+ 1654 04ee 0B       		.byte	0xb
+ 1655 04ef 90       		.byte	0x90
+ 1656 04f0 70030000 		.4byte	0x370
+ 1657 04f4 08       		.byte	0x8
+ 1658 04f5 06       		.uleb128 0x6
+ 1659 04f6 9E000000 		.4byte	.LASF79
+ 1660 04fa 0B       		.byte	0xb
+ 1661 04fb 91       		.byte	0x91
+ 1662 04fc 70030000 		.4byte	0x370
+ 1663 0500 0C       		.byte	0xc
+ 1664 0501 07       		.uleb128 0x7
+ 1665 0502 49445200 		.ascii	"IDR\000"
+ 1666 0506 0B       		.byte	0xb
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 32
+
+
+ 1667 0507 92       		.byte	0x92
+ 1668 0508 70030000 		.4byte	0x370
+ 1669 050c 10       		.byte	0x10
+ 1670 050d 07       		.uleb128 0x7
+ 1671 050e 4F445200 		.ascii	"ODR\000"
+ 1672 0512 0B       		.byte	0xb
+ 1673 0513 93       		.byte	0x93
+ 1674 0514 70030000 		.4byte	0x370
+ 1675 0518 14       		.byte	0x14
+ 1676 0519 06       		.uleb128 0x6
+ 1677 051a F4000000 		.4byte	.LASF80
+ 1678 051e 0B       		.byte	0xb
+ 1679 051f 9A       		.byte	0x9a
+ 1680 0520 4A050000 		.4byte	0x54a
+ 1681 0524 18       		.byte	0x18
+ 1682 0525 06       		.uleb128 0x6
+ 1683 0526 32020000 		.4byte	.LASF81
+ 1684 052a 0B       		.byte	0xb
+ 1685 052b 9B       		.byte	0x9b
+ 1686 052c 70030000 		.4byte	0x370
+ 1687 0530 1C       		.byte	0x1c
+ 1688 0531 06       		.uleb128 0x6
+ 1689 0532 2A030000 		.4byte	.LASF82
+ 1690 0536 0B       		.byte	0xb
+ 1691 0537 9C       		.byte	0x9c
+ 1692 0538 70030000 		.4byte	0x370
+ 1693 053c 20       		.byte	0x20
+ 1694 053d 06       		.uleb128 0x6
+ 1695 053e 25030000 		.4byte	.LASF83
+ 1696 0542 0B       		.byte	0xb
+ 1697 0543 9D       		.byte	0x9d
+ 1698 0544 70030000 		.4byte	0x370
+ 1699 0548 24       		.byte	0x24
+ 1700 0549 00       		.byte	0
+ 1701 054a 0D       		.uleb128 0xd
+ 1702 054b AE040000 		.4byte	0x4ae
+ 1703 054f 03       		.uleb128 0x3
+ 1704 0550 25020000 		.4byte	.LASF84
+ 1705 0554 0B       		.byte	0xb
+ 1706 0555 9E       		.byte	0x9e
+ 1707 0556 C9040000 		.4byte	0x4c9
+ 1708 055a 03       		.uleb128 0x3
+ 1709 055b 59000000 		.4byte	.LASF85
+ 1710 055f 0B       		.byte	0xb
+ 1711 0560 F0       		.byte	0xf0
+ 1712 0561 CA000000 		.4byte	0xca
+ 1713 0565 03       		.uleb128 0x3
+ 1714 0566 E7050000 		.4byte	.LASF86
+ 1715 056a 0B       		.byte	0xb
+ 1716 056b FD       		.byte	0xfd
+ 1717 056c 70050000 		.4byte	0x570
+ 1718 0570 09       		.uleb128 0x9
+ 1719 0571 04       		.byte	0x4
+ 1720 0572 4F050000 		.4byte	0x54f
+ 1721 0576 12       		.uleb128 0x12
+ 1722 0577 01       		.byte	0x1
+ 1723 0578 0C       		.byte	0xc
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 33
+
+
+ 1724 0579 53       		.byte	0x53
+ 1725 057a 91050000 		.4byte	0x591
+ 1726 057e 13       		.uleb128 0x13
+ 1727 057f B3010000 		.4byte	.LASF87
+ 1728 0583 00       		.sleb128 0
+ 1729 0584 13       		.uleb128 0x13
+ 1730 0585 F9000000 		.4byte	.LASF88
+ 1731 0589 01       		.sleb128 1
+ 1732 058a 13       		.uleb128 0x13
+ 1733 058b AD000000 		.4byte	.LASF89
+ 1734 058f 02       		.sleb128 2
+ 1735 0590 00       		.byte	0
+ 1736 0591 03       		.uleb128 0x3
+ 1737 0592 14010000 		.4byte	.LASF90
+ 1738 0596 0C       		.byte	0xc
+ 1739 0597 57       		.byte	0x57
+ 1740 0598 76050000 		.4byte	0x576
+ 1741 059c 12       		.uleb128 0x12
+ 1742 059d 01       		.byte	0x1
+ 1743 059e 0C       		.byte	0xc
+ 1744 059f 5C       		.byte	0x5c
+ 1745 05a0 B7050000 		.4byte	0x5b7
+ 1746 05a4 13       		.uleb128 0x13
+ 1747 05a5 14040000 		.4byte	.LASF91
+ 1748 05a9 00       		.sleb128 0
+ 1749 05aa 13       		.uleb128 0x13
+ 1750 05ab 77000000 		.4byte	.LASF92
+ 1751 05af 01       		.sleb128 1
+ 1752 05b0 13       		.uleb128 0x13
+ 1753 05b1 2D000000 		.4byte	.LASF93
+ 1754 05b5 02       		.sleb128 2
+ 1755 05b6 00       		.byte	0
+ 1756 05b7 03       		.uleb128 0x3
+ 1757 05b8 63030000 		.4byte	.LASF94
+ 1758 05bc 0C       		.byte	0xc
+ 1759 05bd 60       		.byte	0x60
+ 1760 05be 9C050000 		.4byte	0x59c
+ 1761 05c2 12       		.uleb128 0x12
+ 1762 05c3 01       		.byte	0x1
+ 1763 05c4 0C       		.byte	0xc
+ 1764 05c5 65       		.byte	0x65
+ 1765 05c6 DD050000 		.4byte	0x5dd
+ 1766 05ca 13       		.uleb128 0x13
+ 1767 05cb E9030000 		.4byte	.LASF95
+ 1768 05cf 00       		.sleb128 0
+ 1769 05d0 13       		.uleb128 0x13
+ 1770 05d1 80050000 		.4byte	.LASF96
+ 1771 05d5 01       		.sleb128 1
+ 1772 05d6 13       		.uleb128 0x13
+ 1773 05d7 05060000 		.4byte	.LASF97
+ 1774 05db 02       		.sleb128 2
+ 1775 05dc 00       		.byte	0
+ 1776 05dd 03       		.uleb128 0x3
+ 1777 05de FA010000 		.4byte	.LASF98
+ 1778 05e2 0C       		.byte	0xc
+ 1779 05e3 69       		.byte	0x69
+ 1780 05e4 C2050000 		.4byte	0x5c2
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 34
+
+
+ 1781 05e8 03       		.uleb128 0x3
+ 1782 05e9 B3020000 		.4byte	.LASF99
+ 1783 05ed 0C       		.byte	0xc
+ 1784 05ee 6F       		.byte	0x6f
+ 1785 05ef CA000000 		.4byte	0xca
+ 1786 05f3 03       		.uleb128 0x3
+ 1787 05f4 63040000 		.4byte	.LASF100
+ 1788 05f8 0C       		.byte	0xc
+ 1789 05f9 74       		.byte	0x74
+ 1790 05fa FE050000 		.4byte	0x5fe
+ 1791 05fe 05       		.uleb128 0x5
+ 1792 05ff 22040000 		.4byte	.LASF101
+ 1793 0603 10       		.byte	0x10
+ 1794 0604 0C       		.byte	0xc
+ 1795 0605 B5       		.byte	0xb5
+ 1796 0606 62060000 		.4byte	0x662
+ 1797 060a 06       		.uleb128 0x6
+ 1798 060b 3F010000 		.4byte	.LASF102
+ 1799 060f 0C       		.byte	0xc
+ 1800 0610 B9       		.byte	0xb9
+ 1801 0611 91050000 		.4byte	0x591
+ 1802 0615 00       		.byte	0
+ 1803 0616 06       		.uleb128 0x6
+ 1804 0617 45010000 		.4byte	.LASF103
+ 1805 061b 0C       		.byte	0xc
+ 1806 061c BD       		.byte	0xbd
+ 1807 061d B7050000 		.4byte	0x5b7
+ 1808 0621 01       		.byte	0x1
+ 1809 0622 06       		.uleb128 0x6
+ 1810 0623 0C010000 		.4byte	.LASF104
+ 1811 0627 0C       		.byte	0xc
+ 1812 0628 C1       		.byte	0xc1
+ 1813 0629 DD050000 		.4byte	0x5dd
+ 1814 062d 02       		.byte	0x2
+ 1815 062e 06       		.uleb128 0x6
+ 1816 062f 64050000 		.4byte	.LASF105
+ 1817 0633 0C       		.byte	0xc
+ 1818 0634 C5       		.byte	0xc5
+ 1819 0635 5E070000 		.4byte	0x75e
+ 1820 0639 04       		.byte	0x4
+ 1821 063a 06       		.uleb128 0x6
+ 1822 063b 37020000 		.4byte	.LASF106
+ 1823 063f 0C       		.byte	0xc
+ 1824 0640 CB       		.byte	0xcb
+ 1825 0641 2A040000 		.4byte	0x42a
+ 1826 0645 08       		.byte	0x8
+ 1827 0646 14       		.uleb128 0x14
+ 1828 0647 AE010000 		.4byte	.LASF139
+ 1829 064b 0C       		.byte	0xc
+ 1830 064c D0       		.byte	0xd0
+ 1831 064d A9000000 		.4byte	0xa9
+ 1832 0651 01       		.byte	0x1
+ 1833 0652 01       		.byte	0x1
+ 1834 0653 07       		.byte	0x7
+ 1835 0654 0C       		.byte	0xc
+ 1836 0655 06       		.uleb128 0x6
+ 1837 0656 C6000000 		.4byte	.LASF107
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 35
+
+
+ 1838 065a 0C       		.byte	0xc
+ 1839 065b D1       		.byte	0xd1
+ 1840 065c 88040000 		.4byte	0x488
+ 1841 0660 0E       		.byte	0xe
+ 1842 0661 00       		.byte	0
+ 1843 0662 03       		.uleb128 0x3
+ 1844 0663 50020000 		.4byte	.LASF108
+ 1845 0667 0C       		.byte	0xc
+ 1846 0668 7B       		.byte	0x7b
+ 1847 0669 6D060000 		.4byte	0x66d
+ 1848 066d 09       		.uleb128 0x9
+ 1849 066e 04       		.byte	0x4
+ 1850 066f 73060000 		.4byte	0x673
+ 1851 0673 15       		.uleb128 0x15
+ 1852 0674 7E060000 		.4byte	0x67e
+ 1853 0678 16       		.uleb128 0x16
+ 1854 0679 7E060000 		.4byte	0x67e
+ 1855 067d 00       		.byte	0
+ 1856 067e 09       		.uleb128 0x9
+ 1857 067f 04       		.byte	0x4
+ 1858 0680 F3050000 		.4byte	0x5f3
+ 1859 0684 03       		.uleb128 0x3
+ 1860 0685 66000000 		.4byte	.LASF109
+ 1861 0689 0C       		.byte	0xc
+ 1862 068a 83       		.byte	0x83
+ 1863 068b 8F060000 		.4byte	0x68f
+ 1864 068f 09       		.uleb128 0x9
+ 1865 0690 04       		.byte	0x4
+ 1866 0691 95060000 		.4byte	0x695
+ 1867 0695 15       		.uleb128 0x15
+ 1868 0696 A5060000 		.4byte	0x6a5
+ 1869 069a 16       		.uleb128 0x16
+ 1870 069b 7E060000 		.4byte	0x67e
+ 1871 069f 16       		.uleb128 0x16
+ 1872 06a0 B4000000 		.4byte	0xb4
+ 1873 06a4 00       		.byte	0
+ 1874 06a5 03       		.uleb128 0x3
+ 1875 06a6 0F020000 		.4byte	.LASF110
+ 1876 06aa 0C       		.byte	0xc
+ 1877 06ab 8B       		.byte	0x8b
+ 1878 06ac B0060000 		.4byte	0x6b0
+ 1879 06b0 09       		.uleb128 0x9
+ 1880 06b1 04       		.byte	0x4
+ 1881 06b2 B6060000 		.4byte	0x6b6
+ 1882 06b6 15       		.uleb128 0x15
+ 1883 06b7 C6060000 		.4byte	0x6c6
+ 1884 06bb 16       		.uleb128 0x16
+ 1885 06bc 7E060000 		.4byte	0x67e
+ 1886 06c0 16       		.uleb128 0x16
+ 1887 06c1 E8050000 		.4byte	0x5e8
+ 1888 06c5 00       		.byte	0
+ 1889 06c6 08       		.uleb128 0x8
+ 1890 06c7 2C       		.byte	0x2c
+ 1891 06c8 0C       		.byte	0xc
+ 1892 06c9 91       		.byte	0x91
+ 1893 06ca 53070000 		.4byte	0x753
+ 1894 06ce 06       		.uleb128 0x6
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 36
+
+
+ 1895 06cf 76050000 		.4byte	.LASF111
+ 1896 06d3 0C       		.byte	0xc
+ 1897 06d4 95       		.byte	0x95
+ 1898 06d5 62060000 		.4byte	0x662
+ 1899 06d9 00       		.byte	0
+ 1900 06da 06       		.uleb128 0x6
+ 1901 06db 51030000 		.4byte	.LASF112
+ 1902 06df 0C       		.byte	0xc
+ 1903 06e0 99       		.byte	0x99
+ 1904 06e1 62060000 		.4byte	0x662
+ 1905 06e5 04       		.byte	0x4
+ 1906 06e6 06       		.uleb128 0x6
+ 1907 06e7 FB020000 		.4byte	.LASF113
+ 1908 06eb 0C       		.byte	0xc
+ 1909 06ec 9D       		.byte	0x9d
+ 1910 06ed 62060000 		.4byte	0x662
+ 1911 06f1 08       		.byte	0x8
+ 1912 06f2 06       		.uleb128 0x6
+ 1913 06f3 1C000000 		.4byte	.LASF114
+ 1914 06f7 0C       		.byte	0xc
+ 1915 06f8 A1       		.byte	0xa1
+ 1916 06f9 84060000 		.4byte	0x684
+ 1917 06fd 0C       		.byte	0xc
+ 1918 06fe 06       		.uleb128 0x6
+ 1919 06ff D5020000 		.4byte	.LASF115
+ 1920 0703 0C       		.byte	0xc
+ 1921 0704 A5       		.byte	0xa5
+ 1922 0705 A5060000 		.4byte	0x6a5
+ 1923 0709 10       		.byte	0x10
+ 1924 070a 06       		.uleb128 0x6
+ 1925 070b 0A000000 		.4byte	.LASF116
+ 1926 070f 0C       		.byte	0xc
+ 1927 0710 A8       		.byte	0xa8
+ 1928 0711 65050000 		.4byte	0x565
+ 1929 0715 14       		.byte	0x14
+ 1930 0716 06       		.uleb128 0x6
+ 1931 0717 26060000 		.4byte	.LASF117
+ 1932 071b 0C       		.byte	0xc
+ 1933 071c A9       		.byte	0xa9
+ 1934 071d 5A050000 		.4byte	0x55a
+ 1935 0721 18       		.byte	0x18
+ 1936 0722 06       		.uleb128 0x6
+ 1937 0723 7E010000 		.4byte	.LASF118
+ 1938 0727 0C       		.byte	0xc
+ 1939 0728 AA       		.byte	0xaa
+ 1940 0729 65050000 		.4byte	0x565
+ 1941 072d 1C       		.byte	0x1c
+ 1942 072e 06       		.uleb128 0x6
+ 1943 072f A9060000 		.4byte	.LASF119
+ 1944 0733 0C       		.byte	0xc
+ 1945 0734 AB       		.byte	0xab
+ 1946 0735 5A050000 		.4byte	0x55a
+ 1947 0739 20       		.byte	0x20
+ 1948 073a 06       		.uleb128 0x6
+ 1949 073b 9E010000 		.4byte	.LASF120
+ 1950 073f 0C       		.byte	0xc
+ 1951 0740 AC       		.byte	0xac
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 37
+
+
+ 1952 0741 CA000000 		.4byte	0xca
+ 1953 0745 24       		.byte	0x24
+ 1954 0746 06       		.uleb128 0x6
+ 1955 0747 72030000 		.4byte	.LASF121
+ 1956 074b 0C       		.byte	0xc
+ 1957 074c AD       		.byte	0xad
+ 1958 074d B4000000 		.4byte	0xb4
+ 1959 0751 28       		.byte	0x28
+ 1960 0752 00       		.byte	0
+ 1961 0753 03       		.uleb128 0x3
+ 1962 0754 3E060000 		.4byte	.LASF122
+ 1963 0758 0C       		.byte	0xc
+ 1964 0759 B0       		.byte	0xb0
+ 1965 075a C6060000 		.4byte	0x6c6
+ 1966 075e 09       		.uleb128 0x9
+ 1967 075f 04       		.byte	0x4
+ 1968 0760 64070000 		.4byte	0x764
+ 1969 0764 10       		.uleb128 0x10
+ 1970 0765 53070000 		.4byte	0x753
+ 1971 0769 17       		.uleb128 0x17
+ 1972 076a 60020000 		.4byte	.LASF140
+ 1973 076e 01       		.byte	0x1
+ 1974 076f 73       		.byte	0x73
+ 1975 0770 00000000 		.4byte	.LFB68
+ 1976 0774 02000000 		.4byte	.LFE68-.LFB68
+ 1977 0778 01       		.uleb128 0x1
+ 1978 0779 9C       		.byte	0x9c
+ 1979 077a 18       		.uleb128 0x18
+ 1980 077b 91060000 		.4byte	.LASF123
+ 1981 077f 01       		.byte	0x1
+ 1982 0780 7D       		.byte	0x7d
+ 1983 0781 00000000 		.4byte	.LFB69
+ 1984 0785 20000000 		.4byte	.LFE69-.LFB69
+ 1985 0789 01       		.uleb128 0x1
+ 1986 078a 9C       		.byte	0x9c
+ 1987 078b 9E070000 		.4byte	0x79e
+ 1988 078f 19       		.uleb128 0x19
+ 1989 0790 0D040000 		.4byte	.LASF125
+ 1990 0794 01       		.byte	0x1
+ 1991 0795 7D       		.byte	0x7d
+ 1992 0796 7E060000 		.4byte	0x67e
+ 1993 079a 02       		.uleb128 0x2
+ 1994 079b 91       		.byte	0x91
+ 1995 079c 7C       		.sleb128 -4
+ 1996 079d 00       		.byte	0
+ 1997 079e 1A       		.uleb128 0x1a
+ 1998 079f FA050000 		.4byte	.LASF124
+ 1999 07a3 01       		.byte	0x1
+ 2000 07a4 91       		.byte	0x91
+ 2001 07a5 00000000 		.4byte	.LFB70
+ 2002 07a9 60000000 		.4byte	.LFE70-.LFB70
+ 2003 07ad 01       		.uleb128 0x1
+ 2004 07ae 9C       		.byte	0x9c
+ 2005 07af 02080000 		.4byte	0x802
+ 2006 07b3 19       		.uleb128 0x19
+ 2007 07b4 0D040000 		.4byte	.LASF125
+ 2008 07b8 01       		.byte	0x1
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 38
+
+
+ 2009 07b9 91       		.byte	0x91
+ 2010 07ba 7E060000 		.4byte	0x67e
+ 2011 07be 02       		.uleb128 0x2
+ 2012 07bf 91       		.byte	0x91
+ 2013 07c0 74       		.sleb128 -12
+ 2014 07c1 19       		.uleb128 0x19
+ 2015 07c2 64050000 		.4byte	.LASF105
+ 2016 07c6 01       		.byte	0x1
+ 2017 07c7 91       		.byte	0x91
+ 2018 07c8 5E070000 		.4byte	0x75e
+ 2019 07cc 02       		.uleb128 0x2
+ 2020 07cd 91       		.byte	0x91
+ 2021 07ce 70       		.sleb128 -16
+ 2022 07cf 1B       		.uleb128 0x1b
+ 2023 07d0 1A000000 		.4byte	.LBB2
+ 2024 07d4 06000000 		.4byte	.LBE2-.LBB2
+ 2025 07d8 EA070000 		.4byte	0x7ea
+ 2026 07dc 1C       		.uleb128 0x1c
+ 2027 07dd 746D7000 		.ascii	"tmp\000"
+ 2028 07e1 01       		.byte	0x1
+ 2029 07e2 95       		.byte	0x95
+ 2030 07e3 CA000000 		.4byte	0xca
+ 2031 07e7 01       		.uleb128 0x1
+ 2032 07e8 53       		.byte	0x53
+ 2033 07e9 00       		.byte	0
+ 2034 07ea 1D       		.uleb128 0x1d
+ 2035 07eb 4A000000 		.4byte	.LBB3
+ 2036 07ef 06000000 		.4byte	.LBE3-.LBB3
+ 2037 07f3 1C       		.uleb128 0x1c
+ 2038 07f4 746D7000 		.ascii	"tmp\000"
+ 2039 07f8 01       		.byte	0x1
+ 2040 07f9 9C       		.byte	0x9c
+ 2041 07fa CA000000 		.4byte	0xca
+ 2042 07fe 01       		.uleb128 0x1
+ 2043 07ff 53       		.byte	0x53
+ 2044 0800 00       		.byte	0
+ 2045 0801 00       		.byte	0
+ 2046 0802 1A       		.uleb128 0x1a
+ 2047 0803 00000000 		.4byte	.LASF126
+ 2048 0807 01       		.byte	0x1
+ 2049 0808 A6       		.byte	0xa6
+ 2050 0809 00000000 		.4byte	.LFB71
+ 2051 080d 5C000000 		.4byte	.LFE71-.LFB71
+ 2052 0811 01       		.uleb128 0x1
+ 2053 0812 9C       		.byte	0x9c
+ 2054 0813 58080000 		.4byte	0x858
+ 2055 0817 19       		.uleb128 0x19
+ 2056 0818 0D040000 		.4byte	.LASF125
+ 2057 081c 01       		.byte	0x1
+ 2058 081d A6       		.byte	0xa6
+ 2059 081e 7E060000 		.4byte	0x67e
+ 2060 0822 02       		.uleb128 0x2
+ 2061 0823 91       		.byte	0x91
+ 2062 0824 74       		.sleb128 -12
+ 2063 0825 1B       		.uleb128 0x1b
+ 2064 0826 12000000 		.4byte	.LBB4
+ 2065 082a 06000000 		.4byte	.LBE4-.LBB4
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 39
+
+
+ 2066 082e 40080000 		.4byte	0x840
+ 2067 0832 1C       		.uleb128 0x1c
+ 2068 0833 746D7000 		.ascii	"tmp\000"
+ 2069 0837 01       		.byte	0x1
+ 2070 0838 AA       		.byte	0xaa
+ 2071 0839 CA000000 		.4byte	0xca
+ 2072 083d 01       		.uleb128 0x1
+ 2073 083e 53       		.byte	0x53
+ 2074 083f 00       		.byte	0
+ 2075 0840 1D       		.uleb128 0x1d
+ 2076 0841 48000000 		.4byte	.LBB5
+ 2077 0845 06000000 		.4byte	.LBE5-.LBB5
+ 2078 0849 1C       		.uleb128 0x1c
+ 2079 084a 746D7000 		.ascii	"tmp\000"
+ 2080 084e 01       		.byte	0x1
+ 2081 084f B2       		.byte	0xb2
+ 2082 0850 CA000000 		.4byte	0xca
+ 2083 0854 01       		.uleb128 0x1
+ 2084 0855 53       		.byte	0x53
+ 2085 0856 00       		.byte	0
+ 2086 0857 00       		.byte	0
+ 2087 0858 1A       		.uleb128 0x1a
+ 2088 0859 D3010000 		.4byte	.LASF127
+ 2089 085d 01       		.byte	0x1
+ 2090 085e C0       		.byte	0xc0
+ 2091 085f 00000000 		.4byte	.LFB72
+ 2092 0863 6C000000 		.4byte	.LFE72-.LFB72
+ 2093 0867 01       		.uleb128 0x1
+ 2094 0868 9C       		.byte	0x9c
+ 2095 0869 C8080000 		.4byte	0x8c8
+ 2096 086d 19       		.uleb128 0x19
+ 2097 086e 0D040000 		.4byte	.LASF125
+ 2098 0872 01       		.byte	0x1
+ 2099 0873 C0       		.byte	0xc0
+ 2100 0874 7E060000 		.4byte	0x67e
+ 2101 0878 02       		.uleb128 0x2
+ 2102 0879 91       		.byte	0x91
+ 2103 087a 74       		.sleb128 -12
+ 2104 087b 1E       		.uleb128 0x1e
+ 2105 087c 6E00     		.ascii	"n\000"
+ 2106 087e 01       		.byte	0x1
+ 2107 087f C0       		.byte	0xc0
+ 2108 0880 28000000 		.4byte	0x28
+ 2109 0884 02       		.uleb128 0x2
+ 2110 0885 91       		.byte	0x91
+ 2111 0886 70       		.sleb128 -16
+ 2112 0887 19       		.uleb128 0x19
+ 2113 0888 09020000 		.4byte	.LASF128
+ 2114 088c 01       		.byte	0x1
+ 2115 088d C0       		.byte	0xc0
+ 2116 088e C8080000 		.4byte	0x8c8
+ 2117 0892 02       		.uleb128 0x2
+ 2118 0893 91       		.byte	0x91
+ 2119 0894 6C       		.sleb128 -20
+ 2120 0895 1B       		.uleb128 0x1b
+ 2121 0896 22000000 		.4byte	.LBB6
+ 2122 089a 06000000 		.4byte	.LBE6-.LBB6
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 40
+
+
+ 2123 089e B0080000 		.4byte	0x8b0
+ 2124 08a2 1C       		.uleb128 0x1c
+ 2125 08a3 746D7000 		.ascii	"tmp\000"
+ 2126 08a7 01       		.byte	0x1
+ 2127 08a8 C5       		.byte	0xc5
+ 2128 08a9 CA000000 		.4byte	0xca
+ 2129 08ad 01       		.uleb128 0x1
+ 2130 08ae 53       		.byte	0x53
+ 2131 08af 00       		.byte	0
+ 2132 08b0 1D       		.uleb128 0x1d
+ 2133 08b1 52000000 		.4byte	.LBB7
+ 2134 08b5 06000000 		.4byte	.LBE7-.LBB7
+ 2135 08b9 1C       		.uleb128 0x1c
+ 2136 08ba 746D7000 		.ascii	"tmp\000"
+ 2137 08be 01       		.byte	0x1
+ 2138 08bf CD       		.byte	0xcd
+ 2139 08c0 CA000000 		.4byte	0xca
+ 2140 08c4 01       		.uleb128 0x1
+ 2141 08c5 53       		.byte	0x53
+ 2142 08c6 00       		.byte	0
+ 2143 08c7 00       		.byte	0
+ 2144 08c8 09       		.uleb128 0x9
+ 2145 08c9 04       		.byte	0x4
+ 2146 08ca CE080000 		.4byte	0x8ce
+ 2147 08ce 1F       		.uleb128 0x1f
+ 2148 08cf 1A       		.uleb128 0x1a
+ 2149 08d0 A5050000 		.4byte	.LASF129
+ 2150 08d4 01       		.byte	0x1
+ 2151 08d5 DC       		.byte	0xdc
+ 2152 08d6 00000000 		.4byte	.LFB73
+ 2153 08da 5C000000 		.4byte	.LFE73-.LFB73
+ 2154 08de 01       		.uleb128 0x1
+ 2155 08df 9C       		.byte	0x9c
+ 2156 08e0 0D090000 		.4byte	0x90d
+ 2157 08e4 19       		.uleb128 0x19
+ 2158 08e5 0D040000 		.4byte	.LASF125
+ 2159 08e9 01       		.byte	0x1
+ 2160 08ea DC       		.byte	0xdc
+ 2161 08eb 7E060000 		.4byte	0x67e
+ 2162 08ef 02       		.uleb128 0x2
+ 2163 08f0 91       		.byte	0x91
+ 2164 08f1 74       		.sleb128 -12
+ 2165 08f2 1E       		.uleb128 0x1e
+ 2166 08f3 6E00     		.ascii	"n\000"
+ 2167 08f5 01       		.byte	0x1
+ 2168 08f6 DC       		.byte	0xdc
+ 2169 08f7 28000000 		.4byte	0x28
+ 2170 08fb 02       		.uleb128 0x2
+ 2171 08fc 91       		.byte	0x91
+ 2172 08fd 70       		.sleb128 -16
+ 2173 08fe 19       		.uleb128 0x19
+ 2174 08ff 09020000 		.4byte	.LASF128
+ 2175 0903 01       		.byte	0x1
+ 2176 0904 DC       		.byte	0xdc
+ 2177 0905 C8080000 		.4byte	0x8c8
+ 2178 0909 02       		.uleb128 0x2
+ 2179 090a 91       		.byte	0x91
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 41
+
+
+ 2180 090b 6C       		.sleb128 -20
+ 2181 090c 00       		.byte	0
+ 2182 090d 20       		.uleb128 0x20
+ 2183 090e DB030000 		.4byte	.LASF130
+ 2184 0912 01       		.byte	0x1
+ 2185 0913 F6       		.byte	0xf6
+ 2186 0914 28000000 		.4byte	0x28
+ 2187 0918 00000000 		.4byte	.LFB74
+ 2188 091c 5C000000 		.4byte	.LFE74-.LFB74
+ 2189 0920 01       		.uleb128 0x1
+ 2190 0921 9C       		.byte	0x9c
+ 2191 0922 74090000 		.4byte	0x974
+ 2192 0926 19       		.uleb128 0x19
+ 2193 0927 0D040000 		.4byte	.LASF125
+ 2194 092b 01       		.byte	0x1
+ 2195 092c F6       		.byte	0xf6
+ 2196 092d 7E060000 		.4byte	0x67e
+ 2197 0931 02       		.uleb128 0x2
+ 2198 0932 91       		.byte	0x91
+ 2199 0933 6C       		.sleb128 -20
+ 2200 0934 1C       		.uleb128 0x1c
+ 2201 0935 6E00     		.ascii	"n\000"
+ 2202 0937 01       		.byte	0x1
+ 2203 0938 F7       		.byte	0xf7
+ 2204 0939 28000000 		.4byte	0x28
+ 2205 093d 02       		.uleb128 0x2
+ 2206 093e 91       		.byte	0x91
+ 2207 093f 74       		.sleb128 -12
+ 2208 0940 1B       		.uleb128 0x1b
+ 2209 0941 12000000 		.4byte	.LBB8
+ 2210 0945 06000000 		.4byte	.LBE8-.LBB8
+ 2211 0949 5B090000 		.4byte	0x95b
+ 2212 094d 1C       		.uleb128 0x1c
+ 2213 094e 746D7000 		.ascii	"tmp\000"
+ 2214 0952 01       		.byte	0x1
+ 2215 0953 FB       		.byte	0xfb
+ 2216 0954 CA000000 		.4byte	0xca
+ 2217 0958 01       		.uleb128 0x1
+ 2218 0959 53       		.byte	0x53
+ 2219 095a 00       		.byte	0
+ 2220 095b 1D       		.uleb128 0x1d
+ 2221 095c 42000000 		.4byte	.LBB9
+ 2222 0960 06000000 		.4byte	.LBE9-.LBB9
+ 2223 0964 21       		.uleb128 0x21
+ 2224 0965 746D7000 		.ascii	"tmp\000"
+ 2225 0969 01       		.byte	0x1
+ 2226 096a 0401     		.2byte	0x104
+ 2227 096c CA000000 		.4byte	0xca
+ 2228 0970 01       		.uleb128 0x1
+ 2229 0971 53       		.byte	0x53
+ 2230 0972 00       		.byte	0
+ 2231 0973 00       		.byte	0
+ 2232 0974 22       		.uleb128 0x22
+ 2233 0975 04030000 		.4byte	.LASF131
+ 2234 0979 01       		.byte	0x1
+ 2235 097a 1501     		.2byte	0x115
+ 2236 097c 28000000 		.4byte	0x28
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 42
+
+
+ 2237 0980 00000000 		.4byte	.LFB75
+ 2238 0984 4C000000 		.4byte	.LFE75-.LFB75
+ 2239 0988 01       		.uleb128 0x1
+ 2240 0989 9C       		.byte	0x9c
+ 2241 098a B5090000 		.4byte	0x9b5
+ 2242 098e 23       		.uleb128 0x23
+ 2243 098f 0D040000 		.4byte	.LASF125
+ 2244 0993 01       		.byte	0x1
+ 2245 0994 1501     		.2byte	0x115
+ 2246 0996 7E060000 		.4byte	0x67e
+ 2247 099a 02       		.uleb128 0x2
+ 2248 099b 91       		.byte	0x91
+ 2249 099c 6C       		.sleb128 -20
+ 2250 099d 1D       		.uleb128 0x1d
+ 2251 099e 2C000000 		.4byte	.LBB10
+ 2252 09a2 0E000000 		.4byte	.LBE10-.LBB10
+ 2253 09a6 21       		.uleb128 0x21
+ 2254 09a7 6E00     		.ascii	"n\000"
+ 2255 09a9 01       		.byte	0x1
+ 2256 09aa 1C01     		.2byte	0x11c
+ 2257 09ac 28000000 		.4byte	0x28
+ 2258 09b0 02       		.uleb128 0x2
+ 2259 09b1 91       		.byte	0x91
+ 2260 09b2 74       		.sleb128 -12
+ 2261 09b3 00       		.byte	0
+ 2262 09b4 00       		.byte	0
+ 2263 09b5 24       		.uleb128 0x24
+ 2264 09b6 34040000 		.4byte	.LASF132
+ 2265 09ba 01       		.byte	0x1
+ 2266 09bb 2F01     		.2byte	0x12f
+ 2267 09bd 00000000 		.4byte	.LFB76
+ 2268 09c1 6C000000 		.4byte	.LFE76-.LFB76
+ 2269 09c5 01       		.uleb128 0x1
+ 2270 09c6 9C       		.byte	0x9c
+ 2271 09c7 2B0A0000 		.4byte	0xa2b
+ 2272 09cb 23       		.uleb128 0x23
+ 2273 09cc 0D040000 		.4byte	.LASF125
+ 2274 09d0 01       		.byte	0x1
+ 2275 09d1 2F01     		.2byte	0x12f
+ 2276 09d3 7E060000 		.4byte	0x67e
+ 2277 09d7 02       		.uleb128 0x2
+ 2278 09d8 91       		.byte	0x91
+ 2279 09d9 74       		.sleb128 -12
+ 2280 09da 25       		.uleb128 0x25
+ 2281 09db 6E00     		.ascii	"n\000"
+ 2282 09dd 01       		.byte	0x1
+ 2283 09de 2F01     		.2byte	0x12f
+ 2284 09e0 28000000 		.4byte	0x28
+ 2285 09e4 02       		.uleb128 0x2
+ 2286 09e5 91       		.byte	0x91
+ 2287 09e6 70       		.sleb128 -16
+ 2288 09e7 23       		.uleb128 0x23
+ 2289 09e8 C6000000 		.4byte	.LASF107
+ 2290 09ec 01       		.byte	0x1
+ 2291 09ed 2F01     		.2byte	0x12f
+ 2292 09ef C6020000 		.4byte	0x2c6
+ 2293 09f3 02       		.uleb128 0x2
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 43
+
+
+ 2294 09f4 91       		.byte	0x91
+ 2295 09f5 6C       		.sleb128 -20
+ 2296 09f6 1B       		.uleb128 0x1b
+ 2297 09f7 22000000 		.4byte	.LBB11
+ 2298 09fb 06000000 		.4byte	.LBE11-.LBB11
+ 2299 09ff 120A0000 		.4byte	0xa12
+ 2300 0a03 21       		.uleb128 0x21
+ 2301 0a04 746D7000 		.ascii	"tmp\000"
+ 2302 0a08 01       		.byte	0x1
+ 2303 0a09 3401     		.2byte	0x134
+ 2304 0a0b CA000000 		.4byte	0xca
+ 2305 0a0f 01       		.uleb128 0x1
+ 2306 0a10 53       		.byte	0x53
+ 2307 0a11 00       		.byte	0
+ 2308 0a12 1D       		.uleb128 0x1d
+ 2309 0a13 52000000 		.4byte	.LBB12
+ 2310 0a17 06000000 		.4byte	.LBE12-.LBB12
+ 2311 0a1b 21       		.uleb128 0x21
+ 2312 0a1c 746D7000 		.ascii	"tmp\000"
+ 2313 0a20 01       		.byte	0x1
+ 2314 0a21 3C01     		.2byte	0x13c
+ 2315 0a23 CA000000 		.4byte	0xca
+ 2316 0a27 01       		.uleb128 0x1
+ 2317 0a28 53       		.byte	0x53
+ 2318 0a29 00       		.byte	0
+ 2319 0a2a 00       		.byte	0
+ 2320 0a2b 24       		.uleb128 0x24
+ 2321 0a2c 37030000 		.4byte	.LASF133
+ 2322 0a30 01       		.byte	0x1
+ 2323 0a31 4B01     		.2byte	0x14b
+ 2324 0a33 00000000 		.4byte	.LFB77
+ 2325 0a37 5C000000 		.4byte	.LFE77-.LFB77
+ 2326 0a3b 01       		.uleb128 0x1
+ 2327 0a3c 9C       		.byte	0x9c
+ 2328 0a3d 6D0A0000 		.4byte	0xa6d
+ 2329 0a41 23       		.uleb128 0x23
+ 2330 0a42 0D040000 		.4byte	.LASF125
+ 2331 0a46 01       		.byte	0x1
+ 2332 0a47 4B01     		.2byte	0x14b
+ 2333 0a49 7E060000 		.4byte	0x67e
+ 2334 0a4d 02       		.uleb128 0x2
+ 2335 0a4e 91       		.byte	0x91
+ 2336 0a4f 74       		.sleb128 -12
+ 2337 0a50 25       		.uleb128 0x25
+ 2338 0a51 6E00     		.ascii	"n\000"
+ 2339 0a53 01       		.byte	0x1
+ 2340 0a54 4B01     		.2byte	0x14b
+ 2341 0a56 28000000 		.4byte	0x28
+ 2342 0a5a 02       		.uleb128 0x2
+ 2343 0a5b 91       		.byte	0x91
+ 2344 0a5c 70       		.sleb128 -16
+ 2345 0a5d 23       		.uleb128 0x23
+ 2346 0a5e C6000000 		.4byte	.LASF107
+ 2347 0a62 01       		.byte	0x1
+ 2348 0a63 4B01     		.2byte	0x14b
+ 2349 0a65 C6020000 		.4byte	0x2c6
+ 2350 0a69 02       		.uleb128 0x2
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 44
+
+
+ 2351 0a6a 91       		.byte	0x91
+ 2352 0a6b 6C       		.sleb128 -20
+ 2353 0a6c 00       		.byte	0
+ 2354 0a6d 22       		.uleb128 0x22
+ 2355 0a6e 6E060000 		.4byte	.LASF134
+ 2356 0a72 01       		.byte	0x1
+ 2357 0a73 6501     		.2byte	0x165
+ 2358 0a75 28000000 		.4byte	0x28
+ 2359 0a79 00000000 		.4byte	.LFB78
+ 2360 0a7d 5C000000 		.4byte	.LFE78-.LFB78
+ 2361 0a81 01       		.uleb128 0x1
+ 2362 0a82 9C       		.byte	0x9c
+ 2363 0a83 D80A0000 		.4byte	0xad8
+ 2364 0a87 23       		.uleb128 0x23
+ 2365 0a88 0D040000 		.4byte	.LASF125
+ 2366 0a8c 01       		.byte	0x1
+ 2367 0a8d 6501     		.2byte	0x165
+ 2368 0a8f 7E060000 		.4byte	0x67e
+ 2369 0a93 02       		.uleb128 0x2
+ 2370 0a94 91       		.byte	0x91
+ 2371 0a95 6C       		.sleb128 -20
+ 2372 0a96 21       		.uleb128 0x21
+ 2373 0a97 6E00     		.ascii	"n\000"
+ 2374 0a99 01       		.byte	0x1
+ 2375 0a9a 6601     		.2byte	0x166
+ 2376 0a9c 28000000 		.4byte	0x28
+ 2377 0aa0 02       		.uleb128 0x2
+ 2378 0aa1 91       		.byte	0x91
+ 2379 0aa2 74       		.sleb128 -12
+ 2380 0aa3 1B       		.uleb128 0x1b
+ 2381 0aa4 12000000 		.4byte	.LBB13
+ 2382 0aa8 06000000 		.4byte	.LBE13-.LBB13
+ 2383 0aac BF0A0000 		.4byte	0xabf
+ 2384 0ab0 21       		.uleb128 0x21
+ 2385 0ab1 746D7000 		.ascii	"tmp\000"
+ 2386 0ab5 01       		.byte	0x1
+ 2387 0ab6 6A01     		.2byte	0x16a
+ 2388 0ab8 CA000000 		.4byte	0xca
+ 2389 0abc 01       		.uleb128 0x1
+ 2390 0abd 53       		.byte	0x53
+ 2391 0abe 00       		.byte	0
+ 2392 0abf 1D       		.uleb128 0x1d
+ 2393 0ac0 42000000 		.4byte	.LBB14
+ 2394 0ac4 06000000 		.4byte	.LBE14-.LBB14
+ 2395 0ac8 21       		.uleb128 0x21
+ 2396 0ac9 746D7000 		.ascii	"tmp\000"
+ 2397 0acd 01       		.byte	0x1
+ 2398 0ace 7401     		.2byte	0x174
+ 2399 0ad0 CA000000 		.4byte	0xca
+ 2400 0ad4 01       		.uleb128 0x1
+ 2401 0ad5 53       		.byte	0x53
+ 2402 0ad6 00       		.byte	0
+ 2403 0ad7 00       		.byte	0
+ 2404 0ad8 22       		.uleb128 0x22
+ 2405 0ad9 7F060000 		.4byte	.LASF135
+ 2406 0add 01       		.byte	0x1
+ 2407 0ade 8501     		.2byte	0x185
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 45
+
+
+ 2408 0ae0 28000000 		.4byte	0x28
+ 2409 0ae4 00000000 		.4byte	.LFB79
+ 2410 0ae8 4C000000 		.4byte	.LFE79-.LFB79
+ 2411 0aec 01       		.uleb128 0x1
+ 2412 0aed 9C       		.byte	0x9c
+ 2413 0aee 190B0000 		.4byte	0xb19
+ 2414 0af2 23       		.uleb128 0x23
+ 2415 0af3 0D040000 		.4byte	.LASF125
+ 2416 0af7 01       		.byte	0x1
+ 2417 0af8 8501     		.2byte	0x185
+ 2418 0afa 7E060000 		.4byte	0x67e
+ 2419 0afe 02       		.uleb128 0x2
+ 2420 0aff 91       		.byte	0x91
+ 2421 0b00 6C       		.sleb128 -20
+ 2422 0b01 1D       		.uleb128 0x1d
+ 2423 0b02 2C000000 		.4byte	.LBB15
+ 2424 0b06 0E000000 		.4byte	.LBE15-.LBB15
+ 2425 0b0a 21       		.uleb128 0x21
+ 2426 0b0b 6E00     		.ascii	"n\000"
+ 2427 0b0d 01       		.byte	0x1
+ 2428 0b0e 8D01     		.2byte	0x18d
+ 2429 0b10 28000000 		.4byte	0x28
+ 2430 0b14 02       		.uleb128 0x2
+ 2431 0b15 91       		.byte	0x91
+ 2432 0b16 74       		.sleb128 -12
+ 2433 0b17 00       		.byte	0
+ 2434 0b18 00       		.byte	0
+ 2435 0b19 22       		.uleb128 0x22
+ 2436 0b1a 2B010000 		.4byte	.LASF136
+ 2437 0b1e 01       		.byte	0x1
+ 2438 0b1f 9E01     		.2byte	0x19e
+ 2439 0b21 E0000000 		.4byte	0xe0
+ 2440 0b25 00000000 		.4byte	.LFB80
+ 2441 0b29 28000000 		.4byte	.LFE80-.LFB80
+ 2442 0b2d 01       		.uleb128 0x1
+ 2443 0b2e 9C       		.byte	0x9c
+ 2444 0b2f 430B0000 		.4byte	0xb43
+ 2445 0b33 23       		.uleb128 0x23
+ 2446 0b34 0D040000 		.4byte	.LASF125
+ 2447 0b38 01       		.byte	0x1
+ 2448 0b39 9E01     		.2byte	0x19e
+ 2449 0b3b 7E060000 		.4byte	0x67e
+ 2450 0b3f 02       		.uleb128 0x2
+ 2451 0b40 91       		.byte	0x91
+ 2452 0b41 74       		.sleb128 -12
+ 2453 0b42 00       		.byte	0
+ 2454 0b43 26       		.uleb128 0x26
+ 2455 0b44 B9000000 		.4byte	.LASF141
+ 2456 0b48 0D       		.byte	0xd
+ 2457 0b49 0706     		.2byte	0x607
+ 2458 0b4b 4F0B0000 		.4byte	0xb4f
+ 2459 0b4f 0D       		.uleb128 0xd
+ 2460 0b50 BF000000 		.4byte	0xbf
+ 2461 0b54 00       		.byte	0
+ 2462              		.section	.debug_abbrev,"",%progbits
+ 2463              	.Ldebug_abbrev0:
+ 2464 0000 01       		.uleb128 0x1
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 46
+
+
+ 2465 0001 11       		.uleb128 0x11
+ 2466 0002 01       		.byte	0x1
+ 2467 0003 25       		.uleb128 0x25
+ 2468 0004 0E       		.uleb128 0xe
+ 2469 0005 13       		.uleb128 0x13
+ 2470 0006 0B       		.uleb128 0xb
+ 2471 0007 03       		.uleb128 0x3
+ 2472 0008 0E       		.uleb128 0xe
+ 2473 0009 55       		.uleb128 0x55
+ 2474 000a 17       		.uleb128 0x17
+ 2475 000b 11       		.uleb128 0x11
+ 2476 000c 01       		.uleb128 0x1
+ 2477 000d 10       		.uleb128 0x10
+ 2478 000e 17       		.uleb128 0x17
+ 2479 000f 00       		.byte	0
+ 2480 0010 00       		.byte	0
+ 2481 0011 02       		.uleb128 0x2
+ 2482 0012 24       		.uleb128 0x24
+ 2483 0013 00       		.byte	0
+ 2484 0014 0B       		.uleb128 0xb
+ 2485 0015 0B       		.uleb128 0xb
+ 2486 0016 3E       		.uleb128 0x3e
+ 2487 0017 0B       		.uleb128 0xb
+ 2488 0018 03       		.uleb128 0x3
+ 2489 0019 08       		.uleb128 0x8
+ 2490 001a 00       		.byte	0
+ 2491 001b 00       		.byte	0
+ 2492 001c 03       		.uleb128 0x3
+ 2493 001d 16       		.uleb128 0x16
+ 2494 001e 00       		.byte	0
+ 2495 001f 03       		.uleb128 0x3
+ 2496 0020 0E       		.uleb128 0xe
+ 2497 0021 3A       		.uleb128 0x3a
+ 2498 0022 0B       		.uleb128 0xb
+ 2499 0023 3B       		.uleb128 0x3b
+ 2500 0024 0B       		.uleb128 0xb
+ 2501 0025 49       		.uleb128 0x49
+ 2502 0026 13       		.uleb128 0x13
+ 2503 0027 00       		.byte	0
+ 2504 0028 00       		.byte	0
+ 2505 0029 04       		.uleb128 0x4
+ 2506 002a 24       		.uleb128 0x24
+ 2507 002b 00       		.byte	0
+ 2508 002c 0B       		.uleb128 0xb
+ 2509 002d 0B       		.uleb128 0xb
+ 2510 002e 3E       		.uleb128 0x3e
+ 2511 002f 0B       		.uleb128 0xb
+ 2512 0030 03       		.uleb128 0x3
+ 2513 0031 0E       		.uleb128 0xe
+ 2514 0032 00       		.byte	0
+ 2515 0033 00       		.byte	0
+ 2516 0034 05       		.uleb128 0x5
+ 2517 0035 13       		.uleb128 0x13
+ 2518 0036 01       		.byte	0x1
+ 2519 0037 03       		.uleb128 0x3
+ 2520 0038 0E       		.uleb128 0xe
+ 2521 0039 0B       		.uleb128 0xb
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 47
+
+
+ 2522 003a 0B       		.uleb128 0xb
+ 2523 003b 3A       		.uleb128 0x3a
+ 2524 003c 0B       		.uleb128 0xb
+ 2525 003d 3B       		.uleb128 0x3b
+ 2526 003e 0B       		.uleb128 0xb
+ 2527 003f 01       		.uleb128 0x1
+ 2528 0040 13       		.uleb128 0x13
+ 2529 0041 00       		.byte	0
+ 2530 0042 00       		.byte	0
+ 2531 0043 06       		.uleb128 0x6
+ 2532 0044 0D       		.uleb128 0xd
+ 2533 0045 00       		.byte	0
+ 2534 0046 03       		.uleb128 0x3
+ 2535 0047 0E       		.uleb128 0xe
+ 2536 0048 3A       		.uleb128 0x3a
+ 2537 0049 0B       		.uleb128 0xb
+ 2538 004a 3B       		.uleb128 0x3b
+ 2539 004b 0B       		.uleb128 0xb
+ 2540 004c 49       		.uleb128 0x49
+ 2541 004d 13       		.uleb128 0x13
+ 2542 004e 38       		.uleb128 0x38
+ 2543 004f 0B       		.uleb128 0xb
+ 2544 0050 00       		.byte	0
+ 2545 0051 00       		.byte	0
+ 2546 0052 07       		.uleb128 0x7
+ 2547 0053 0D       		.uleb128 0xd
+ 2548 0054 00       		.byte	0
+ 2549 0055 03       		.uleb128 0x3
+ 2550 0056 08       		.uleb128 0x8
+ 2551 0057 3A       		.uleb128 0x3a
+ 2552 0058 0B       		.uleb128 0xb
+ 2553 0059 3B       		.uleb128 0x3b
+ 2554 005a 0B       		.uleb128 0xb
+ 2555 005b 49       		.uleb128 0x49
+ 2556 005c 13       		.uleb128 0x13
+ 2557 005d 38       		.uleb128 0x38
+ 2558 005e 0B       		.uleb128 0xb
+ 2559 005f 00       		.byte	0
+ 2560 0060 00       		.byte	0
+ 2561 0061 08       		.uleb128 0x8
+ 2562 0062 13       		.uleb128 0x13
+ 2563 0063 01       		.byte	0x1
+ 2564 0064 0B       		.uleb128 0xb
+ 2565 0065 0B       		.uleb128 0xb
+ 2566 0066 3A       		.uleb128 0x3a
+ 2567 0067 0B       		.uleb128 0xb
+ 2568 0068 3B       		.uleb128 0x3b
+ 2569 0069 0B       		.uleb128 0xb
+ 2570 006a 01       		.uleb128 0x1
+ 2571 006b 13       		.uleb128 0x13
+ 2572 006c 00       		.byte	0
+ 2573 006d 00       		.byte	0
+ 2574 006e 09       		.uleb128 0x9
+ 2575 006f 0F       		.uleb128 0xf
+ 2576 0070 00       		.byte	0
+ 2577 0071 0B       		.uleb128 0xb
+ 2578 0072 0B       		.uleb128 0xb
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 48
+
+
+ 2579 0073 49       		.uleb128 0x49
+ 2580 0074 13       		.uleb128 0x13
+ 2581 0075 00       		.byte	0
+ 2582 0076 00       		.byte	0
+ 2583 0077 0A       		.uleb128 0xa
+ 2584 0078 0F       		.uleb128 0xf
+ 2585 0079 00       		.byte	0
+ 2586 007a 0B       		.uleb128 0xb
+ 2587 007b 0B       		.uleb128 0xb
+ 2588 007c 00       		.byte	0
+ 2589 007d 00       		.byte	0
+ 2590 007e 0B       		.uleb128 0xb
+ 2591 007f 13       		.uleb128 0x13
+ 2592 0080 01       		.byte	0x1
+ 2593 0081 03       		.uleb128 0x3
+ 2594 0082 0E       		.uleb128 0xe
+ 2595 0083 0B       		.uleb128 0xb
+ 2596 0084 0B       		.uleb128 0xb
+ 2597 0085 3A       		.uleb128 0x3a
+ 2598 0086 0B       		.uleb128 0xb
+ 2599 0087 3B       		.uleb128 0x3b
+ 2600 0088 05       		.uleb128 0x5
+ 2601 0089 01       		.uleb128 0x1
+ 2602 008a 13       		.uleb128 0x13
+ 2603 008b 00       		.byte	0
+ 2604 008c 00       		.byte	0
+ 2605 008d 0C       		.uleb128 0xc
+ 2606 008e 0D       		.uleb128 0xd
+ 2607 008f 00       		.byte	0
+ 2608 0090 03       		.uleb128 0x3
+ 2609 0091 08       		.uleb128 0x8
+ 2610 0092 3A       		.uleb128 0x3a
+ 2611 0093 0B       		.uleb128 0xb
+ 2612 0094 3B       		.uleb128 0x3b
+ 2613 0095 05       		.uleb128 0x5
+ 2614 0096 49       		.uleb128 0x49
+ 2615 0097 13       		.uleb128 0x13
+ 2616 0098 38       		.uleb128 0x38
+ 2617 0099 0B       		.uleb128 0xb
+ 2618 009a 00       		.byte	0
+ 2619 009b 00       		.byte	0
+ 2620 009c 0D       		.uleb128 0xd
+ 2621 009d 35       		.uleb128 0x35
+ 2622 009e 00       		.byte	0
+ 2623 009f 49       		.uleb128 0x49
+ 2624 00a0 13       		.uleb128 0x13
+ 2625 00a1 00       		.byte	0
+ 2626 00a2 00       		.byte	0
+ 2627 00a3 0E       		.uleb128 0xe
+ 2628 00a4 17       		.uleb128 0x17
+ 2629 00a5 01       		.byte	0x1
+ 2630 00a6 0B       		.uleb128 0xb
+ 2631 00a7 0B       		.uleb128 0xb
+ 2632 00a8 3A       		.uleb128 0x3a
+ 2633 00a9 0B       		.uleb128 0xb
+ 2634 00aa 3B       		.uleb128 0x3b
+ 2635 00ab 0B       		.uleb128 0xb
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 49
+
+
+ 2636 00ac 01       		.uleb128 0x1
+ 2637 00ad 13       		.uleb128 0x13
+ 2638 00ae 00       		.byte	0
+ 2639 00af 00       		.byte	0
+ 2640 00b0 0F       		.uleb128 0xf
+ 2641 00b1 0D       		.uleb128 0xd
+ 2642 00b2 00       		.byte	0
+ 2643 00b3 03       		.uleb128 0x3
+ 2644 00b4 0E       		.uleb128 0xe
+ 2645 00b5 3A       		.uleb128 0x3a
+ 2646 00b6 0B       		.uleb128 0xb
+ 2647 00b7 3B       		.uleb128 0x3b
+ 2648 00b8 0B       		.uleb128 0xb
+ 2649 00b9 49       		.uleb128 0x49
+ 2650 00ba 13       		.uleb128 0x13
+ 2651 00bb 00       		.byte	0
+ 2652 00bc 00       		.byte	0
+ 2653 00bd 10       		.uleb128 0x10
+ 2654 00be 26       		.uleb128 0x26
+ 2655 00bf 00       		.byte	0
+ 2656 00c0 49       		.uleb128 0x49
+ 2657 00c1 13       		.uleb128 0x13
+ 2658 00c2 00       		.byte	0
+ 2659 00c3 00       		.byte	0
+ 2660 00c4 11       		.uleb128 0x11
+ 2661 00c5 0D       		.uleb128 0xd
+ 2662 00c6 00       		.byte	0
+ 2663 00c7 03       		.uleb128 0x3
+ 2664 00c8 08       		.uleb128 0x8
+ 2665 00c9 3A       		.uleb128 0x3a
+ 2666 00ca 0B       		.uleb128 0xb
+ 2667 00cb 3B       		.uleb128 0x3b
+ 2668 00cc 0B       		.uleb128 0xb
+ 2669 00cd 49       		.uleb128 0x49
+ 2670 00ce 13       		.uleb128 0x13
+ 2671 00cf 00       		.byte	0
+ 2672 00d0 00       		.byte	0
+ 2673 00d1 12       		.uleb128 0x12
+ 2674 00d2 04       		.uleb128 0x4
+ 2675 00d3 01       		.byte	0x1
+ 2676 00d4 0B       		.uleb128 0xb
+ 2677 00d5 0B       		.uleb128 0xb
+ 2678 00d6 3A       		.uleb128 0x3a
+ 2679 00d7 0B       		.uleb128 0xb
+ 2680 00d8 3B       		.uleb128 0x3b
+ 2681 00d9 0B       		.uleb128 0xb
+ 2682 00da 01       		.uleb128 0x1
+ 2683 00db 13       		.uleb128 0x13
+ 2684 00dc 00       		.byte	0
+ 2685 00dd 00       		.byte	0
+ 2686 00de 13       		.uleb128 0x13
+ 2687 00df 28       		.uleb128 0x28
+ 2688 00e0 00       		.byte	0
+ 2689 00e1 03       		.uleb128 0x3
+ 2690 00e2 0E       		.uleb128 0xe
+ 2691 00e3 1C       		.uleb128 0x1c
+ 2692 00e4 0D       		.uleb128 0xd
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 50
+
+
+ 2693 00e5 00       		.byte	0
+ 2694 00e6 00       		.byte	0
+ 2695 00e7 14       		.uleb128 0x14
+ 2696 00e8 0D       		.uleb128 0xd
+ 2697 00e9 00       		.byte	0
+ 2698 00ea 03       		.uleb128 0x3
+ 2699 00eb 0E       		.uleb128 0xe
+ 2700 00ec 3A       		.uleb128 0x3a
+ 2701 00ed 0B       		.uleb128 0xb
+ 2702 00ee 3B       		.uleb128 0x3b
+ 2703 00ef 0B       		.uleb128 0xb
+ 2704 00f0 49       		.uleb128 0x49
+ 2705 00f1 13       		.uleb128 0x13
+ 2706 00f2 0B       		.uleb128 0xb
+ 2707 00f3 0B       		.uleb128 0xb
+ 2708 00f4 0D       		.uleb128 0xd
+ 2709 00f5 0B       		.uleb128 0xb
+ 2710 00f6 0C       		.uleb128 0xc
+ 2711 00f7 0B       		.uleb128 0xb
+ 2712 00f8 38       		.uleb128 0x38
+ 2713 00f9 0B       		.uleb128 0xb
+ 2714 00fa 00       		.byte	0
+ 2715 00fb 00       		.byte	0
+ 2716 00fc 15       		.uleb128 0x15
+ 2717 00fd 15       		.uleb128 0x15
+ 2718 00fe 01       		.byte	0x1
+ 2719 00ff 27       		.uleb128 0x27
+ 2720 0100 19       		.uleb128 0x19
+ 2721 0101 01       		.uleb128 0x1
+ 2722 0102 13       		.uleb128 0x13
+ 2723 0103 00       		.byte	0
+ 2724 0104 00       		.byte	0
+ 2725 0105 16       		.uleb128 0x16
+ 2726 0106 05       		.uleb128 0x5
+ 2727 0107 00       		.byte	0
+ 2728 0108 49       		.uleb128 0x49
+ 2729 0109 13       		.uleb128 0x13
+ 2730 010a 00       		.byte	0
+ 2731 010b 00       		.byte	0
+ 2732 010c 17       		.uleb128 0x17
+ 2733 010d 2E       		.uleb128 0x2e
+ 2734 010e 00       		.byte	0
+ 2735 010f 3F       		.uleb128 0x3f
+ 2736 0110 19       		.uleb128 0x19
+ 2737 0111 03       		.uleb128 0x3
+ 2738 0112 0E       		.uleb128 0xe
+ 2739 0113 3A       		.uleb128 0x3a
+ 2740 0114 0B       		.uleb128 0xb
+ 2741 0115 3B       		.uleb128 0x3b
+ 2742 0116 0B       		.uleb128 0xb
+ 2743 0117 27       		.uleb128 0x27
+ 2744 0118 19       		.uleb128 0x19
+ 2745 0119 11       		.uleb128 0x11
+ 2746 011a 01       		.uleb128 0x1
+ 2747 011b 12       		.uleb128 0x12
+ 2748 011c 06       		.uleb128 0x6
+ 2749 011d 40       		.uleb128 0x40
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 51
+
+
+ 2750 011e 18       		.uleb128 0x18
+ 2751 011f 9742     		.uleb128 0x2117
+ 2752 0121 19       		.uleb128 0x19
+ 2753 0122 00       		.byte	0
+ 2754 0123 00       		.byte	0
+ 2755 0124 18       		.uleb128 0x18
+ 2756 0125 2E       		.uleb128 0x2e
+ 2757 0126 01       		.byte	0x1
+ 2758 0127 3F       		.uleb128 0x3f
+ 2759 0128 19       		.uleb128 0x19
+ 2760 0129 03       		.uleb128 0x3
+ 2761 012a 0E       		.uleb128 0xe
+ 2762 012b 3A       		.uleb128 0x3a
+ 2763 012c 0B       		.uleb128 0xb
+ 2764 012d 3B       		.uleb128 0x3b
+ 2765 012e 0B       		.uleb128 0xb
+ 2766 012f 27       		.uleb128 0x27
+ 2767 0130 19       		.uleb128 0x19
+ 2768 0131 11       		.uleb128 0x11
+ 2769 0132 01       		.uleb128 0x1
+ 2770 0133 12       		.uleb128 0x12
+ 2771 0134 06       		.uleb128 0x6
+ 2772 0135 40       		.uleb128 0x40
+ 2773 0136 18       		.uleb128 0x18
+ 2774 0137 9742     		.uleb128 0x2117
+ 2775 0139 19       		.uleb128 0x19
+ 2776 013a 01       		.uleb128 0x1
+ 2777 013b 13       		.uleb128 0x13
+ 2778 013c 00       		.byte	0
+ 2779 013d 00       		.byte	0
+ 2780 013e 19       		.uleb128 0x19
+ 2781 013f 05       		.uleb128 0x5
+ 2782 0140 00       		.byte	0
+ 2783 0141 03       		.uleb128 0x3
+ 2784 0142 0E       		.uleb128 0xe
+ 2785 0143 3A       		.uleb128 0x3a
+ 2786 0144 0B       		.uleb128 0xb
+ 2787 0145 3B       		.uleb128 0x3b
+ 2788 0146 0B       		.uleb128 0xb
+ 2789 0147 49       		.uleb128 0x49
+ 2790 0148 13       		.uleb128 0x13
+ 2791 0149 02       		.uleb128 0x2
+ 2792 014a 18       		.uleb128 0x18
+ 2793 014b 00       		.byte	0
+ 2794 014c 00       		.byte	0
+ 2795 014d 1A       		.uleb128 0x1a
+ 2796 014e 2E       		.uleb128 0x2e
+ 2797 014f 01       		.byte	0x1
+ 2798 0150 3F       		.uleb128 0x3f
+ 2799 0151 19       		.uleb128 0x19
+ 2800 0152 03       		.uleb128 0x3
+ 2801 0153 0E       		.uleb128 0xe
+ 2802 0154 3A       		.uleb128 0x3a
+ 2803 0155 0B       		.uleb128 0xb
+ 2804 0156 3B       		.uleb128 0x3b
+ 2805 0157 0B       		.uleb128 0xb
+ 2806 0158 27       		.uleb128 0x27
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 52
+
+
+ 2807 0159 19       		.uleb128 0x19
+ 2808 015a 11       		.uleb128 0x11
+ 2809 015b 01       		.uleb128 0x1
+ 2810 015c 12       		.uleb128 0x12
+ 2811 015d 06       		.uleb128 0x6
+ 2812 015e 40       		.uleb128 0x40
+ 2813 015f 18       		.uleb128 0x18
+ 2814 0160 9642     		.uleb128 0x2116
+ 2815 0162 19       		.uleb128 0x19
+ 2816 0163 01       		.uleb128 0x1
+ 2817 0164 13       		.uleb128 0x13
+ 2818 0165 00       		.byte	0
+ 2819 0166 00       		.byte	0
+ 2820 0167 1B       		.uleb128 0x1b
+ 2821 0168 0B       		.uleb128 0xb
+ 2822 0169 01       		.byte	0x1
+ 2823 016a 11       		.uleb128 0x11
+ 2824 016b 01       		.uleb128 0x1
+ 2825 016c 12       		.uleb128 0x12
+ 2826 016d 06       		.uleb128 0x6
+ 2827 016e 01       		.uleb128 0x1
+ 2828 016f 13       		.uleb128 0x13
+ 2829 0170 00       		.byte	0
+ 2830 0171 00       		.byte	0
+ 2831 0172 1C       		.uleb128 0x1c
+ 2832 0173 34       		.uleb128 0x34
+ 2833 0174 00       		.byte	0
+ 2834 0175 03       		.uleb128 0x3
+ 2835 0176 08       		.uleb128 0x8
+ 2836 0177 3A       		.uleb128 0x3a
+ 2837 0178 0B       		.uleb128 0xb
+ 2838 0179 3B       		.uleb128 0x3b
+ 2839 017a 0B       		.uleb128 0xb
+ 2840 017b 49       		.uleb128 0x49
+ 2841 017c 13       		.uleb128 0x13
+ 2842 017d 02       		.uleb128 0x2
+ 2843 017e 18       		.uleb128 0x18
+ 2844 017f 00       		.byte	0
+ 2845 0180 00       		.byte	0
+ 2846 0181 1D       		.uleb128 0x1d
+ 2847 0182 0B       		.uleb128 0xb
+ 2848 0183 01       		.byte	0x1
+ 2849 0184 11       		.uleb128 0x11
+ 2850 0185 01       		.uleb128 0x1
+ 2851 0186 12       		.uleb128 0x12
+ 2852 0187 06       		.uleb128 0x6
+ 2853 0188 00       		.byte	0
+ 2854 0189 00       		.byte	0
+ 2855 018a 1E       		.uleb128 0x1e
+ 2856 018b 05       		.uleb128 0x5
+ 2857 018c 00       		.byte	0
+ 2858 018d 03       		.uleb128 0x3
+ 2859 018e 08       		.uleb128 0x8
+ 2860 018f 3A       		.uleb128 0x3a
+ 2861 0190 0B       		.uleb128 0xb
+ 2862 0191 3B       		.uleb128 0x3b
+ 2863 0192 0B       		.uleb128 0xb
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 53
+
+
+ 2864 0193 49       		.uleb128 0x49
+ 2865 0194 13       		.uleb128 0x13
+ 2866 0195 02       		.uleb128 0x2
+ 2867 0196 18       		.uleb128 0x18
+ 2868 0197 00       		.byte	0
+ 2869 0198 00       		.byte	0
+ 2870 0199 1F       		.uleb128 0x1f
+ 2871 019a 26       		.uleb128 0x26
+ 2872 019b 00       		.byte	0
+ 2873 019c 00       		.byte	0
+ 2874 019d 00       		.byte	0
+ 2875 019e 20       		.uleb128 0x20
+ 2876 019f 2E       		.uleb128 0x2e
+ 2877 01a0 01       		.byte	0x1
+ 2878 01a1 3F       		.uleb128 0x3f
+ 2879 01a2 19       		.uleb128 0x19
+ 2880 01a3 03       		.uleb128 0x3
+ 2881 01a4 0E       		.uleb128 0xe
+ 2882 01a5 3A       		.uleb128 0x3a
+ 2883 01a6 0B       		.uleb128 0xb
+ 2884 01a7 3B       		.uleb128 0x3b
+ 2885 01a8 0B       		.uleb128 0xb
+ 2886 01a9 27       		.uleb128 0x27
+ 2887 01aa 19       		.uleb128 0x19
+ 2888 01ab 49       		.uleb128 0x49
+ 2889 01ac 13       		.uleb128 0x13
+ 2890 01ad 11       		.uleb128 0x11
+ 2891 01ae 01       		.uleb128 0x1
+ 2892 01af 12       		.uleb128 0x12
+ 2893 01b0 06       		.uleb128 0x6
+ 2894 01b1 40       		.uleb128 0x40
+ 2895 01b2 18       		.uleb128 0x18
+ 2896 01b3 9642     		.uleb128 0x2116
+ 2897 01b5 19       		.uleb128 0x19
+ 2898 01b6 01       		.uleb128 0x1
+ 2899 01b7 13       		.uleb128 0x13
+ 2900 01b8 00       		.byte	0
+ 2901 01b9 00       		.byte	0
+ 2902 01ba 21       		.uleb128 0x21
+ 2903 01bb 34       		.uleb128 0x34
+ 2904 01bc 00       		.byte	0
+ 2905 01bd 03       		.uleb128 0x3
+ 2906 01be 08       		.uleb128 0x8
+ 2907 01bf 3A       		.uleb128 0x3a
+ 2908 01c0 0B       		.uleb128 0xb
+ 2909 01c1 3B       		.uleb128 0x3b
+ 2910 01c2 05       		.uleb128 0x5
+ 2911 01c3 49       		.uleb128 0x49
+ 2912 01c4 13       		.uleb128 0x13
+ 2913 01c5 02       		.uleb128 0x2
+ 2914 01c6 18       		.uleb128 0x18
+ 2915 01c7 00       		.byte	0
+ 2916 01c8 00       		.byte	0
+ 2917 01c9 22       		.uleb128 0x22
+ 2918 01ca 2E       		.uleb128 0x2e
+ 2919 01cb 01       		.byte	0x1
+ 2920 01cc 3F       		.uleb128 0x3f
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 54
+
+
+ 2921 01cd 19       		.uleb128 0x19
+ 2922 01ce 03       		.uleb128 0x3
+ 2923 01cf 0E       		.uleb128 0xe
+ 2924 01d0 3A       		.uleb128 0x3a
+ 2925 01d1 0B       		.uleb128 0xb
+ 2926 01d2 3B       		.uleb128 0x3b
+ 2927 01d3 05       		.uleb128 0x5
+ 2928 01d4 27       		.uleb128 0x27
+ 2929 01d5 19       		.uleb128 0x19
+ 2930 01d6 49       		.uleb128 0x49
+ 2931 01d7 13       		.uleb128 0x13
+ 2932 01d8 11       		.uleb128 0x11
+ 2933 01d9 01       		.uleb128 0x1
+ 2934 01da 12       		.uleb128 0x12
+ 2935 01db 06       		.uleb128 0x6
+ 2936 01dc 40       		.uleb128 0x40
+ 2937 01dd 18       		.uleb128 0x18
+ 2938 01de 9642     		.uleb128 0x2116
+ 2939 01e0 19       		.uleb128 0x19
+ 2940 01e1 01       		.uleb128 0x1
+ 2941 01e2 13       		.uleb128 0x13
+ 2942 01e3 00       		.byte	0
+ 2943 01e4 00       		.byte	0
+ 2944 01e5 23       		.uleb128 0x23
+ 2945 01e6 05       		.uleb128 0x5
+ 2946 01e7 00       		.byte	0
+ 2947 01e8 03       		.uleb128 0x3
+ 2948 01e9 0E       		.uleb128 0xe
+ 2949 01ea 3A       		.uleb128 0x3a
+ 2950 01eb 0B       		.uleb128 0xb
+ 2951 01ec 3B       		.uleb128 0x3b
+ 2952 01ed 05       		.uleb128 0x5
+ 2953 01ee 49       		.uleb128 0x49
+ 2954 01ef 13       		.uleb128 0x13
+ 2955 01f0 02       		.uleb128 0x2
+ 2956 01f1 18       		.uleb128 0x18
+ 2957 01f2 00       		.byte	0
+ 2958 01f3 00       		.byte	0
+ 2959 01f4 24       		.uleb128 0x24
+ 2960 01f5 2E       		.uleb128 0x2e
+ 2961 01f6 01       		.byte	0x1
+ 2962 01f7 3F       		.uleb128 0x3f
+ 2963 01f8 19       		.uleb128 0x19
+ 2964 01f9 03       		.uleb128 0x3
+ 2965 01fa 0E       		.uleb128 0xe
+ 2966 01fb 3A       		.uleb128 0x3a
+ 2967 01fc 0B       		.uleb128 0xb
+ 2968 01fd 3B       		.uleb128 0x3b
+ 2969 01fe 05       		.uleb128 0x5
+ 2970 01ff 27       		.uleb128 0x27
+ 2971 0200 19       		.uleb128 0x19
+ 2972 0201 11       		.uleb128 0x11
+ 2973 0202 01       		.uleb128 0x1
+ 2974 0203 12       		.uleb128 0x12
+ 2975 0204 06       		.uleb128 0x6
+ 2976 0205 40       		.uleb128 0x40
+ 2977 0206 18       		.uleb128 0x18
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 55
+
+
+ 2978 0207 9642     		.uleb128 0x2116
+ 2979 0209 19       		.uleb128 0x19
+ 2980 020a 01       		.uleb128 0x1
+ 2981 020b 13       		.uleb128 0x13
+ 2982 020c 00       		.byte	0
+ 2983 020d 00       		.byte	0
+ 2984 020e 25       		.uleb128 0x25
+ 2985 020f 05       		.uleb128 0x5
+ 2986 0210 00       		.byte	0
+ 2987 0211 03       		.uleb128 0x3
+ 2988 0212 08       		.uleb128 0x8
+ 2989 0213 3A       		.uleb128 0x3a
+ 2990 0214 0B       		.uleb128 0xb
+ 2991 0215 3B       		.uleb128 0x3b
+ 2992 0216 05       		.uleb128 0x5
+ 2993 0217 49       		.uleb128 0x49
+ 2994 0218 13       		.uleb128 0x13
+ 2995 0219 02       		.uleb128 0x2
+ 2996 021a 18       		.uleb128 0x18
+ 2997 021b 00       		.byte	0
+ 2998 021c 00       		.byte	0
+ 2999 021d 26       		.uleb128 0x26
+ 3000 021e 34       		.uleb128 0x34
+ 3001 021f 00       		.byte	0
+ 3002 0220 03       		.uleb128 0x3
+ 3003 0221 0E       		.uleb128 0xe
+ 3004 0222 3A       		.uleb128 0x3a
+ 3005 0223 0B       		.uleb128 0xb
+ 3006 0224 3B       		.uleb128 0x3b
+ 3007 0225 05       		.uleb128 0x5
+ 3008 0226 49       		.uleb128 0x49
+ 3009 0227 13       		.uleb128 0x13
+ 3010 0228 3F       		.uleb128 0x3f
+ 3011 0229 19       		.uleb128 0x19
+ 3012 022a 3C       		.uleb128 0x3c
+ 3013 022b 19       		.uleb128 0x19
+ 3014 022c 00       		.byte	0
+ 3015 022d 00       		.byte	0
+ 3016 022e 00       		.byte	0
+ 3017              		.section	.debug_aranges,"",%progbits
+ 3018 0000 7C000000 		.4byte	0x7c
+ 3019 0004 0200     		.2byte	0x2
+ 3020 0006 00000000 		.4byte	.Ldebug_info0
+ 3021 000a 04       		.byte	0x4
+ 3022 000b 00       		.byte	0
+ 3023 000c 0000     		.2byte	0
+ 3024 000e 0000     		.2byte	0
+ 3025 0010 00000000 		.4byte	.LFB68
+ 3026 0014 02000000 		.4byte	.LFE68-.LFB68
+ 3027 0018 00000000 		.4byte	.LFB69
+ 3028 001c 20000000 		.4byte	.LFE69-.LFB69
+ 3029 0020 00000000 		.4byte	.LFB70
+ 3030 0024 60000000 		.4byte	.LFE70-.LFB70
+ 3031 0028 00000000 		.4byte	.LFB71
+ 3032 002c 5C000000 		.4byte	.LFE71-.LFB71
+ 3033 0030 00000000 		.4byte	.LFB72
+ 3034 0034 6C000000 		.4byte	.LFE72-.LFB72
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 56
+
+
+ 3035 0038 00000000 		.4byte	.LFB73
+ 3036 003c 5C000000 		.4byte	.LFE73-.LFB73
+ 3037 0040 00000000 		.4byte	.LFB74
+ 3038 0044 5C000000 		.4byte	.LFE74-.LFB74
+ 3039 0048 00000000 		.4byte	.LFB75
+ 3040 004c 4C000000 		.4byte	.LFE75-.LFB75
+ 3041 0050 00000000 		.4byte	.LFB76
+ 3042 0054 6C000000 		.4byte	.LFE76-.LFB76
+ 3043 0058 00000000 		.4byte	.LFB77
+ 3044 005c 5C000000 		.4byte	.LFE77-.LFB77
+ 3045 0060 00000000 		.4byte	.LFB78
+ 3046 0064 5C000000 		.4byte	.LFE78-.LFB78
+ 3047 0068 00000000 		.4byte	.LFB79
+ 3048 006c 4C000000 		.4byte	.LFE79-.LFB79
+ 3049 0070 00000000 		.4byte	.LFB80
+ 3050 0074 28000000 		.4byte	.LFE80-.LFB80
+ 3051 0078 00000000 		.4byte	0
+ 3052 007c 00000000 		.4byte	0
+ 3053              		.section	.debug_ranges,"",%progbits
+ 3054              	.Ldebug_ranges0:
+ 3055 0000 00000000 		.4byte	.LFB68
+ 3056 0004 02000000 		.4byte	.LFE68
+ 3057 0008 00000000 		.4byte	.LFB69
+ 3058 000c 20000000 		.4byte	.LFE69
+ 3059 0010 00000000 		.4byte	.LFB70
+ 3060 0014 60000000 		.4byte	.LFE70
+ 3061 0018 00000000 		.4byte	.LFB71
+ 3062 001c 5C000000 		.4byte	.LFE71
+ 3063 0020 00000000 		.4byte	.LFB72
+ 3064 0024 6C000000 		.4byte	.LFE72
+ 3065 0028 00000000 		.4byte	.LFB73
+ 3066 002c 5C000000 		.4byte	.LFE73
+ 3067 0030 00000000 		.4byte	.LFB74
+ 3068 0034 5C000000 		.4byte	.LFE74
+ 3069 0038 00000000 		.4byte	.LFB75
+ 3070 003c 4C000000 		.4byte	.LFE75
+ 3071 0040 00000000 		.4byte	.LFB76
+ 3072 0044 6C000000 		.4byte	.LFE76
+ 3073 0048 00000000 		.4byte	.LFB77
+ 3074 004c 5C000000 		.4byte	.LFE77
+ 3075 0050 00000000 		.4byte	.LFB78
+ 3076 0054 5C000000 		.4byte	.LFE78
+ 3077 0058 00000000 		.4byte	.LFB79
+ 3078 005c 4C000000 		.4byte	.LFE79
+ 3079 0060 00000000 		.4byte	.LFB80
+ 3080 0064 28000000 		.4byte	.LFE80
+ 3081 0068 00000000 		.4byte	0
+ 3082 006c 00000000 		.4byte	0
+ 3083              		.section	.debug_line,"",%progbits
+ 3084              	.Ldebug_line0:
+ 3085 0000 6A040000 		.section	.debug_str,"MS",%progbits,1
+ 3085      02007602 
+ 3085      00000201 
+ 3085      FB0E0D00 
+ 3085      01010101 
+ 3086              	.LASF126:
+ 3087 0000 6C756172 		.ascii	"luartStop\000"
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 57
+
+
+ 3087      7453746F 
+ 3087      7000
+ 3088              	.LASF116:
+ 3089 000a 616E6F64 		.ascii	"anode_port\000"
+ 3089      655F706F 
+ 3089      727400
+ 3090              	.LASF2:
+ 3091 0015 73697A65 		.ascii	"size_t\000"
+ 3091      5F7400
+ 3092              	.LASF114:
+ 3093 001c 72786368 		.ascii	"rxchar_cb\000"
+ 3093      61725F63 
+ 3093      6200
+ 3094              	.LASF70:
+ 3095 0026 7264796D 		.ascii	"rdymsg\000"
+ 3095      736700
+ 3096              	.LASF93:
+ 3097 002d 4C554152 		.ascii	"LUART_TX_COMPLETE\000"
+ 3097      545F5458 
+ 3097      5F434F4D 
+ 3097      504C4554 
+ 3097      4500
+ 3098              	.LASF19:
+ 3099 003f 75696E74 		.ascii	"uint64_t\000"
+ 3099      36345F74 
+ 3099      00
+ 3100              	.LASF77:
+ 3101 0048 4F545950 		.ascii	"OTYPER\000"
+ 3101      455200
+ 3102              	.LASF3:
+ 3103 004f 5F5F7569 		.ascii	"__uint8_t\000"
+ 3103      6E74385F 
+ 3103      7400
+ 3104              	.LASF85:
+ 3105 0059 696F706F 		.ascii	"ioportmask_t\000"
+ 3105      72746D61 
+ 3105      736B5F74 
+ 3105      00
+ 3106              	.LASF109:
+ 3107 0066 6C756172 		.ascii	"luartccb_t\000"
+ 3107      74636362 
+ 3107      5F7400
+ 3108              	.LASF76:
+ 3109 0071 4D4F4445 		.ascii	"MODER\000"
+ 3109      5200
+ 3110              	.LASF92:
+ 3111 0077 4C554152 		.ascii	"LUART_TX_ACTIVE\000"
+ 3111      545F5458 
+ 3111      5F414354 
+ 3111      49564500 
+ 3112              	.LASF14:
+ 3113 0087 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3113      206C6F6E 
+ 3113      6720756E 
+ 3113      7369676E 
+ 3113      65642069 
+ 3114              	.LASF79:
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 58
+
+
+ 3115 009e 50555044 		.ascii	"PUPDR\000"
+ 3115      5200
+ 3116              	.LASF71:
+ 3117 00a4 65786974 		.ascii	"exitcode\000"
+ 3117      636F6465 
+ 3117      00
+ 3118              	.LASF89:
+ 3119 00ad 4C554152 		.ascii	"LUART_READY\000"
+ 3119      545F5245 
+ 3119      41445900 
+ 3120              	.LASF141:
+ 3121 00b9 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 3121      52784275 
+ 3121      66666572 
+ 3121      00
+ 3122              	.LASF107:
+ 3123 00c6 72786275 		.ascii	"rxbuf\000"
+ 3123      6600
+ 3124              	.LASF20:
+ 3125 00cc 626F6F6C 		.ascii	"bool_t\000"
+ 3125      5F7400
+ 3126              	.LASF34:
+ 3127 00d3 705F7072 		.ascii	"p_prio\000"
+ 3127      696F00
+ 3128              	.LASF12:
+ 3129 00da 6C6F6E67 		.ascii	"long long int\000"
+ 3129      206C6F6E 
+ 3129      6720696E 
+ 3129      7400
+ 3130              	.LASF1:
+ 3131 00e8 7369676E 		.ascii	"signed char\000"
+ 3131      65642063 
+ 3131      68617200 
+ 3132              	.LASF80:
+ 3133 00f4 42535252 		.ascii	"BSRR\000"
+ 3133      00
+ 3134              	.LASF88:
+ 3135 00f9 4C554152 		.ascii	"LUART_STOP\000"
+ 3135      545F5354 
+ 3135      4F5000
+ 3136              	.LASF51:
+ 3137 0104 705F6D70 		.ascii	"p_mpool\000"
+ 3137      6F6F6C00 
+ 3138              	.LASF104:
+ 3139 010c 72787374 		.ascii	"rxstate\000"
+ 3139      61746500 
+ 3140              	.LASF90:
+ 3141 0114 6C756172 		.ascii	"luartstate_t\000"
+ 3141      74737461 
+ 3141      74655F74 
+ 3141      00
+ 3142              	.LASF25:
+ 3143 0121 74736C69 		.ascii	"tslices_t\000"
+ 3143      6365735F 
+ 3143      7400
+ 3144              	.LASF136:
+ 3145 012b 6C756172 		.ascii	"luartPollLinkStatus\000"
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 59
+
+
+ 3145      74506F6C 
+ 3145      6C4C696E 
+ 3145      6B537461 
+ 3145      74757300 
+ 3146              	.LASF102:
+ 3147 013f 73746174 		.ascii	"state\000"
+ 3147      6500
+ 3148              	.LASF103:
+ 3149 0145 74787374 		.ascii	"txstate\000"
+ 3149      61746500 
+ 3150              	.LASF9:
+ 3151 014d 6C6F6E67 		.ascii	"long int\000"
+ 3151      20696E74 
+ 3151      00
+ 3152              	.LASF23:
+ 3153 0156 74737461 		.ascii	"tstate_t\000"
+ 3153      74655F74 
+ 3153      00
+ 3154              	.LASF42:
+ 3155 015f 705F7265 		.ascii	"p_refs\000"
+ 3155      667300
+ 3156              	.LASF16:
+ 3157 0166 75696E74 		.ascii	"uint16_t\000"
+ 3157      31365F74 
+ 3157      00
+ 3158              	.LASF44:
+ 3159 016f 705F7469 		.ascii	"p_time\000"
+ 3159      6D6500
+ 3160              	.LASF36:
+ 3161 0176 705F6E65 		.ascii	"p_newer\000"
+ 3161      77657200 
+ 3162              	.LASF118:
+ 3163 017e 63617468 		.ascii	"cathode_port\000"
+ 3163      6F64655F 
+ 3163      706F7274 
+ 3163      00
+ 3164              	.LASF78:
+ 3165 018b 4F535045 		.ascii	"OSPEEDR\000"
+ 3165      45445200 
+ 3166              	.LASF10:
+ 3167 0193 5F5F7569 		.ascii	"__uint32_t\000"
+ 3167      6E743332 
+ 3167      5F7400
+ 3168              	.LASF120:
+ 3169 019e 63617468 		.ascii	"cathode_extmode\000"
+ 3169      6F64655F 
+ 3169      6578746D 
+ 3169      6F646500 
+ 3170              	.LASF139:
+ 3171 01ae 6C696E6B 		.ascii	"link\000"
+ 3171      00
+ 3172              	.LASF87:
+ 3173 01b3 4C554152 		.ascii	"LUART_UNINIT\000"
+ 3173      545F554E 
+ 3173      494E4954 
+ 3173      00
+ 3174              	.LASF31:
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 60
+
+
+ 3175 01c0 54687265 		.ascii	"Thread\000"
+ 3175      616400
+ 3176              	.LASF68:
+ 3177 01c7 4576656E 		.ascii	"EventSource\000"
+ 3177      74536F75 
+ 3177      72636500 
+ 3178              	.LASF127:
+ 3179 01d3 6C756172 		.ascii	"luartStartSend\000"
+ 3179      74537461 
+ 3179      72745365 
+ 3179      6E6400
+ 3180              	.LASF39:
+ 3181 01e2 705F7374 		.ascii	"p_stklimit\000"
+ 3181      6B6C696D 
+ 3181      697400
+ 3182              	.LASF0:
+ 3183 01ed 756E7369 		.ascii	"unsigned int\000"
+ 3183      676E6564 
+ 3183      20696E74 
+ 3183      00
+ 3184              	.LASF98:
+ 3185 01fa 6C756172 		.ascii	"luartrxstate_t\000"
+ 3185      74727873 
+ 3185      74617465 
+ 3185      5F7400
+ 3186              	.LASF128:
+ 3187 0209 74786275 		.ascii	"txbuf\000"
+ 3187      6600
+ 3188              	.LASF110:
+ 3189 020f 6C756172 		.ascii	"luartecb_t\000"
+ 3189      74656362 
+ 3189      5F7400
+ 3190              	.LASF46:
+ 3191 021a 705F6D73 		.ascii	"p_msgqueue\000"
+ 3191      67717565 
+ 3191      756500
+ 3192              	.LASF84:
+ 3193 0225 4750494F 		.ascii	"GPIO_TypeDef\000"
+ 3193      5F547970 
+ 3193      65446566 
+ 3193      00
+ 3194              	.LASF81:
+ 3195 0232 4C434B52 		.ascii	"LCKR\000"
+ 3195      00
+ 3196              	.LASF106:
+ 3197 0237 6576656E 		.ascii	"event\000"
+ 3197      7400
+ 3198              	.LASF7:
+ 3199 023d 73686F72 		.ascii	"short unsigned int\000"
+ 3199      7420756E 
+ 3199      7369676E 
+ 3199      65642069 
+ 3199      6E7400
+ 3200              	.LASF108:
+ 3201 0250 6C756172 		.ascii	"luartcb_t\000"
+ 3201      7463625F 
+ 3201      7400
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 61
+
+
+ 3202              	.LASF27:
+ 3203 025a 6D73675F 		.ascii	"msg_t\000"
+ 3203      7400
+ 3204              	.LASF140:
+ 3205 0260 6C756172 		.ascii	"luartInit\000"
+ 3205      74496E69 
+ 3205      7400
+ 3206              	.LASF64:
+ 3207 026a 656C5F6E 		.ascii	"el_next\000"
+ 3207      65787400 
+ 3208              	.LASF22:
+ 3209 0272 746D6F64 		.ascii	"tmode_t\000"
+ 3209      655F7400 
+ 3210              	.LASF53:
+ 3211 027a 54687265 		.ascii	"ThreadsList\000"
+ 3211      6164734C 
+ 3211      69737400 
+ 3212              	.LASF28:
+ 3213 0286 6576656E 		.ascii	"eventmask_t\000"
+ 3213      746D6173 
+ 3213      6B5F7400 
+ 3214              	.LASF8:
+ 3215 0292 5F5F696E 		.ascii	"__int32_t\000"
+ 3215      7433325F 
+ 3215      7400
+ 3216              	.LASF55:
+ 3217 029c 73746B61 		.ascii	"stkalign_t\000"
+ 3217      6C69676E 
+ 3217      5F7400
+ 3218              	.LASF29:
+ 3219 02a7 666C6167 		.ascii	"flagsmask_t\000"
+ 3219      736D6173 
+ 3219      6B5F7400 
+ 3220              	.LASF99:
+ 3221 02b3 6C756172 		.ascii	"luartflags_t\000"
+ 3221      74666C61 
+ 3221      67735F74 
+ 3221      00
+ 3222              	.LASF58:
+ 3223 02c0 73697A65 		.ascii	"sizetype\000"
+ 3223      74797065 
+ 3223      00
+ 3224              	.LASF75:
+ 3225 02c9 636C6561 		.ascii	"clear\000"
+ 3225      7200
+ 3226              	.LASF59:
+ 3227 02cf 4D757465 		.ascii	"Mutex\000"
+ 3227      7800
+ 3228              	.LASF115:
+ 3229 02d5 72786572 		.ascii	"rxerr_cb\000"
+ 3229      725F6362 
+ 3229      00
+ 3230              	.LASF66:
+ 3231 02de 656C5F6D 		.ascii	"el_mask\000"
+ 3231      61736B00 
+ 3232              	.LASF37:
+ 3233 02e6 705F6F6C 		.ascii	"p_older\000"
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 62
+
+
+ 3233      64657200 
+ 3234              	.LASF52:
+ 3235 02ee 54687265 		.ascii	"ThreadsQueue\000"
+ 3235      61647351 
+ 3235      75657565 
+ 3235      00
+ 3236              	.LASF113:
+ 3237 02fb 7278656E 		.ascii	"rxend_cb\000"
+ 3237      645F6362 
+ 3237      00
+ 3238              	.LASF131:
+ 3239 0304 6C756172 		.ascii	"luartStopSendI\000"
+ 3239      7453746F 
+ 3239      7053656E 
+ 3239      644900
+ 3240              	.LASF62:
+ 3241 0313 6D5F6E65 		.ascii	"m_next\000"
+ 3241      787400
+ 3242              	.LASF13:
+ 3243 031a 5F5F7569 		.ascii	"__uint64_t\000"
+ 3243      6E743634 
+ 3243      5F7400
+ 3244              	.LASF83:
+ 3245 0325 41465248 		.ascii	"AFRH\000"
+ 3245      00
+ 3246              	.LASF82:
+ 3247 032a 4146524C 		.ascii	"AFRL\000"
+ 3247      00
+ 3248              	.LASF24:
+ 3249 032f 74726566 		.ascii	"trefs_t\000"
+ 3249      735F7400 
+ 3250              	.LASF133:
+ 3251 0337 6C756172 		.ascii	"luartStartReceiveI\000"
+ 3251      74537461 
+ 3251      72745265 
+ 3251      63656976 
+ 3251      654900
+ 3252              	.LASF33:
+ 3253 034a 705F7072 		.ascii	"p_prev\000"
+ 3253      657600
+ 3254              	.LASF112:
+ 3255 0351 7478656E 		.ascii	"txend2_cb\000"
+ 3255      64325F63 
+ 3255      6200
+ 3256              	.LASF26:
+ 3257 035b 74707269 		.ascii	"tprio_t\000"
+ 3257      6F5F7400 
+ 3258              	.LASF94:
+ 3259 0363 6C756172 		.ascii	"luarttxstate_t\000"
+ 3259      74747873 
+ 3259      74617465 
+ 3259      5F7400
+ 3260              	.LASF121:
+ 3261 0372 74687265 		.ascii	"threshold\000"
+ 3261      73686F6C 
+ 3261      6400
+ 3262              	.LASF21:
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 63
+
+
+ 3263 037c 5F426F6F 		.ascii	"_Bool\000"
+ 3263      6C00
+ 3264              	.LASF17:
+ 3265 0382 696E7433 		.ascii	"int32_t\000"
+ 3265      325F7400 
+ 3266              	.LASF4:
+ 3267 038a 756E7369 		.ascii	"unsigned char\000"
+ 3267      676E6564 
+ 3267      20636861 
+ 3267      7200
+ 3268              	.LASF60:
+ 3269 0398 6D5F7175 		.ascii	"m_queue\000"
+ 3269      65756500 
+ 3270              	.LASF65:
+ 3271 03a0 656C5F6C 		.ascii	"el_listener\000"
+ 3271      69737465 
+ 3271      6E657200 
+ 3272              	.LASF67:
+ 3273 03ac 656C5F66 		.ascii	"el_flags\000"
+ 3273      6C616773 
+ 3273      00
+ 3274              	.LASF49:
+ 3275 03b5 705F6D74 		.ascii	"p_mtxlist\000"
+ 3275      786C6973 
+ 3275      7400
+ 3276              	.LASF5:
+ 3277 03bf 73686F72 		.ascii	"short int\000"
+ 3277      7420696E 
+ 3277      7400
+ 3278              	.LASF40:
+ 3279 03c9 705F7374 		.ascii	"p_state\000"
+ 3279      61746500 
+ 3280              	.LASF43:
+ 3281 03d1 705F7072 		.ascii	"p_preempt\000"
+ 3281      65656D70 
+ 3281      7400
+ 3282              	.LASF130:
+ 3283 03db 6C756172 		.ascii	"luartStopSend\000"
+ 3283      7453746F 
+ 3283      7053656E 
+ 3283      6400
+ 3284              	.LASF95:
+ 3285 03e9 4C554152 		.ascii	"LUART_RX_IDLE\000"
+ 3285      545F5258 
+ 3285      5F49444C 
+ 3285      4500
+ 3286              	.LASF73:
+ 3287 03f7 65776D61 		.ascii	"ewmask\000"
+ 3287      736B00
+ 3288              	.LASF32:
+ 3289 03fe 705F6E65 		.ascii	"p_next\000"
+ 3289      787400
+ 3290              	.LASF41:
+ 3291 0405 705F666C 		.ascii	"p_flags\000"
+ 3291      61677300 
+ 3292              	.LASF125:
+ 3293 040d 6C756172 		.ascii	"luartp\000"
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 64
+
+
+ 3293      747000
+ 3294              	.LASF91:
+ 3295 0414 4C554152 		.ascii	"LUART_TX_IDLE\000"
+ 3295      545F5458 
+ 3295      5F49444C 
+ 3295      4500
+ 3296              	.LASF101:
+ 3297 0422 4C454443 		.ascii	"LEDCommUARTDriver\000"
+ 3297      6F6D6D55 
+ 3297      41525444 
+ 3297      72697665 
+ 3297      7200
+ 3298              	.LASF132:
+ 3299 0434 6C756172 		.ascii	"luartStartReceive\000"
+ 3299      74537461 
+ 3299      72745265 
+ 3299      63656976 
+ 3299      6500
+ 3300              	.LASF48:
+ 3301 0446 705F6570 		.ascii	"p_epending\000"
+ 3301      656E6469 
+ 3301      6E6700
+ 3302              	.LASF18:
+ 3303 0451 75696E74 		.ascii	"uint32_t\000"
+ 3303      33325F74 
+ 3303      00
+ 3304              	.LASF54:
+ 3305 045a 72656761 		.ascii	"regarm_t\000"
+ 3305      726D5F74 
+ 3305      00
+ 3306              	.LASF100:
+ 3307 0463 4C454443 		.ascii	"LEDCommUARTDriver_t\000"
+ 3307      6F6D6D55 
+ 3307      41525444 
+ 3307      72697665 
+ 3307      725F7400 
+ 3308              	.LASF137:
+ 3309 0477 474E5520 		.ascii	"GNU C 4.8.3 20140228 (release) [ARM/embedded-4_8-br"
+ 3309      4320342E 
+ 3309      382E3320 
+ 3309      32303134 
+ 3309      30323238 
+ 3310 04aa 616E6368 		.ascii	"anch revision 208322] -mcpu=cortex-m4 -mno-thumb-in"
+ 3310      20726576 
+ 3310      6973696F 
+ 3310      6E203230 
+ 3310      38333232 
+ 3311 04dd 74657277 		.ascii	"terwork -mthumb -ggdb -fomit-frame-pointer -falign-"
+ 3311      6F726B20 
+ 3311      2D6D7468 
+ 3311      756D6220 
+ 3311      2D676764 
+ 3312 0510 66756E63 		.ascii	"functions=16 -ffunction-sections -fdata-sections -f"
+ 3312      74696F6E 
+ 3312      733D3136 
+ 3312      202D6666 
+ 3312      756E6374 
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 65
+
+
+ 3313 0543 6E6F2D63 		.ascii	"no-common\000"
+ 3313      6F6D6D6F 
+ 3313      6E00
+ 3314              	.LASF11:
+ 3315 054d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3315      20756E73 
+ 3315      69676E65 
+ 3315      6420696E 
+ 3315      7400
+ 3316              	.LASF74:
+ 3317 055f 63686172 		.ascii	"char\000"
+ 3317      00
+ 3318              	.LASF105:
+ 3319 0564 636F6E66 		.ascii	"config\000"
+ 3319      696700
+ 3320              	.LASF6:
+ 3321 056b 5F5F7569 		.ascii	"__uint16_t\000"
+ 3321      6E743136 
+ 3321      5F7400
+ 3322              	.LASF111:
+ 3323 0576 7478656E 		.ascii	"txend1_cb\000"
+ 3323      64315F63 
+ 3323      6200
+ 3324              	.LASF96:
+ 3325 0580 4C554152 		.ascii	"LUART_RX_ACTIVE\000"
+ 3325      545F5258 
+ 3325      5F414354 
+ 3325      49564500 
+ 3326              	.LASF30:
+ 3327 0590 73797374 		.ascii	"systime_t\000"
+ 3327      696D655F 
+ 3327      7400
+ 3328              	.LASF50:
+ 3329 059a 705F7265 		.ascii	"p_realprio\000"
+ 3329      616C7072 
+ 3329      696F00
+ 3330              	.LASF129:
+ 3331 05a5 6C756172 		.ascii	"luartStartSendI\000"
+ 3331      74537461 
+ 3331      72745365 
+ 3331      6E644900 
+ 3332              	.LASF138:
+ 3333 05b5 2F686F6D 		.ascii	"/home/pauba/ChibiOS-RT/ext/LEDComm/ledcomm-uart.c\000"
+ 3333      652F7061 
+ 3333      7562612F 
+ 3333      43686962 
+ 3333      694F532D 
+ 3334              	.LASF86:
+ 3335 05e7 696F706F 		.ascii	"ioportid_t\000"
+ 3335      72746964 
+ 3335      5F7400
+ 3336              	.LASF57:
+ 3337 05f2 636F6E74 		.ascii	"context\000"
+ 3337      65787400 
+ 3338              	.LASF124:
+ 3339 05fa 6C756172 		.ascii	"luartStart\000"
+ 3339      74537461 
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 66
+
+
+ 3339      727400
+ 3340              	.LASF97:
+ 3341 0605 4C554152 		.ascii	"LUART_RX_COMPLETE\000"
+ 3341      545F5258 
+ 3341      5F434F4D 
+ 3341      504C4554 
+ 3341      4500
+ 3342              	.LASF56:
+ 3343 0617 696E7463 		.ascii	"intctx\000"
+ 3343      747800
+ 3344              	.LASF69:
+ 3345 061e 65735F6E 		.ascii	"es_next\000"
+ 3345      65787400 
+ 3346              	.LASF117:
+ 3347 0626 616E6F64 		.ascii	"anode_pad\000"
+ 3347      655F7061 
+ 3347      6400
+ 3348              	.LASF47:
+ 3349 0630 705F6D73 		.ascii	"p_msg\000"
+ 3349      6700
+ 3350              	.LASF15:
+ 3351 0636 75696E74 		.ascii	"uint8_t\000"
+ 3351      385F7400 
+ 3352              	.LASF122:
+ 3353 063e 4C454443 		.ascii	"LEDCommUARTConfig_t\000"
+ 3353      6F6D6D55 
+ 3353      41525443 
+ 3353      6F6E6669 
+ 3353      675F7400 
+ 3354              	.LASF63:
+ 3355 0652 4576656E 		.ascii	"EventListener\000"
+ 3355      744C6973 
+ 3355      74656E65 
+ 3355      7200
+ 3356              	.LASF72:
+ 3357 0660 77746F62 		.ascii	"wtobjp\000"
+ 3357      6A7000
+ 3358              	.LASF38:
+ 3359 0667 705F6E61 		.ascii	"p_name\000"
+ 3359      6D6500
+ 3360              	.LASF134:
+ 3361 066e 6C756172 		.ascii	"luartStopReceive\000"
+ 3361      7453746F 
+ 3361      70526563 
+ 3361      65697665 
+ 3361      00
+ 3362              	.LASF135:
+ 3363 067f 6C756172 		.ascii	"luartStopReceiveI\000"
+ 3363      7453746F 
+ 3363      70526563 
+ 3363      65697665 
+ 3363      4900
+ 3364              	.LASF123:
+ 3365 0691 6C756172 		.ascii	"luartObjectInit\000"
+ 3365      744F626A 
+ 3365      65637449 
+ 3365      6E697400 
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 67
+
+
+ 3366              	.LASF61:
+ 3367 06a1 6D5F6F77 		.ascii	"m_owner\000"
+ 3367      6E657200 
+ 3368              	.LASF119:
+ 3369 06a9 63617468 		.ascii	"cathode_pad\000"
+ 3369      6F64655F 
+ 3369      70616400 
+ 3370              	.LASF35:
+ 3371 06b5 705F6374 		.ascii	"p_ctx\000"
+ 3371      7800
+ 3372              	.LASF45:
+ 3373 06bb 705F7761 		.ascii	"p_waiting\000"
+ 3373      6974696E 
+ 3373      6700
+ 3374              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.3 20140228 (release) [ARM/embedded-4_8-br
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 68
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ledcomm-uart.c
+/home/pauba/tmp/cca1lkQP.s:19     .text.luartInit:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:25     .text.luartInit:00000000 luartInit
+/home/pauba/tmp/cca1lkQP.s:39     .text.luartObjectInit:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:45     .text.luartObjectInit:00000000 luartObjectInit
+/home/pauba/tmp/cca1lkQP.s:79     .rodata:00000000 $d
+/home/pauba/tmp/cca1lkQP.s:86     .text.luartStart:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:92     .text.luartStart:00000000 luartStart
+/home/pauba/tmp/cca1lkQP.s:164    .text.luartStart:00000058 $d
+/home/pauba/tmp/cca1lkQP.s:177    .text.luartStop:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:183    .text.luartStop:00000000 luartStop
+/home/pauba/tmp/cca1lkQP.s:253    .text.luartStop:00000054 $d
+/home/pauba/tmp/cca1lkQP.s:269    .text.luartStartSend:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:275    .text.luartStartSend:00000000 luartStartSend
+/home/pauba/tmp/cca1lkQP.s:352    .text.luartStartSend:00000060 $d
+/home/pauba/tmp/cca1lkQP.s:369    .text.luartStartSendI:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:375    .text.luartStartSendI:00000000 luartStartSendI
+/home/pauba/tmp/cca1lkQP.s:436    .text.luartStartSendI:00000050 $d
+/home/pauba/tmp/cca1lkQP.s:450    .text.luartStopSend:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:456    .text.luartStopSend:00000000 luartStopSend
+/home/pauba/tmp/cca1lkQP.s:528    .text.luartStopSend:00000054 $d
+/home/pauba/tmp/cca1lkQP.s:541    .text.luartStopSendI:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:547    .text.luartStopSendI:00000000 luartStopSendI
+/home/pauba/tmp/cca1lkQP.s:607    .text.luartStopSendI:00000044 $d
+/home/pauba/tmp/cca1lkQP.s:623    .text.luartStartReceive:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:629    .text.luartStartReceive:00000000 luartStartReceive
+/home/pauba/tmp/cca1lkQP.s:706    .text.luartStartReceive:00000060 $d
+/home/pauba/tmp/cca1lkQP.s:723    .text.luartStartReceiveI:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:729    .text.luartStartReceiveI:00000000 luartStartReceiveI
+/home/pauba/tmp/cca1lkQP.s:790    .text.luartStartReceiveI:00000050 $d
+/home/pauba/tmp/cca1lkQP.s:804    .text.luartStopReceive:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:810    .text.luartStopReceive:00000000 luartStopReceive
+/home/pauba/tmp/cca1lkQP.s:882    .text.luartStopReceive:00000054 $d
+/home/pauba/tmp/cca1lkQP.s:895    .text.luartStopReceiveI:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:901    .text.luartStopReceiveI:00000000 luartStopReceiveI
+/home/pauba/tmp/cca1lkQP.s:961    .text.luartStopReceiveI:00000044 $d
+/home/pauba/tmp/cca1lkQP.s:971    .text.luartPollLinkStatus:00000000 $t
+/home/pauba/tmp/cca1lkQP.s:977    .text.luartPollLinkStatus:00000000 luartPollLinkStatus
+/home/pauba/tmp/cca1lkQP.s:1010   .text.luartPollLinkStatus:00000024 $d
+                     .debug_frame:00000010 $d
+/home/pauba/tmp/cca1lkQP.s:258    .text.luartStop:0000005c $t
+/home/pauba/tmp/cca1lkQP.s:358    .text.luartStartSend:0000006c $t
+/home/pauba/tmp/cca1lkQP.s:442    .text.luartStartSendI:0000005c $t
+/home/pauba/tmp/cca1lkQP.s:533    .text.luartStopSend:0000005c $t
+/home/pauba/tmp/cca1lkQP.s:612    .text.luartStopSendI:0000004c $t
+/home/pauba/tmp/cca1lkQP.s:712    .text.luartStartReceive:0000006c $t
+/home/pauba/tmp/cca1lkQP.s:796    .text.luartStartReceiveI:0000005c $t
+/home/pauba/tmp/cca1lkQP.s:887    .text.luartStopReceive:0000005c $t
+/home/pauba/tmp/cca1lkQP.s:966    .text.luartStopReceiveI:0000004c $t
+/home/pauba/tmp/cca1lkQP.s:1014   .text.luartPollLinkStatus:00000028 $t
+
+UNDEFINED SYMBOLS
+chDbgPanic
+dbg_check_lock
+dbg_check_unlock
+chDbgCheckClassI
+ARM GAS  /home/pauba/tmp/cca1lkQP.s 			page 69
+
+

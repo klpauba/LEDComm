@@ -1,0 +1,317 @@
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"i2c.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              	.Letext0:
+  19              		.file 1 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/machine/_default_types.h"
+  20              		.file 2 "/opt/gcc-arm-none-eabi-4_8-2014q1/arm-none-eabi/include/stdint.h"
+  21              		.file 3 "/home/pauba/ChibiOS-RT/os/ports/common/ARMCMx/CMSIS/include/core_cm3.h"
+  22              		.section	.debug_info,"",%progbits
+  23              	.Ldebug_info0:
+  24 0000 98000000 		.4byte	0x98
+  25 0004 0400     		.2byte	0x4
+  26 0006 00000000 		.4byte	.Ldebug_abbrev0
+  27 000a 04       		.byte	0x4
+  28 000b 01       		.uleb128 0x1
+  29 000c 8E000000 		.4byte	.LASF14
+  30 0010 01       		.byte	0x1
+  31 0011 21000000 		.4byte	.LASF15
+  32 0015 00000000 		.4byte	.Ldebug_line0
+  33 0019 02       		.uleb128 0x2
+  34 001a 04       		.byte	0x4
+  35 001b 05       		.byte	0x5
+  36 001c 696E7400 		.ascii	"int\000"
+  37 0020 03       		.uleb128 0x3
+  38 0021 04       		.byte	0x4
+  39 0022 07       		.byte	0x7
+  40 0023 83010000 		.4byte	.LASF0
+  41 0027 03       		.uleb128 0x3
+  42 0028 01       		.byte	0x1
+  43 0029 06       		.byte	0x6
+  44 002a 77010000 		.4byte	.LASF1
+  45 002e 03       		.uleb128 0x3
+  46 002f 01       		.byte	0x1
+  47 0030 08       		.byte	0x8
+  48 0031 72000000 		.4byte	.LASF2
+  49 0035 03       		.uleb128 0x3
+  50 0036 02       		.byte	0x2
+  51 0037 05       		.byte	0x5
+  52 0038 9A010000 		.4byte	.LASF3
+  53 003c 03       		.uleb128 0x3
+  54 003d 02       		.byte	0x2
+  55 003e 07       		.byte	0x7
+  56 003f 0E000000 		.4byte	.LASF4
+  57 0043 04       		.uleb128 0x4
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 2
+
+
+  58 0044 90010000 		.4byte	.LASF9
+  59 0048 01       		.byte	0x1
+  60 0049 37       		.byte	0x37
+  61 004a 4E000000 		.4byte	0x4e
+  62 004e 03       		.uleb128 0x3
+  63 004f 04       		.byte	0x4
+  64 0050 05       		.byte	0x5
+  65 0051 85000000 		.4byte	.LASF5
+  66 0055 03       		.uleb128 0x3
+  67 0056 04       		.byte	0x4
+  68 0057 07       		.byte	0x7
+  69 0058 49000000 		.4byte	.LASF6
+  70 005c 03       		.uleb128 0x3
+  71 005d 08       		.byte	0x8
+  72 005e 05       		.byte	0x5
+  73 005f 00000000 		.4byte	.LASF7
+  74 0063 03       		.uleb128 0x3
+  75 0064 08       		.byte	0x8
+  76 0065 07       		.byte	0x7
+  77 0066 5B000000 		.4byte	.LASF8
+  78 006a 04       		.uleb128 0x4
+  79 006b A4010000 		.4byte	.LASF10
+  80 006f 02       		.byte	0x2
+  81 0070 41       		.byte	0x41
+  82 0071 43000000 		.4byte	0x43
+  83 0075 03       		.uleb128 0x3
+  84 0076 01       		.byte	0x1
+  85 0077 02       		.byte	0x2
+  86 0078 64010000 		.4byte	.LASF11
+  87 007c 03       		.uleb128 0x3
+  88 007d 04       		.byte	0x4
+  89 007e 07       		.byte	0x7
+  90 007f AC010000 		.4byte	.LASF12
+  91 0083 03       		.uleb128 0x3
+  92 0084 01       		.byte	0x1
+  93 0085 08       		.byte	0x8
+  94 0086 80000000 		.4byte	.LASF13
+  95 008a 05       		.uleb128 0x5
+  96 008b 6A010000 		.4byte	.LASF16
+  97 008f 03       		.byte	0x3
+  98 0090 0706     		.2byte	0x607
+  99 0092 96000000 		.4byte	0x96
+ 100 0096 06       		.uleb128 0x6
+ 101 0097 6A000000 		.4byte	0x6a
+ 102 009b 00       		.byte	0
+ 103              		.section	.debug_abbrev,"",%progbits
+ 104              	.Ldebug_abbrev0:
+ 105 0000 01       		.uleb128 0x1
+ 106 0001 11       		.uleb128 0x11
+ 107 0002 01       		.byte	0x1
+ 108 0003 25       		.uleb128 0x25
+ 109 0004 0E       		.uleb128 0xe
+ 110 0005 13       		.uleb128 0x13
+ 111 0006 0B       		.uleb128 0xb
+ 112 0007 03       		.uleb128 0x3
+ 113 0008 0E       		.uleb128 0xe
+ 114 0009 10       		.uleb128 0x10
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 3
+
+
+ 115 000a 17       		.uleb128 0x17
+ 116 000b 00       		.byte	0
+ 117 000c 00       		.byte	0
+ 118 000d 02       		.uleb128 0x2
+ 119 000e 24       		.uleb128 0x24
+ 120 000f 00       		.byte	0
+ 121 0010 0B       		.uleb128 0xb
+ 122 0011 0B       		.uleb128 0xb
+ 123 0012 3E       		.uleb128 0x3e
+ 124 0013 0B       		.uleb128 0xb
+ 125 0014 03       		.uleb128 0x3
+ 126 0015 08       		.uleb128 0x8
+ 127 0016 00       		.byte	0
+ 128 0017 00       		.byte	0
+ 129 0018 03       		.uleb128 0x3
+ 130 0019 24       		.uleb128 0x24
+ 131 001a 00       		.byte	0
+ 132 001b 0B       		.uleb128 0xb
+ 133 001c 0B       		.uleb128 0xb
+ 134 001d 3E       		.uleb128 0x3e
+ 135 001e 0B       		.uleb128 0xb
+ 136 001f 03       		.uleb128 0x3
+ 137 0020 0E       		.uleb128 0xe
+ 138 0021 00       		.byte	0
+ 139 0022 00       		.byte	0
+ 140 0023 04       		.uleb128 0x4
+ 141 0024 16       		.uleb128 0x16
+ 142 0025 00       		.byte	0
+ 143 0026 03       		.uleb128 0x3
+ 144 0027 0E       		.uleb128 0xe
+ 145 0028 3A       		.uleb128 0x3a
+ 146 0029 0B       		.uleb128 0xb
+ 147 002a 3B       		.uleb128 0x3b
+ 148 002b 0B       		.uleb128 0xb
+ 149 002c 49       		.uleb128 0x49
+ 150 002d 13       		.uleb128 0x13
+ 151 002e 00       		.byte	0
+ 152 002f 00       		.byte	0
+ 153 0030 05       		.uleb128 0x5
+ 154 0031 34       		.uleb128 0x34
+ 155 0032 00       		.byte	0
+ 156 0033 03       		.uleb128 0x3
+ 157 0034 0E       		.uleb128 0xe
+ 158 0035 3A       		.uleb128 0x3a
+ 159 0036 0B       		.uleb128 0xb
+ 160 0037 3B       		.uleb128 0x3b
+ 161 0038 05       		.uleb128 0x5
+ 162 0039 49       		.uleb128 0x49
+ 163 003a 13       		.uleb128 0x13
+ 164 003b 3F       		.uleb128 0x3f
+ 165 003c 19       		.uleb128 0x19
+ 166 003d 3C       		.uleb128 0x3c
+ 167 003e 19       		.uleb128 0x19
+ 168 003f 00       		.byte	0
+ 169 0040 00       		.byte	0
+ 170 0041 06       		.uleb128 0x6
+ 171 0042 35       		.uleb128 0x35
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 4
+
+
+ 172 0043 00       		.byte	0
+ 173 0044 49       		.uleb128 0x49
+ 174 0045 13       		.uleb128 0x13
+ 175 0046 00       		.byte	0
+ 176 0047 00       		.byte	0
+ 177 0048 00       		.byte	0
+ 178              		.section	.debug_aranges,"",%progbits
+ 179 0000 14000000 		.4byte	0x14
+ 180 0004 0200     		.2byte	0x2
+ 181 0006 00000000 		.4byte	.Ldebug_info0
+ 182 000a 04       		.byte	0x4
+ 183 000b 00       		.byte	0
+ 184 000c 0000     		.2byte	0
+ 185 000e 0000     		.2byte	0
+ 186 0010 00000000 		.4byte	0
+ 187 0014 00000000 		.4byte	0
+ 188              		.section	.debug_line,"",%progbits
+ 189              	.Ldebug_line0:
+ 190 0000 FB000000 		.section	.debug_str,"MS",%progbits,1
+ 190      0200F500 
+ 190      00000201 
+ 190      FB0E0D00 
+ 190      01010101 
+ 191              	.LASF7:
+ 192 0000 6C6F6E67 		.ascii	"long long int\000"
+ 192      206C6F6E 
+ 192      6720696E 
+ 192      7400
+ 193              	.LASF4:
+ 194 000e 73686F72 		.ascii	"short unsigned int\000"
+ 194      7420756E 
+ 194      7369676E 
+ 194      65642069 
+ 194      6E7400
+ 195              	.LASF15:
+ 196 0021 2F686F6D 		.ascii	"/home/pauba/ChibiOS-RT/os/hal/src/i2c.c\000"
+ 196      652F7061 
+ 196      7562612F 
+ 196      43686962 
+ 196      694F532D 
+ 197              	.LASF6:
+ 198 0049 6C6F6E67 		.ascii	"long unsigned int\000"
+ 198      20756E73 
+ 198      69676E65 
+ 198      6420696E 
+ 198      7400
+ 199              	.LASF8:
+ 200 005b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 200      206C6F6E 
+ 200      6720756E 
+ 200      7369676E 
+ 200      65642069 
+ 201              	.LASF2:
+ 202 0072 756E7369 		.ascii	"unsigned char\000"
+ 202      676E6564 
+ 202      20636861 
+ 202      7200
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 5
+
+
+ 203              	.LASF13:
+ 204 0080 63686172 		.ascii	"char\000"
+ 204      00
+ 205              	.LASF5:
+ 206 0085 6C6F6E67 		.ascii	"long int\000"
+ 206      20696E74 
+ 206      00
+ 207              	.LASF14:
+ 208 008e 474E5520 		.ascii	"GNU C 4.8.3 20140228 (release) [ARM/embedded-4_8-br"
+ 208      4320342E 
+ 208      382E3320 
+ 208      32303134 
+ 208      30323238 
+ 209 00c1 616E6368 		.ascii	"anch revision 208322] -mcpu=cortex-m4 -mno-thumb-in"
+ 209      20726576 
+ 209      6973696F 
+ 209      6E203230 
+ 209      38333232 
+ 210 00f4 74657277 		.ascii	"terwork -mthumb -ggdb -fomit-frame-pointer -falign-"
+ 210      6F726B20 
+ 210      2D6D7468 
+ 210      756D6220 
+ 210      2D676764 
+ 211 0127 66756E63 		.ascii	"functions=16 -ffunction-sections -fdata-sections -f"
+ 211      74696F6E 
+ 211      733D3136 
+ 211      202D6666 
+ 211      756E6374 
+ 212 015a 6E6F2D63 		.ascii	"no-common\000"
+ 212      6F6D6D6F 
+ 212      6E00
+ 213              	.LASF11:
+ 214 0164 5F426F6F 		.ascii	"_Bool\000"
+ 214      6C00
+ 215              	.LASF16:
+ 216 016a 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 216      52784275 
+ 216      66666572 
+ 216      00
+ 217              	.LASF1:
+ 218 0177 7369676E 		.ascii	"signed char\000"
+ 218      65642063 
+ 218      68617200 
+ 219              	.LASF0:
+ 220 0183 756E7369 		.ascii	"unsigned int\000"
+ 220      676E6564 
+ 220      20696E74 
+ 220      00
+ 221              	.LASF9:
+ 222 0190 5F5F696E 		.ascii	"__int32_t\000"
+ 222      7433325F 
+ 222      7400
+ 223              	.LASF3:
+ 224 019a 73686F72 		.ascii	"short int\000"
+ 224      7420696E 
+ 224      7400
+ 225              	.LASF10:
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 6
+
+
+ 226 01a4 696E7433 		.ascii	"int32_t\000"
+ 226      325F7400 
+ 227              	.LASF12:
+ 228 01ac 73697A65 		.ascii	"sizetype\000"
+ 228      74797065 
+ 228      00
+ 229              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.3 20140228 (release) [ARM/embedded-4_8-br
+ARM GAS  /home/pauba/tmp/ccnEFvEz.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c.c
+
+NO UNDEFINED SYMBOLS
