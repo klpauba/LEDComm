@@ -52,6 +52,13 @@
  * @note    Set only one of <TT>LEDCOMM_USE_GPT1</TT> or <TT>LEDCOMM_USE_GPT2</TT> to TRUE.
  */
 #define LEDCOMM_USE_GPTD2	TRUE
+/**
+ * @brief   The GPT frequency and interval.
+ * @note    For compatibility with Mecrisp, use 20000 and 49 (4081 Hz or 2.45 usec period)
+ *          Default is 200000 and 40 (5000 Hz or a 2.00 usec period).
+ */
+#define LEDCOMM_GPT_FREQUENCY	200000
+#define LEDCOMM_GPT_INTERVAL    49
 
 /**
  * @brief   Use EXT1 for the LEDComm Driver.
