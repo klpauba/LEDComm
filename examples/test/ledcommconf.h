@@ -61,6 +61,12 @@
 #define LEDCOMM_GPT_INTERVAL    49
 
 /**
+ * @brief   The number of SYNCs required for the link to be "UP".
+ * @note    For compatibility with Mecrisp, use 34.  Default is 18.
+ */
+#define LEDCOMM_SYNCS	34
+
+/**
  * @brief   Use EXT1 for the LEDComm Driver.
  * @note    Set only one of <TT>LEDCOMM_USE_EXTD1</TT> or <TT>LEDCOMM_USE_EXTD2</TT> to TRUE.
  */

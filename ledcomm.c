@@ -134,7 +134,7 @@ inline bool_t isLinkDown(LEDCommDriver_t *l) {
 
 inline void linkUp(LEDCommDriver_t *l) {
     l->link = 1;
-    l->syncs = LEDCOMM_DEFAULT_SYNCS;
+    l->syncs = LEDCOMM_SYNCS;
     l->txrdy = 1;
 #if CH_USE_EVENTS
 #if LEDCOMM_THREADED
@@ -361,7 +361,7 @@ void ldStart(LEDCommDriver_t *ldp, const LEDCommConfig_t *config) {
     ldp->cathode_port = config->cathode_port;
     ldp->cathode_pad = config->cathode_pad;
     ldp->threshold = config->threshold;
-    ldp->syncs = LEDCOMM_DEFAULT_SYNCS;
+    ldp->syncs = LEDCOMM_SYNCS;
     ldp->data_bits = config->data_bits;
 
     ledCommInitPad(ldp);

@@ -84,8 +84,13 @@
 #endif
 /** @} */
 
-#define LEDCOMM_DEFAULT_SYNCS	18	/**< @brief Number of MARKs before considering the link is "up".  */
+#if !defined(LEDCOMM_SYNCS) || defined(__DOXYGEN__)
+#define LEDCOMM_SYNCS	18	/**< @brief Number of MARKs before considering the link is "up".  */
+#endif
+
+#if !defined(LEDCOMM_DEFAULT_THRESHOLD) || defined(__DOXYGEN__)
 #define LEDCOMM_DEFAULT_THRESHOLD 3000	/**< @brief Maximum number of hal ticks for a "shine".  */
+#endif
 
 #define LEDCOMM_DATA_BITS8 0		/**< @brief 8 data bits per character.  */
 #define LEDCOMM_DATA_BITS7 1		/**< @brief 7 data bits per character (default).  */
@@ -137,7 +142,7 @@
     ioportid_t		cathode_port;					\
     ioportmask_t	cathode_pad;					\
     uint16_t		threshold;		/* The highest number of elapsed HAL ticks that represents a 'shine' */ \
-    uint8_t		syncs:5;		/* The number of MARKs received so far */ \
+    uint8_t		syncs:6;		/* The number of MARKs received so far */ \
     uint8_t		data_bits:1;		/* 0=8bits, 1=7bits */  \
     uint8_t		parity:1;		/* 0=no parity, 1=parity */ \
     uint8_t		parity_type:2;		/* 0=even, 1=odd, 2=space, 3=mark  */ \
