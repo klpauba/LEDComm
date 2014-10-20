@@ -1,1 +1,4 @@
 html/
+examples/test/build/
+examples/test/openocd.log
+*~
